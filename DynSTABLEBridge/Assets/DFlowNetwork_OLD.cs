@@ -7,7 +7,7 @@ using System.Threading;
 using System.Text;
 using System;
 
-public class DFlowNetwork : MonoBehaviour {
+public class DFlowNetwork_OLD : MonoBehaviour {
 
 	//Remember to fix this befor compiling!
 	public string ipAddress = "192.168.178.48";
@@ -75,7 +75,7 @@ public class DFlowNetwork : MonoBehaviour {
 		public float[] data;
 	};
 
-	public delegate void NewData (DFlowNetwork network);
+	public delegate void NewData (DFlowNetwork_OLD network);
 	public static event NewData OnNewData;
 
 
@@ -96,15 +96,15 @@ public class DFlowNetwork : MonoBehaviour {
 		NetworkingThread.Start ();
 	}
 
-	DFlowNetwork.DFlowPackage readPackage(NetworkStream stream) {
+	DFlowNetwork_OLD.DFlowPackage readPackage(NetworkStream stream) {
 		
-		DFlowNetwork.DFlowPackage newPackage;
+		DFlowNetwork_OLD.DFlowPackage newPackage;
 
 		byte[] buffer = new byte[256 * sizeof(float)];
 
 		//Package type
 		stream.Read (buffer, 0, sizeof(Int32));
-		newPackage.packageType = (DFlowNetwork.DFlowPackage.PackageType) System.BitConverter.ToInt32 (buffer, 0);
+		newPackage.packageType = (DFlowNetwork_OLD.DFlowPackage.PackageType) System.BitConverter.ToInt32 (buffer, 0);
 
 		//Number of inputs
 		stream.Read (buffer, 0, sizeof(Int32));
@@ -155,7 +155,7 @@ public class DFlowNetwork : MonoBehaviour {
 
 		initStream = new NetworkStream (initSocket);
 
-		DFlowNetwork.DFlowPackage newPackage;
+		DFlowNetwork_OLD.DFlowPackage newPackage;
 		newPackage.packageType = DFlowPackage.PackageType.UPDATE;
 		newPackage.clientIndex = 0;
 		newPackage.clientName = "";
