@@ -29,7 +29,7 @@ public class DynSTABLE : MonoBehaviour {
 
 	public DynSTABLE.CenterOfPressure[] copHistory = new DynSTABLE.CenterOfPressure[100];
 
-	void NewDFlowData(DFlowNetwork network) {
+	void NewDFlowData(DFlowNetwork_OLD network) {
 		DynSTABLE.CenterOfPressure newCop = new DynSTABLE.CenterOfPressure {
 			x = network.getOutput (0),
 			z = network.getOutput (1),
@@ -56,16 +56,14 @@ public class DynSTABLE : MonoBehaviour {
 
 		cop = newCop;
 	}
+
+    public DFlowClient dFlowClient;
 		
 	// Use this for initialization
 	void Start () {
-		DFlowNetwork.OnNewData += NewDFlowData;
+        DFlowNetwork_OLD.OnNewData += NewDFlowData;
 
-		int a = 50;
-		int b = 70;
-
-		float c = (float)a / b;
-		Debug.Log (c);
+        dFlowClient.Connect();
 	}
 	
 	// Update is called once per frame
