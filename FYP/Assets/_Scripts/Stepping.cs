@@ -1,97 +1,82 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using UnityEngine.UI; 
 using UnityEngine;
 
-public class Stepping : MonoBehaviour {
+public class Stepping : MonoBehaviour
+{
 
-    public List<Direction> Steps = new List<Direction>();
-    private GameObject[] ArrowsOne = new GameObject[4];
-    private GameObject[] ArrowsTwo = new GameObject[5];
-    private GameObject[] ArrowsThree = new GameObject[6];
-    private int numberOfSteps = 4;
-    private Direction left, right, up, down;
+    public GameObject LeftButton;
+    public GameObject UpButton;
+    public GameObject RightButton;
+    public GameObject DownButton;
+    public GameObject Canvas;
+
+    public int Xvalue = -137;
+    public int Yvalue = -102;
+    public int Zvalue = 0;
+    public int ButtonSpacing = -90; 
+
+    Vector3 position;
+    public int NumberOfButtons = 3;
+    System.Random randy = new System.Random(); 
 
     // Use this for initialization
     void Start()
     {
-         Steps.Add(new Direction() { DirectionName = "Left", DirectionId = 0, Image = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Sprites/Arows/left.png")});
-         Steps.Add(new Direction() { DirectionName = "Right", DirectionId = 1, Image = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Sprites/Arows/right.png")});
-         Steps.Add(new Direction() { DirectionName = "Up", DirectionId = 2, Image = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Sprites/Arows/up.png" )});
-         Steps.Add(new Direction() { DirectionName = "Down", DirectionId = 3, Image = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Sprites/Arows/down.png" )});
-
-      /*  left = Direction.CreateInstance(0, "left", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Sprites/Arows/left.png"));
-        right = Direction.CreateInstance(1, "right", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Sprites/Arows/right.png"));
-        up = Direction.CreateInstance(2, "up", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Sprites/Arows/up.png"));
-        down = Direction.CreateInstance(3, "down", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Sprites/Arows/down.png"));*/
-
-        Steps.Add(left);
-        Steps.Add(right);
-        Steps.Add(up);
-        Steps.Add(down);
-    }
-
-	
-	// Update is called once per frame
-	void Update () {
-        DifficultyOne();
-
+        position = new Vector3(Xvalue, Yvalue, Zvalue);
     }
 
 
-    void DifficultyOne()
+    // Update is called once per frame
+    void Update()
     {
-        for (int i = 0; i < numberOfSteps; i++)
+        Instantiate(LeftButton, position, transform.rotation);
+        LeftButton.transform.SetParent(Canvas.transform, false);
+        /*
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            int rand = UnityEngine.Random.Range(0, Steps.Count);
-
-
-            // Direction.CreateInstance(Steps.Exists(x => x.DirectionId == rand)); 
-            //Direction.CreateInstance(Steps.Contains(new Direction { DirectionId = rand }).ToString());
-            /*Direction step = Steps.Find(delegate (Direction generatedStep)
-                {
-                    return generatedStep.DirectionId == rand;
-                });
-            if (step!== null)
-            {
-                Direction one = Direction.CreateInstance(step.DirectionId, step.DirectionName, step.Image);
-               // one. =
-                Debug.Log("it found something");
-            }
-            else
-            {
-                Debug.Log("Direction not found in Steps list");
-            }*/
+            GenerateButtons(2);
+            Debug.Log("Button O is being registered");
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GenerateButtons(3);
+        }
+        */
     }
 
- 
-}
-
-public struct Direction 
-{
-    public int DirectionId { get; set; }
-    public string DirectionName { get; set; } // can be the same as keycode to string
-    public Texture2D Image { get; set; } 
-
-    /*
-    public int DirectionId;
-    public string DirectionName;
-    public Texture2D Image;
-        
-    public void Init (int DirectionId, string DirectionName, Texture2D Image)
+    void GenerateButtons(int numberOfButtons)
     {
-        this.DirectionId = DirectionId;
-        this.DirectionName = DirectionName;
-        this.Image = Image; 
-    }  
+        for (int i = 0; i < numberOfButtons; i++)
+        {
+            int rand = randy.Next(0, 3);
 
-    public static Direction CreateInstance(int DirectionId, string DirectionName, Texture2D Image)
-    {
-        var data = Instantiate(data, );
-        data.Init(DirectionId, DirectionName, Image);
-        return data; 
-    }*/
+            switch (rand)
+            {
+                case (0):
+                    Instantiate(LeftButton, position, transform.rotation);
+                    LeftButton.transform.SetParent(Canvas.transform, false);
+                    break;
+                case (1):
+                    Instantiate(UpButton, position, transform.rotation);
+                    UpButton.transform.SetParent(Canvas.transform, false);
+                    break;
+                case (2):
+                    Instantiate(RightButton, position, transform.rotation);
+                    RightButton.transform.SetParent(Canvas.transform, false);
+                    break;
+                case (3):
+                    Instantiate(DownButton, position, transform.rotation);
+                    DownButton.transform.SetParent(Canvas.transform, false);
+                    break;
+                default:
+                    break;
+            }
+
+            Xvalue += ButtonSpacing;
+        }
+    }
 }
