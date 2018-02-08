@@ -4,52 +4,103 @@ using UnityEngine;
 
 public class ButtonScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+
+//    public Stepping stepping;
+   // GameObject firstArrow;
+
+    // Use this for initialization
+    void Start () {
+    //    stepping = GetComponent<Stepping>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+          if (Input.GetKey(KeyCode.D))
+          {
+          //  CheckFirstArrowInQueue();
+        }
 
-        DestroyLeft();
-        DestroyUp();
-        DestroyRight();
-        DestroyDown();
-    }
+        /*if (Input.GetKey(KeyCode.W))
+        {
+            DestroyUp();
+        }
 
+        if (Input.GetKey(KeyCode.A))
+        {
+            DestroyLeft();
+        }
 
-   public void DestroyLeft()
-    {
-        
         if (Input.GetKey(KeyCode.D))
         {
-            Destroy(GameObject.FindWithTag("Left"));
+            DestroyDown();
+        }*/
+
+        
+    }
+
+    void CheckStepsQueue()
+    {
+        if (Stepping.Steps.Count <= 0)
+        {
+            throw new System.Exception("Queue is empty");
         }
+    }
+
+    public void CheckFirstArrowInQueue()
+    {
+
+        CheckStepsQueue();
+        GameObject firstArrow = Stepping.Steps.Peek();
+
+        if (firstArrow.CompareTag("Right"))
+        {
+            
+            Stepping.Steps.Dequeue();
+            Destroy(firstArrow);
+        }
+
+           
+
+    }
+    /*
+
+   public void DestroyRight()
+    {
+       
+          var arrow = GameObject.FindWithTag("Right");
+         
+          if (Stepping.Steps.Count > 0)
+            firstArrow = Stepping.Steps.Peek();
+        
+            if (firstArrow!= null && firstArrow.(arrow) )
+            {
+                Debug.Log("It works yo");
+                Stepping.Steps.Dequeue();
+                Destroy(firstArrow);
+            }   
+            
     }
 
    public void DestroyUp()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            Destroy(GameObject.FindWithTag("Up"));
-        }
+            var arrow = GameObject.FindWithTag("Up");
+            //stepping.Steps.Dequeue();
+            Destroy(arrow);
     }
 
-  public  void DestroyRight()
+  public  void DestroyLeft()
     {
-        if(Input.GetKey(KeyCode.A))
-        {
-            Destroy(GameObject.FindWithTag("Right"));
-        }
+            var arrow = GameObject.FindWithTag("Left");
+           /// stepping.Steps.Dequeue();
+            Destroy(arrow);
     }
 
 
    public void DestroyDown()
     {
-        if (Input.GetKey(KeyCode.S))
-        {
-            Destroy(GameObject.FindWithTag("Down"));
-        }
+            var arrow = GameObject.FindWithTag("Down");
+          //  stepping.Steps.Dequeue();
+            Destroy(arrow);
     }
+    */
 }
