@@ -13,6 +13,7 @@ public class Stepping : MonoBehaviour
     public Canvas Canvas;
 
     //For positioning
+    public int resetXValue = -134;
     public int Xvalue = -134;
     public int Yvalue = -102;
     public int Zvalue = 0;
@@ -23,7 +24,8 @@ public class Stepping : MonoBehaviour
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
     public static Queue <GameObject>Steps = new Queue<GameObject>();
     
-    // parameter is received from world controller
+    
+   
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
@@ -36,27 +38,30 @@ public class Stepping : MonoBehaviour
             GenerateButtons(3);
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Steps.Count > 0)
         {
-            DestroyRight();
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            DestroyUp();
-        }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                DestroyRight();
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                DestroyUp();
+            }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            DestroyLeft();
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                DestroyLeft();
+            }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            DestroyDown();
+            if (Input.GetKey(KeyCode.S))
+            {
+                DestroyDown();
+            }
         }
-        
     }
 
+    // parameter should eventually be received from world controller
     void GenerateButtons(int numberOfButtons)
     {
         for (int i = 0; i < numberOfButtons; i++)
@@ -89,14 +94,16 @@ public class Stepping : MonoBehaviour
 
         }
     }
-
+    
     void SetPosition(GameObject arrow)
     {
-        arrow.transform.SetParent(Canvas.transform, false);
-        arrow.transform.localPosition = new Vector3(Xvalue, Yvalue, Zvalue);
-        Xvalue -= ButtonSpacing;
-        Steps.Enqueue(arrow);
-        Debug.Log("Steps count: " + Steps.Count);
+        
+            arrow.transform.SetParent(Canvas.transform, false);
+            arrow.transform.localPosition = new Vector3(Xvalue, Yvalue, Zvalue);
+            Xvalue -= ButtonSpacing;
+            Steps.Enqueue(arrow);
+            Debug.Log("Steps count: " + Steps.Count);
+        ResetXPosition();
     }
 
      
@@ -108,8 +115,8 @@ public class Stepping : MonoBehaviour
         {
             Steps.Dequeue();
             Destroy(firstArrow);
-        } 
-
+        }
+        ResetXPosition();
     }
     
 
@@ -122,6 +129,7 @@ public class Stepping : MonoBehaviour
             Steps.Dequeue();
             Destroy(firstArrow);
         }
+        ResetXPosition();
     }
 
     public void DestroyLeft()
@@ -133,6 +141,7 @@ public class Stepping : MonoBehaviour
             Steps.Dequeue();
             Destroy(firstArrow);
         }
+        ResetXPosition();
     }
 
 
@@ -145,6 +154,14 @@ public class Stepping : MonoBehaviour
             Steps.Dequeue();
             Destroy(firstArrow);
         }
+        ResetXPosition();
     }
 
+    public void ResetXPosition()
+    {
+        if (Steps.Count == 0)
+        {
+            Xvalue = resetXValue;
+        }
+    }
 }
