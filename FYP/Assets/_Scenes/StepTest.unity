@@ -255,6 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 266706144}
   - component: {fileID: 266706145}
+  - component: {fileID: 266706146}
   m_Layer: 0
   m_Name: WorldController
   m_TagString: GameController
@@ -312,6 +313,28 @@ MonoBehaviour:
   timeLeft: 30
   difficulty: 3
   gameOver: 0
+--- !u!114 &266706146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 266706143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e09f66b776bca2409b3a86ed69893a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftButton: {fileID: 1947113244769786, guid: 8e32c8ca2d72b334ba0175d928f0b643, type: 2}
+  UpButton: {fileID: 1097476532420890, guid: 58996e55e45736c4eb632a874da662cc, type: 2}
+  RightButton: {fileID: 1849859357751624, guid: 2caa35187d818014abba60456990cd0a,
+    type: 2}
+  DownButton: {fileID: 1345517646070038, guid: d4cb836744e1c9542b87581c05f016c7, type: 2}
+  Canvas: {fileID: 1577683699}
+  resetXValue: -134
+  Xvalue: -134
+  Yvalue: -102
+  Zvalue: 0
+  ButtonSpacing: -90
 --- !u!1 &427821987
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1279594977
 MonoBehaviour:
   m_ObjectHideFlags: 0

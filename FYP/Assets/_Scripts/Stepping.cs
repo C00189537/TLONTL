@@ -28,6 +28,7 @@ public class Stepping : MonoBehaviour
    
     void Update()
     {
+        /* //This was for testing purposes 
         if (Input.GetKeyDown(KeyCode.O))
         {
             GenerateButtons(2);
@@ -37,6 +38,7 @@ public class Stepping : MonoBehaviour
         {
             GenerateButtons(3);
         }
+        */
 
         if (Steps.Count > 0)
         {
@@ -62,7 +64,7 @@ public class Stepping : MonoBehaviour
     }
 
     // parameter should eventually be received from world controller
-    void GenerateButtons(int numberOfButtons)
+    public void GenerateButtons(int numberOfButtons)
     {
         for (int i = 0; i < numberOfButtons; i++)
         {

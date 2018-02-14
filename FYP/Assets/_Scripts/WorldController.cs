@@ -56,9 +56,12 @@ public class WorldController : MonoBehaviour {
 
     public bool gameOver;
 
+    Stepping stepping;
 
     void Start()
     {
+        stepping = GetComponent<Stepping>();
+
         //Initialise camera obj
         GameObject camOb = GameObject.FindWithTag("MainCamera");
         if (camOb != null)
@@ -223,11 +226,11 @@ public class WorldController : MonoBehaviour {
     {
         if (difficulty == 1)
         {
-            
+            stepping.GenerateButtons(2);
         }
         else
         {
-            
+            stepping.GenerateButtons(2);
         }
 
     }

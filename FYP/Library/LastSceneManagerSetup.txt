@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scenes/StepTest.unity
+- path: C:/Users/Amanda/Desktop/Game Developement/TLONTL/DynSTABLEBridge/Assets/Untitled.unity
   isLoaded: 1
   isActive: 1
