@@ -24,7 +24,7 @@ public class Stepping : MonoBehaviour
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
     public static Queue <GameObject>Steps = new Queue<GameObject>();
     
-    
+
    
     void Update()
     {
@@ -44,17 +44,17 @@ public class Stepping : MonoBehaviour
             {
                 DestroyRight();
             }
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W))
             {
                 DestroyUp();
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 DestroyLeft();
             }
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 DestroyDown();
             }

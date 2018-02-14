@@ -605,7 +605,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1279594978}
   - component: {fileID: 1279594977}
-  - component: {fileID: 1279594979}
   m_Layer: 0
   m_Name: SteppingScriptHolder
   m_TagString: Untagged
@@ -630,6 +629,7 @@ MonoBehaviour:
     type: 2}
   DownButton: {fileID: 1345517646070038, guid: d4cb836744e1c9542b87581c05f016c7, type: 2}
   Canvas: {fileID: 1577683699}
+  resetXValue: -134
   Xvalue: -137
   Yvalue: -102
   Zvalue: 0
@@ -647,17 +647,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1279594979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1279594976}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5379c1054476674ab5769da1d338ef2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1577683696
 GameObject:
   m_ObjectHideFlags: 0
