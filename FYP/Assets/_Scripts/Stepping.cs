@@ -17,30 +17,27 @@ public class Stepping : MonoBehaviour
     public int Xvalue = -134;
     public int Yvalue = -102;
     public int Zvalue = 0;
-    public int ButtonSpacing = -90; 
+    public int ButtonSpacing = -90;
+    
     
     System.Random randy = new System.Random();
 
+    PlayerController2 playerController;
+
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
     public static Queue <GameObject>Steps = new Queue<GameObject>();
-    
+
+    private void Start()
+    {
+        GameObject playerControllerObject = GameObject.FindWithTag("Player");
+        playerController = playerControllerObject.GetComponent<PlayerController2>();
+    }
 
    
     void Update()
     {
-        /* //This was for testing purposes 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            GenerateButtons(2);
-        }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GenerateButtons(3);
-        }
-        */
-
-        if (Steps.Count > 0)
+        if (Steps.Count > 0 && playerController.step == true)
         {
             if (Input.GetKeyDown(KeyCode.D))
             {
@@ -60,6 +57,18 @@ public class Stepping : MonoBehaviour
             {
                 DestroyDown();
             }
+        }
+
+        
+        //Should destroy all the objects in the queue when player leaves stepping track
+        if (playerController.step == false)
+        {
+            
+            foreach ( GameObject step in Steps){
+               Destroy(step);
+            }
+            Steps.Clear();
+            ResetXPosition();
         }
     }
 
@@ -104,8 +113,7 @@ public class Stepping : MonoBehaviour
             arrow.transform.localPosition = new Vector3(Xvalue, Yvalue, Zvalue);
             Xvalue -= ButtonSpacing;
             Steps.Enqueue(arrow);
-            Debug.Log("Steps count: " + Steps.Count);
-        ResetXPosition();
+            ResetXPosition();
     }
 
      

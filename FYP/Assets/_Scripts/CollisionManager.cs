@@ -8,9 +8,11 @@ public class CollisionManager : MonoBehaviour
     WorldController gameController;
     PlayerController2 playerController;
     Camera cam;
+   // Stepping stepping; 
 
     void Start()
     {
+     //   stepping = GameObject.Find("WorldController").GetComponent<Stepping>();
         //access the world controller for updating speed + score
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         if (gameControllerObject != null)
@@ -121,7 +123,9 @@ public class CollisionManager : MonoBehaviour
         {
             Debug.Log("Step");
             playerController.step = false;
+            //stepping.EmptyQueue();
             playerController.basic = true;
+            
         }
         else if (other.gameObject.tag == "Jump")
         {
