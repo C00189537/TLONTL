@@ -32,6 +32,8 @@ public class WorldController : MonoBehaviour {
     public float maxSpeed;
 
     private Vector3 scrollSpeed;
+    private Vector3 oneLegScrollSpeed;
+    public bool oneLegSpeed;
 
     //Where the next section will spawn
     public float spawnPoint;
@@ -87,17 +89,29 @@ public class WorldController : MonoBehaviour {
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
 
         gameOver = false;
+        oneLegSpeed = false;
         timerText.text = "Time: " + timeLeft;
 
         StartCoroutine(Earthquake());
+        UpdateMaxSpeed();
+        UpdateOneLegSpeed();
     }
 
     void Update()
     {
+
         for (int i = 0; i < TRACK_SIZE; i++)
         {
             //ScrollingWorld(trackPiece[i]);
-            trackPiece[i].transform.position -= scrollSpeed;
+            if (oneLegSpeed)
+            {
+                trackPiece[i].transform.position -= oneLegScrollSpeed;
+            }
+            else
+            {
+                trackPiece[i].transform.position -= scrollSpeed;
+            }
+           
         }
         UpdateTrack();
         UpdateScore();
@@ -171,6 +185,8 @@ public class WorldController : MonoBehaviour {
     {
         switch (difficulty)
         {
+            case 0:
+                break;
             case 1:
                 trackPiece[val].transform.Find("ObstacleMid").Translate(rand.Next(-4, 5), 2, 0);
                 break;
@@ -192,6 +208,7 @@ public class WorldController : MonoBehaviour {
     }
     void OneLegSpawn(int val)
     {
+
         //Randomly pick a side
         int side = rand.Next(1, 3);
         if (side == 1)
@@ -208,17 +225,27 @@ public class WorldController : MonoBehaviour {
     }
     void JumpSpawn(int val)
     {
-        if (difficulty == 1)
+        switch (difficulty)
         {
-            trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
+            case 0:
+                trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
+                break;
+            case 1:
+                trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
+                break;
+            case 2:
+                trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, 0);
+                trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 0);
+                break;
+            case 3:
+                trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, 0);
+                trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 0);
+                break;
+            default:
+                break;
         }
-        else
-        {
-            trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, 0);
-            trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 0);
+
         }
-         
-    }
     void StepSpawn(int val)
     {
         if (difficulty == 1)
@@ -285,6 +312,50 @@ public class WorldController : MonoBehaviour {
         }
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
+
+    public void UpdateMaxSpeed()
+    {
+        switch (difficulty)
+        {
+            case 0:
+                maxSpeed = 0.2f;
+                break;
+            case 1:
+                maxSpeed = 0.3f;
+                break;
+            case 2:
+                maxSpeed = 0.4f;
+                break;
+            case 3:
+                maxSpeed = 0.5f;
+                break;
+            default:
+                break;
+        }
+    }
+
+
+        public void UpdateOneLegSpeed()
+    {
+        switch (difficulty)
+        {
+            case 0:
+                oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
+                break;
+            case 1:
+                oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
+                break;
+            case 2:
+                oneLegScrollSpeed = new Vector3(0, 0, 0.15f);
+                break;
+            case 3:
+                oneLegScrollSpeed = new Vector3(0, 0, 0.1f);
+                break;
+            default:
+                break;
+        }
+    }
+
     void ScrollingWorld(GameObject g)
     {
         g.transform.position -= scrollSpeed;
@@ -326,6 +397,24 @@ public class WorldController : MonoBehaviour {
     {
         while(earthquake)
         {
+            switch (difficulty)
+            {
+                case 0:
+                    cam.GetComponent<CameraShake>().SetShakeAmount(0.05f);
+                    break;
+                case 1:
+                    cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
+                    break;
+                case 2:
+                    cam.GetComponent<CameraShake>().SetShakeAmount(0.2f);
+                    break;
+                case 3:
+                    cam.GetComponent<CameraShake>().SetShakeAmount(0.3f);
+                    break;
+                default:
+                    break;
+            }
+
             yield return new WaitForSeconds(rand.Next(5, 10));
             Debug.Log("Shake");
             //Earthquake
