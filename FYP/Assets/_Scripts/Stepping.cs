@@ -19,6 +19,8 @@ public class Stepping : MonoBehaviour
     public int Yvalue = -102;
     public int Zvalue = 0;
     public int ButtonSpacing = -90;
+
+    public int buttoneCount;
     
     System.Random randy = new System.Random();
 
@@ -36,7 +38,6 @@ public class Stepping : MonoBehaviour
    
     void Update()
     {
-        
         //Should destroy all the objects in the queue when player leaves stepping track
         if (playerController.step == false)
         {
@@ -52,6 +53,7 @@ public class Stepping : MonoBehaviour
     // parameter should eventually be received from world controller
     public void GenerateButtons(int numberOfButtons)
     {
+        buttoneCount = numberOfButtons + 1;
         for (int i = 0; i < numberOfButtons; i++)
         {
             int rand = randy.Next(0, 3);
@@ -161,5 +163,10 @@ public class Stepping : MonoBehaviour
         {
             Xvalue = resetXValue;
         }
+    }
+
+    public int getSteps()
+    {
+        return Steps.Count - 1;
     }
 }

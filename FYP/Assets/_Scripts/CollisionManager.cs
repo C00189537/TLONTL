@@ -6,12 +6,12 @@ public class CollisionManager : MonoBehaviour
 {
 
     WorldController gameController;
+    Stepping stepController;
     PlayerController2 playerController;
     Camera cam;
    // Stepping stepping; 
 
     private int platformScore;
-   
 
     void Start()
     {
@@ -31,6 +31,11 @@ public class CollisionManager : MonoBehaviour
         if (gameControllerObject != null)
         {
             playerController = playerControllerObject.GetComponent<PlayerController2>();
+        }
+        GameObject stepControllerObject = GameObject.FindWithTag("GameController");
+        if (stepControllerObject != null)
+        {
+            stepController = stepControllerObject.GetComponent<Stepping>();
         }
         else if (playerController == null)
         {
@@ -99,6 +104,24 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "Step")
         {
             Debug.Log(" Start Steping");
+            gameController.SteppingStones();
+            switch (gameController.difficulty)
+            {
+                case 0:
+                    platformScore = 1;
+                    break;
+                case 1:
+                    platformScore = 2;
+                    break;
+                case 2:
+                    platformScore = 3;
+                    break;
+                case 3:
+                    platformScore = 4;
+                    break;
+                default:
+                    break;
+            }
             platformScore = 3;
         }
         else if (other.gameObject.tag == "Jump")
@@ -108,12 +131,13 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "Jump2")
         {
-            Debug.Log("STart Jumping 2");
+            Debug.Log("Start Jumping 2");
             platformScore = 3;
         }
     }
     void OnTriggerStay(Collider other)
     {
+
         if (other.gameObject.tag == "Lean")
         {
             Debug.Log("Lean");
@@ -126,7 +150,7 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "Step")
         {
-            Debug.Log("Step");
+            //Debug.Log("Step");
             playerController.step = true;
         }
         else if (other.gameObject.tag == "Jump")
@@ -169,6 +193,8 @@ public class CollisionManager : MonoBehaviour
             playerController.step = false;
             //stepping.EmptyQueue();
             playerController.basic = true;
+            platformScore -= stepController.getSteps();
+            Debug.Log(platformScore);
             gameController.UpdateSpeed(0.015f * platformScore);
         }
         else if (other.gameObject.tag == "Jump")

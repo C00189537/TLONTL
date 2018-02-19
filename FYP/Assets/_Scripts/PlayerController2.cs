@@ -28,7 +28,7 @@ public class PlayerController2 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Step();
+        //Step();
 
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0 );
 		gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -90,23 +90,22 @@ public class PlayerController2 : MonoBehaviour {
     }
     void Step()
     {
-
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             stepping.DestroyRight();
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             stepping.DestroyUp();
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             stepping.DestroyLeft();
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             stepping.DestroyDown();
         }
