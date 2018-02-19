@@ -122,7 +122,7 @@ public class CollisionManager : MonoBehaviour
                 default:
                     break;
             }
-            platformScore = 3;
+
         }
         else if (other.gameObject.tag == "Jump")
         {

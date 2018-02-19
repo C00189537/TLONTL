@@ -20,7 +20,6 @@ public class Stepping : MonoBehaviour
     public int Zvalue = 0;
     public int ButtonSpacing = -90;
 
-    public int buttoneCount;
     
     System.Random randy = new System.Random();
 
@@ -53,8 +52,7 @@ public class Stepping : MonoBehaviour
     // parameter should eventually be received from world controller
     public void GenerateButtons(int numberOfButtons)
     {
-        buttoneCount = numberOfButtons + 1;
-        for (int i = 0; i < numberOfButtons; i++)
+        for (int i = 0; i < numberOfButtons + 1; i++)
         {
             int rand = randy.Next(0, 3);
             
@@ -167,6 +165,6 @@ public class Stepping : MonoBehaviour
 
     public int getSteps()
     {
-        return Steps.Count - 1;
+        return Steps.Count;
     }
 }
