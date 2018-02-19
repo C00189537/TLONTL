@@ -15,7 +15,7 @@ public class Rotato : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log("Rotate");
+        
         transform.Rotate(rotationVector * Time.deltaTime);
 	}
 }

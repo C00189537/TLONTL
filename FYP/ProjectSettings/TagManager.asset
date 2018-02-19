@@ -16,6 +16,10 @@ TagManager:
   - Jump2
   - Coin
   - Killer
+  - Up
+  - Right
+  - Left
+  - Down
   layers:
   - Default
   - TransparentFX

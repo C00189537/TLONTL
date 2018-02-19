@@ -58,9 +58,12 @@ public class WorldController : MonoBehaviour {
 
     public bool gameOver;
 
+    Stepping stepping;
 
     void Start()
     {
+        stepping = GetComponent<Stepping>();
+
         //Initialise camera obj
         GameObject camOb = GameObject.FindWithTag("MainCamera");
         if (camOb != null)
@@ -246,16 +249,23 @@ public class WorldController : MonoBehaviour {
         }
 
         }
+    //TODO integrate better 
     void StepSpawn(int val)
     {
-        if (difficulty == 1)
-        {
-            
-        }
-        else
-        {
-            
-        }
+        //switch (difficulty)
+        //{
+        //    case 1:
+        //        stepping.GenerateButtons(2);
+        //        break;
+        //    case 2:
+        //        stepping.GenerateButtons(3);
+        //        break;
+        //    case 3:
+        //        stepping.GenerateButtons(4);
+        //        break;
+        //    default:
+        //        break;
+        //}
 
     }
     void DifJumpSpawn(int val)
@@ -390,6 +400,11 @@ public class WorldController : MonoBehaviour {
             score += speed * Time.deltaTime;
             SetScoreText();
         } 
+    }
+
+    public void SteppingStones()
+    {
+        stepping.GenerateButtons(difficulty);
     }
 
     //Flashes 

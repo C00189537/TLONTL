@@ -1,51 +1,170 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI; 
 using UnityEngine;
 
-public class Stepping : MonoBehaviour {
-
-    public List<Direction> Steps = new List<Direction>();
-    private int numberOfStepsOne = 3;
-    private int numberOfStepsTw0 = 4; 
-    private int numberOfStepsThree = 6;
-
-
-    // Use this for initialization
-    void Start () {
-        Steps.Add(new Direction() { DirectionName = "Left", DirectionId = 0 });
-        Steps.Add(new Direction() { DirectionName = "Right", DirectionId = 1});
-        Steps.Add(new Direction() { DirectionName = "Up", DirectionId = 2 });
-        Steps.Add(new Direction() { DirectionName = "Down", DirectionId = 3 });
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    void DifficultyOne()
-    {
-        int randomRandy = UnityEngine.Random.Range(0, 3);
-    }
-
-    void DifficultyTwo()
-    {
-
-    }
-
-    void DifficultyThree()
-    {
-
-    }
-}
-
-public class Direction 
+public class Stepping : MonoBehaviour
 {
-    public int DirectionId { get; set; }
-    public string DirectionName { get; set; }
+    public GameObject LeftButton;
+    public GameObject UpButton;
+    public GameObject RightButton;
+    public GameObject DownButton;
+    public Canvas Canvas;
 
-    //image on screen
-    //keycode needed
+   
+    //For positioning
+    public int resetXValue = -134;
+    public int Xvalue = -134;
+    public int Yvalue = -102;
+    public int Zvalue = 0;
+    public int ButtonSpacing = -90;
+
+    
+    System.Random randy = new System.Random();
+
+    PlayerController2 playerController;
+
+    //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
+    public Queue <GameObject>Steps = new Queue<GameObject>();
+
+    private void Start()
+    {
+        GameObject playerControllerObject = GameObject.FindWithTag("Player");
+        playerController = playerControllerObject.GetComponent<PlayerController2>();
+    }
+
+   
+    void Update()
+    {
+        //Should destroy all the objects in the queue when player leaves stepping track
+        if (playerController.step == false)
+        {
+            
+            foreach ( GameObject step in Steps){
+               Destroy(step);
+            }
+            Steps.Clear();
+            ResetXPosition();
+        }
+    }
+
+    // parameter should eventually be received from world controller
+    public void GenerateButtons(int numberOfButtons)
+    {
+        for (int i = 0; i < numberOfButtons + 1; i++)
+        {
+            int rand = randy.Next(0, 3);
+            
+            switch (rand)
+            {
+                case (0):
+                    var Left = Instantiate(LeftButton);
+                    SetPosition(Left);
+                    break;
+                case (1):
+                    var Up = Instantiate(UpButton);
+                    SetPosition(Up);
+                    break;
+                case (2):
+                    var Right = Instantiate(RightButton);
+                    SetPosition(Right);
+                    break;
+                case (3):
+                    var Down = Instantiate(DownButton);
+                    SetPosition(Down);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+    void SetPosition(GameObject arrow)
+    {
+            arrow.transform.SetParent(Canvas.transform, false);
+            arrow.transform.localPosition = new Vector3(Xvalue, Yvalue, Zvalue);
+            Xvalue -= ButtonSpacing;
+            Steps.Enqueue(arrow);
+           ResetXPosition();
+    }
+
+     
+    public void DestroyRight()
+    {
+        if (Steps.Count > 0){
+             GameObject firstArrow = Steps.Peek();
+
+              if (firstArrow.CompareTag("Right"))
+              {
+                  Steps.Dequeue();
+                  Destroy(firstArrow);
+              }
+            ResetXPosition();
+        }
         
+    }
+    
+
+    public void DestroyUp()
+    {
+        if (Steps.Count > 0)
+        {
+            GameObject firstArrow = Steps.Peek();
+
+            if (firstArrow.CompareTag("Up"))
+            {
+                Steps.Dequeue();
+                Destroy(firstArrow);
+            }
+            ResetXPosition();
+        }
+       
+    }
+
+    public void DestroyLeft()
+    {
+        if (Steps.Count > 0)
+        {
+            GameObject firstArrow = Steps.Peek();
+
+            if (firstArrow.CompareTag("Left"))
+            {
+                Steps.Dequeue();
+                Destroy(firstArrow);
+            }
+            ResetXPosition();
+        }
+        
+    }
+
+
+    public void DestroyDown()
+    {
+        if (Steps.Count > 0)
+        {
+            GameObject firstArrow = Steps.Peek();
+
+            if (firstArrow.CompareTag("Down"))
+            {
+                Steps.Dequeue();
+                Destroy(firstArrow);
+            }
+            ResetXPosition();
+        }
+        
+    }
+
+    public void ResetXPosition()
+    {
+        if (Steps.Count == 0)
+        {
+            Xvalue = resetXValue;
+        }
+    }
+
+    public int getSteps()
+    {
+        return Steps.Count;
+    }
 }
