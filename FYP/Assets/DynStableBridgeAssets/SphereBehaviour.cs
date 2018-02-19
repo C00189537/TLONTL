@@ -5,8 +5,8 @@ using UnityEngine;
 public class SphereBehaviour : MonoBehaviour {
 
 
-    public DynSTABLE platform; 
-
+    public DynSTABLE platform;
+    public Vector3 ballPosition;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +25,7 @@ public class SphereBehaviour : MonoBehaviour {
         // position.z = -10 * platform.cop.z;
 
         //transform.localScale = scale;
-        transform.position = new Vector3(position.x, 1, 0);
+        ballPosition = new Vector3(position.x, 1, 0);
 
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 public class SphereBehaviour : MonoBehaviour {
 
 
-    public DynSTABLE platform; 
+    public DynSTABLE platform;
+    public Vector3 position;
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -18,14 +18,14 @@ public class SphereBehaviour : MonoBehaviour {
         //Vector3 scale = transform.localScale;
         //scale.y = 6 * platform.cop.force;
 
-        Vector3 position = transform.localPosition;
+        position = transform.localPosition;
       //  position.y = 3 * platform.cop.force;
 
         position.x = 10 * platform.cop.x;
         // position.z = -10 * platform.cop.z;
 
         //transform.localScale = scale;
-        transform.position = new Vector3(position.x, 0, 0);
+        transform.position = new Vector3(position.x, 1, 0);
 
     }
 }

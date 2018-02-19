@@ -13,21 +13,35 @@ public class PlayerController2 : MonoBehaviour {
     public float testSpeed;
     public bool basic, lean, oneLeg, step, jump, jump2;
 
-	// Use this for initialization
-	void Start () {
+    public DynSTABLE platform;
+    public Vector3 pos;
+
+    // Use this for initialization
+    void Start () {
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         if (gameControllerObject != null)
         {
             gameController = gameControllerObject.GetComponent<WorldController>();
         }
+        
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0 );
-		gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-        Inputs();
+       // pos = transform.localPosition;
+
+        pos.x = 10 * platform.cop.x;
+
+      //  new Vector3(platform.cop.x * 10, 1, 0);
+
+        gameObject.transform.position = new Vector3(pos.x, gameObject.transform.position.y, 0 );
+
+       
+		//gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        /*Inputs();
         if (lean || basic)
         {
             Lean();
@@ -49,6 +63,7 @@ public class PlayerController2 : MonoBehaviour {
             Jump2();
         }
         //OneLeg();
+        */
 	}
     void Lean()
     {

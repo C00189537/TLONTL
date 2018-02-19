@@ -1,5 +1,4 @@
 sceneSetups:
-- path: C:/Users/Amanda/Desktop/Game Developement/TLONTL/FYP/Assets/_Scenes/StepTest
-    1.unity
+- path: C:/Users/Amanda/Desktop/Game Developement/TLONTL/FYP/Assets/_Scenes/connectionTest.unity
   isLoaded: 1
   isActive: 1
