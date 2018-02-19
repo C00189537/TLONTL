@@ -123,7 +123,7 @@ public class WorldController : MonoBehaviour {
                     trackers[i] = rand.Next(minRand, maxRand + 1);
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
                     //Set up the track pieces
-                    switch (4)//trackers[i])
+                    switch (trackers[i])
                     {
                         case 1:
                             ObstacleSpawn(i);
@@ -225,12 +225,19 @@ public class WorldController : MonoBehaviour {
     //TODO integrate better 
     void StepSpawn(int val)
     {
-        if (difficulty == 1)
+        switch (difficulty)
         {
-           // stepping.GenerateButtons(2);
-        }
-        else
-        {
+            case 1:
+                stepping.GenerateButtons(2);
+                break;
+            case 2:
+                stepping.GenerateButtons(3);
+                break;
+            case 3:
+                stepping.GenerateButtons(4);
+                break;
+            default:
+                break;
         }
 
     }

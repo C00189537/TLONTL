@@ -237,11 +237,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac44be20785e8cb4094f6f6d72dde1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stepping: {fileID: 0}
   xVal: 2.75
   translateSpeed: 10
   testSpeed: 0.1
   basic: 0
-  lean: 0
+  lean: 1
   oneLeg: 0
   step: 0
   jump: 0

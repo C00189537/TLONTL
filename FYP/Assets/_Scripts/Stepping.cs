@@ -12,6 +12,7 @@ public class Stepping : MonoBehaviour
     public GameObject DownButton;
     public Canvas Canvas;
 
+   
     //For positioning
     public int resetXValue = -134;
     public int Xvalue = -134;
@@ -19,13 +20,12 @@ public class Stepping : MonoBehaviour
     public int Zvalue = 0;
     public int ButtonSpacing = -90;
     
-    
     System.Random randy = new System.Random();
 
     PlayerController2 playerController;
 
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
-    public static Queue <GameObject>Steps = new Queue<GameObject>();
+    public Queue <GameObject>Steps = new Queue<GameObject>();
 
     private void Start()
     {
@@ -36,29 +36,6 @@ public class Stepping : MonoBehaviour
    
     void Update()
     {
-
-        if (Steps.Count > 0 && playerController.step == true)
-        {
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                DestroyRight();
-            }
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                DestroyUp();
-            }
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                DestroyLeft();
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                DestroyDown();
-            }
-        }
-
         
         //Should destroy all the objects in the queue when player leaves stepping track
         if (playerController.step == false)
@@ -81,7 +58,6 @@ public class Stepping : MonoBehaviour
             
             switch (rand)
             {
-             
                 case (0):
                     var Left = Instantiate(LeftButton);
                     SetPosition(Left);
@@ -101,70 +77,82 @@ public class Stepping : MonoBehaviour
                 default:
                     break;
             }
-           
-
         }
     }
     
     void SetPosition(GameObject arrow)
     {
-        
             arrow.transform.SetParent(Canvas.transform, false);
             arrow.transform.localPosition = new Vector3(Xvalue, Yvalue, Zvalue);
             Xvalue -= ButtonSpacing;
             Steps.Enqueue(arrow);
-            ResetXPosition();
+           ResetXPosition();
     }
 
      
     public void DestroyRight()
     {
-        var firstArrow = Stepping.Steps.Peek();
+        if (Steps.Count > 0){
+             GameObject firstArrow = Steps.Peek();
 
-        if (firstArrow.CompareTag("Right"))
-        {
-            Steps.Dequeue();
-            Destroy(firstArrow);
+              if (firstArrow.CompareTag("Right"))
+              {
+                  Steps.Dequeue();
+                  Destroy(firstArrow);
+              }
+            ResetXPosition();
         }
-        ResetXPosition();
+        
     }
     
 
     public void DestroyUp()
     {
-        var firstArrow = Stepping.Steps.Peek();
-
-        if (firstArrow.CompareTag("Up"))
+        if (Steps.Count > 0)
         {
-            Steps.Dequeue();
-            Destroy(firstArrow);
+            GameObject firstArrow = Steps.Peek();
+
+            if (firstArrow.CompareTag("Up"))
+            {
+                Steps.Dequeue();
+                Destroy(firstArrow);
+            }
+            ResetXPosition();
         }
-        ResetXPosition();
+       
     }
 
     public void DestroyLeft()
     {
-        var firstArrow = Stepping.Steps.Peek();
-
-        if (firstArrow.CompareTag("Left"))
+        if (Steps.Count > 0)
         {
-            Steps.Dequeue();
-            Destroy(firstArrow);
+            GameObject firstArrow = Steps.Peek();
+
+            if (firstArrow.CompareTag("Left"))
+            {
+                Steps.Dequeue();
+                Destroy(firstArrow);
+            }
+            ResetXPosition();
         }
-        ResetXPosition();
+        
     }
 
 
     public void DestroyDown()
     {
-        var firstArrow = Stepping.Steps.Peek();
-
-        if (firstArrow.CompareTag("Down"))
+        if (Steps.Count > 0)
         {
-            Steps.Dequeue();
-            Destroy(firstArrow);
+            GameObject firstArrow = Steps.Peek();
+
+            if (firstArrow.CompareTag("Down"))
+            {
+                Steps.Dequeue();
+                Destroy(firstArrow);
+            }
+            ResetXPosition();
         }
-        ResetXPosition();
+        
     }
 
     public void ResetXPosition()

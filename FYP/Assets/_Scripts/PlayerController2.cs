@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController2 : MonoBehaviour {
 
     WorldController gameController;
+    public Stepping stepping; 
     
     public float xVal;
 
@@ -20,10 +21,14 @@ public class PlayerController2 : MonoBehaviour {
         {
             gameController = gameControllerObject.GetComponent<WorldController>();
         }
+
+        stepping = gameControllerObject.GetComponent<Stepping>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        Step();
 
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0 );
 		gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -86,7 +91,27 @@ public class PlayerController2 : MonoBehaviour {
     void Step()
     {
 
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            stepping.DestroyRight();
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            stepping.DestroyUp();
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            stepping.DestroyLeft();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            stepping.DestroyDown();
+        }
     }
+
     void Jump()
     {
 

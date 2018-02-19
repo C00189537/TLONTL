@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 224906751161484512}
   - component: {fileID: 222716867691957248}
   - component: {fileID: 114045513329544760}
-  - component: {fileID: 114394655708478894}
   m_Layer: 5
   m_Name: Right
   m_TagString: Right
@@ -55,17 +54,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &114394655708478894
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849859357751624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5379c1054476674ab5769da1d338ef2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &222716867691957248
 CanvasRenderer:
   m_ObjectHideFlags: 1
