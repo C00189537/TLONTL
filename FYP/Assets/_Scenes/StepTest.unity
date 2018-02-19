@@ -299,6 +299,7 @@ MonoBehaviour:
   speed: 0.5
   minSpeed: 0.2
   maxSpeed: 0.5
+  oneLegSpeed: 0
   spawnPoint: 30
   spawnPointFar: 60
   minRand: 1
@@ -322,7 +323,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 266706143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e09f66b776bca2409b3a86ed69893a5, type: 3}
+  m_Script: {fileID: 11500000, guid: bd9d5c494850477439aa9d09e3124ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LeftButton: {fileID: 1947113244769786, guid: 8e32c8ca2d72b334ba0175d928f0b643, type: 2}
@@ -620,57 +621,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1226377376}
---- !u!1 &1279594976
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1279594978}
-  - component: {fileID: 1279594977}
-  m_Layer: 0
-  m_Name: SteppingScriptHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1279594977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1279594976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e09f66b776bca2409b3a86ed69893a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LeftButton: {fileID: 1947113244769786, guid: 8e32c8ca2d72b334ba0175d928f0b643, type: 2}
-  UpButton: {fileID: 1097476532420890, guid: 58996e55e45736c4eb632a874da662cc, type: 2}
-  RightButton: {fileID: 1849859357751624, guid: 2caa35187d818014abba60456990cd0a,
-    type: 2}
-  DownButton: {fileID: 1345517646070038, guid: d4cb836744e1c9542b87581c05f016c7, type: 2}
-  Canvas: {fileID: 1577683699}
-  resetXValue: -134
-  Xvalue: -137
-  Yvalue: -102
-  Zvalue: 0
-  ButtonSpacing: -90
---- !u!4 &1279594978
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1279594976}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1577683696
 GameObject:
   m_ObjectHideFlags: 0

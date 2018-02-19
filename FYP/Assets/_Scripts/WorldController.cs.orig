@@ -249,7 +249,12 @@ public class WorldController : MonoBehaviour {
         }
 
         }
+<<<<<<< HEAD
+         
+    }
     //TODO integrate better 
+=======
+>>>>>>> origin/master
     void StepSpawn(int val)
     {
         switch (difficulty)

@@ -169,7 +169,11 @@ public class CollisionManager : MonoBehaviour
             playerController.step = false;
             //stepping.EmptyQueue();
             playerController.basic = true;
+<<<<<<< HEAD
+            
+=======
             gameController.UpdateSpeed(0.015f * platformScore);
+>>>>>>> origin/master
         }
         else if (other.gameObject.tag == "Jump")
         {

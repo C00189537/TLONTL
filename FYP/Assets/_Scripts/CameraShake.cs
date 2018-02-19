@@ -50,4 +50,8 @@ public class CameraShake : MonoBehaviour
         shakeDuration = v;
 		persistentShakeDuration = v;
     }
+    public void SetShakeAmount(float s)
+    {
+        shakeAmount = s;
+    }
 }
