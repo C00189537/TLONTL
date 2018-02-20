@@ -10,7 +10,7 @@ using System;
 public class DFlowNetwork : MonoBehaviour {
 
 	//Remember to fix this befor compiling!
-	public string ipAddress = "127.0.0.1";
+	public string ipAddress = "192.168.178.48";
 
 	//Default port
 	public int port = 3910;
@@ -228,7 +228,7 @@ public class DFlowNetwork : MonoBehaviour {
 				
 				Array.Copy (newPackage.data, outputs, 256);
 
-				Debug.Log (outputs [0] + " " + outputs [1]);
+				//Debug.Log (outputs [0] + " " + outputs [1]);
 
 				OnNewData (this);
 
