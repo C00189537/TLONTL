@@ -10,7 +10,7 @@ using System;
 public class DFlowNetwork : MonoBehaviour {
 
 	//Remember to fix this befor compiling!
-	public string ipAddress = "192.168.178.48";
+	public string ipAddress = "127.0.0.1";
 
 	//Default port
 	public int port = 3910;

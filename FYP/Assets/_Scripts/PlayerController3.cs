@@ -10,11 +10,12 @@ public class PlayerController3 : MonoBehaviour {
     
     public float xVal;
 
-    private bool right, left;
+    private bool right, left, leanLeft, LeanRight;
     public float translateSpeed;
     public float testSpeed;
     public float jumpSpeed;
     public bool basic, lean, oneLeg, step, jump, jump2;
+   
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,7 @@ public class PlayerController3 : MonoBehaviour {
          }
          */
         stepping = gameControllerObject.GetComponent<Stepping>();
+       
     }
 	
 	// Update is called once per frame
@@ -46,11 +48,11 @@ public class PlayerController3 : MonoBehaviour {
         }
         else if(jump)
         {
-            Jump();
+            //Jump();
         }
         else if (jump2)
         {
-            Jump2();
+            //Jump2();
         }
         //OneLeg();
 
@@ -63,42 +65,42 @@ public class PlayerController3 : MonoBehaviour {
     }
     void OneLeg()
     {
-        if (right)
+        if (LeanRight)
         {
             gameObject.transform.Translate((xVal - gameObject.transform.position.x) / translateSpeed, 0, 0);
 
         }
-        else if (left)
+        else if (leanLeft)
         {
             gameObject.transform.Translate(-((xVal + gameObject.transform.position.x) / translateSpeed), 0, 0);
         }
-        else if (!right)
+        else if (!LeanRight)
         {
             gameObject.transform.Translate(-((0 + gameObject.transform.position.x) / translateSpeed), 0, 0);
         }
-        else if (!left)
+        else if (!leanLeft)
         {
             gameObject.transform.Translate(-((0 + gameObject.transform.position.x) / translateSpeed), 0, 0);
         }
     }
     void Step()
     {
-        if (platform.cop.x > 0.5f)// && (platform.cop.z < -0.1 || platform.cop.z > 0.1))
+        if (platform.cop.x > 0.15)
         {
             stepping.DestroyRight();
         }
 
-        if (platform.cop.z > 0.5f)
+        if (platform.cop.z <= -0.15)
         {
             stepping.DestroyUp();
         }
 
-        if (platform.cop.x < -0.5f)// && (platform.cop.z < -0.1 || platform.cop.z > 0.1))
+        if (platform.cop.x < -0.15)
         {
             stepping.DestroyLeft();
         }
 
-        if (platform.cop.z < -0.5)
+        if (platform.cop.z >= 0.15)
         {
             stepping.DestroyDown();
         }
@@ -128,12 +130,34 @@ public class PlayerController3 : MonoBehaviour {
             right = true; 
         }
 
-       if (platform.cop.force > 0)
+       if (platform.cop.x > 0.160)
+        {
+            LeanRight = true;
+            leanLeft = false;
+        }
+       if(platform.cop.x <= 0.160)
+        {
+            LeanRight = false;
+        }
+
+        if (platform.cop.x < -0.160)
+        {
+            LeanRight = false;
+            leanLeft = true;
+        }
+
+        if (platform.cop.x >= -0.160)
+        {
+            leanLeft = false;
+        }
+
+        if (platform.cop.force > 10)
         {
             jump = false;
         }
+       
 
-       if (platform.cop.force <= 0)
+       if (platform.cop.force <= 10)
         {
             jump = true; 
         }
