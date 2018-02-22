@@ -216,14 +216,23 @@ MonoBehaviour:
   stepping: {fileID: 0}
   xVal: 2.75
   translateSpeed: 10
-  testSpeed: 0.5
-  jumpSpeed: 0.1
+  LeanSpeed: 0.5
+  jumpSpeed: 1
+  LeanValue: 0
+  OneLegValue: 0.158
+  StepValue: 0.15
+  JumpValue: 100
+  JumpTwoValue: 0
   basic: 0
   lean: 0
   oneLeg: 0
-  step: 1
-  jump: 0
+  step: 0
+  jump: 1
   jump2: 0
+  rb: {fileID: 0}
+  force: 0
+  xpos: 0
+  zpos: 0
 --- !u!54 &213662111
 Rigidbody:
   m_ObjectHideFlags: 0

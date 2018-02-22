@@ -7,7 +7,7 @@ public class CollisionManager : MonoBehaviour
 
     WorldController gameController;
     Stepping stepController;
-    PlayerController2 playerController;
+    PlayerController3 playerController;
     Camera cam;
    // Stepping stepping; 
 
@@ -30,7 +30,7 @@ public class CollisionManager : MonoBehaviour
         GameObject playerControllerObject = GameObject.FindWithTag("Player");
         if (gameControllerObject != null)
         {
-            playerController = playerControllerObject.GetComponent<PlayerController2>();
+            playerController = playerControllerObject.GetComponent<PlayerController3>();
         }
         GameObject stepControllerObject = GameObject.FindWithTag("GameController");
         if (stepControllerObject != null)

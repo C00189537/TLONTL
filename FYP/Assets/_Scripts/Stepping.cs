@@ -23,7 +23,7 @@ public class Stepping : MonoBehaviour
     
     System.Random randy = new System.Random();
 
-    PlayerController2 playerController;
+    PlayerController3 playerController;
 
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
     public Queue <GameObject>Steps = new Queue<GameObject>();
@@ -31,7 +31,7 @@ public class Stepping : MonoBehaviour
     private void Start()
     {
         GameObject playerControllerObject = GameObject.FindWithTag("Player");
-        playerController = playerControllerObject.GetComponent<PlayerController2>();
+        playerController = playerControllerObject.GetComponent<PlayerController3>();
     }
 
    
