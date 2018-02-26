@@ -59,6 +59,7 @@ public class WorldController : MonoBehaviour {
     public bool gameOver;
 
     Stepping stepping;
+    public NetworkInput input; 
 
     void Start()
     {
@@ -70,6 +71,8 @@ public class WorldController : MonoBehaviour {
         {
             cam = camOb.GetComponent<Camera>();
         }
+
+        input = GetComponent<NetworkInput>(); 
 
         //initialise the first platforms
         currentSection = Instantiate(platformLayout[currentTracker], new Vector3(0, 0, 0.0f), transform.rotation) as GameObject;
