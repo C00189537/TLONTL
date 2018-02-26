@@ -15,6 +15,9 @@ public class NetworkInput : MonoBehaviour {
     public float nSpeed;
     public float nObstackles;
     public float nBoardMovements;
+    public float nJumpDifficulty;
+    public float nNumberofSteps;
+    public float nOneLegSpeed; 
 
     // Use this for initialization
     void Start()
@@ -34,6 +37,9 @@ public class NetworkInput : MonoBehaviour {
         nSpeed = network.getOutput(9);
         nObstackles = network.getOutput(10);
         nBoardMovements = network.getOutput(11);
+        nJumpDifficulty = network.getOutput(12);
+        nNumberofSteps = network.getOutput(13);
+        nOneLegSpeed = network.getOutput(14);
     }
 
 }
