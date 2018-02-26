@@ -217,11 +217,11 @@ MonoBehaviour:
   xVal: 2.75
   translateSpeed: 10
   LeanSpeed: 0.5
-  jumpSpeed: 1
+  jumpSpeed: 0.5
   LeanValue: 0
   OneLegValue: 0.158
   StepValue: 0.15
-  JumpValue: 100
+  JumpValue: 350
   JumpTwoValue: 0
   basic: 0
   lean: 0

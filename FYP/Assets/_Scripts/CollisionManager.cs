@@ -73,7 +73,7 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "Pit")
         {
-            gameObject.GetComponent<PlayerController2>().ResetPlayer();
+            gameObject.GetComponent<PlayerController3>().ResetPlayer();
             if (platformScore > 0)
             {
                 platformScore--;

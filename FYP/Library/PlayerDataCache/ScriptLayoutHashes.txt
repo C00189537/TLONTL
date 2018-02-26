@@ -1,6 +1,6 @@
 WindowsStandalone
 SceneListBegin?
-Assets/_Scenes/StepTest.unity
+Assets/_Scenes/jumptesting.unity
 SceneListEnd?
 9fac431d35537a90f62710b2560bd7d1 Assembly-CSharp.dll:.PlayerController2
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -149,3 +149,4 @@ f17de2692b540f8aaa02a194eea83988 Assembly-CSharp.dll:.WorldController
 b4d191cbde808e3ddc3183c413623016 Assembly-CSharp.dll:.DynSTABLE
 6d1a632fb999155da0ce036b3020fc64 Assembly-CSharp.dll:.DFlowNetwork
 1c73b74c9178d66d57f0e003963e8a05 Assembly-CSharp.dll:.Rotato
+f62df79d6c2faae01645e9681bbfaa8e Assembly-CSharp.dll:.TestJump

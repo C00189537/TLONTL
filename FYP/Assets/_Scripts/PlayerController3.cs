@@ -118,14 +118,16 @@ public class PlayerController3 : MonoBehaviour {
         
         if (jump)
         {
-            if (gameObject.transform.position.y < 4.00f)
-            {
-                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.VelocityChange);
-            }
-            if (gameObject.transform.position.y > 5.00f)
-            {
-                rb.AddForce(Vector3.down * jumpSpeed, ForceMode.VelocityChange);
-            }
+            /* if (gameObject.transform.position.y < 4.00f)
+             {
+                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.VelocityChange);
+             }
+             if (gameObject.transform.position.y > 5.00f)
+             {
+                 rb.AddForce(Vector3.down * jumpSpeed, ForceMode.VelocityChange);
+             } */
+
+            gameObject.transform.Translate(0, jumpSpeed, 0);
         }
            
            // gameObject.transform.Translate(0, jumpSpeed, 0);

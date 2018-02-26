@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scenes/StepTest.unity
+- path: Assets/_Scenes/jumptesting.unity
   isLoaded: 1
   isActive: 1
