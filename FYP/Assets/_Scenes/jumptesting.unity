@@ -147,6 +147,7 @@ MonoBehaviour:
   platform: {fileID: 1258700778}
   jumpValue: 300
   jumpSpeed: 0.5
+  LeanSpeed: 0.5
   force: 0
 --- !u!54 &112089973
 Rigidbody:
