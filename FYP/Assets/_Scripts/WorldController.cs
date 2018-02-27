@@ -59,6 +59,7 @@ public class WorldController : MonoBehaviour {
     public bool gameOver;
 
     Stepping stepping;
+    public NetworkInput input; 
 
     void Start()
     {
@@ -70,6 +71,8 @@ public class WorldController : MonoBehaviour {
         {
             cam = camOb.GetComponent<Camera>();
         }
+
+        input = GetComponent<NetworkInput>(); 
 
         //initialise the first platforms
         currentSection = Instantiate(platformLayout[currentTracker], new Vector3(0, 0, 0.0f), transform.rotation) as GameObject;
@@ -136,27 +139,30 @@ public class WorldController : MonoBehaviour {
                 {
                     trackers[i] = rand.Next(minRand, maxRand + 1);
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-                    //Set up the track pieces
-                    switch (trackers[i])
-                    {
-                        case 1:
-                            ObstacleSpawn(i);
-                            break;
-                        case 2:
-                            OneLegSpawn(i);
-                            break;
-                        case 3:
-                            JumpSpawn(i);
-                            break;
-                        case 4:
-                            StepSpawn(i);
-                            break;
-                        case 5:
-                            DifJumpSpawn(i);
-                            break;
-                        default:
-                            break;
-                    }
+
+                        //Set up the track pieces
+                        switch (trackers[i])
+                        {
+                            case 1:
+                                ObstacleSpawn(i);
+                                break;
+                            case 2:
+                                OneLegSpawn(i);
+                                break;
+                            case 3:
+                                JumpSpawn(i);
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                DifJumpSpawn(i);
+                                break;
+                            default:
+                                break;
+                        }
+
+                    
+                    
                 }
                 //If the track piece is an exercise, the next one will be a base piece
                 else if (trackers[i] > 0)
@@ -184,9 +190,21 @@ public class WorldController : MonoBehaviour {
         trackPiece[val].transform.Find("ScoreOb1").Translate(randy, 2, 0);
         trackPiece[val].transform.Find("ScoreOb2").Translate(randy, 2, 0);
     }
+
     void ObstacleSpawn(int val)
     {
-        switch (difficulty)
+        int variable = difficulty; 
+
+        if (input.nManual == 0.0f)
+        {
+            variable = difficulty;
+        } 
+        if (input.nManual == 1)
+        {
+            variable = (int)input.nObstackles;
+        }
+
+        switch (variable)
         {
             case 0:
                 break;
@@ -205,6 +223,7 @@ public class WorldController : MonoBehaviour {
             default:
                 break;
         }
+
         trackPiece[val].transform.Find("ObstacleFront").localScale = trackPiece[val].transform.Find("ObstacleFront").localScale * difficulty * 0.75f;
         trackPiece[val].transform.Find("ObstacleMid").localScale = trackPiece[val].transform.Find("ObstacleMid").localScale * difficulty * 0.75f;
         trackPiece[val].transform.Find("ObstacleBack").localScale = trackPiece[val].transform.Find("ObstacleBack").localScale * difficulty * 0.75f;
@@ -228,46 +247,39 @@ public class WorldController : MonoBehaviour {
     }
     void JumpSpawn(int val)
     {
-        switch (difficulty)
+
+        int variable = difficulty;
+
+        if (input.nManual == 0)
         {
-            case 0:
-                trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
-                break;
-            case 1:
-                trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
-                break;
-            case 2:
-                trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, 0);
-                trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 0);
-                break;
-            case 3:
-                trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, 0);
-                trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 0);
-                break;
-            default:
-                break;
+            variable = difficulty;
+        }
+        if (input.nManual == 1)
+        {
+            variable = (int)input.nJumpDifficulty;
         }
 
-        }
-    //TODO integrate better 
-    void StepSpawn(int val)
-    {
-        //switch (difficulty)
-        //{
-        //    case 1:
-        //        stepping.GenerateButtons(2);
-        //        break;
-        //    case 2:
-        //        stepping.GenerateButtons(3);
-        //        break;
-        //    case 3:
-        //        stepping.GenerateButtons(4);
-        //        break;
-        //    default:
-        //        break;
-        //}
-
+        switch (variable)
+            {
+                case 0:
+                    trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
+                    break;
+                case 1:
+                    trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
+                    break;
+                case 2:
+                    trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, 0);
+                    trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 0);
+                    break;
+                case 3:
+                    trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, 0);
+                    trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 0);
+                    break;
+                default:
+                    break;
+            }
     }
+
     void DifJumpSpawn(int val)
     {
         if (difficulty == 1)
@@ -311,12 +323,20 @@ public class WorldController : MonoBehaviour {
     }
     public void UpdateSpeed(float v)
     {
-        speed += v;
+        if (input.nManual == 0)
+        {
+            speed += v;
+        }
+        if (input.nManual == 1)
+        {
+            speed = input.nSpeed;
+        }
+
         if (speed < minSpeed)
         {
             speed = minSpeed;
         }
-        else if(speed > maxSpeed)
+        else if (speed > maxSpeed)
         {
             speed = maxSpeed;
         }
@@ -347,23 +367,35 @@ public class WorldController : MonoBehaviour {
 
         public void UpdateOneLegSpeed()
     {
-        switch (difficulty)
+        int variable = difficulty;
+
+        if (input.nManual == 0)
         {
-            case 0:
-                oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
-                break;
-            case 1:
-                oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
-                break;
-            case 2:
-                oneLegScrollSpeed = new Vector3(0, 0, 0.15f);
-                break;
-            case 3:
-                oneLegScrollSpeed = new Vector3(0, 0, 0.1f);
-                break;
-            default:
-                break;
+            variable = difficulty;
         }
+        if (input.nManual == 1)
+        {
+            variable = (int)input.nOneLegSpeed;
+        }
+
+        switch (variable)
+            {
+                case 0:
+                    oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
+                    break;
+                case 1:
+                    oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
+                    break;
+                case 2:
+                    oneLegScrollSpeed = new Vector3(0, 0, 0.15f);
+                    break;
+                case 3:
+                    oneLegScrollSpeed = new Vector3(0, 0, 0.1f);
+                    break;
+                default:
+                    break;
+            }
+        
     }
 
     void ScrollingWorld(GameObject g)
@@ -404,7 +436,14 @@ public class WorldController : MonoBehaviour {
 
     public void SteppingStones()
     {
-        stepping.GenerateButtons(difficulty);
+        if (input.nManual == 0)
+        {
+            stepping.GenerateButtons(difficulty);
+        }
+        if (input.nManual == 1)
+        {
+            stepping.GenerateButtons((int)input.nNumberofSteps);
+        }
     }
 
     //Flashes 
@@ -412,7 +451,17 @@ public class WorldController : MonoBehaviour {
     {
         while(earthquake)
         {
-            switch (difficulty)
+            int variable = difficulty;
+
+            if (input.nManual == 0)
+            {
+                variable = difficulty;
+            }
+            if (input.nManual == 1)
+            {
+                variable = (int)input.nEarthquakeShake;
+            }
+            switch (variable)
             {
                 case 0:
                     cam.GetComponent<CameraShake>().SetShakeAmount(0.05f);

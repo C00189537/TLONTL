@@ -9,7 +9,6 @@ public class Stepping : MonoBehaviour
     public GameObject LeftButton;
     public GameObject UpButton;
     public GameObject RightButton;
-    public GameObject DownButton;
     public Canvas Canvas;
 
    
@@ -23,7 +22,7 @@ public class Stepping : MonoBehaviour
     
     System.Random randy = new System.Random();
 
-    PlayerController2 playerController;
+    PlayerController3 playerController;
 
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
     public Queue <GameObject>Steps = new Queue<GameObject>();
@@ -31,7 +30,7 @@ public class Stepping : MonoBehaviour
     private void Start()
     {
         GameObject playerControllerObject = GameObject.FindWithTag("Player");
-        playerController = playerControllerObject.GetComponent<PlayerController2>();
+        playerController = playerControllerObject.GetComponent<PlayerController3>();
     }
 
    
@@ -69,10 +68,6 @@ public class Stepping : MonoBehaviour
                 case (2):
                     var Right = Instantiate(RightButton);
                     SetPosition(Right);
-                    break;
-                case (3):
-                    var Down = Instantiate(DownButton);
-                    SetPosition(Down);
                     break;
                 default:
                     break;
@@ -139,21 +134,7 @@ public class Stepping : MonoBehaviour
     }
 
 
-    public void DestroyDown()
-    {
-        if (Steps.Count > 0)
-        {
-            GameObject firstArrow = Steps.Peek();
-
-            if (firstArrow.CompareTag("Down"))
-            {
-                Steps.Dequeue();
-                Destroy(firstArrow);
-            }
-            ResetXPosition();
-        }
-        
-    }
+    
 
     public void ResetXPosition()
     {
