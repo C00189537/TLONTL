@@ -105,10 +105,7 @@ public class PlayerController2 : MonoBehaviour {
             stepping.DestroyLeft();
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            stepping.DestroyDown();
-        }
+       
     }
 
     void Jump()

@@ -107,10 +107,7 @@ public class PlayerController3 : MonoBehaviour {
             stepping.DestroyLeft();
         }
 
-        if (platform.cop.z >= StepValue)
-        {
-            stepping.DestroyDown();
-        }
+       
     }
 
     void Jump()

@@ -6,18 +6,19 @@ public class NetworkInput : MonoBehaviour {
 
     public DFlowNetwork network;
 
-    public float nManual;
-    public float nLeaning;
-    public float nOneLeg;
-    public float nStepping;
-    public float nJumping;
-    public float nJumpingOneleg;
-    public float nSpeed;
-    public float nObstackles;
-    public float nBoardMovements;
-    public float nJumpDifficulty;
-    public float nNumberofSteps;
-    public float nOneLegSpeed; 
+    public float nManual = 0;
+    public float nLeaning = 0;
+    public float nOneLeg = 0;
+    public float nStepping = 0;
+    public float nJumping = 0;
+    public float nJumpingOneleg = 0;
+    public float nSpeed = 0;
+    public float nObstackles = 0;
+    public float nBoardMovements = 0;
+    public float nJumpDifficulty = 0;
+    public float nNumberofSteps = 0;
+    public float nOneLegSpeed = 0;
+    public float nEarthquakeShake = 0;
 
     // Use this for initialization
     void Start()
@@ -40,6 +41,7 @@ public class NetworkInput : MonoBehaviour {
         nJumpDifficulty = network.getOutput(12);
         nNumberofSteps = network.getOutput(13);
         nOneLegSpeed = network.getOutput(14);
+        nEarthquakeShake = network.getOutput(15);
     }
 
 }
