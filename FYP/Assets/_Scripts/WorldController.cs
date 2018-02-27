@@ -7,7 +7,10 @@ using UnityEngine.UI;
 public class WorldController : MonoBehaviour {
 
     public GameObject[] platformLayout = new GameObject[6];
+    public int[] trackAvailable = new int[6];
+    private int temp;
     Camera cam;
+
 
     private int[] trackers = new int[3];
     private int currentTracker = 0;
@@ -137,7 +140,12 @@ public class WorldController : MonoBehaviour {
                 //If the track piece is a base piece the next one will be a random exercise
                 if (trackers[i] == 0)
                 {
-                    trackers[i] = rand.Next(minRand, maxRand + 1);
+                    temp = rand.Next(minRand, maxRand + 1);
+                    while (trackAvailable[temp] != 1)
+                    {
+                        temp = rand.Next(minRand, maxRand + 1);
+                    }
+                    trackers[i] = temp;
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
 
                         //Set up the track pieces

@@ -329,6 +329,7 @@ MonoBehaviour:
   - {fileID: 1700179515123682, guid: 96cf698360b4eb7468a54459f66701b8, type: 2}
   - {fileID: 1232494071150802, guid: 55ca574b3b6e39043a4d23f86752cbde, type: 2}
   - {fileID: 1435351589542188, guid: e90b4cea3c50e3346bc724d9d6b978b2, type: 2}
+  trackAvailable: 010000000000000000000000000000000000000000000000
   killPoint: -30
   speed: 0.1
   minSpeed: 0.1
@@ -336,8 +337,8 @@ MonoBehaviour:
   oneLegSpeed: 0
   spawnPoint: 30
   spawnPointFar: 60
-  minRand: 1
-  maxRand: 2
+  minRand: 0
+  maxRand: 5
   scoreText: {fileID: 1009907257}
   timerText: {fileID: 1226377378}
   gameOverText: {fileID: 427821989}
@@ -365,7 +366,6 @@ MonoBehaviour:
   UpButton: {fileID: 1097476532420890, guid: 58996e55e45736c4eb632a874da662cc, type: 2}
   RightButton: {fileID: 1849859357751624, guid: 2caa35187d818014abba60456990cd0a,
     type: 2}
-  DownButton: {fileID: 1345517646070038, guid: d4cb836744e1c9542b87581c05f016c7, type: 2}
   Canvas: {fileID: 1577683699}
   resetXValue: -134
   Xvalue: -134
