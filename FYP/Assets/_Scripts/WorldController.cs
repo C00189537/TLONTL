@@ -122,12 +122,25 @@ public class WorldController : MonoBehaviour {
             }
            
         }
+        if (input.nManual == 1)
+        {
+            UpdateAvailableTracks();
+        }
+        
         UpdateTrack();
         UpdateScore();
         timer();
         //move the track
     }
 
+    void UpdateAvailableTracks()
+    {
+        trackAvailable[1] = (int)input.nLeaning;
+        trackAvailable[2] = (int)input.nOneLeg;
+        trackAvailable[3] = (int)input.nJumping;
+        trackAvailable[4] = (int)input.nStepping;
+        trackAvailable[5] = (int)input.nJumpingOneleg;
+    }
 
     void UpdateTrack()
     {
