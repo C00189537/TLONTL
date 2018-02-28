@@ -217,11 +217,11 @@ MonoBehaviour:
   xVal: 2.75
   translateSpeed: 10
   LeanSpeed: 0.5
-  jumpSpeed: 1
+  jumpSpeed: 5
   LeanValue: 0
-  OneLegValue: 0.158
-  StepValue: 0.15
-  JumpValue: 0
+  OneLegValue: 0.15
+  StepValue: 0.12
+  JumpValue: 400
   JumpTwoValue: 0
   basic: 0
   lean: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
   oneLegSpeed: 0
   spawnPoint: 30
   spawnPointFar: 60
-  minRand: 0
+  minRand: 1
   maxRand: 5
   scoreText: {fileID: 1009907257}
   timerText: {fileID: 1226377378}

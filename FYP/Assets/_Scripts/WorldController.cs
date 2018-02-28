@@ -157,9 +157,19 @@ public class WorldController : MonoBehaviour {
                 if (trackers[i] == 0)
                 {
                     temp = rand.Next(minRand, maxRand + 1);
+
+                    int count = 0; 
                     while (trackAvailable[temp] != 1)
                     {
+                        
                         temp = rand.Next(minRand, maxRand + 1);
+                        count++;
+
+                         if (count >= 60){
+                            temp = 1;
+                            break;
+                        }
+                        
                     }
                     trackers[i] = temp;
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
