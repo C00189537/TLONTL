@@ -9,7 +9,7 @@ public class PlayerController3 : MonoBehaviour {
     
     public float xVal;
 
-    private bool right, left, leanLeft, LeanRight;
+    private bool right, left, leanLeft, LeanRight, jumping, jumping2;
     public float translateSpeed;
     public float LeanSpeed;
     public float jumpSpeed;
@@ -41,6 +41,7 @@ public class PlayerController3 : MonoBehaviour {
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0 );
 		gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         Inputs();
+
         if (lean || basic)
         {
             Lean();
@@ -56,13 +57,22 @@ public class PlayerController3 : MonoBehaviour {
         else if(jump)
         {
             Jump();
+            
         }
-      //  else if (jump2)
-        //{
-        //    Jump2();
-       //i }
-       
+      else if (jump2)
+        {
+            Jump2();
+        }
 
+        if (gameObject.transform.position.y > 5)
+        {
+            gameObject.transform.Translate(Vector3.down);
+        }
+
+        if (gameObject.transform.position.y < 0)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, 0, 0);
+        }
 
 	}
     void Lean()
@@ -113,18 +123,34 @@ public class PlayerController3 : MonoBehaviour {
     void Jump()
     {
         
-        if (jump)
+        if (jumping)
         {
             gameObject.transform.Translate(0, jumpSpeed, 0);
+            Debug.Log("JUMP-ing pow pow");
         }
-           
+
+        if (gameObject.transform.position.x < 0 || gameObject.transform.position.x > 0)
+        {
+            gameObject.transform.position = new Vector3(0, gameObject.transform.position.y, 0);
+        }
+        
     }
     void Jump2()
     {
-        if (jump)
+        if (jumping2)
         {
             gameObject.transform.Translate(0, jumpSpeed, 0);
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
+            
+            if(gameObject.transform.position.x < -3.5)
+            {
+                gameObject.transform.position = new Vector3(-3.5f, gameObject.transform.position.y, 0);
+            }
+
+            if (gameObject.transform.position.x > 3.5)
+            {
+                gameObject.transform.position = new Vector3(3.5f, gameObject.transform.position.y, 0);
+            }
         }
 
     }
@@ -165,13 +191,15 @@ public class PlayerController3 : MonoBehaviour {
 
         if (platform.cop.force > JumpValue)
         {
-            jump = false;
+            jumping = false;
+            jumping2 = false;
         }
        
 
        if (platform.cop.force < JumpValue)
         {
-            jump = true; 
+            jumping = true;
+            jumping2 = true; 
         }
 
     }

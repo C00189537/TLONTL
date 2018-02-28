@@ -19,6 +19,8 @@ public class Stepping : MonoBehaviour
     public int Zvalue = 0;
     public int ButtonSpacing = -90;
 
+    int previousArrow = 4; 
+
     
     System.Random randy = new System.Random();
 
@@ -36,6 +38,7 @@ public class Stepping : MonoBehaviour
    
     void Update()
     {
+        
         //Should destroy all the objects in the queue when player leaves stepping track
         if (playerController.step == false)
         {
@@ -55,18 +58,26 @@ public class Stepping : MonoBehaviour
         {
             int rand = randy.Next(0, 3);
             
+            while (previousArrow == rand)
+            {
+                rand = randy.Next(0, 3);
+            }
+
             switch (rand)
             {
                 case (0):
                     var Left = Instantiate(LeftButton);
+                    previousArrow = 0; 
                     SetPosition(Left);
                     break;
                 case (1):
                     var Up = Instantiate(UpButton);
+                    previousArrow = 1; 
                     SetPosition(Up);
                     break;
                 case (2):
                     var Right = Instantiate(RightButton);
+                    previousArrow = 2; 
                     SetPosition(Right);
                     break;
                 default:

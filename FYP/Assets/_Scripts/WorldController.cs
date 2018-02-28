@@ -62,7 +62,8 @@ public class WorldController : MonoBehaviour {
     public bool gameOver;
 
     Stepping stepping;
-    public NetworkInput input; 
+    public NetworkInput input;
+    public NetworkOutput board; 
 
     void Start()
     {
@@ -75,7 +76,8 @@ public class WorldController : MonoBehaviour {
             cam = camOb.GetComponent<Camera>();
         }
 
-        input = GetComponent<NetworkInput>(); 
+        input = GetComponent<NetworkInput>();
+        board = GetComponent<NetworkOutput>();
 
         //initialise the first platforms
         currentSection = Instantiate(platformLayout[currentTracker], new Vector3(0, 0, 0.0f), transform.rotation) as GameObject;
@@ -122,12 +124,26 @@ public class WorldController : MonoBehaviour {
             }
            
         }
+        if (input.nManual == 1)
+        {
+            UpdateAvailableTracks();
+        }
+        
         UpdateTrack();
         UpdateScore();
         timer();
         //move the track
+        BoardMovements();
     }
 
+    void UpdateAvailableTracks()
+    {
+        trackAvailable[1] = (int)input.nLeaning;
+        trackAvailable[2] = (int)input.nOneLeg;
+        trackAvailable[3] = (int)input.nJumping;
+        trackAvailable[4] = (int)input.nStepping;
+        trackAvailable[5] = (int)input.nJumpingOneleg;
+    }
 
     void UpdateTrack()
     {
@@ -141,9 +157,19 @@ public class WorldController : MonoBehaviour {
                 if (trackers[i] == 0)
                 {
                     temp = rand.Next(minRand, maxRand + 1);
+
+                    int count = 0; 
                     while (trackAvailable[temp] != 1)
                     {
+                        
                         temp = rand.Next(minRand, maxRand + 1);
+                        count++;
+
+                         if (count >= 60){
+                            temp = 1;
+                            break;
+                        }
+                        
                     }
                     trackers[i] = temp;
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
@@ -390,10 +416,10 @@ public class WorldController : MonoBehaviour {
             {
                 case 0:
                     oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
-                    break;
+                break;
                 case 1:
                     oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
-                    break;
+                break;
                 case 2:
                     oneLegScrollSpeed = new Vector3(0, 0, 0.15f);
                     break;
@@ -452,6 +478,39 @@ public class WorldController : MonoBehaviour {
         {
             stepping.GenerateButtons((int)input.nNumberofSteps);
         }
+    }
+
+    public void BoardMovements()
+    {
+        int variable = difficulty;
+
+        if (input.nManual == 0)
+        {
+            variable = difficulty;
+        }
+        if (input.nManual == 1)
+        {
+            variable = (int)input.nBoardMovements;
+        }
+
+        switch (variable)
+        {
+            case 0:
+                board.SetPos(0.5f, 0.5f); 
+                break;
+            case 1:
+                board.SetPos(1.0f, 1.0f);
+                break;
+            case 2:
+                board.SetPos(1.5f, 1.5f);
+                break;
+            case 3:
+                board.SetPos(2.0f, 2.0f);
+                break;
+            default:
+                break;
+        }
+
     }
 
     //Flashes 

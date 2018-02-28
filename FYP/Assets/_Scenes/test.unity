@@ -207,7 +207,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 213662105}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a447fd09c16fe7440ac404285be8af8e, type: 3}
   m_Name: 
@@ -217,11 +217,11 @@ MonoBehaviour:
   xVal: 2.75
   translateSpeed: 10
   LeanSpeed: 0.5
-  jumpSpeed: 1
+  jumpSpeed: 5
   LeanValue: 0
-  OneLegValue: 0.158
-  StepValue: 0.15
-  JumpValue: 0
+  OneLegValue: 0.15
+  StepValue: 0.12
+  JumpValue: 400
   JumpTwoValue: 0
   basic: 0
   lean: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 213662105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac44be20785e8cb4094f6f6d72dde1c4, type: 3}
   m_Name: 
@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 266706145}
   - component: {fileID: 266706146}
   - component: {fileID: 266706147}
+  - component: {fileID: 266706148}
   m_Layer: 0
   m_Name: WorldController
   m_TagString: GameController
@@ -329,7 +330,7 @@ MonoBehaviour:
   - {fileID: 1700179515123682, guid: 96cf698360b4eb7468a54459f66701b8, type: 2}
   - {fileID: 1232494071150802, guid: 55ca574b3b6e39043a4d23f86752cbde, type: 2}
   - {fileID: 1435351589542188, guid: e90b4cea3c50e3346bc724d9d6b978b2, type: 2}
-  trackAvailable: 010000000000000000000000000000000000000000000000
+  trackAvailable: 010000000100000001000000010000000100000001000000
   killPoint: -30
   speed: 0.1
   minSpeed: 0.1
@@ -337,7 +338,7 @@ MonoBehaviour:
   oneLegSpeed: 0
   spawnPoint: 30
   spawnPointFar: 60
-  minRand: 0
+  minRand: 1
   maxRand: 5
   scoreText: {fileID: 1009907257}
   timerText: {fileID: 1226377378}
@@ -351,13 +352,14 @@ MonoBehaviour:
   difficulty: 3
   gameOver: 0
   input: {fileID: 0}
+  board: {fileID: 0}
 --- !u!114 &266706146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 266706143}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd9d5c494850477439aa9d09e3124ae2, type: 3}
   m_Name: 
@@ -397,6 +399,18 @@ MonoBehaviour:
   nNumberofSteps: 0
   nOneLegSpeed: 0
   nEarthquakeShake: 0
+--- !u!114 &266706148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 266706143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5e877033649754ea3f153017ef4c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  network: {fileID: 1685186093}
 --- !u!1 &427821987
 GameObject:
   m_ObjectHideFlags: 0
