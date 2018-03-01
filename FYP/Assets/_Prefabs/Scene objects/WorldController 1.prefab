@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1827215757070166}
+  m_IsPrefabParent: 1
+--- !u!1 &1827215757070166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4422749427905620}
+  - component: {fileID: 114421315659252798}
+  - component: {fileID: 114669572370761672}
+  - component: {fileID: 114120550342037776}
+  - component: {fileID: 114204391942548182}
+  m_Layer: 0
+  m_Name: WorldController 1
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4422749427905620
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114120550342037776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13319154a946b44aa0e6072053648b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  network: {fileID: 0}
+  nManual: 0
+  nLeaning: 0
+  nOneLeg: 0
+  nStepping: 0
+  nJumping: 0
+  nJumpingOneleg: 0
+  nSpeed: 0
+  nObstackles: 0
+  nBoardMovements: 0
+  nJumpDifficulty: 0
+  nNumberofSteps: 0
+  nOneLegSpeed: 0
+  nEarthquakeShake: 0
+--- !u!114 &114204391942548182
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5e877033649754ea3f153017ef4c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  network: {fileID: 0}
+--- !u!114 &114421315659252798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d7137c94ae84a408ad4a93625662a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformLayout:
+  - {fileID: 1142404712670770, guid: 3399044956d803d43b7dd2456cae29ff, type: 2}
+  - {fileID: 1824907658901804, guid: 200e7626a7bcb2b41abead7e3599d407, type: 2}
+  - {fileID: 1052874630767960, guid: d7f9431cdca74be4d8a352a49f4c9494, type: 2}
+  - {fileID: 1700179515123682, guid: 96cf698360b4eb7468a54459f66701b8, type: 2}
+  - {fileID: 1232494071150802, guid: 55ca574b3b6e39043a4d23f86752cbde, type: 2}
+  - {fileID: 1435351589542188, guid: e90b4cea3c50e3346bc724d9d6b978b2, type: 2}
+  trackAvailable: 010000000100000001000000010000000100000001000000
+  killPoint: -30
+  speed: 0.1
+  minSpeed: 0.1
+  maxSpeed: 0.3
+  oneLegSpeed: 0
+  spawnPoint: 30
+  spawnPointFar: 60
+  minRand: 1
+  maxRand: 5
+  scoreText: {fileID: 0}
+  timerText: {fileID: 0}
+  gameOverText: {fileID: 0}
+  blockade:
+  - {fileID: 1128516937520142, guid: 66c7a66c0f78a15468e8da62404b390d, type: 2}
+  - {fileID: 1128516937520142, guid: 66c7a66c0f78a15468e8da62404b390d, type: 2}
+  - {fileID: 1128516937520142, guid: 66c7a66c0f78a15468e8da62404b390d, type: 2}
+  score: 0
+  timeLeft: 30
+  difficulty: 3
+  gameOver: 0
+  input: {fileID: 0}
+  board: {fileID: 0}
+--- !u!114 &114669572370761672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9d5c494850477439aa9d09e3124ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftButton: {fileID: 1947113244769786, guid: 8e32c8ca2d72b334ba0175d928f0b643, type: 2}
+  UpButton: {fileID: 1097476532420890, guid: 58996e55e45736c4eb632a874da662cc, type: 2}
+  RightButton: {fileID: 1849859357751624, guid: 2caa35187d818014abba60456990cd0a,
+    type: 2}
+  Canvas: {fileID: 0}
+  resetXValue: -134
+  Xvalue: -134
+  Yvalue: -102
+  Zvalue: 0
+  ButtonSpacing: -90
