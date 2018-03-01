@@ -20,6 +20,7 @@ TagManager:
   - Right
   - Left
   - Down
+  - Basic
   layers:
   - Default
   - TransparentFX
