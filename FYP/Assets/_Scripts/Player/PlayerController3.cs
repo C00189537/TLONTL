@@ -17,7 +17,7 @@ public class PlayerController3 : MonoBehaviour {
     public float StepValue;
     public float JumpValue;
     public float JumpTwoValue;
-    public bool basic, lean, oneLeg, step, jump, jump2;
+    public bool basic, lean, oneLeg, step, jump, jump2, pit;
 
     public Rigidbody rb; 
 
