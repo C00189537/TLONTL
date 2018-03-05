@@ -10,6 +10,7 @@ public class CollisionManager : MonoBehaviour
     PlayerController3 playerController;
     Camera cam; 
 
+
     private int platformScore;
 
     void Start()
@@ -100,6 +101,24 @@ public class CollisionManager : MonoBehaviour
             platformScore = 3;
             playerController.pit = false;
             playerController.basic = false;
+            switch (gameController.difficulty)
+            {
+                case 1:
+                    platformScore = 0;
+                    break;
+                case 2:
+                    platformScore = 1;
+                    break;
+                case 3:
+                    platformScore = 2;
+                    break;
+                case 4:
+                    platformScore = 3;
+                    Debug.Log("its me");
+                    break;
+                default:
+                    break;
+            }
         }
         else if (other.gameObject.tag == "OneLeg")
         {
@@ -107,7 +126,23 @@ public class CollisionManager : MonoBehaviour
             gameController.oneLegSpeed = true;
             playerController.pit = false;
             playerController.basic = false;
-            platformScore = 3;
+            switch (gameController.difficulty)
+            {
+                case 1:
+                    platformScore = 2;
+                    break;
+                case 2:
+                    platformScore = 2;
+                    break;
+                case 3:
+                    platformScore = 1;
+                    break;
+                case 4:
+                    platformScore = 1;
+                    break;
+                default:
+                    break;
+            }
         }
         else if (other.gameObject.tag == "Step")
         {
@@ -117,16 +152,16 @@ public class CollisionManager : MonoBehaviour
             gameController.SteppingStones();
             switch (gameController.difficulty)
             {
-                case 0:
+                case 1:
                     platformScore = 1;
                     break;
-                case 1:
+                case 2:
                     platformScore = 2;
                     break;
-                case 2:
+                case 3:
                     platformScore = 3;
                     break;
-                case 3:
+                case 4:
                     platformScore = 4;
                     break;
                 default:
@@ -139,14 +174,46 @@ public class CollisionManager : MonoBehaviour
             playerController.pit = false;
             playerController.basic = false;
             Debug.Log("Start Jumping");
-            platformScore = 3;
+            switch (gameController.difficulty)
+            {
+                case 1:
+                    platformScore = 1;
+                    break;
+                case 2:
+                    platformScore = 1;
+                    break;
+                case 3:
+                    platformScore = 2;
+                    break;
+                case 4:
+                    platformScore = 2;
+                    break;
+                default:
+                    break;
+            }
         }
         else if (other.gameObject.tag == "Jump2")
         {
             playerController.pit = false;
             playerController.basic = false;
             Debug.Log("Start Jumping 2");
-            platformScore = 3;
+            switch (gameController.difficulty)
+            {
+                case 1:
+                    platformScore = 2;
+                    break;
+                case 2:
+                    platformScore = 2;
+                    break;
+                case 3:
+                    platformScore = 3;
+                    break;
+                case 4:
+                    platformScore = 3;
+                    break;
+                default:
+                    break;
+            }
         }
     }
     void OnTriggerStay(Collider other)
@@ -154,7 +221,6 @@ public class CollisionManager : MonoBehaviour
 
         if (other.gameObject.tag == "Lean")
         {
-            Debug.Log("Lean");
             playerController.lean = true;
             playerController.basic = false; 
         }
@@ -168,25 +234,21 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "OneLeg")
         {
-            Debug.Log("OneLeg");
             playerController.oneLeg = true;
             playerController.basic = false;
         }
         else if (other.gameObject.tag == "Step")
         {
-
             playerController.step = true;
             playerController.basic = false;
         }
         else if (other.gameObject.tag == "Jump")
         {
-            Debug.Log("Jump");
             playerController.jump = true;
             playerController.basic = false;
         }
         else if (other.gameObject.tag == "Jump2")
         {
-            Debug.Log("Jump2");
             playerController.jump2 = true;
             playerController.basic = false;
         }
@@ -198,10 +260,31 @@ public class CollisionManager : MonoBehaviour
         Debug.Log("Exit");
         if (other.gameObject.tag == "Lean")
         {
-            Debug.Log("Lean");
             playerController.lean = false;
            // playerController.basic = true;
             Debug.Log(platformScore);
+            //Difficulty check
+            if (platformScore == 0)
+            {
+                switch (gameController.difficulty)
+                {
+                    case 2:
+                        gameController.difficultyScore--;
+                        break;
+                    case 3:
+                        gameController.difficultyScore -= 2;
+                        break;
+                    case 4:
+                        gameController.difficultyScore -= 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                gameController.difficultyScore += platformScore;
+            }
             gameController.UpdateSpeed(0.015f * platformScore);
 
         }
@@ -215,34 +298,130 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "OneLeg")
         {
-            Debug.Log("OneLeg");
             playerController.oneLeg = false;
            // playerController.basic = true;
             Debug.Log(platformScore);
+            //Difficulty check
+            if (platformScore == 0)
+            {
+                switch (gameController.difficulty)
+                {
+                    case 1:
+                        gameController.difficultyScore--;
+                        break;
+                    case 2:
+                        gameController.difficultyScore--;
+                        break;
+                    case 3:
+                        gameController.difficultyScore -= 2;
+                        break;
+                    case 4:
+                        gameController.difficultyScore -= 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                gameController.difficultyScore += platformScore;
+            }
             gameController.UpdateSpeed(0.015f * platformScore);
             gameController.oneLegSpeed = false;
         }
         else if (other.gameObject.tag == "Step")
         {
-            Debug.Log("Step");
             playerController.step = false; 
             //playerController.basic = true;
             platformScore -= stepController.getSteps();
             Debug.Log(platformScore);
+            //Difficulty check
+            if (platformScore == 0)
+            {
+                switch (gameController.difficulty)
+                {
+                    case 1:
+                        gameController.difficultyScore--;
+                        break;
+                    case 2:
+                        gameController.difficultyScore -= 2;
+                        break;
+                    case 3:
+                        gameController.difficultyScore -= 3;
+                        break;
+                    case 4:
+                        gameController.difficultyScore -= 4;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                gameController.difficultyScore += platformScore;
+            }
             gameController.UpdateSpeed(0.015f * platformScore);
         }
         else if (other.gameObject.tag == "Jump")
         {
-            Debug.Log("Jump");
             playerController.jump = false;
             //playerController.basic = true;
+            //Difficulty check
+            if (platformScore == 0)
+            {
+                switch (gameController.difficulty)
+                {
+                    case 1:
+                        gameController.difficultyScore--;
+                        break;
+                    case 2:
+                        gameController.difficultyScore -= 2;
+                        break;
+                    case 3:
+                        gameController.difficultyScore -= 3;
+                        break;
+                    case 4:
+                        gameController.difficultyScore -= 4;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                gameController.difficultyScore += platformScore;
+            }
             gameController.UpdateSpeed(0.015f * platformScore);
         }
         else if (other.gameObject.tag == "Jump2")
         {
-            Debug.Log("Jump2");
             playerController.jump2 = false;
             //playerController.basic = true;
+            //Difficulty check
+            if (platformScore == 0)
+            {
+                switch (gameController.difficulty)
+                {
+                    case 1:
+                        gameController.difficultyScore -= 2;
+                        break;
+                    case 2:
+                        gameController.difficultyScore -= 2;
+                        break;
+                    case 3:
+                        gameController.difficultyScore -= 3;
+                        break;
+                    case 4:
+                        gameController.difficultyScore -= 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                gameController.difficultyScore += platformScore;
+            }
             gameController.UpdateSpeed(0.015f * platformScore);
         }
     }

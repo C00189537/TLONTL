@@ -58,6 +58,7 @@ public class WorldController : MonoBehaviour {
 
     public double timeLeft = 30;
     public int difficulty;
+    public int difficultyScore = 0;
 
     public bool gameOver;
 
@@ -106,6 +107,24 @@ public class WorldController : MonoBehaviour {
         StartCoroutine(Earthquake());
         UpdateMaxSpeed();
         UpdateOneLegSpeed();
+
+        switch (difficulty)
+        {
+            case 1:
+                difficultyScore = 2;
+                break;
+            case 2:
+                difficultyScore = 7;
+                break;
+            case 3:
+                difficultyScore = 20;
+                break;
+            case 4:
+                difficultyScore = 35;
+                break;
+            default:
+                break;
+        }
     }
 
     void Update()
@@ -131,6 +150,10 @@ public class WorldController : MonoBehaviour {
         
         UpdateTrack();
         UpdateScore();
+        if (input.nManual == 0)
+        {
+            UpdateDifficultyScore();
+        }
         timer();
         //move the track
         BoardMovements();
@@ -240,16 +263,16 @@ public class WorldController : MonoBehaviour {
 
         switch (variable)
         {
-            case 0:
-                break;
             case 1:
-                trackPiece[val].transform.Find("ObstacleMid").Translate(rand.Next(-4, 5), 2, 0);
                 break;
             case 2:
+                trackPiece[val].transform.Find("ObstacleMid").Translate(rand.Next(-4, 5), 2, 0);
+                break;
+            case 3:
                 trackPiece[val].transform.Find("ObstacleFront").Translate(rand.Next(-4, 5), 2, 0);
                 trackPiece[val].transform.Find("ObstacleBack").Translate(rand.Next(-4, 5), 2, 0);
                 break;
-            case 3:
+            case 4:
                 trackPiece[val].transform.Find("ObstacleFront").Translate(rand.Next(-4, 5), 2, 0);
                 trackPiece[val].transform.Find("ObstacleMid").Translate(rand.Next(-4, 5), 2, 0);
                 trackPiece[val].transform.Find("ObstacleBack").Translate(rand.Next(-4, 5), 2, 0);
@@ -295,17 +318,17 @@ public class WorldController : MonoBehaviour {
 
         switch (variable)
             {
-                case 0:
+                case 1:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
                     break;
-                case 1:
+                case 2:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
                     break;
-                case 2:
+                case 3:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, 0);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 0);
                     break;
-                case 3:
+                case 4:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, 0);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 0);
                     break;
@@ -381,16 +404,16 @@ public class WorldController : MonoBehaviour {
     {
         switch (difficulty)
         {
-            case 0:
+            case 1:
                 maxSpeed = 0.2f;
                 break;
-            case 1:
+            case 2:
                 maxSpeed = 0.3f;
                 break;
-            case 2:
+            case 3:
                 maxSpeed = 0.4f;
                 break;
-            case 3:
+            case 4:
                 maxSpeed = 0.5f;
                 break;
             default:
@@ -467,7 +490,35 @@ public class WorldController : MonoBehaviour {
             SetScoreText();
         } 
     }
-
+    void UpdateDifficultyScore()
+    {
+        //Contain within 0-50
+        if (difficultyScore  < 0)
+        {
+            difficultyScore = 0;
+        }
+        else if (difficultyScore >= 50)
+        {
+            difficultyScore = 50;
+        }
+        //Difficulty set based on performance
+        if (difficultyScore >= 0 && difficultyScore < 5)
+        {
+            difficulty = 1;
+        }
+        else if (difficultyScore >= 5 && difficultyScore < 15)
+        {
+            difficulty = 2;
+        }
+        else if (difficultyScore >= 15 && difficultyScore < 30)
+        {
+            difficulty = 3;
+        }
+        else if (difficultyScore >= 30 && difficultyScore < 50)
+        {
+            difficulty = 4;
+        }
+    }
     public void SteppingStones()
     {
         if (input.nManual == 0)
@@ -495,16 +546,16 @@ public class WorldController : MonoBehaviour {
 
         switch (variable)
         {
-            case 0:
+            case 1:
                 board.SetPos(0.5f, 0.5f); 
                 break;
-            case 1:
+            case 2:
                 board.SetPos(1.0f, 1.0f);
                 break;
-            case 2:
+            case 3:
                 board.SetPos(1.5f, 1.5f);
                 break;
-            case 3:
+            case 4:
                 board.SetPos(2.0f, 2.0f);
                 break;
             default:
@@ -530,16 +581,16 @@ public class WorldController : MonoBehaviour {
             }
             switch (variable)
             {
-                case 0:
+                case 1:
                     cam.GetComponent<CameraShake>().SetShakeAmount(0.05f);
                     break;
-                case 1:
+                case 2:
                     cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
                     break;
-                case 2:
+                case 3:
                     cam.GetComponent<CameraShake>().SetShakeAmount(0.2f);
                     break;
-                case 3:
+                case 4:
                     cam.GetComponent<CameraShake>().SetShakeAmount(0.3f);
                     break;
                 default:
