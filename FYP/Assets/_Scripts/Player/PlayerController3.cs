@@ -130,7 +130,6 @@ public class PlayerController3 : MonoBehaviour {
         {
             //gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(gameObject.transform.position.x, 0, 0), jumpSpeed *10 * Time.deltaTime);
             rb.AddForce(Vector3.down * jumpSpeed * 2, ForceMode.Impulse);
-            Debug.Log("===========================================================================");
         }
 
         if (gameObject.transform.position.y < 1.2f)

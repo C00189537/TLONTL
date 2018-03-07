@@ -63,7 +63,6 @@ public class WorldController : MonoBehaviour {
 
     Stepping stepping;
     public NetworkInput input;
-    public NetworkOutput board; 
 
     void Start()
     {
@@ -77,7 +76,8 @@ public class WorldController : MonoBehaviour {
         }
 
         input = GetComponent<NetworkInput>();
-        board = GetComponent<NetworkOutput>();
+        
+
 
         //initialise the first platforms
         currentSection = Instantiate(platformLayout[currentTracker], new Vector3(0, 0, 0.0f), transform.rotation) as GameObject;
@@ -104,6 +104,7 @@ public class WorldController : MonoBehaviour {
         timerText.text = "Time: " + timeLeft;
 
         StartCoroutine(Earthquake());
+        
         UpdateMaxSpeed();
         UpdateOneLegSpeed();
     }
@@ -127,19 +128,20 @@ public class WorldController : MonoBehaviour {
         if (input.nManual == 1)
         {
             UpdateAvailableTracks();
+        } else if (input.nManual == 0)
+        {
+            trackAvailable[1] = 1;
+            trackAvailable[2] = 1;
+            trackAvailable[3] = 1;
+            trackAvailable[4] = 1;
+            trackAvailable[5] = 1;
         }
         
         UpdateTrack();
         UpdateScore();
         timer();
-        //move the track
-        /*int board = rand.Next(0, 10); 
-        if ( board % 3 == 0)
-        {
-            BoardMovements();
-        }*/
-        BoardMovements(); 
-
+      
+        
     }
 
     void UpdateAvailableTracks()
@@ -406,7 +408,7 @@ public class WorldController : MonoBehaviour {
     }
 
 
-        public void UpdateOneLegSpeed()
+    public void UpdateOneLegSpeed()
     {
         int variable = difficulty;
 
@@ -487,91 +489,7 @@ public class WorldController : MonoBehaviour {
         }
     }
 
-    public void BoardMovements()
-    {
-        int variable = difficulty;
-
-        if (input.nManual == 0)
-        {
-            variable = difficulty;
-        }
-        if (input.nManual == 1)
-        {
-            variable = (int)input.nBoardMovements;
-        }
-
-        switch (variable)
-        {
-            case 0:
-                break; 
-            case 1:
-                MovementOne(); 
-                break;
-            case 2:
-                MovementTwo(); 
-                break;
-            case 3:
-                MovementThree(); 
-                break;
-            case 4:
-                MovementFour(); 
-                break;
-            default:
-                break;
-        }
-
-    }
-
-    public void MovementOne()
-    {
-
-        //double i = rand.NextDouble();
-        //board.SetPos((float)i, (float)i);
-        board.SetPos(1, 1);
-        board.SetPos(0, 0);
-        board.SetPos(1.5f, 1.5f);
-        board.SetPos(0, 0);
-        board.SetPos(2, 2);
-        board.SetPos(0, 0);
-        board.SetPos(2.5f, 2.5f);
-        board.SetPos(0, 0);
-    }
-
-    public void MovementTwo()
-    {
-        double i = rand.NextDouble();
-        board.SetPos((float)i, (float)i);
-        board.SetPos(0, 0);
-        double j = rand.NextDouble();
-        board.SetPos((float)-j, (float)-j);
-        board.SetPos(0, 0);
-    }
-
-    public void MovementThree()
-    {
-        double i = rand.NextDouble();
-        board.SetPos((float)i, (float)i);
-        double j = rand.NextDouble();
-        board.SetPos((float)-j, (float)-j);
-        double k = rand.NextDouble();
-        board.SetPos((float)-k, (float)k);
-        board.SetPos(0, 0);
-    }
-
-    public void MovementFour()
-    {
-        double i = rand.NextDouble();
-        board.SetPos((float)i, (float)i);
-        double j = rand.NextDouble();
-        board.SetPos((float)-j, (float)-j);
-        double k = rand.NextDouble();
-        board.SetPos((float)-k, (float)k);
-        double l = rand.NextDouble();
-        board.SetPos((float)l, (float)-l);
-        board.SetPos(0, 0);
-    }
-
-
+    
     //Flashes 
     IEnumerator Earthquake()
     {
