@@ -120,7 +120,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 e726b6eb0189a7a62ce8809ac13da5fa Assembly-CSharp.dll:.PlayerController
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
-b0d7e43b41e4f66e9069764e631b6c0a Assembly-CSharp.dll:.PlayerController3
+c7f738c900feb7d82bb7f9a822bb884f Assembly-CSharp.dll:.PlayerController3
 503e5ee98358b34356026b523dc045f8 Assembly-CSharp.dll:.Stepping
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -150,5 +150,6 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 aeba7f7529da76bcf540763056906f11 Assembly-CSharp.dll:.WorldController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CollisionManager
 b4d191cbde808e3ddc3183c413623016 Assembly-CSharp.dll:.DynSTABLE
+e39896a96b4063b02906a7be724746b1 Assembly-CSharp.dll:.ImageController
 6d1a632fb999155da0ce036b3020fc64 Assembly-CSharp.dll:.DFlowNetwork
 1c73b74c9178d66d57f0e003963e8a05 Assembly-CSharp.dll:.Rotato
