@@ -8,7 +8,7 @@ public class NetworkOutput : MonoBehaviour {
 
     public void SetPos(float x, float z)
     {
-        network.setInput(0, x);
-        network.setInput(1, z);
+        network.setInput(0, (float)x);
+        network.setInput(1, (float)z);
     }
 }

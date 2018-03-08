@@ -109,6 +109,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 71ee135b59cd5b5cbcd2a31afca676c3 Assembly-CSharp.dll:.CameraShake
+d095d700dd239e6bcba38b90b1e63338 Assembly-CSharp.dll:.BoardMovement
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
@@ -120,7 +121,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 e726b6eb0189a7a62ce8809ac13da5fa Assembly-CSharp.dll:.PlayerController
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
-b0d7e43b41e4f66e9069764e631b6c0a Assembly-CSharp.dll:.PlayerController3
+e747bd2e2865c16ebc49af3a32c9a820 Assembly-CSharp.dll:.PlayerController3
 503e5ee98358b34356026b523dc045f8 Assembly-CSharp.dll:.Stepping
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -147,8 +148,9 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-aeba7f7529da76bcf540763056906f11 Assembly-CSharp.dll:.WorldController
+8ae559adf953e8fbf1959bcc3dc215bc Assembly-CSharp.dll:.WorldController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CollisionManager
 b4d191cbde808e3ddc3183c413623016 Assembly-CSharp.dll:.DynSTABLE
+e39896a96b4063b02906a7be724746b1 Assembly-CSharp.dll:.ImageController
 6d1a632fb999155da0ce036b3020fc64 Assembly-CSharp.dll:.DFlowNetwork
 1c73b74c9178d66d57f0e003963e8a05 Assembly-CSharp.dll:.Rotato

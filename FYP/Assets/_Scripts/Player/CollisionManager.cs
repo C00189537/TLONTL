@@ -8,12 +8,14 @@ public class CollisionManager : MonoBehaviour
     WorldController gameController;
     Stepping stepController;
     PlayerController3 playerController;
-    Camera cam; 
+    Camera cam;
+    BoardMovement movement;
 
     private int platformScore;
 
     void Start()
-    { 
+    {
+        
         //access the world controller for updating speed + score
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         if (gameControllerObject != null)
@@ -24,6 +26,9 @@ public class CollisionManager : MonoBehaviour
         {
             Debug.Log("cannot find 'GameController' script");
         }
+
+        movement = gameControllerObject.GetComponent<BoardMovement>();
+
         //Get player script
         GameObject playerControllerObject = GameObject.FindWithTag("Player");
         if (gameControllerObject != null)
@@ -100,6 +105,7 @@ public class CollisionManager : MonoBehaviour
             platformScore = 3;
             playerController.pit = false;
             playerController.basic = false;
+            movement.BoardMovements();
         }
         else if (other.gameObject.tag == "OneLeg")
         {
@@ -108,6 +114,7 @@ public class CollisionManager : MonoBehaviour
             playerController.pit = false;
             playerController.basic = false;
             platformScore = 3;
+            movement.BoardMovements();
         }
         else if (other.gameObject.tag == "Step")
         {
@@ -115,6 +122,7 @@ public class CollisionManager : MonoBehaviour
             playerController.basic = false;
             Debug.Log(" Start Steping");
             gameController.SteppingStones();
+            movement.BoardMovements();
             switch (gameController.difficulty)
             {
                 case 0:
@@ -140,6 +148,7 @@ public class CollisionManager : MonoBehaviour
             playerController.basic = false;
             Debug.Log("Start Jumping");
             platformScore = 3;
+            movement.BoardMovements();
         }
         else if (other.gameObject.tag == "Jump2")
         {
@@ -147,6 +156,7 @@ public class CollisionManager : MonoBehaviour
             playerController.basic = false;
             Debug.Log("Start Jumping 2");
             platformScore = 3;
+            movement.BoardMovements();
         }
     }
     void OnTriggerStay(Collider other)
