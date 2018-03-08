@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController3 : MonoBehaviour {
 
     public DynSTABLE platform; 
-    public Stepping stepping; 
-    
+    public Stepping stepping;
+    public WorldController theWorld; 
+
     public float xVal;
 
     private bool leanLeft, LeanRight, jumping2;
@@ -32,8 +33,9 @@ public class PlayerController3 : MonoBehaviour {
 	void Start () {
        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
        stepping = gameControllerObject.GetComponent<Stepping>();
-
+       theWorld = gameControllerObject.GetComponent<WorldController>();
         rb = GetComponent<Rigidbody>();
+        
     }
 
 
@@ -81,11 +83,11 @@ public class PlayerController3 : MonoBehaviour {
         {
             Step();
         }
-       
-	}
+         
+        gameObject.transform.Rotate(new Vector3(0, 0, 3000 * Time.deltaTime * theWorld.speed), Space.Self);
+    }
     void Lean()
     {
-        
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
     }
     void OneLeg()
@@ -124,38 +126,25 @@ public class PlayerController3 : MonoBehaviour {
         {
             stepping.DestroyLeft();
         }
-
-       
+        
     }
 
     void Jump()
     {
-
-        
         if (platform.cop.force < JumpValue && touchGround == true)
         {
             rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             touchGround = false;
         }
-
         
-            
         if (gameObject.transform.position.x < 0 || gameObject.transform.position.x > 0)
         {
             gameObject.transform.position = new Vector3(0, gameObject.transform.position.y, 0);
         }
-        
-        
     }
     void Jump2()
     {
         float step = switchJumpSpeed * Time.deltaTime;
-
-        /*if (platform.cop.force < JumpValue)
-        {
-            gameObject.transform.Translate(0, jumpSpeed  * Time.deltaTime, 0);
-            
-        }*/
         if (platform.cop.force < JumpValue && touchGround == true)
         {
             rb.AddForce(Vector3.up * jump2Speed, ForceMode.Impulse);
@@ -181,7 +170,6 @@ public class PlayerController3 : MonoBehaviour {
     }
     void Inputs()
     {
-       
 
        if (platform.cop.x > OneLegValue)
         {
