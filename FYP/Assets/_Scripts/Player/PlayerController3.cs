@@ -72,8 +72,6 @@ public class PlayerController3 : MonoBehaviour {
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0 );
         //gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
 
-        //gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 3000 * Time.deltaTime * theWorld.speed));
-
         rotation+= 10;
         gameObject.transform.rotation = Quaternion.Euler((theWorld.speed * rotation) * 3.6f, 0, 0);
         Inputs();
@@ -90,8 +88,7 @@ public class PlayerController3 : MonoBehaviour {
         {
             Step();
         }
-         
-       // gameObject.transform.Rotate(new Vector3(0, 0, 3000 * Time.deltaTime * theWorld.speed), Space.Self);
+
     }
     void Lean()
     {
