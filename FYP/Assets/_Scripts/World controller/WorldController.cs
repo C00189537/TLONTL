@@ -17,6 +17,8 @@ public class WorldController : MonoBehaviour {
     private int nextTracker = 1;
     private int farTracker = 0;
 
+    private int restPhase; 
+
     bool earthquake = true;
 
     //Destroys track off screen
@@ -68,6 +70,8 @@ public class WorldController : MonoBehaviour {
     void Start()
     {
         stepping = GetComponent<Stepping>();
+
+        restPhase = 0; 
 
         //Initialise camera obj
         GameObject camOb = GameObject.FindWithTag("MainCamera");
@@ -185,10 +189,10 @@ public class WorldController : MonoBehaviour {
             {
                 Destroy(trackPiece[i]);
                 //If the track piece is a base piece the next one will be a random exercise
-                if (trackers[i] == 0)
+                if (restPhase > 2)
                 {
                     temp = rand.Next(minRand, maxRand + 1);
-
+                    restPhase = 0; 
                     int count = 0; 
                     while (trackAvailable[temp] != 1)
                     {
@@ -198,6 +202,7 @@ public class WorldController : MonoBehaviour {
 
                          if (count >= 60){
                             temp = 1;
+                            restPhase = 1; 
                             break;
                         }
                         
@@ -209,6 +214,7 @@ public class WorldController : MonoBehaviour {
                         switch (trackers[i])
                         {
                             case 1:
+                                CoinSpawn(i);
                                 ObstacleSpawn(i);
                                 break;
                             case 2:
@@ -230,11 +236,12 @@ public class WorldController : MonoBehaviour {
                     
                 }
                 //If the track piece is an exercise, the next one will be a base piece
-                else if (trackers[i] > 0)
+                else if (restPhase <= 2)  //(trackers[i] > 0)
                 {
+                    restPhase++; 
                     trackers[i] = 0;
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-                    CoinSpawn(i);
+                    
                 }
                 if (TRACK_SIZE > i + 1)
                 {
@@ -272,18 +279,16 @@ public class WorldController : MonoBehaviour {
         switch (variable)
         {
             case 1:
+                trackPiece[val].transform.Find("ObstacleMid").Translate(rand.Next(-4, 5), 2, 0);
                 break;
             case 2:
-                trackPiece[val].transform.Find("ObstacleMid").Translate(rand.Next(-4, 5), 2, 0);
+                ObstacleTwo(val);
                 break;
             case 3:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(rand.Next(-4, 5), 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(rand.Next(-4, 5), 2, 0);
+                ObstacleThree(val);
                 break;
             case 4:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(rand.Next(-4, 5), 2, 0);
-                trackPiece[val].transform.Find("ObstacleMid").Translate(rand.Next(-4, 5), 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(rand.Next(-4, 5), 2, 0);
+                ObstacleFour(val);
                 break;
             default:
                 break;
@@ -292,6 +297,59 @@ public class WorldController : MonoBehaviour {
         trackPiece[val].transform.Find("ObstacleFront").localScale = trackPiece[val].transform.Find("ObstacleFront").localScale * difficulty * 0.75f;
         trackPiece[val].transform.Find("ObstacleMid").localScale = trackPiece[val].transform.Find("ObstacleMid").localScale * difficulty * 0.75f;
         trackPiece[val].transform.Find("ObstacleBack").localScale = trackPiece[val].transform.Find("ObstacleBack").localScale * difficulty * 0.75f;
+    }
+
+
+    void ObstacleTwo(int val)
+    {
+        int set = rand.Next(1, 4);
+
+        switch (set)
+        {
+            case 1:
+                trackPiece[val].transform.Find("ObstacleFront").Translate(1, 2, -1);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(rand.Next(-4, 5), 2, 0);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }
+
+    void ObstacleThree(int val)
+    {
+        int set = rand.Next(1, 4);
+
+        switch (set)
+        {
+            case 1:
+                trackPiece[val].transform.Find("ObstacleMid").Translate(1, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(-1, 2, -9);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }
+
+    void ObstacleFour(int val)
+    {
+        int set = rand.Next(1, 4);
+
+        switch (set)
+        {
+            case 1:
+                trackPiece[val].transform.Find("ObstacleFront").Translate(0, 2, 0);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, 0);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
     void OneLegSpawn(int val)
     {

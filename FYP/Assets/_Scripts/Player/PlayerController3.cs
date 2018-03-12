@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController3 : MonoBehaviour {
 
     public DynSTABLE platform; 
-    public Stepping stepping; 
-    
+    public Stepping stepping;
+    public WorldController theWorld; 
+
     public float xVal;
 
     private bool leanLeft, LeanRight, jumping2;
@@ -27,13 +28,16 @@ public class PlayerController3 : MonoBehaviour {
 
     public float force;
     public float xpos;
-    public float zpos; 
+    public float zpos;
+
+    public float rotation; 
 	// Use this for initialization
 	void Start () {
        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
        stepping = gameControllerObject.GetComponent<Stepping>();
-
+       theWorld = gameControllerObject.GetComponent<WorldController>();
         rb = GetComponent<Rigidbody>();
+        rotation = 10; 
     }
 
 
@@ -66,7 +70,10 @@ public class PlayerController3 : MonoBehaviour {
         xpos = platform.cop.x;
         zpos = platform.cop.z;
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0 );
-		gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        //gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        rotation+= 10;
+        gameObject.transform.rotation = Quaternion.Euler((theWorld.speed * rotation) * 3.6f, 0, 0);
         Inputs();
 
         if (lean || basic)
@@ -81,11 +88,10 @@ public class PlayerController3 : MonoBehaviour {
         {
             Step();
         }
-       
-	}
+
+    }
     void Lean()
     {
-        
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
     }
     void OneLeg()
@@ -124,38 +130,27 @@ public class PlayerController3 : MonoBehaviour {
         {
             stepping.DestroyLeft();
         }
-
-       
+        
     }
 
     void Jump()
     {
-
-        
         if (platform.cop.force < JumpValue && touchGround == true)
         {
             rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             touchGround = false;
         }
-
         
-            
+        /*
         if (gameObject.transform.position.x < 0 || gameObject.transform.position.x > 0)
         {
             gameObject.transform.position = new Vector3(0, gameObject.transform.position.y, 0);
         }
-        
-        
+        */
     }
     void Jump2()
     {
         float step = switchJumpSpeed * Time.deltaTime;
-
-        /*if (platform.cop.force < JumpValue)
-        {
-            gameObject.transform.Translate(0, jumpSpeed  * Time.deltaTime, 0);
-            
-        }*/
         if (platform.cop.force < JumpValue && touchGround == true)
         {
             rb.AddForce(Vector3.up * jump2Speed, ForceMode.Impulse);
@@ -181,7 +176,6 @@ public class PlayerController3 : MonoBehaviour {
     }
     void Inputs()
     {
-       
 
        if (platform.cop.x > OneLegValue)
         {
