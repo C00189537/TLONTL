@@ -54,6 +54,8 @@ public class Stepping : MonoBehaviour
     // parameter should eventually be received from world controller
     public void GenerateButtons(int numberOfButtons)
     {
+
+        Debug.Log("STTTOMMMMEEEES");
         for (int i = 0; i < numberOfButtons; i++)
         {
             int rand = randy.Next(0, 3);

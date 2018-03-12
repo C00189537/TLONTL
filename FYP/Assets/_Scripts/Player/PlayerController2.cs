@@ -13,6 +13,7 @@ public class PlayerController2 : MonoBehaviour {
     public float translateSpeed;
     public float testSpeed;
     public bool basic, lean, oneLeg, step, jump, jump2;
+    public bool pit;
 
 	// Use this for initialization
 	void Start () {
@@ -87,6 +88,7 @@ public class PlayerController2 : MonoBehaviour {
     }
     void Step()
     {
+        Debug.Log("stepping");
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             stepping.DestroyRight();

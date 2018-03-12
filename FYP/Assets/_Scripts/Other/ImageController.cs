@@ -21,8 +21,10 @@ public class ImageController : MonoBehaviour {
         iOneLeg.enabled = false;
         iStepping.enabled = false;
         iJumpTwoLegs.enabled = false; 
-        iJumpOneleg.enabled = false; 
-	}
+        iJumpOneleg.enabled = false;
+
+        Debug.Log("STTTOMMMMEEEES");
+    }
 	
 	// Update is called once per frame
 	void Update () {
