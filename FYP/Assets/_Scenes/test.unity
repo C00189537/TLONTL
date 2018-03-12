@@ -631,6 +631,12 @@ Prefab:
       value: 
       objectReference: {fileID: 1595736375101992, guid: 61c8da5f9a00007499387b8e52add302,
         type: 2}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: platformLayout.Array.data[0]
+      value: 
+      objectReference: {fileID: 1720975006306316, guid: 3f25f031b85c22a448a24da2dbdc8258,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf69d8c034f4b48408c34b0ade75d994, type: 2}
   m_IsPrefabParent: 0
