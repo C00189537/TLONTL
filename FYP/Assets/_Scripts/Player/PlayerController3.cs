@@ -141,10 +141,12 @@ public class PlayerController3 : MonoBehaviour {
             touchGround = false;
         }
         
+        /*
         if (gameObject.transform.position.x < 0 || gameObject.transform.position.x > 0)
         {
             gameObject.transform.position = new Vector3(0, gameObject.transform.position.y, 0);
         }
+        */
     }
     void Jump2()
     {
