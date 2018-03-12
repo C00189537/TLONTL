@@ -637,6 +637,24 @@ Prefab:
       value: 
       objectReference: {fileID: 1720975006306316, guid: 3f25f031b85c22a448a24da2dbdc8258,
         type: 2}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: platformLayout.Array.data[3]
+      value: 
+      objectReference: {fileID: 1759563264385624, guid: b5d655f6ea7dd1643b9d7cfa7b55e09f,
+        type: 2}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: platformLayout.Array.data[4]
+      value: 
+      objectReference: {fileID: 1868207315502254, guid: e769c5a21252f7b40a33a241bc5f9c88,
+        type: 2}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: platformLayout.Array.data[5]
+      value: 
+      objectReference: {fileID: 1643114762676192, guid: 085732ce2154ece4a9c5d3ed2fb16160,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf69d8c034f4b48408c34b0ade75d994, type: 2}
   m_IsPrefabParent: 0
