@@ -186,6 +186,7 @@ public class WorldController : MonoBehaviour {
                         switch (trackers[i])
                         {
                             case 1:
+                                CoinSpawn(i);
                                 ObstacleSpawn(i);
                                 break;
                             case 2:
@@ -211,7 +212,7 @@ public class WorldController : MonoBehaviour {
                 {
                     trackers[i] = 0;
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-                    CoinSpawn(i);
+                    
                 }
                 if (TRACK_SIZE > i + 1)
                 {
@@ -231,6 +232,7 @@ public class WorldController : MonoBehaviour {
         int randy = rand.Next(-4, 5);
         trackPiece[val].transform.Find("ScoreOb1").Translate(randy, 2, 0);
         trackPiece[val].transform.Find("ScoreOb2").Translate(randy, 2, 0);
+        Debug.Log("+++++++++++++++++++++++++++++++++++++++");
     }
 
     void ObstacleSpawn(int val)
