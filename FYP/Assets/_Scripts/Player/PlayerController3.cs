@@ -28,14 +28,16 @@ public class PlayerController3 : MonoBehaviour {
 
     public float force;
     public float xpos;
-    public float zpos; 
+    public float zpos;
+
+    public float rotation; 
 	// Use this for initialization
 	void Start () {
        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
        stepping = gameControllerObject.GetComponent<Stepping>();
        theWorld = gameControllerObject.GetComponent<WorldController>();
         rb = GetComponent<Rigidbody>();
-        
+        rotation = 10; 
     }
 
 
@@ -68,7 +70,12 @@ public class PlayerController3 : MonoBehaviour {
         xpos = platform.cop.x;
         zpos = platform.cop.z;
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0 );
-		gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        //gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        //gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 3000 * Time.deltaTime * theWorld.speed));
+
+        rotation+= 10;
+        gameObject.transform.rotation = Quaternion.Euler((theWorld.speed * rotation) * 3.6f, 0, 0);
         Inputs();
 
         if (lean || basic)
@@ -84,7 +91,7 @@ public class PlayerController3 : MonoBehaviour {
             Step();
         }
          
-        gameObject.transform.Rotate(new Vector3(0, 0, 3000 * Time.deltaTime * theWorld.speed), Space.Self);
+       // gameObject.transform.Rotate(new Vector3(0, 0, 3000 * Time.deltaTime * theWorld.speed), Space.Self);
     }
     void Lean()
     {
