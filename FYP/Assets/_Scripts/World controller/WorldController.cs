@@ -60,6 +60,7 @@ public class WorldController : MonoBehaviour {
 
     public double timeLeft = 30;
     public int difficulty;
+    public int difficultyScore = 0;
 
     public bool gameOver;
 
@@ -111,6 +112,24 @@ public class WorldController : MonoBehaviour {
         
         UpdateMaxSpeed();
         UpdateOneLegSpeed();
+
+        switch (difficulty)
+        {
+            case 1:
+                difficultyScore = 2;
+                break;
+            case 2:
+                difficultyScore = 7;
+                break;
+            case 3:
+                difficultyScore = 20;
+                break;
+            case 4:
+                difficultyScore = 35;
+                break;
+            default:
+                break;
+        }
     }
 
     void Update()
@@ -143,6 +162,10 @@ public class WorldController : MonoBehaviour {
         
         UpdateTrack();
         UpdateScore();
+        if (input.nManual == 0)
+        {
+            UpdateDifficultyScore();
+        }
         timer();
       
         
@@ -363,10 +386,10 @@ public class WorldController : MonoBehaviour {
             {
                 case 1:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
-                break;
+                    break;
                 case 2:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
-                break;
+                    break;
                 case 3:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, 0);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 0);
@@ -534,7 +557,35 @@ public class WorldController : MonoBehaviour {
             SetScoreText();
         } 
     }
-
+    void UpdateDifficultyScore()
+    {
+        //Contain within 0-50
+        if (difficultyScore  < 0)
+        {
+            difficultyScore = 0;
+        }
+        else if (difficultyScore >= 50)
+        {
+            difficultyScore = 50;
+        }
+        //Difficulty set based on performance
+        if (difficultyScore >= 0 && difficultyScore < 5)
+        {
+            difficulty = 1;
+        }
+        else if (difficultyScore >= 5 && difficultyScore < 15)
+        {
+            difficulty = 2;
+        }
+        else if (difficultyScore >= 15 && difficultyScore < 30)
+        {
+            difficulty = 3;
+        }
+        else if (difficultyScore >= 30 && difficultyScore < 50)
+        {
+            difficulty = 4;
+        }
+    }
     public void SteppingStones()
     {
         if (input.nManual == 0)
@@ -547,7 +598,6 @@ public class WorldController : MonoBehaviour {
         }
     }
 
-    
     //Flashes 
     IEnumerator Earthquake()
     {
