@@ -641,7 +641,7 @@ Prefab:
         type: 2}
       propertyPath: platformLayout.Array.data[3]
       value: 
-      objectReference: {fileID: 1759563264385624, guid: b5d655f6ea7dd1643b9d7cfa7b55e09f,
+      objectReference: {fileID: 1190143988149030, guid: 217661df0e6565648b7ceb46f3888909,
         type: 2}
     - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
         type: 2}
