@@ -5,8 +5,10 @@ using UnityEngine;
 public class NetworkInput : MonoBehaviour {
 
     public DFlowNetwork network;
+    public WorldController theWorld;
 
-    public float nManual = 0;
+    private float nDifficulty = 0;
+    private float nManual = 0;
     public float nLeaning = 0;
     public float nOneLeg = 0;
     public float nStepping = 0;
@@ -20,16 +22,49 @@ public class NetworkInput : MonoBehaviour {
     public float nOneLegSpeed = 0;
     public float nEarthquakeShake = 0;
 
+    public float diffChange;
+    public float NManual
+    {
+        get
+        {
+            return nManual;
+        }
+
+        set
+        {
+            nManual = value;
+            
+        }
+    }
+
+    public float NDifficulty
+    {
+        get
+        {
+            return nDifficulty;
+        }
+
+        set
+        {
+            nDifficulty = value;
+            diffChange = nDifficulty;
+            theWorld.BeginDifficulty((int)NDifficulty);
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
-
+        theWorld = gameObject.GetComponent<WorldController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        nManual = network.getOutput(3);
+        if (!(diffChange == network.getOutput(16))){
+            NDifficulty = network.getOutput(16);
+        }
+        NManual = network.getOutput(3);
         nLeaning = network.getOutput(4);
         nOneLeg = network.getOutput(5);
         nStepping = network.getOutput(6);
@@ -43,5 +78,7 @@ public class NetworkInput : MonoBehaviour {
         nOneLegSpeed = network.getOutput(14);
         nEarthquakeShake = network.getOutput(15);
     }
+
+
 
 }

@@ -660,6 +660,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1643114762676192, guid: 085732ce2154ece4a9c5d3ed2fb16160,
         type: 2}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: difficulty
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: restTracks
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf69d8c034f4b48408c34b0ade75d994, type: 2}
   m_IsPrefabParent: 0
