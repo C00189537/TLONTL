@@ -311,8 +311,13 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("ObstacleBack").Translate(rand.Next(-4, 5), 2, 0);
                 break;
             case 2:
+                trackPiece[val].transform.Find("ObstacleFront").Translate((rand.Next(-4, 5)), 2, -1);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(1, 2, 0);
                 break;
             case 3:
+                int side = rand.Next(-4, 5);
+                trackPiece[val].transform.Find("ObstacleFront").Translate(side, 2, -1);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(side, 2, 0);
                 break;
         }
     }
@@ -324,12 +329,16 @@ public class WorldController : MonoBehaviour {
         switch (set)
         {
             case 1:
-                trackPiece[val].transform.Find("ObstacleMid").Translate(1, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(-1, 2, -9);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(-3, 2, -9);
                 break;
             case 2:
+                trackPiece[val].transform.Find("ObstacleMid").Translate(2, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(-1, 2, -9);
                 break;
             case 3:
+                trackPiece[val].transform.Find("ObstacleMid").Translate(3, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, -9);
                 break;
         }
     }
@@ -346,8 +355,14 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, 0);
                 break;
             case 2:
+                trackPiece[val].transform.Find("ObstacleFront").Translate(3.5f, 2, 9);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(1, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(-3.5f, 2, -9);
                 break;
             case 3:
+                trackPiece[val].transform.Find("ObstacleFront").Translate(-3.5f, 2, 9);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(-1, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(3.5f, 2, -9);
                 break;
         }
     }
