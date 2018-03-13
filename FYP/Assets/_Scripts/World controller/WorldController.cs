@@ -189,7 +189,7 @@ public class WorldController : MonoBehaviour {
             {
                 Destroy(trackPiece[i]);
                 //If the track piece is a base piece the next one will be a random exercise
-                if (restPhase > 2)
+                if (restPhase > 1)
                 {
                     temp = rand.Next(minRand, maxRand + 1);
                     restPhase = 0; 
@@ -236,7 +236,7 @@ public class WorldController : MonoBehaviour {
                     
                 }
                 //If the track piece is an exercise, the next one will be a base piece
-                else if (restPhase <= 2)  //(trackers[i] > 0)
+                else if (restPhase <= 1)  //(trackers[i] > 0)
                 {
                     restPhase++; 
                     trackers[i] = 0;
@@ -391,13 +391,13 @@ public class WorldController : MonoBehaviour {
                     trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
                     break;
                 case 3:
-                    trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, 0);
-                    trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 0);
+                    trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
+                    trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 1);
                 
                     break;
                 case 4:
-                    trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, 0);
-                    trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 0);
+                    trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, -3);
+                    trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
                     break;
                 default:
                     break;
