@@ -17,7 +17,8 @@ public class WorldController : MonoBehaviour {
     private int nextTracker = 1;
     private int farTracker = 0;
 
-    private int restPhase; 
+    private int restPhase;
+    public int restTracks;
 
     bool earthquake = true;
 
@@ -81,7 +82,7 @@ public class WorldController : MonoBehaviour {
         }
 
         input = GetComponent<NetworkInput>();
-        
+        //BeginDifficulty((int)input.nDifficulty);
 
 
         //initialise the first platforms
@@ -112,7 +113,11 @@ public class WorldController : MonoBehaviour {
         
         UpdateMaxSpeed();
         UpdateOneLegSpeed();
+       
+    }
 
+    public void BeginDifficulty(int difficulty)
+    {
         switch (difficulty)
         {
             case 1:
@@ -134,7 +139,6 @@ public class WorldController : MonoBehaviour {
 
     void Update()
     {
-
         for (int i = 0; i < TRACK_SIZE; i++)
         {
             //ScrollingWorld(trackPiece[i]);
@@ -148,10 +152,11 @@ public class WorldController : MonoBehaviour {
             }
            
         }
-        if (input.nManual == 1)
+
+        if (input.NManual == 1)
         {
             UpdateAvailableTracks();
-        } else if (input.nManual == 0)
+        } else if (input.NManual == 0)
         {
             trackAvailable[1] = 1;
             trackAvailable[2] = 1;
@@ -162,7 +167,8 @@ public class WorldController : MonoBehaviour {
         
         UpdateTrack();
         UpdateScore();
-        if (input.nManual == 0)
+
+        if (input.NManual == 0)
         {
             UpdateDifficultyScore();
         }
@@ -189,7 +195,7 @@ public class WorldController : MonoBehaviour {
             {
                 Destroy(trackPiece[i]);
                 //If the track piece is a base piece the next one will be a random exercise
-                if (restPhase > 2)
+                if (restPhase > restTracks)
                 {
                     temp = rand.Next(minRand, maxRand + 1);
                     restPhase = 0; 
@@ -202,7 +208,7 @@ public class WorldController : MonoBehaviour {
 
                          if (count >= 60){
                             temp = 1;
-                            restPhase = 1; 
+                            restPhase = restTracks; 
                             break;
                         }
                         
@@ -236,7 +242,7 @@ public class WorldController : MonoBehaviour {
                     
                 }
                 //If the track piece is an exercise, the next one will be a base piece
-                else if (restPhase <= 2)  //(trackers[i] > 0)
+                else if (restPhase <= restTracks)  //(trackers[i] > 0)
                 {
                     restPhase++; 
                     trackers[i] = 0;
@@ -267,11 +273,11 @@ public class WorldController : MonoBehaviour {
     {
         int variable = difficulty; 
 
-        if (input.nManual == 0.0f)
+        if (input.NManual == 0.0f)
         {
             variable = difficulty;
         } 
-        if (input.nManual == 1)
+        if (input.NManual == 1)
         {
             variable = (int)input.nObstackles;
         }
@@ -311,8 +317,13 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("ObstacleBack").Translate(rand.Next(-4, 5), 2, 0);
                 break;
             case 2:
+                trackPiece[val].transform.Find("ObstacleFront").Translate((rand.Next(-4, 5)), 2, -1);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(1, 2, 0);
                 break;
             case 3:
+                int side = rand.Next(-4, 5);
+                trackPiece[val].transform.Find("ObstacleFront").Translate(side, 2, -1);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(side, 2, 0);
                 break;
         }
     }
@@ -324,12 +335,16 @@ public class WorldController : MonoBehaviour {
         switch (set)
         {
             case 1:
-                trackPiece[val].transform.Find("ObstacleMid").Translate(1, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(-1, 2, -9);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(-3, 2, -9);
                 break;
             case 2:
+                trackPiece[val].transform.Find("ObstacleMid").Translate(2, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(-1, 2, -9);
                 break;
             case 3:
+                trackPiece[val].transform.Find("ObstacleMid").Translate(3, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, -9);
                 break;
         }
     }
@@ -346,8 +361,14 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, 0);
                 break;
             case 2:
+                trackPiece[val].transform.Find("ObstacleFront").Translate(3.5f, 2, 9);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(1, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(-3.5f, 2, -9);
                 break;
             case 3:
+                trackPiece[val].transform.Find("ObstacleFront").Translate(-3.5f, 2, 9);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(-1, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(3.5f, 2, -9);
                 break;
         }
     }
@@ -373,11 +394,11 @@ public class WorldController : MonoBehaviour {
 
         int variable = difficulty;
 
-        if (input.nManual == 0)
+        if (input.NManual == 0)
         {
             variable = difficulty;
         }
-        if (input.nManual == 1)
+        if (input.NManual == 1)
         {
             variable = (int)input.nJumpDifficulty;
         }
@@ -391,13 +412,13 @@ public class WorldController : MonoBehaviour {
                     trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
                     break;
                 case 3:
-                    trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, 0);
-                    trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 0);
+                    trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
+                    trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 1);
                 
                     break;
                 case 4:
-                    trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, 0);
-                    trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 0);
+                    trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, -3);
+                    trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
                     break;
                 default:
                     break;
@@ -447,11 +468,11 @@ public class WorldController : MonoBehaviour {
     }
     public void UpdateSpeed(float v)
     {
-        if (input.nManual == 0)
+        if (input.NManual == 0)
         {
             speed += v;
         }
-        if (input.nManual == 1)
+        if (input.NManual == 1)
         {
             speed = input.nSpeed;
         }
@@ -493,11 +514,11 @@ public class WorldController : MonoBehaviour {
     {
         int variable = difficulty;
 
-        if (input.nManual == 0)
+        if (input.NManual == 0)
         {
             variable = difficulty;
         }
-        if (input.nManual == 1)
+        if (input.NManual == 1)
         {
             variable = (int)input.nOneLegSpeed;
         }
@@ -588,11 +609,11 @@ public class WorldController : MonoBehaviour {
     }
     public void SteppingStones()
     {
-        if (input.nManual == 0)
+        if (input.NManual == 0)
         {
             stepping.GenerateButtons(difficulty);
         }
-        if (input.nManual == 1)
+        if (input.NManual == 1)
         {
             stepping.GenerateButtons((int)input.nNumberofSteps);
         }
@@ -605,11 +626,11 @@ public class WorldController : MonoBehaviour {
         {
             int variable = difficulty;
 
-            if (input.nManual == 0)
+            if (input.NManual == 0)
             {
                 variable = difficulty;
             }
-            if (input.nManual == 1)
+            if (input.NManual == 1)
             {
                 variable = (int)input.nEarthquakeShake;
             }

@@ -32,11 +32,11 @@ public class BoardMovement : MonoBehaviour {
     {
         int variable = world.difficulty;    
 
-        if (input.nManual == 0)
+        if (input.NManual == 0)
         {
             variable = world.difficulty;
         }
-        if (input.nManual == 1)
+        if (input.NManual == 1)
         {
             variable = (int)input.nBoardMovements;
         }
