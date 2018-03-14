@@ -427,7 +427,18 @@ public class WorldController : MonoBehaviour {
 
     void DifJumpSpawn(int val)
     {
-        if (difficulty == 1)
+        int variable = difficulty;
+
+        if (input.NManual == 0)
+        {
+            variable = difficulty;
+        }
+        if (input.NManual == 1)
+        {
+            variable = (int)input.nJumpDifficulty;
+        }
+
+        if (variable == 1)
         {
             int side = rand.Next(1,3);
             //spawns the platforms on the same side
@@ -435,33 +446,41 @@ public class WorldController : MonoBehaviour {
             {
                 trackPiece[val].transform.Find("Pad2").Translate(0, 1.0f, 0);
                 trackPiece[val].transform.Find("Pad4").Translate(0, 1.0f, 0);
+                trackPiece[val].transform.Find("Pad3").gameObject.SetActive(false);
+                trackPiece[val].transform.Find("Pad5").gameObject.SetActive(false);
             }
             else
             {
                 trackPiece[val].transform.Find("Pad3").Translate(0, 1.0f, 0);
                 trackPiece[val].transform.Find("Pad5").Translate(0, 1.0f, 0);
+                trackPiece[val].transform.Find("Pad2").gameObject.SetActive(false);
+                trackPiece[val].transform.Find("Pad4").gameObject.SetActive(false);
             }
         }
         else
         {
-            int front = rand.Next(1, 3);
-            int back = rand.Next(1, 3);
+            int front = 1;// rand.Next(1, 3);
+            int back = 2;// rand.Next(1, 3);
             //Spawns random pads
             if (front == 1)
             {
                 trackPiece[val].transform.Find("Pad2").Translate(0, 1.0f, 0);
+                trackPiece[val].transform.Find("Pad3").gameObject.SetActive(false);
             }
             else
             {
                 trackPiece[val].transform.Find("Pad3").Translate(0, 1.0f, 0);
+                trackPiece[val].transform.Find("Pad2").gameObject.SetActive(false);
             }
             if (back == 1)
             {
                 trackPiece[val].transform.Find("Pad4").Translate(0, 1.0f, 0);
+                trackPiece[val].transform.Find("Pad5").gameObject.SetActive(false);
             }
             else
             {
                 trackPiece[val].transform.Find("Pad5").Translate(0, 1.0f, 0);
+                trackPiece[val].transform.Find("Pad4").gameObject.SetActive(false);
             }
         }
 
