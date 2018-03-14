@@ -157,7 +157,6 @@ public class CollisionManager : MonoBehaviour
             playerController.basic = false;
             Debug.Log(" Start Steping");
             gameController.SteppingStones();
-            movement.BoardMovements();
             switch (gameController.difficulty)
             {
                 case 1:
@@ -199,7 +198,6 @@ public class CollisionManager : MonoBehaviour
                 default:
                     break;
             }
-            movement.BoardMovements();
         }
         else if (other.gameObject.tag == "Jump2")
         {
@@ -223,7 +221,6 @@ public class CollisionManager : MonoBehaviour
                 default:
                     break;
             }
-            movement.BoardMovements();
         }
     }
     void OnTriggerStay(Collider other)

@@ -116,17 +116,17 @@ public class PlayerController3 : MonoBehaviour {
     }
     void Step()
     {
-        if (platform.cop.x > StepValue)
+        if (platform.cop.x > StepValue && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
         {
             stepping.DestroyRight();
         }
 
-        if (platform.cop.z <= -StepValue)
+        if (platform.cop.z <= -StepValue && platform.cop.x < 0.1f && platform.cop.x > -0.1f)
         {
             stepping.DestroyUp();
         }
 
-        if (platform.cop.x < -StepValue)
+        if (platform.cop.x < -StepValue && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
         {
             stepping.DestroyLeft();
         }
