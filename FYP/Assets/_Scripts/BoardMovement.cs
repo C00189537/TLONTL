@@ -54,6 +54,9 @@ public class BoardMovement : MonoBehaviour {
             case 4:
                 StartCoroutine(MovementThree());
                 break;
+            case 5:
+                StartCoroutine(MovementFour());
+                break;
             default:
                 break;
         }
@@ -116,6 +119,15 @@ public class BoardMovement : MonoBehaviour {
         i = GetRandomDouble(0.06, 0.1);
         j = GetRandomDouble(0.06, 0.1);
         board.SetPos((float)i, (float)j); */
+        yield return new WaitForSeconds(1);
+        board.SetPos(0, 0);
+    }
+
+    IEnumerator MovementFour()
+    {
+        float i = GetRandomFloat(0.06f, 0.1f);
+        float j = GetRandomFloat(0.06f, 0.1f);
+        board.SetPos((float)i, (float)j);
         yield return new WaitForSeconds(1);
         board.SetPos(0, 0);
     }

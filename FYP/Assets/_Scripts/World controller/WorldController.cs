@@ -285,6 +285,9 @@ public class WorldController : MonoBehaviour {
             case 4:
                 ObstacleFour(val);
                 break;
+            case 5:
+                ObstacleFive(val);
+                break;
             default:
                 break;
         }
@@ -347,13 +350,43 @@ public class WorldController : MonoBehaviour {
     {
         int set = rand.Next(1, 4);
 
-        switch (3)
+        switch (set)
         {
             case 1:
                 trackPiece[val].transform.Find("ObstacleFront").Translate(0, 2, 0);
                 trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
                 trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, 0);
                 trackPiece[val].transform.Find("ScoreOb1").Translate(2, 2, 2);
+                trackPiece[val].transform.Find("ScoreOb2").Translate(2, 2, 0);
+                break;
+            case 2:
+                trackPiece[val].transform.Find("ObstacleFront").Translate(-3, 2, 0);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(3, 2, 0);
+                trackPiece[val].transform.Find("ScoreOb1").Translate(2, 2, 2);
+                trackPiece[val].transform.Find("ScoreOb2").Translate(-1, 2, 0);
+                break;
+            case 3:
+                trackPiece[val].transform.Find("ObstacleFront").Translate(3, 2, 0);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(-3.5f, 2, 0);
+                trackPiece[val].transform.Find("ScoreOb1").Translate(-1, 2, 2);
+                trackPiece[val].transform.Find("ScoreOb2").Translate(2, 2, 0);
+                break;
+        }
+    }
+
+    void ObstacleFive (int val)
+    {
+        int set = rand.Next(1, 4);
+
+        switch (set)
+        {
+            case 1:
+                trackPiece[val].transform.Find("ObstacleFront").Translate(-2, 2, 9);
+                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 9);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(2, 2, -9);
+                trackPiece[val].transform.Find("ScoreOb1").Translate(0, 2, 2);
                 trackPiece[val].transform.Find("ScoreOb2").Translate(2, 2, 0);
                 break;
             case 2:
@@ -417,10 +450,14 @@ public class WorldController : MonoBehaviour {
                 
                     break;
                 case 4:
+                    trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
+                    trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
+                    break;
+                 case 5:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
                     break;
-                default:
+            default:
                     break;
             }
     }
@@ -545,7 +582,7 @@ public class WorldController : MonoBehaviour {
         switch (variable)
             {
                 case 1:
-                    oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
+                    oneLegScrollSpeed = new Vector3(0, 0, 0.25f);
                 break;
                 case 2:
                     oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
@@ -556,7 +593,10 @@ public class WorldController : MonoBehaviour {
                 case 4:
                     oneLegScrollSpeed = new Vector3(0, 0, 0.1f);
                     break;
-                default:
+                case 5:
+                    oneLegScrollSpeed = new Vector3(0, 0, 0.05f);
+                    break;
+            default:
                     break;
             }
         
@@ -666,6 +706,9 @@ public class WorldController : MonoBehaviour {
                     break;
                 case 4:
                     cam.GetComponent<CameraShake>().SetShakeAmount(0.3f);
+                    break;
+                case 5:
+                    cam.GetComponent<CameraShake>().SetShakeAmount(0.35f);
                     break;
                 default:
                     break;
