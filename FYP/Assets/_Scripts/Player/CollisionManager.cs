@@ -64,7 +64,7 @@ public class CollisionManager : MonoBehaviour
         {
             Debug.Log("explode?");
             Destroy(other.gameObject);
-            gameController.UpdateSpeed(-0.025f);
+            //gameController.UpdateSpeed(-0.025f);
             cam.GetComponent<CameraShake>().SetTimer(1.0f);
             Debug.Log("bifbwbf");
 
@@ -292,7 +292,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+            //gameController.UpdateSpeed(0.015f * platformScore);
 
         }
         else if (other.gameObject.tag == "Basic")
@@ -333,7 +333,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+           // gameController.UpdateSpeed(0.015f * platformScore);
             gameController.oneLegSpeed = false;
         }
         else if (other.gameObject.tag == "Step")
@@ -367,7 +367,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+            //gameController.UpdateSpeed(0.015f * platformScore);
         }
         else if (other.gameObject.tag == "Jump")
         {
@@ -398,7 +398,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+            //gameController.UpdateSpeed(0.015f * platformScore);
         }
         else if (other.gameObject.tag == "Jump2")
         {
@@ -429,7 +429,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+           // gameController.UpdateSpeed(0.015f * platformScore);
         }
     }
 

@@ -11,7 +11,6 @@ public class WorldController : MonoBehaviour {
     private int temp;
     Camera cam;
 
-
     private int[] trackers = new int[3];
     private int currentTracker = 0;
     private int nextTracker = 1;
@@ -82,8 +81,6 @@ public class WorldController : MonoBehaviour {
         }
 
         input = GetComponent<NetworkInput>();
-        //BeginDifficulty((int)input.nDifficulty);
-
 
         //initialise the first platforms
         currentSection = Instantiate(platformLayout[currentTracker], new Vector3(0, 0, 0.0f), transform.rotation) as GameObject;
@@ -111,7 +108,7 @@ public class WorldController : MonoBehaviour {
 
         StartCoroutine(Earthquake());
         
-        UpdateMaxSpeed();
+        //UpdateMaxSpeed();
         UpdateOneLegSpeed();
        
     }
@@ -157,6 +154,7 @@ public class WorldController : MonoBehaviour {
         UpdateAvailableTracks(); 
         UpdateTrack();
         UpdateScore();
+        SpeedUpdate();
 
         if (input.NManual == 0)
         {
@@ -294,7 +292,6 @@ public class WorldController : MonoBehaviour {
         trackPiece[val].transform.Find("ObstacleMid").localScale = trackPiece[val].transform.Find("ObstacleMid").localScale * difficulty * 0.75f;
         trackPiece[val].transform.Find("ObstacleBack").localScale = trackPiece[val].transform.Find("ObstacleBack").localScale * difficulty * 0.75f;
     }
-
 
     void ObstacleTwo(int val)
     {
@@ -475,49 +472,49 @@ public class WorldController : MonoBehaviour {
         }
 
     }
-    public void UpdateSpeed(float v)
-    {
-        if (input.NManual == 0)
-        {
-            speed += v;
-        }
-        if (input.NManual == 1)
-        {
-            speed = input.nSpeed;
-        }
 
-        if (speed < minSpeed)
-        {
-            speed = minSpeed;
-        }
-        else if (speed > maxSpeed)
-        {
-            speed = maxSpeed;
-        }
+    void SpeedUpdate()
+    {
+        speed = input.NSpeed;
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
 
-    public void UpdateMaxSpeed()
-    {
-        switch (difficulty)
-        {
-            case 1:
-                maxSpeed = 0.2f;
-                break;
-            case 2:
-                maxSpeed = 0.3f;
-                break;
-            case 3:
-                maxSpeed = 0.4f;
-                break;
-            case 4:
-                maxSpeed = 0.5f;
-                break;
-            default:
-                break;
-        }
-    }
+    /* public void UpdateSpeed(float v)
+     {
+         speed = input.NSpeed;
 
+         if (speed < minSpeed)
+         {
+             speed = minSpeed;
+         }
+         else if (speed > maxSpeed)
+         {
+             speed = maxSpeed;
+         }
+    scrollSpeed = new Vector3(0.0f, 0.0f, speed);
+    } */
+
+    /* public void UpdateMaxSpeed()
+     {
+         switch (difficulty)
+         {
+             case 1:
+                 maxSpeed = 0.2f;
+                 break;
+             case 2:
+                 maxSpeed = 0.3f;
+                 break;
+             case 3:
+                 maxSpeed = 0.4f;
+                 break;
+             case 4:
+                 maxSpeed = 0.5f;
+                 break;
+             default:
+                 break;
+         }
+     }
+     */
 
     public void UpdateOneLegSpeed()
     {

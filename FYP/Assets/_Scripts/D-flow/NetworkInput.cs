@@ -14,7 +14,7 @@ public class NetworkInput : MonoBehaviour {
     public float nStepping = 0;
     public float nJumping = 0;
     public float nJumpingOneleg = 0;
-    public float nSpeed = 0;
+    private float nSpeed = 0;
     public float nObstackles = 0;
     public float nBoardMovements = 0;
     public float nJumpDifficulty = 0;
@@ -24,6 +24,8 @@ public class NetworkInput : MonoBehaviour {
     public float nMomZ = 0; 
 
     public float diffChange;
+    public float speedChange; 
+
     public float NManual
     {
         get
@@ -53,6 +55,19 @@ public class NetworkInput : MonoBehaviour {
         }
     }
 
+    public float NSpeed
+    {
+        get
+        {
+            return nSpeed;
+        }
+
+        set
+        {
+            nSpeed = value;
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -69,7 +84,7 @@ public class NetworkInput : MonoBehaviour {
         nStepping = network.getOutput(6);
         nJumping = network.getOutput(7);
         nJumpingOneleg = network.getOutput(8);
-        nSpeed = network.getOutput(9);
+        NSpeed = network.getOutput(9);
         nObstackles = network.getOutput(10);
         nBoardMovements = network.getOutput(11);
         nJumpDifficulty = network.getOutput(12);
