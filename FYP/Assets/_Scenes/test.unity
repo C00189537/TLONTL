@@ -300,7 +300,7 @@ Prefab:
     - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
         type: 2}
       propertyPath: JumpValue
-      value: 300
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
         type: 2}
@@ -325,12 +325,12 @@ Prefab:
     - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
         type: 2}
       propertyPath: JumpTwoValue
-      value: 300
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
         type: 2}
       propertyPath: jump2Speed
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
         type: 2}
@@ -358,6 +358,16 @@ Prefab:
         type: 2}
       propertyPath: StepValue
       value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
+        type: 2}
+      propertyPath: LeanSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
+        type: 2}
+      propertyPath: OneLegJumpValue
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38d3f8b3f9d5ea04aac27d06255c046c, type: 2}

@@ -153,18 +153,8 @@ public class WorldController : MonoBehaviour {
            
         }
 
-        if (input.NManual == 1)
-        {
-            UpdateAvailableTracks();
-        } else if (input.NManual == 0)
-        {
-            trackAvailable[1] = 1;
-            trackAvailable[2] = 1;
-            trackAvailable[3] = 1;
-            trackAvailable[4] = 1;
-            trackAvailable[5] = 1;
-        }
         
+        UpdateAvailableTracks(); 
         UpdateTrack();
         UpdateScore();
 

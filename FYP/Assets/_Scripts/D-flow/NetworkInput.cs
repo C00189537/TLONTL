@@ -21,6 +21,7 @@ public class NetworkInput : MonoBehaviour {
     public float nNumberofSteps = 0;
     public float nOneLegSpeed = 0;
     public float nEarthquakeShake = 0;
+    public float nMomZ = 0; 
 
     public float diffChange;
     public float NManual
@@ -61,9 +62,7 @@ public class NetworkInput : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!(diffChange == network.getOutput(16))){
-            NDifficulty = network.getOutput(16);
-        }
+        
         NManual = network.getOutput(3);
         nLeaning = network.getOutput(4);
         nOneLeg = network.getOutput(5);
@@ -77,6 +76,13 @@ public class NetworkInput : MonoBehaviour {
         nNumberofSteps = network.getOutput(13);
         nOneLegSpeed = network.getOutput(14);
         nEarthquakeShake = network.getOutput(15);
+
+        if (!(diffChange == network.getOutput(16)))
+        {
+            NDifficulty = network.getOutput(16);
+        }
+
+        nMomZ = network.getOutput(17);
     }
 
 
