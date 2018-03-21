@@ -9,6 +9,7 @@ public class BoardMovement : MonoBehaviour {
 
     public WorldController world;
     public NetworkInput input;
+    public float moveTime; 
     System.Random rand = new System.Random();
     // Use this for initialization
 
@@ -16,16 +17,20 @@ public class BoardMovement : MonoBehaviour {
         world = GetComponent<WorldController>();
         input = GetComponent<NetworkInput>();
         board = GetComponent<NetworkOutput>();
+        board.SetPos(0, 0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         //move the track
+        /*
         int board = rand.Next(0, 10);
         if (board % 3 == 0)
         {
            // BoardMovements();
-        }
+        }*/
+
+       
     }
 
     public void BoardMovements()
@@ -46,16 +51,20 @@ public class BoardMovement : MonoBehaviour {
             case 1:
                 break;
             case 2:
-                StartCoroutine(MovementOne());
+                moveTime = 0.7f;
+                StartCoroutine(Movement(moveTime));
                 break;
             case 3:
-                StartCoroutine(MovementTwo());
+                moveTime = 0.5f;
+                StartCoroutine(Movement(moveTime));
                 break;
             case 4:
-                StartCoroutine(MovementThree());
+                moveTime = 0.3f;
+                StartCoroutine(Movement(moveTime));
                 break;
             case 5:
-                StartCoroutine(MovementFour());
+                moveTime = 0.1f;
+                StartCoroutine(Movement(moveTime));
                 break;
             default:
                 break;
@@ -63,22 +72,44 @@ public class BoardMovement : MonoBehaviour {
          
     }
 
-    IEnumerator MovementOne()
+    IEnumerator Movement(float seconds)
     {
-        float i = GetRandomFloat(0, 0.03f);
-        float j = GetRandomFloat(0, 0.03f);
-        board.SetPos(i, j);
-        yield return new WaitForSeconds(3);
+        float i = GetRandomFloat(0.03f, 0.06f);
+
+        float k = 0.0f;
+
+        if ( i > 0)
+        {
+            while (!(k >= i))
+            {
+                k += 0.01f;
+                Debug.Log(k);
+                board.SetPos(k, k);
+                yield return new WaitForSeconds(seconds);
+            }
+        }
+
+        if (i < 0)
+        {
+            while (!(k <= i))
+            {
+                k -= 0.01f;
+                board.SetPos(k, k);
+                yield return new WaitForSeconds(seconds);
+            }
+        }
+        
+        //yield return new WaitForSeconds(2);
         board.SetPos(0, 0);
-       /* yield return new WaitForSeconds(3);
-        i = GetRandomFloat(0, 0.03f);
-        j = GetRandomFloat(0, 0.03f);
-        board.SetPos(i, j);
-        yield return new WaitForSeconds(3);
-        board.SetPos(0, 0);*/
         
     }
 
+    public void ResetBoard()
+    {
+        board.SetPos(0, 0); 
+    }
+
+    /*
     IEnumerator MovementTwo()
     {
         float i = GetRandomFloat(0.03f, 0.06f);
@@ -86,71 +117,36 @@ public class BoardMovement : MonoBehaviour {
         board.SetPos(i, j);
         yield return new WaitForSeconds(2);
         board.SetPos(0, 0);
-        /* yield return new WaitForSeconds(2);
-         i = GetRandomFloat(0.03f, 0.06f);
-         j = GetRandomFloat(0.03f, 0.06f);
-         board.SetPos((float)i, (float)j);
-         yield return new WaitForSeconds(2);
-         board.SetPos(0, 0);
-         yield return new WaitForSeconds(2);
-         i = GetRandomDouble(0.03, 0.06);
-         j = GetRandomDouble(0.03, 0.06);
-         board.SetPos((float)i, (float)j);
-         yield return new WaitForSeconds(2);
-         board.SetPos(0, 0); */
     }
 
     IEnumerator MovementThree()
     {
-        float i = GetRandomFloat(0.06f, 0.1f);
-        float j = GetRandomFloat(0.06f, 0.1f);
+        float i = GetRandomFloat(0.03f, 0.06f);
+        float j = GetRandomFloat(0.03f, 0.06f);
         board.SetPos((float)i, (float)j);
-        /* yield return new WaitForSeconds(1);
-        i = GetRandomFloat(0.06f, 0.1f);
-        j = GetRandomFloat(0.06f, 0.1f);
-        board.SetPos((float)i, (float)j);
-        yield return new WaitForSeconds(1);
-       i = GetRandomDouble(0.06, 0.1);
-        j = GetRandomDouble(0.06, 0.1);
-        board.SetPos((float)i, (float)j);
-        yield return new WaitForSeconds(1);
-        board.SetPos(0, 0);
-        yield return new WaitForSeconds(1);
-        i = GetRandomDouble(0.06, 0.1);
-        j = GetRandomDouble(0.06, 0.1);
-        board.SetPos((float)i, (float)j); */
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         board.SetPos(0, 0);
     }
 
     IEnumerator MovementFour()
     {
-        float i = GetRandomFloat(0.06f, 0.1f);
-        float j = GetRandomFloat(0.06f, 0.1f);
+        float i = GetRandomFloat(0.03f, 0.06f);
+        float j = GetRandomFloat(0.03f, 0.06f);
         board.SetPos((float)i, (float)j);
         yield return new WaitForSeconds(1);
         board.SetPos(0, 0);
     }
-
-    public double GetRandomDouble(double min, double max)
-    {
-        int i = rand.Next(0, 1);
-       
-        if (i == 0)
-        {
-            i = -1; 
-        }
-        
-        return ( rand.NextDouble() * (max - min) + min) * i; 
-    }
+    */
 
     public float GetRandomFloat (float min, float max) { 
          int i = rand.Next(0, 2);
        
             if (i == 0)
             {
-            i = -1; 
-            }
+                i = -1; 
+            } else {
+                i = 1;
+             }
 
         return (Random.Range(min, max) * i);
     }

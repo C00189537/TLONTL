@@ -78,6 +78,7 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "Basic")
         {
             playerController.basic = true;
+            movement.ResetBoard();
         }
         else if (other.gameObject.tag == "Pit")
         {
@@ -234,6 +235,7 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "Basic")
         {
             playerController.basic = true;
+            movement.ResetBoard();
         }
         else if (other.gameObject.tag == "Pit")
         {
