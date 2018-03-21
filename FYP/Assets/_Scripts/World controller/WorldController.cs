@@ -13,7 +13,7 @@ public class WorldController : MonoBehaviour {
 
     private int[] trackers = new int[3];
     private int currentTracker = 0;
-    private int nextTracker = 1;
+    private int nextTracker = 0;
     private int farTracker = 0;
 
     private int restPhase;
@@ -25,7 +25,7 @@ public class WorldController : MonoBehaviour {
     public float killPoint;
 
     //Sections of track
-    private int TRACK_SIZE = 3;
+    private int TRACK_SIZE = 3 ;
     private GameObject[] trackPiece = new GameObject[3];
     private GameObject currentSection;
     private GameObject nextSection;
@@ -93,7 +93,7 @@ public class WorldController : MonoBehaviour {
         trackPiece[2] = farSection;
 
         //Initialises the first set of obstacles
-        ObstacleSpawn(nextTracker);
+        //ObstacleSpawn(nextTracker);
 
         //Set up the trackers array
         trackers[0] = currentTracker;
@@ -197,8 +197,8 @@ public class WorldController : MonoBehaviour {
                         temp = rand.Next(minRand, maxRand + 1);
                         count++;
 
-                         if (count >= 60){
-                            temp = 1;
+                         if (count >= 20){
+                            temp = 0;
                             restPhase = restTracks; 
                             break;
                         }
