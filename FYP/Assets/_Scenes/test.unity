@@ -638,7 +638,7 @@ Prefab:
     - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
         type: 2}
       propertyPath: maxSpeed
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
         type: 2}
@@ -1371,6 +1371,7 @@ MonoBehaviour:
   board: {fileID: 1730798129}
   world: {fileID: 1730798132}
   input: {fileID: 1730798130}
+  moveTime: 0
 --- !u!114 &1730798129 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114204391942548182, guid: bf69d8c034f4b48408c34b0ade75d994,

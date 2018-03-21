@@ -129,6 +129,9 @@ public class WorldController : MonoBehaviour {
             case 4:
                 difficultyScore = 35;
                 break;
+            case 5:
+                difficultyScore = 55;
+                break;
             default:
                 break;
         }
@@ -250,12 +253,13 @@ public class WorldController : MonoBehaviour {
         }
     }
 
+    /*
     void CoinSpawn(int val)
     {
         int randy = rand.Next(-4, 5);
         trackPiece[val].transform.Find("ScoreOb1").Translate(randy, 2, 0);
         trackPiece[val].transform.Find("ScoreOb2").Translate(randy, 2, 0);
-    }
+    } */
 
     void ObstacleSpawn(int val)
     {
@@ -644,9 +648,9 @@ public class WorldController : MonoBehaviour {
         {
             difficultyScore = 0;
         }
-        else if (difficultyScore >= 50)
+        else if (difficultyScore >= 70)
         {
-            difficultyScore = 50;
+            difficultyScore = 70;
         }
         //Difficulty set based on performance
         if (difficultyScore >= 0 && difficultyScore < 5)
@@ -664,6 +668,10 @@ public class WorldController : MonoBehaviour {
         else if (difficultyScore >= 30 && difficultyScore < 50)
         {
             difficulty = 4;
+        }
+        else if (difficultyScore >= 50 && difficultyScore < 70)
+        {
+            difficulty = 5;
         }
     }
     public void SteppingStones()
