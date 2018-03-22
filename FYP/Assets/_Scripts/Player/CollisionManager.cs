@@ -62,6 +62,7 @@ public class CollisionManager : MonoBehaviour
         //Player vs Obstacle
         if (other.gameObject.tag == "Obstacle")
         {
+            movement.Boardvibration();
             Debug.Log("explode?");
             Destroy(other.gameObject);
             //gameController.UpdateSpeed(-0.025f);
@@ -73,6 +74,7 @@ public class CollisionManager : MonoBehaviour
                 platformScore--;
             }
             //palpitation TBD
+            
 
         }
         else if (other.gameObject.tag == "Basic")
