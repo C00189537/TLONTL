@@ -19,12 +19,14 @@ public class PlayerController3 : MonoBehaviour {
     public float switchJumpSpeed;
     public float OneLegValue;
     public float StepValue;
+    public float OneLegJumpValue;
     public float JumpValue;
     public float JumpTwoValue;
     public bool basic, lean, oneLeg, step, jump, jump2, pit;
     public bool touchGround = true;
 
-    public Rigidbody rb; 
+    public Rigidbody rb;
+    public NetworkInput input; 
 
     public float force;
     public float xpos;
@@ -34,6 +36,7 @@ public class PlayerController3 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+        input = gameControllerObject.GetComponent<NetworkInput>();
        stepping = gameControllerObject.GetComponent<Stepping>();
        theWorld = gameControllerObject.GetComponent<WorldController>();
         rb = GetComponent<Rigidbody>();
@@ -116,17 +119,17 @@ public class PlayerController3 : MonoBehaviour {
     }
     void Step()
     {
-        if (platform.cop.x > StepValue)
+        if (platform.cop.x > StepValue && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
         {
             stepping.DestroyRight();
         }
 
-        if (platform.cop.z <= -StepValue)
+        if (platform.cop.z <= -StepValue && platform.cop.x < 0.1f && platform.cop.x > -0.1f)
         {
             stepping.DestroyUp();
         }
 
-        if (platform.cop.x < -StepValue)
+        if (platform.cop.x < -StepValue && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
         {
             stepping.DestroyLeft();
         }
@@ -151,27 +154,31 @@ public class PlayerController3 : MonoBehaviour {
     void Jump2()
     {
         float step = switchJumpSpeed * Time.deltaTime;
-        if (platform.cop.force < JumpValue && touchGround == true)
+        if (platform.cop.force < JumpTwoValue && touchGround == true)
         {
             rb.AddForce(Vector3.up * jump2Speed, ForceMode.Impulse);
             touchGround = false;
         }
 
-        if (platform.cop.x < -StepValue && !jumping2)
-        {
-           gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(-3, gameObject.transform.position.y, 0), step); 
-             
+        if (touchGround){
+            if ( input.nMomZ < -100) //platform.cop.x < -OneLegJumpValue &&
+            {
+                gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(-3, gameObject.transform.position.y, 0), step);
+
+            }
+
+            if (input.nMomZ > -100 && input.nMomZ < 100)//platform.cop.x > -OneLegJumpValue && platform.cop.x < OneLegJumpValue)
+            {
+                gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(0, gameObject.transform.position.y, 0), step);
+            }
+
+            if (input.nMomZ > 100) //platform.cop.x > OneLegJumpValue && 
+            {
+                gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(3, gameObject.transform.position.y, 0), step);
+            }
         }
 
-        if (platform.cop.x > -StepValue && platform.cop.x < StepValue && !jumping2)
-        {
-            gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(0, gameObject.transform.position.y, 0), step);
-        }
-
-        if (platform.cop.x > StepValue && !jumping2)
-        {
-            gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(3, gameObject.transform.position.y, 0), step);
-        }
+        
 
     }
     void Inputs()

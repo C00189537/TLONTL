@@ -62,9 +62,10 @@ public class CollisionManager : MonoBehaviour
         //Player vs Obstacle
         if (other.gameObject.tag == "Obstacle")
         {
+            movement.Boardvibration();
             Debug.Log("explode?");
             Destroy(other.gameObject);
-            gameController.UpdateSpeed(-0.025f);
+            //gameController.UpdateSpeed(-0.025f);
             cam.GetComponent<CameraShake>().SetTimer(1.0f);
             Debug.Log("bifbwbf");
 
@@ -73,11 +74,13 @@ public class CollisionManager : MonoBehaviour
                 platformScore--;
             }
             //palpitation TBD
+            
 
         }
         else if (other.gameObject.tag == "Basic")
         {
             playerController.basic = true;
+            movement.ResetBoard();
         }
         else if (other.gameObject.tag == "Pit")
         {
@@ -157,7 +160,6 @@ public class CollisionManager : MonoBehaviour
             playerController.basic = false;
             Debug.Log(" Start Steping");
             gameController.SteppingStones();
-            movement.BoardMovements();
             switch (gameController.difficulty)
             {
                 case 1:
@@ -199,7 +201,6 @@ public class CollisionManager : MonoBehaviour
                 default:
                     break;
             }
-            movement.BoardMovements();
         }
         else if (other.gameObject.tag == "Jump2")
         {
@@ -223,7 +224,6 @@ public class CollisionManager : MonoBehaviour
                 default:
                     break;
             }
-            movement.BoardMovements();
         }
     }
     void OnTriggerStay(Collider other)
@@ -237,6 +237,7 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "Basic")
         {
             playerController.basic = true;
+            movement.ResetBoard();
         }
         else if (other.gameObject.tag == "Pit")
         {
@@ -295,7 +296,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+            //gameController.UpdateSpeed(0.015f * platformScore);
 
         }
         else if (other.gameObject.tag == "Basic")
@@ -336,7 +337,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+           // gameController.UpdateSpeed(0.015f * platformScore);
             gameController.oneLegSpeed = false;
         }
         else if (other.gameObject.tag == "Step")
@@ -370,7 +371,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+            //gameController.UpdateSpeed(0.015f * platformScore);
         }
         else if (other.gameObject.tag == "Jump")
         {
@@ -401,7 +402,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+            //gameController.UpdateSpeed(0.015f * platformScore);
         }
         else if (other.gameObject.tag == "Jump2")
         {
@@ -432,7 +433,7 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            gameController.UpdateSpeed(0.015f * platformScore);
+           // gameController.UpdateSpeed(0.015f * platformScore);
         }
     }
 

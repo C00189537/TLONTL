@@ -13,11 +13,11 @@ public class Stepping : MonoBehaviour
 
    
     //For positioning
-    public int resetXValue = -134;
-    public int Xvalue = -134;
-    public int Yvalue = -102;
+    public int resetYValue = -100;
+    public int Xvalue = 0;
+    public int Yvalue = -0;
     public int Zvalue = 0;
-    public int ButtonSpacing = -90;
+    public int ButtonSpacing = 65;
 
     int previousArrow = 4; 
 
@@ -54,7 +54,7 @@ public class Stepping : MonoBehaviour
     // parameter should eventually be received from world controller
     public void GenerateButtons(int numberOfButtons)
     {
-        for (int i = 0; i < numberOfButtons + 1; i++)
+        for (int i = 0; i < numberOfButtons; i++)
         {
             int rand = randy.Next(0, 3);
             
@@ -90,7 +90,7 @@ public class Stepping : MonoBehaviour
     {
             arrow.transform.SetParent(Canvas.transform, false);
             arrow.transform.localPosition = new Vector3(Xvalue, Yvalue, Zvalue);
-            Xvalue -= ButtonSpacing;
+            Yvalue -= ButtonSpacing;
             Steps.Enqueue(arrow);
            ResetXPosition();
     }
@@ -151,7 +151,7 @@ public class Stepping : MonoBehaviour
     {
         if (Steps.Count == 0)
         {
-            Xvalue = resetXValue;
+            Yvalue = resetYValue;
         }
     }
 
