@@ -25,6 +25,8 @@ public class PlayerController3 : MonoBehaviour {
     public bool basic, lean, oneLeg, step, jump, jump2, pit;
     public bool touchGround = true;
 
+	private const int MAXJUMP = 1;
+
     public Rigidbody rb;
     public NetworkInput input; 
 
@@ -48,20 +50,15 @@ public class PlayerController3 : MonoBehaviour {
     {
         if (platform.cop.force >= JumpValue && touchGround == false)
         {
-            rb.AddForce(Vector3.down * jumpFallSpeed, ForceMode.Impulse);
-        }
+			rb.AddForce(Vector3.down * jumpFallSpeed, ForceMode.Impulse);
+		}
 
         if (gameObject.transform.position.y < 1.01f)
         {
             touchGround = true;
         }
 
-        if (jump)
-        {
-            Jump();
-
-        }
-        else if (jump2)
+        if (jump2)
         {
             Jump2();
             
@@ -91,8 +88,13 @@ public class PlayerController3 : MonoBehaviour {
         {
             Step();
         }
+		else if (jump)
+		{
+			Jump();
 
-    }
+		}
+
+	}
     void Lean()
     {
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
@@ -140,8 +142,10 @@ public class PlayerController3 : MonoBehaviour {
     {
         if (platform.cop.force < JumpValue && touchGround == true)
         {
-            rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-            touchGround = false;
+			//rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
+			rb.velocity = rb.velocity + new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+			//transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime, Space.World);
+			touchGround = false;
         }
         
         /*

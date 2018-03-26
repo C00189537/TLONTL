@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c1db50f3ba9b0814bb31d349a216a4ad, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.17888552, g: 0.122268714, b: 0.21569714, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ Prefab:
     - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
         type: 2}
       propertyPath: jumpSpeed
-      value: 300
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
         type: 2}
@@ -335,7 +335,7 @@ Prefab:
     - target: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
         type: 2}
       propertyPath: jumpFallSpeed
-      value: 80
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 23016653668581956, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
         type: 2}
@@ -484,6 +484,11 @@ Prefab:
     - target: {fileID: 4731329688156184, guid: 52e1b93ac0df604449f279e8af7ba9e3, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23870927394649934, guid: 52e1b93ac0df604449f279e8af7ba9e3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52e1b93ac0df604449f279e8af7ba9e3, type: 2}
@@ -750,7 +755,7 @@ Prefab:
         type: 2}
       propertyPath: platformLayout.Array.data[0]
       value: 
-      objectReference: {fileID: 1720975006306316, guid: 3f25f031b85c22a448a24da2dbdc8258,
+      objectReference: {fileID: 1975812177755816, guid: b54b8332cc2759f4dbd247f4508a2c9e,
         type: 2}
     - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
         type: 2}
@@ -1044,7 +1049,7 @@ Prefab:
     - target: {fileID: 114112949673215264, guid: c69d427782397084ea32c38894dcd9d3,
         type: 2}
       propertyPath: ipAddress
-      value: 192.168.1.50
+      value: 127.0.0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c69d427782397084ea32c38894dcd9d3, type: 2}
@@ -1487,6 +1492,9 @@ MonoBehaviour:
   world: {fileID: 1730798132}
   input: {fileID: 1730798130}
   moveTime: 0
+  increment: 0
+  boardOffset: 0
+  done: 0
 --- !u!114 &1730798129 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114204391942548182, guid: bf69d8c034f4b48408c34b0ade75d994,
