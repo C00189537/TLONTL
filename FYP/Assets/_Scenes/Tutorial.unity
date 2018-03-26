@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 637390475}
   m_Layer: 0
   m_Name: TutPlayer
-  m_TagString: Untagged
+  m_TagString: PlayerTut
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -374,19 +374,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 637390468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd9d5c494850477439aa9d09e3124ae2, type: 3}
+  m_Script: {fileID: 11500000, guid: 618a77db217d83644b01ea335dfe3612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftButton: {fileID: 1947113244769786, guid: 8e32c8ca2d72b334ba0175d928f0b643, type: 2}
-  UpButton: {fileID: 1097476532420890, guid: 58996e55e45736c4eb632a874da662cc, type: 2}
-  RightButton: {fileID: 1849859357751624, guid: 2caa35187d818014abba60456990cd0a,
+  LeftButton: {fileID: 1947113244769786, guid: 385fa7185cfda484e9c9c9a40f7ad9b0, type: 2}
+  UpButton: {fileID: 1097476532420890, guid: 3588856849147924faabd665d18e04cd, type: 2}
+  RightButton: {fileID: 1849859357751624, guid: 2df67f3573acec444912aa01756b1cc6,
     type: 2}
   Canvas: {fileID: 1384552214}
   resetYValue: -100
   Xvalue: 0
-  Yvalue: 0
+  Yvalue: -65
   Zvalue: 0
-  ButtonSpacing: 65
+  ButtonSpacing: 70
 --- !u!1 &702572723
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   network: {fileID: 1528284187}
+  step: {fileID: 637390475}
   nLeaning: 0
   nOneLeg: 0
   nStepping: 0

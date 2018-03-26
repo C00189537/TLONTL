@@ -21,6 +21,7 @@ TagManager:
   - Left
   - Down
   - Basic
+  - PlayerTut
   layers:
   - Default
   - TransparentFX

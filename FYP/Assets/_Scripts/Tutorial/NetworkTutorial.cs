@@ -5,6 +5,7 @@ using UnityEngine;
 public class NetworkTutorial : MonoBehaviour {
 
     public DFlowNetwork network;
+    public StepTutorial step; 
 
     public float nLeaning = 0;
     public float nOneLeg = 0;
@@ -14,6 +15,7 @@ public class NetworkTutorial : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+       // step = gameObject.GetComponent<StepTutorial>(); 
 	}
 	
 	// Update is called once per frame
@@ -35,6 +37,11 @@ public class NetworkTutorial : MonoBehaviour {
         } else if (nStepping == 1)
         {
             this.tag = "Step";
+            if (step.Steps.Count <= 0 )
+            {
+                step.GenerateButtons(3);
+            }
+
         } else if (nJumping == 1)
         {
             this.tag = "Jump";
