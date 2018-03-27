@@ -810,6 +810,26 @@ Prefab:
       propertyPath: ButtonSpacing
       value: -65
       objectReference: {fileID: 0}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: killPoint
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: timeLeft
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: spawnPointFar
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 114421315659252798, guid: bf69d8c034f4b48408c34b0ade75d994,
+        type: 2}
+      propertyPath: spawnPoint
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf69d8c034f4b48408c34b0ade75d994, type: 2}
   m_IsPrefabParent: 0

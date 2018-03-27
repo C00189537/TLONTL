@@ -246,7 +246,7 @@ public class WorldController : MonoBehaviour {
                 }
                 if (TRACK_SIZE > i + 2)
                 {
-                    trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, 30.0f);
+                    trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, spawnPoint);
                 }
                 
             }
