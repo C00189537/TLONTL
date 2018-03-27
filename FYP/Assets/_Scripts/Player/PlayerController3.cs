@@ -8,9 +8,9 @@ public class PlayerController3 : MonoBehaviour {
     public Stepping stepping;
     public WorldController theWorld; 
 
-    public float xVal;
+    public float xMax;
 
-    private bool leanLeft, LeanRight, jumping2;
+    private bool leanLeft, LeanRight, jumping2, jumping2L, jumping2R;
     public float translateSpeed;
     public float LeanSpeed;
     public float jumpSpeed;
@@ -23,7 +23,7 @@ public class PlayerController3 : MonoBehaviour {
     public float JumpValue;
     public float JumpTwoValue;
     public bool basic, lean, oneLeg, step, jump, jump2, pit;
-    public bool touchGround = true;
+    public bool touchGround = true, flying = false;
 
 	private const int MAXJUMP = 1;
 
@@ -59,13 +59,15 @@ public class PlayerController3 : MonoBehaviour {
         }
 
         if (jump2)
-        {
+        { 
             Jump2();
             
         }
     }
     // Update is called once per frame
     void Update () {
+
+   
         force = platform.cop.force;
         xpos = platform.cop.x;
         zpos = platform.cop.z;
@@ -76,7 +78,19 @@ public class PlayerController3 : MonoBehaviour {
         gameObject.transform.rotation = Quaternion.Euler((theWorld.speed * rotation) * 3.6f, 0, 0);
         Inputs();
 
-        if (lean || basic)
+        if (basic)
+        {
+            Lean();
+            if (gameObject.transform.position.x >= xMax)
+            {
+                gameObject.transform.position = new Vector3(3, gameObject.transform.position.y, gameObject.transform.position.z);
+            }
+            else if (gameObject.transform.position.x <= -xMax)
+            {
+                gameObject.transform.position = new Vector3(-3, gameObject.transform.position.y, gameObject.transform.position.z);
+            }
+        }
+        if (lean)
         {
             Lean();
         }
@@ -103,12 +117,12 @@ public class PlayerController3 : MonoBehaviour {
     {
         if (LeanRight)
         {
-            gameObject.transform.Translate((xVal - gameObject.transform.position.x) / translateSpeed, 0, 0);
+            gameObject.transform.Translate((xMax - gameObject.transform.position.x) / translateSpeed, 0, 0);
 
         }
         else if (leanLeft)
         {
-            gameObject.transform.Translate(-((xVal + gameObject.transform.position.x) / translateSpeed), 0, 0);
+            gameObject.transform.Translate(-((xMax + gameObject.transform.position.x) / translateSpeed), 0, 0);
         }
         else if (!LeanRight)
         {
@@ -121,17 +135,17 @@ public class PlayerController3 : MonoBehaviour {
     }
     void Step()
     {
-        if (platform.cop.x > StepValue && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
+        if (platform.cop.x > StepValue)// && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
         {
             stepping.DestroyRight();
         }
 
-        if (platform.cop.z <= -StepValue && platform.cop.x < 0.1f && platform.cop.x > -0.1f)
+        if (platform.cop.z <= -StepValue)// && platform.cop.x < 0.1f && platform.cop.x > -0.1f)
         {
             stepping.DestroyUp();
         }
 
-        if (platform.cop.x < -StepValue && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
+        if (platform.cop.x < -StepValue)// && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
         {
             stepping.DestroyLeft();
         }
@@ -158,32 +172,82 @@ public class PlayerController3 : MonoBehaviour {
     void Jump2()
     {
         float step = switchJumpSpeed * Time.deltaTime;
-        if (platform.cop.force < JumpTwoValue && touchGround == true)
-        {
-            rb.AddForce(Vector3.up * jump2Speed, ForceMode.Impulse);
-            touchGround = false;
-        }
+        //if (platform.cop.force < JumpTwoValue && touchGround == true)
+        //{
+        //    rb.AddForce(Vector3.up * jump2Speed, ForceMode.Impulse);
+        //    touchGround = false;
+        //}
 
-        if (touchGround){
+        if (touchGround)
+        {
+
             if ( input.nMomZ < -100) //platform.cop.x < -OneLegJumpValue &&
             {
-                gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(-3, gameObject.transform.position.y, 0), step);
+                //gameObject.transform.Translate(-((xMax + gameObject.transform.position.x) / translateSpeed), 0, 0);
+                //if (Physics.Raycast(gameObject.transform.position, Vector3.down, 3) && transform.position.y > 1)
+                //{
+                //    gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
+                //}
+                //else
+                //{
+                //    rb.AddForce(Vector3.down * 0.01f, ForceMode.Impulse);
+                //}
+
+                flying = false;
+                jumping2L = true;
+                jumping2R = false;
+                if (platform.cop.force < JumpValue)
+                {
+                    jumping2L = false;
+                    jumping2R = true;
+                    flying = true;
+                }
+               
 
             }
-
             if (input.nMomZ > -100 && input.nMomZ < 100)//platform.cop.x > -OneLegJumpValue && platform.cop.x < OneLegJumpValue)
             {
-                gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(0, gameObject.transform.position.y, 0), step);
+     
+               
             }
-
             if (input.nMomZ > 100) //platform.cop.x > OneLegJumpValue && 
             {
-                gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, new Vector3(3, gameObject.transform.position.y, 0), step);
+                //gameObject.transform.Translate((xMax - gameObject.transform.position.x) / translateSpeed, 0, 0);
+                //if (Physics.Raycast(gameObject.transform.position, Vector3.down, 3) && transform.position.y > 1)
+                //{
+                //    gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
+                //}
+                //else
+                //{
+                //    rb.AddForce(Vector3.down * 0.01f, ForceMode.Impulse);
+                //}
+                flying = false;
+                jumping2L = false;
+                jumping2R = true;
+                if (platform.cop.force < JumpValue)
+                {
+                    jumping2L = true;
+                    jumping2R = false;
+                    flying = true;
+                }
             }
+
+            //Movement from left to right
+            if (jumping2L)
+            {
+                gameObject.transform.Translate(-((xMax + gameObject.transform.position.x) / translateSpeed), 0, 0);
+            }
+            else if (jumping2R)
+            {
+                gameObject.transform.Translate((xMax - gameObject.transform.position.x) / translateSpeed, 0, 0);
+            }
+            if (flying)
+            {
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
+                //gameObject.transform.Translate(0, ((xMax + gameObject.transform.position.y) / translateSpeed), 0);
+            }
+
         }
-
-        
-
     }
     void Inputs()
     {

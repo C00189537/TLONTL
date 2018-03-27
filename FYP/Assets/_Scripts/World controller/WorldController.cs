@@ -489,6 +489,9 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("Pad4").Translate(0, 1.0f, 0);
                 trackPiece[val].transform.Find("Pad3").gameObject.SetActive(false);
                 trackPiece[val].transform.Find("Pad5").gameObject.SetActive(false);
+
+                trackPiece[val].transform.Find("Pad6").Translate(-2.5f, 0.0f, 0);
+                trackPiece[val].transform.Find("Pad1").Translate(2.5f, 0, 0);
             }
             else
             {
@@ -496,12 +499,17 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("Pad5").Translate(0, 1.0f, 0);
                 trackPiece[val].transform.Find("Pad2").gameObject.SetActive(false);
                 trackPiece[val].transform.Find("Pad4").gameObject.SetActive(false);
+
+                trackPiece[val].transform.Find("Pad6").Translate(2.5f, 0.0f, 0);
+                trackPiece[val].transform.Find("Pad1").Translate(-2.5f, 0, 0);
             }
         }
         else
         {
             int front = 1;// rand.Next(1, 3);
             int back = 2;// rand.Next(1, 3);
+            int endP = rand.Next(1, 3);
+            
             //Spawns random pads
             if (front == 1)
             {
@@ -522,6 +530,16 @@ public class WorldController : MonoBehaviour {
             {
                 trackPiece[val].transform.Find("Pad5").Translate(0, 1.0f, 0);
                 trackPiece[val].transform.Find("Pad4").gameObject.SetActive(false);
+            }
+            if (endP == 1)
+            {
+                trackPiece[val].transform.Find("Pad6").Translate(-2.5f, 0.0f, 0);
+                trackPiece[val].transform.Find("Pad1").Translate(2.5f, 0, 0);
+            }
+            else
+            {
+                trackPiece[val].transform.Find("Pad6").Translate(2.5f, 0.0f, 0);
+                trackPiece[val].transform.Find("Pad1").Translate(-2.5f, 0, 0);
             }
         }
 
