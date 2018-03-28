@@ -71,7 +71,7 @@ public class WorldController : MonoBehaviour {
     {
         stepping = GetComponent<Stepping>();
 
-        restPhase = 0; 
+        restPhase = 4; 
 
         //Initialise camera obj
         GameObject camOb = GameObject.FindWithTag("MainCamera");
@@ -489,23 +489,31 @@ public class WorldController : MonoBehaviour {
             {
                 case 1:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, 10 * speed);
+                break;
                 case 2:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, 10 * speed);
+                break;
                 case 3:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 1);
-                
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, 10 * speed);
+
+                break;
                 case 4:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, 10 * speed);
+                break;
                  case 5:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, 10 * speed);
+                break;
             default:
                     break;
             }
