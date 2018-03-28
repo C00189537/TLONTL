@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17888552, g: 0.122268714, b: 0.21569714, a: 1}
+  m_IndirectSpecularColor: {r: 0.1792573, g: 0.122309275, b: 0.21620092, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -603,6 +603,63 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58996e55e45736c4eb632a874da662cc, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &598310025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 598310027}
+  - component: {fileID: 598310026}
+  m_Layer: 0
+  m_Name: Astroidbelt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &598310026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 598310025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ac7942052d65a4e8ebdac61109e642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  astroids:
+  - {fileID: 1547056978872828, guid: 9725196f4562cc74995f60ee8d2354b0, type: 2}
+  - {fileID: 1575272362330360, guid: 17d2821b2f4033243b386d2d06a56745, type: 2}
+  - {fileID: 1567485218052400, guid: 6b8fc5fa1f09ef2498153ac10544a7dc, type: 2}
+  - {fileID: 1448461724275380, guid: 757fdcb2d53014c4a9e946d435acbc28, type: 2}
+  - {fileID: 1510091206135328, guid: 194dde4671d817448bfb2cd7c351a94c, type: 2}
+  - {fileID: 1485624022938120, guid: 5b276d5a34e76914f893cc97e70a8c35, type: 2}
+  - {fileID: 1886500773475864, guid: 6f8ec8fc223528c46ae94a6376604eae, type: 2}
+  - {fileID: 1232151377995230, guid: 89fc587a7008f3644883ffe565e4c95d, type: 2}
+  interval: 1
+  spawnPoint: 80
+  minLeftSide: -8
+  maxLeftSide: -3
+  minRightSide: 3
+  maxRightSide: 8
+  minHeight: 7
+  maxHeight: 10
+--- !u!4 &598310027
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 598310025}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.018522054, y: 0.038490772, z: -0.0042605996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &657533855 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114335864957488778, guid: 39a62cfb5857cf346a72cc6a9113164c,
@@ -1523,6 +1580,8 @@ MonoBehaviour:
   input: {fileID: 1730798130}
   moveTime: 0
   increment: 0
+  l: 0
+  m: 0
   boardOffset: 0
   done: 0
 --- !u!114 &1730798129 stripped
