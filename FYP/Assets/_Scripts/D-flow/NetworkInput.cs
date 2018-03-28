@@ -19,7 +19,7 @@ public class NetworkInput : MonoBehaviour {
     public float nBoardMovements = 0;
     public float nJumpDifficulty = 0;
     public float nNumberofSteps = 0;
-    public float nOneLegSpeed = 0;
+    public float nOneLegDifficulty = 1;
     public float nEarthquakeShake = 0;
     public float nMomZ = 0; 
 
@@ -89,7 +89,7 @@ public class NetworkInput : MonoBehaviour {
         nBoardMovements = network.getOutput(11);
         nJumpDifficulty = network.getOutput(12);
         nNumberofSteps = network.getOutput(13);
-        nOneLegSpeed = network.getOutput(14);
+        nOneLegDifficulty = network.getOutput(14);
         nEarthquakeShake = network.getOutput(15);
 
         if (!(diffChange == network.getOutput(16)))
