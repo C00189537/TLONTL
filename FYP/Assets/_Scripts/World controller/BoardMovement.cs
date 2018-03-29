@@ -10,7 +10,7 @@ public class BoardMovement : MonoBehaviour {
     public WorldController world;
     public NetworkInput input;
     public float moveTime;
-    public float increment; 
+    public float increment, l, m; 
     System.Random rand = new System.Random();
 
     public float boardOffset;
@@ -72,15 +72,15 @@ public class BoardMovement : MonoBehaviour {
             default:
                 break;
         }
-
+        k = 0;
+        l = PosNegValue(1);
+        m = PosNegValue(1);
         StartCoroutine(Movement(boardOffset, increment, moveTime));
     }
 
     IEnumerator Movement(float offset, float inc, float time)
     {
-        k = 0;
-        float l = PosNegValue(1);
-        float m = PosNegValue(1);
+       
 
         while (k < offset && done == false)
         {
