@@ -639,14 +639,14 @@ MonoBehaviour:
   - {fileID: 1485624022938120, guid: 5b276d5a34e76914f893cc97e70a8c35, type: 2}
   - {fileID: 1886500773475864, guid: 6f8ec8fc223528c46ae94a6376604eae, type: 2}
   - {fileID: 1232151377995230, guid: 89fc587a7008f3644883ffe565e4c95d, type: 2}
-  interval: 1
+  interval: 0.5
   spawnPoint: 80
-  minLeftSide: -8
-  maxLeftSide: -3
-  minRightSide: 3
-  maxRightSide: 8
-  minHeight: 7
-  maxHeight: 10
+  minLeftSide: -30
+  maxLeftSide: -6
+  minRightSide: 6
+  maxRightSide: 30
+  minHeight: -12
+  maxHeight: 12
 --- !u!4 &598310027
 Transform:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class AstroidMovement : MonoBehaviour {
 
     WorldController theWorld;
     public float posZ;
-    public float killpoint = -30;
+    public float killpoint = -10;
 
     // Use this for initialization
     void Start()
@@ -25,7 +25,7 @@ public class AstroidMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        posZ = gameObject.transform.localPosition.z - theWorld.speed/2;
+        posZ = gameObject.transform.localPosition.z - theWorld.speed/4;
         gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y, posZ); 
 
         if (gameObject.transform.position.y < killpoint)
