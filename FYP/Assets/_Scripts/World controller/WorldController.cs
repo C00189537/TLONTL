@@ -429,7 +429,7 @@ public class WorldController : MonoBehaviour {
     {
         int set = rand.Next(1, 4);
 
-        switch (3)
+        switch (set)
         {
             case 1:
                 trackPiece[val].transform.Find("ObstacleFront").Translate(-2, 2, 9);
