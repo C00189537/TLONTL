@@ -15,6 +15,8 @@ public class WorldController : MonoBehaviour {
     private int currentTracker = 0;
     private int nextTracker = 0;
     private int farTracker = 0;
+    private int oneLegTracker = 0;
+    public int oneLegDif = 1;
 
     private int restPhase;
     public int restTracks;
@@ -37,8 +39,6 @@ public class WorldController : MonoBehaviour {
     public float maxSpeed;
 
     private Vector3 scrollSpeed;
-    private Vector3 oneLegScrollSpeed;
-    public bool oneLegSpeed;
 
     //Where the next section will spawn
     public float spawnPoint;
@@ -71,7 +71,7 @@ public class WorldController : MonoBehaviour {
     {
         stepping = GetComponent<Stepping>();
 
-        restPhase = 0; 
+        restPhase = 4; 
 
         //Initialise camera obj
         GameObject camOb = GameObject.FindWithTag("MainCamera");
@@ -103,14 +103,10 @@ public class WorldController : MonoBehaviour {
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
 
         gameOver = false;
-        oneLegSpeed = false;
         timerText.text = "Time: " + timeLeft;
 
         StartCoroutine(Earthquake());
-        
-        //UpdateMaxSpeed();
-        UpdateOneLegSpeed();
-       
+      
     }
 
     public void BeginDifficulty(int difficulty)
@@ -141,16 +137,7 @@ public class WorldController : MonoBehaviour {
     {
         for (int i = 0; i < TRACK_SIZE; i++)
         {
-            //ScrollingWorld(trackPiece[i]);
-            if (oneLegSpeed)
-            {
-                trackPiece[i].transform.position -= oneLegScrollSpeed;
-            }
-            else
-            {
-                trackPiece[i].transform.position -= scrollSpeed;
-            }
-           
+            trackPiece[i].transform.position -= scrollSpeed;   
         }
 
         
@@ -205,32 +192,97 @@ public class WorldController : MonoBehaviour {
                         
                     }
                     trackers[i] = temp;
-                    trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-
-                        //Set up the track pieces
-                        switch (trackers[i])
+                    //Longer one leg
+                    if (temp == 2)
+                    {
+                        if (input.NManual == 1)
                         {
-                            case 1:
-                                //CoinSpawn(i);
-                                ObstacleSpawn(i);
-                                break;
-                            case 2:
-                                OneLegSpawn(i);
-                                break;
-                            case 3:
-                                JumpSpawn(i);
-                                break;
-                            case 4:
-                                break;
-                            case 5:
-                                DifJumpSpawn(i);
-                                break;
-                            default:
-                                break;
+                            switch ((int)input.nOneLegDifficulty)
+                            {
+                                case 1:
+                                    //1 length
+                                    oneLegTracker = 0;
+                                    break;
+                                case 2:
+                                    //2 length
+                                    oneLegTracker = 1;
+                                    break;
+                                case 3:
+                                    //3 length
+                                    oneLegTracker = 2;
+                                    break;
+                                case 4:
+                                    //4 length
+                                    oneLegTracker = 3;
+                                    break;
+                                case 5:
+                                    //5 length
+                                    oneLegTracker = 4;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
+                        else
+                        {
+                            switch (oneLegDif)
+                            {
+                                case 1:
+                                    //1 length
+                                    oneLegTracker = 0;
+                                    break;
+                                case 2:
+                                    //2 length
+                                    oneLegTracker = 1;
+                                    break;
+                                case 3:
+                                    //3 length
+                                    oneLegTracker = 2;
+                                    break;
+                                case 4:
+                                    //4 length
+                                    oneLegTracker = 3;
+                                    break;
+                                case 5:
+                                    //5 length
+                                    oneLegTracker = 4;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
 
+                    trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+         
+                    //Set up the track pieces
+                    switch (trackers[i])
+                    {
+                        case 1:
+                            //CoinSpawn(i);
+                            ObstacleSpawn(i);
+                            break;
+                        case 2:
+                            OneLegSpawn(i);
+                            break;
+                        case 3:
+                            JumpSpawn(i);
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            DifJumpSpawn(i);
+                            break;
+                        default:
+                            break;
+                    }
                     
-                    
+                }
+                else if (oneLegTracker > 0)
+                {
+                    oneLegTracker--;
+                    trackPiece[i] = Instantiate(platformLayout[2], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+                    OneLegSpawn(i);
                 }
                 //If the track piece is an exercise, the next one will be a base piece
                 else if (restPhase <= restTracks)  //(trackers[i] > 0)
@@ -240,26 +292,19 @@ public class WorldController : MonoBehaviour {
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
                     
                 }
+                //Alligns the track
                 if (TRACK_SIZE > i + 1)
                 {
                     trackPiece[i + 1].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
                 }
                 if (TRACK_SIZE > i + 2)
                 {
-                    trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, 30.0f);
+                    trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, spawnPoint);
                 }
                 
             }
         }
     }
-
-    /*
-    void CoinSpawn(int val)
-    {
-        int randy = rand.Next(-4, 5);
-        trackPiece[val].transform.Find("ScoreOb1").Translate(randy, 2, 0);
-        trackPiece[val].transform.Find("ScoreOb2").Translate(randy, 2, 0);
-    } */
 
     void ObstacleSpawn(int val)
     {
@@ -444,23 +489,31 @@ public class WorldController : MonoBehaviour {
             {
                 case 1:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, 10 * speed);
+                break;
                 case 2:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, 10 * speed);
+                break;
                 case 3:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 1);
-                
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, 10 * speed);
+
+                break;
                 case 4:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, 10 * speed);
+                break;
                  case 5:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
-                    break;
+                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, 10 * speed);
+                break;
             default:
                     break;
             }
@@ -489,6 +542,9 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("Pad4").Translate(0, 1.0f, 0);
                 trackPiece[val].transform.Find("Pad3").gameObject.SetActive(false);
                 trackPiece[val].transform.Find("Pad5").gameObject.SetActive(false);
+
+                trackPiece[val].transform.Find("Pad6").Translate(-2.5f, 0.0f, 0);
+                trackPiece[val].transform.Find("Pad1").Translate(2.5f, 0, 0);
             }
             else
             {
@@ -496,12 +552,17 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("Pad5").Translate(0, 1.0f, 0);
                 trackPiece[val].transform.Find("Pad2").gameObject.SetActive(false);
                 trackPiece[val].transform.Find("Pad4").gameObject.SetActive(false);
+
+                trackPiece[val].transform.Find("Pad6").Translate(2.5f, 0.0f, 0);
+                trackPiece[val].transform.Find("Pad1").Translate(-2.5f, 0, 0);
             }
         }
         else
         {
             int front = 1;// rand.Next(1, 3);
             int back = 2;// rand.Next(1, 3);
+            int endP = rand.Next(1, 3);
+            
             //Spawns random pads
             if (front == 1)
             {
@@ -523,6 +584,16 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("Pad5").Translate(0, 1.0f, 0);
                 trackPiece[val].transform.Find("Pad4").gameObject.SetActive(false);
             }
+            if (endP == 1)
+            {
+                trackPiece[val].transform.Find("Pad6").Translate(-2.5f, 0.0f, 0);
+                trackPiece[val].transform.Find("Pad1").Translate(2.5f, 0, 0);
+            }
+            else
+            {
+                trackPiece[val].transform.Find("Pad6").Translate(2.5f, 0.0f, 0);
+                trackPiece[val].transform.Find("Pad1").Translate(-2.5f, 0, 0);
+            }
         }
 
     }
@@ -533,78 +604,6 @@ public class WorldController : MonoBehaviour {
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
 
-    /* public void UpdateSpeed(float v)
-     {
-         speed = input.NSpeed;
-
-         if (speed < minSpeed)
-         {
-             speed = minSpeed;
-         }
-         else if (speed > maxSpeed)
-         {
-             speed = maxSpeed;
-         }
-    scrollSpeed = new Vector3(0.0f, 0.0f, speed);
-    } */
-
-    /* public void UpdateMaxSpeed()
-     {
-         switch (difficulty)
-         {
-             case 1:
-                 maxSpeed = 0.2f;
-                 break;
-             case 2:
-                 maxSpeed = 0.3f;
-                 break;
-             case 3:
-                 maxSpeed = 0.4f;
-                 break;
-             case 4:
-                 maxSpeed = 0.5f;
-                 break;
-             default:
-                 break;
-         }
-     }
-     */
-
-    public void UpdateOneLegSpeed()
-    {
-        int variable = difficulty;
-
-        if (input.NManual == 0)
-        {
-            variable = difficulty;
-        }
-        if (input.NManual == 1)
-        {
-            variable = (int)input.nOneLegSpeed;
-        }
-
-        switch (variable)
-            {
-                case 1:
-                    oneLegScrollSpeed = new Vector3(0, 0, 0.25f);
-                break;
-                case 2:
-                    oneLegScrollSpeed = new Vector3(0, 0, 0.2f);
-                break;
-                case 3:
-                    oneLegScrollSpeed = new Vector3(0, 0, 0.15f);
-                    break;
-                case 4:
-                    oneLegScrollSpeed = new Vector3(0, 0, 0.1f);
-                    break;
-                case 5:
-                    oneLegScrollSpeed = new Vector3(0, 0, 0.05f);
-                    break;
-            default:
-                    break;
-            }
-        
-    }
 
     void ScrollingWorld(GameObject g)
     {
@@ -656,22 +655,27 @@ public class WorldController : MonoBehaviour {
         if (difficultyScore >= 0 && difficultyScore < 5)
         {
             difficulty = 1;
+            oneLegDif = 1;
         }
         else if (difficultyScore >= 5 && difficultyScore < 15)
         {
             difficulty = 2;
+            oneLegDif = 2;
         }
         else if (difficultyScore >= 15 && difficultyScore < 30)
         {
             difficulty = 3;
+            oneLegDif = 3;
         }
         else if (difficultyScore >= 30 && difficultyScore < 50)
         {
             difficulty = 4;
+            oneLegDif = 4;
         }
         else if (difficultyScore >= 50 && difficultyScore < 70)
         {
             difficulty = 5;
+            oneLegDif = 5;
         }
     }
     public void SteppingStones()

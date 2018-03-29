@@ -132,26 +132,10 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "OneLeg")
         {
             Debug.Log("Start OneLeg");
-            gameController.oneLegSpeed = true;
+            //gameController.oneLegSpeed = true;
             playerController.pit = false;
             playerController.basic = false;
-            switch (gameController.difficulty)
-            {
-                case 1:
-                    platformScore = 2;
-                    break;
-                case 2:
-                    platformScore = 2;
-                    break;
-                case 3:
-                    platformScore = 1;
-                    break;
-                case 4:
-                    platformScore = 1;
-                    break;
-                default:
-                    break;
-            }
+            platformScore = 1;
             movement.BoardMovements();
         }
         else if (other.gameObject.tag == "Step")
@@ -315,30 +299,12 @@ public class CollisionManager : MonoBehaviour
             //Difficulty check
             if (platformScore == 0)
             {
-                switch (gameController.difficulty)
-                {
-                    case 1:
-                        gameController.difficultyScore--;
-                        break;
-                    case 2:
-                        gameController.difficultyScore--;
-                        break;
-                    case 3:
-                        gameController.difficultyScore -= 2;
-                        break;
-                    case 4:
-                        gameController.difficultyScore -= 3;
-                        break;
-                    default:
-                        break;
-                }
+                gameController.difficultyScore--;
             }
             else
             {
                 gameController.difficultyScore += platformScore;
             }
-           // gameController.UpdateSpeed(0.015f * platformScore);
-            gameController.oneLegSpeed = false;
         }
         else if (other.gameObject.tag == "Step")
         {
