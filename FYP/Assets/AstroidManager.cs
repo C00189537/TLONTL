@@ -41,7 +41,7 @@ public class AstroidManager : MonoBehaviour {
 
             if (position == 0)
             {
-                number = rand.Next(0, astroids.Length + 1);
+                number = rand.Next(0, astroids.Length);
                 position = rand.Next(minLeftSide, maxLeftSide + 1);
                 height = rand.Next(minHeight, maxHeight + 1);
                 Instantiate(astroids[number], new Vector3(position, height, spawnPoint), transform.rotation);
@@ -50,7 +50,7 @@ public class AstroidManager : MonoBehaviour {
 
             if (position == 1)
             {
-                number = rand.Next(0, astroids.Length + 1);
+                number = rand.Next(0, astroids.Length);
                 position = rand.Next(minRightSide, maxRightSide + 1);
                 height = rand.Next(minHeight, maxHeight + 1);
                 Instantiate(astroids[number], new Vector3(position, height, spawnPoint), transform.rotation);

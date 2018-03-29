@@ -10,8 +10,7 @@ public class Stepping : MonoBehaviour
     public GameObject UpButton;
     public GameObject RightButton;
     public Canvas Canvas;
-
-   
+    
     //For positioning
     public int resetYValue = -100;
     public int Xvalue = 0;
@@ -33,6 +32,7 @@ public class Stepping : MonoBehaviour
     {
         GameObject playerControllerObject = GameObject.FindWithTag("Player");
         playerController = playerControllerObject.GetComponent<PlayerController3>();
+        
     }
 
    
@@ -103,8 +103,10 @@ public class Stepping : MonoBehaviour
 
               if (firstArrow.CompareTag("Right"))
               {
+                 firstArrow.GetComponent<RawImage>().color = Color.green;
+                 // Wait(2);
                   Steps.Dequeue();
-                  Destroy(firstArrow);
+                  //Destroy(firstArrow);
               }
             ResetXPosition();
         }
@@ -120,8 +122,10 @@ public class Stepping : MonoBehaviour
 
             if (firstArrow.CompareTag("Up"))
             {
+                firstArrow.GetComponent<RawImage>().color = Color.green;
                 Steps.Dequeue();
-                Destroy(firstArrow);
+
+                //Destroy(firstArrow);
             }
             ResetXPosition();
         }
@@ -136,14 +140,19 @@ public class Stepping : MonoBehaviour
 
             if (firstArrow.CompareTag("Left"))
             {
+                firstArrow.GetComponent<RawImage>().color = Color.green;
                 Steps.Dequeue();
-                Destroy(firstArrow);
+                //Destroy(firstArrow);
             }
             ResetXPosition();
         }
         
     }
 
+    IEnumerator Wait(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
 
     
 
