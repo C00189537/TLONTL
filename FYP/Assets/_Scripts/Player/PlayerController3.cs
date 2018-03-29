@@ -26,6 +26,7 @@ public class PlayerController3 : MonoBehaviour {
     public bool touchGround = true, flying = false;
 
 	private const int MAXJUMP = 1;
+    public float pressure;
 
     public Rigidbody rb;
     public NetworkInput input; 
@@ -162,36 +163,17 @@ public class PlayerController3 : MonoBehaviour {
 			touchGround = false;
         }
         
-        /*
-        if (gameObject.transform.position.x < 0 || gameObject.transform.position.x > 0)
-        {
-            gameObject.transform.position = new Vector3(0, gameObject.transform.position.y, 0);
-        }
-        */
+
     }
     void Jump2()
     {
         float step = switchJumpSpeed * Time.deltaTime;
-        //if (platform.cop.force < JumpTwoValue && touchGround == true)
-        //{
-        //    rb.AddForce(Vector3.up * jump2Speed, ForceMode.Impulse);
-        //    touchGround = false;
-        //}
 
         if (touchGround)
         {
 
-            if ( input.nMomZ < -100) //platform.cop.x < -OneLegJumpValue &&
+            if ( input.nMomZ < -pressure) //platform.cop.x < -OneLegJumpValue &&
             {
-                //gameObject.transform.Translate(-((xMax + gameObject.transform.position.x) / translateSpeed), 0, 0);
-                //if (Physics.Raycast(gameObject.transform.position, Vector3.down, 3) && transform.position.y > 1)
-                //{
-                //    gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
-                //}
-                //else
-                //{
-                //    rb.AddForce(Vector3.down * 0.01f, ForceMode.Impulse);
-                //}
 
                 flying = false;
                 jumping2L = true;
@@ -205,12 +187,12 @@ public class PlayerController3 : MonoBehaviour {
                
 
             }
-            if (input.nMomZ > -100 && input.nMomZ < 100)//platform.cop.x > -OneLegJumpValue && platform.cop.x < OneLegJumpValue)
+            if (input.nMomZ > -pressure && input.nMomZ < pressure)//platform.cop.x > -OneLegJumpValue && platform.cop.x < OneLegJumpValue)
             {
      
                
             }
-            if (input.nMomZ > 100) //platform.cop.x > OneLegJumpValue && 
+            if (input.nMomZ > pressure) //platform.cop.x > OneLegJumpValue && 
             {
                 //gameObject.transform.Translate((xMax - gameObject.transform.position.x) / translateSpeed, 0, 0);
                 //if (Physics.Raycast(gameObject.transform.position, Vector3.down, 3) && transform.position.y > 1)
