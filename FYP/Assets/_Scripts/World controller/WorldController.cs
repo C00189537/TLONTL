@@ -489,30 +489,30 @@ public class WorldController : MonoBehaviour {
             {
                 case 1:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
-                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, (9 * speed) + 1);
                 break;
                 case 2:
                     trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
-                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, (9 * speed) + 1);
                 break;
                 case 3:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 1);
-                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, 10 * speed);
-                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, (9 * speed) + 1);
+                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, (9 * speed) + 1);
 
                 break;
                 case 4:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
-                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, 10 * speed);
-                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, (9 * speed) + 1);
+                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, (9 * speed) + 1);
                 break;
                  case 5:
                     trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, -3);
                     trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
-                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, 10 * speed);
-                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, 10 * speed);
+                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, (9 * speed) + 1);
+                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, (9 * speed) + 1);
                 break;
             default:
                     break;
@@ -600,7 +600,10 @@ public class WorldController : MonoBehaviour {
 
     void SpeedUpdate()
     {
-        speed = input.NSpeed;
+        if (input.NManual == 1)
+        {
+            speed = input.NSpeed;
+        }
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
 
@@ -656,26 +659,31 @@ public class WorldController : MonoBehaviour {
         {
             difficulty = 1;
             oneLegDif = 1;
+            speed = 0.15f;
         }
         else if (difficultyScore >= 5 && difficultyScore < 15)
         {
             difficulty = 2;
             oneLegDif = 2;
+            speed = 0.20f;
         }
         else if (difficultyScore >= 15 && difficultyScore < 30)
         {
             difficulty = 3;
             oneLegDif = 3;
+            speed = 0.25f;
         }
         else if (difficultyScore >= 30 && difficultyScore < 50)
         {
             difficulty = 4;
             oneLegDif = 4;
+            speed = 0.30f;
         }
         else if (difficultyScore >= 50 && difficultyScore < 70)
         {
             difficulty = 5;
             oneLegDif = 5;
+            speed = 0.35f;
         }
     }
     public void SteppingStones()
