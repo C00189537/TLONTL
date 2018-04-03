@@ -690,8 +690,13 @@ public class WorldController : MonoBehaviour {
         }
     }
 
+    public void CamShake()
+    {
+        cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
+    }
+
     //Flashes 
-    IEnumerator Earthquake()
+    public IEnumerator Earthquake()
     {
         while(earthquake)
         {
