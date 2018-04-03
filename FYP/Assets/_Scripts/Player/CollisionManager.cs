@@ -61,6 +61,7 @@ public class CollisionManager : MonoBehaviour
         //Player vs Obstacle
         if (other.gameObject.tag == "Obstacle")
         {
+            gameController.CamShake();
             movement.Boardvibration();
             Debug.Log("explode?");
             Destroy(other.gameObject);

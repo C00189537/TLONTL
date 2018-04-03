@@ -379,13 +379,13 @@ public class WorldController : MonoBehaviour {
         {
             case 1:
                 trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(-3, 2, -9);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(-3, 2, -12);
                 trackPiece[val].transform.Find("ScoreOb1").Translate(0, 2, 0);
                 break;
             case 2:
                 trackPiece[val].transform.Find("ObstacleMid").Translate(2, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(-1, 2, -9);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(1, 2, 15);
+                trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, -14);
+                trackPiece[val].transform.Find("ScoreOb1").Translate(1, 2, -2);
                 break;
             case 3:
                 trackPiece[val].transform.Find("ObstacleMid").Translate(3, 2, 0);
@@ -436,7 +436,7 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 9);
                 trackPiece[val].transform.Find("ObstacleBack").Translate(2, 2, -9);
                 trackPiece[val].transform.Find("ScoreOb1").Translate(0, 2, 2);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(2, 2, 0);
+                trackPiece[val].transform.Find("ScoreOb2").Translate(2, 2, 8);
                 break;
             case 2:
                 trackPiece[val].transform.Find("ObstacleFront").Translate(3.5f, 2, 9);
@@ -698,8 +698,13 @@ public class WorldController : MonoBehaviour {
         }
     }
 
+    public void CamShake()
+    {
+        cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
+    }
+
     //Flashes 
-    IEnumerator Earthquake()
+    public IEnumerator Earthquake()
     {
         while(earthquake)
         {
