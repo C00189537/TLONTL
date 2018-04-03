@@ -58,7 +58,6 @@ public class CollisionManager : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hit");
         //Player vs Obstacle
         if (other.gameObject.tag == "Obstacle")
         {
@@ -68,7 +67,6 @@ public class CollisionManager : MonoBehaviour
             Destroy(other.gameObject);
             //gameController.UpdateSpeed(-0.025f);
             cam.GetComponent<CameraShake>().SetTimer(1.0f);
-            Debug.Log("bifbwbf");
 
             if (platformScore > 0)
             {
@@ -90,7 +88,6 @@ public class CollisionManager : MonoBehaviour
             {
                 platformScore--;
             }
-            Debug.Log("Fallen");
             playerController.pit = true;
             playerController.basic = false;
         }
@@ -106,7 +103,6 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "Lean")
         {
-            Debug.Log("Start Leaning");
             platformScore = 3;
             playerController.pit = false;
             playerController.basic = false;
@@ -132,7 +128,6 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "OneLeg")
         {
-            Debug.Log("Start OneLeg");
             //gameController.oneLegSpeed = true;
             playerController.pit = false;
             playerController.basic = false;
@@ -143,7 +138,6 @@ public class CollisionManager : MonoBehaviour
         {
             playerController.pit = false;
             playerController.basic = false;
-            Debug.Log(" Start Steping");
             gameController.SteppingStones();
             switch (gameController.difficulty)
             {
@@ -168,7 +162,6 @@ public class CollisionManager : MonoBehaviour
         {
             playerController.pit = false;
             playerController.basic = false;
-            Debug.Log("Start Jumping");
             switch (gameController.difficulty)
             {
                 case 1:
@@ -191,7 +184,6 @@ public class CollisionManager : MonoBehaviour
         {
             playerController.pit = false;
             playerController.basic = false;
-            Debug.Log("Start Jumping 2");
             switch (gameController.difficulty)
             {
                 case 1:
@@ -253,12 +245,10 @@ public class CollisionManager : MonoBehaviour
     //Leaving each platform
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("Exit");
         if (other.gameObject.tag == "Lean")
         {
             playerController.lean = false;
            // playerController.basic = true;
-            Debug.Log(platformScore);
             //Difficulty check
             if (platformScore == 0)
             {
@@ -281,8 +271,6 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            //gameController.UpdateSpeed(0.015f * platformScore);
-
         }
         else if (other.gameObject.tag == "Basic")
         {
@@ -296,7 +284,6 @@ public class CollisionManager : MonoBehaviour
         {
             playerController.oneLeg = false;
            // playerController.basic = true;
-            Debug.Log(platformScore);
             //Difficulty check
             if (platformScore == 0)
             {
@@ -312,7 +299,6 @@ public class CollisionManager : MonoBehaviour
             playerController.step = false; 
             //playerController.basic = true;
             platformScore -= stepController.getSteps();
-            Debug.Log(platformScore);
             //Difficulty check
             if (platformScore == 0)
             {
@@ -338,12 +324,10 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            //gameController.UpdateSpeed(0.015f * platformScore);
         }
         else if (other.gameObject.tag == "Jump")
         {
             playerController.jump = false;
-            //playerController.basic = true;
             //Difficulty check
             if (platformScore == 0)
             {
@@ -369,12 +353,10 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-            //gameController.UpdateSpeed(0.015f * platformScore);
         }
         else if (other.gameObject.tag == "Jump2")
         {
             playerController.jump2 = false;
-            //playerController.basic = true;
             //Difficulty check
             if (platformScore == 0)
             {
@@ -400,7 +382,6 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
-           // gameController.UpdateSpeed(0.015f * platformScore);
         }
     }
 

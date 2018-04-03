@@ -29,7 +29,8 @@ public class PlayerController3 : MonoBehaviour {
     public float pressure;
 
     public Rigidbody rb;
-    public NetworkInput input; 
+    public NetworkInput input;
+    public float tilt;
 
     public float force;
     public float xpos;
@@ -54,7 +55,7 @@ public class PlayerController3 : MonoBehaviour {
 			rb.AddForce(Vector3.down * jumpFallSpeed, ForceMode.Impulse);
 		}
 
-        if (gameObject.transform.position.y < 1.01f)
+        if (platform.cop.force >= 300)
         {
             touchGround = true;
         }
@@ -73,10 +74,8 @@ public class PlayerController3 : MonoBehaviour {
         xpos = platform.cop.x;
         zpos = platform.cop.z;
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0 );
-        //gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-
-        rotation+= 10;
-        gameObject.transform.rotation = Quaternion.Euler((theWorld.speed * rotation) * 3.6f, 0, 0);
+        Tilted();
+      
         Inputs();
 
         if (basic)
@@ -84,11 +83,11 @@ public class PlayerController3 : MonoBehaviour {
             Lean();
             if (gameObject.transform.position.x >= xMax)
             {
-                gameObject.transform.position = new Vector3(3, gameObject.transform.position.y, gameObject.transform.position.z);
+                gameObject.transform.position = new Vector3(xMax, gameObject.transform.position.y, gameObject.transform.position.z);
             }
             else if (gameObject.transform.position.x <= -xMax)
             {
-                gameObject.transform.position = new Vector3(-3, gameObject.transform.position.y, gameObject.transform.position.z);
+                gameObject.transform.position = new Vector3(-xMax, gameObject.transform.position.y, gameObject.transform.position.z);
             }
         }
         if (lean)
@@ -106,13 +105,12 @@ public class PlayerController3 : MonoBehaviour {
 		else if (jump)
 		{
 			Jump();
-
 		}
 
 	}
     void Lean()
     {
-            gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
+        gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
     }
     void OneLeg()
     {
@@ -194,15 +192,7 @@ public class PlayerController3 : MonoBehaviour {
             }
             if (input.nMomZ > pressure) //platform.cop.x > OneLegJumpValue && 
             {
-                //gameObject.transform.Translate((xMax - gameObject.transform.position.x) / translateSpeed, 0, 0);
-                //if (Physics.Raycast(gameObject.transform.position, Vector3.down, 3) && transform.position.y > 1)
-                //{
-                //    gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
-                //}
-                //else
-                //{
-                //    rb.AddForce(Vector3.down * 0.01f, ForceMode.Impulse);
-                //}
+
                 flying = false;
                 jumping2L = false;
                 jumping2R = true;
@@ -271,5 +261,23 @@ public class PlayerController3 : MonoBehaviour {
 	{
         gameObject.transform.position = new Vector3(0, 3, 0);
 		gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+    private void Tilted()
+    {
+        //gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        if (input.nMomZ < -pressure)
+        {
+            //gameObject.transform.Rotate(new Vector3 (0, 0, -tilt));
+            gameObject.transform.rotation = new Quaternion(0, 0, tilt * Mathf.Deg2Rad, 1);
+        }
+        else if (input.nMomZ > pressure)
+        {
+            //gameObject.transform.Rotate(new Vector3(0, 0, tilt));
+            gameObject.transform.rotation = new Quaternion(0, 0, -tilt * Mathf.Deg2Rad, 1);
+        }
+        else
+        {
+            gameObject.transform.rotation = new Quaternion(0, 0, 0, 1);
+        }
     }
 }
