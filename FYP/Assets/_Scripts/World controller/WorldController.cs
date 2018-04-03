@@ -69,6 +69,7 @@ public class WorldController : MonoBehaviour {
 
     void Start()
     {
+        FloatingTextController.Initialize();
         stepping = GetComponent<Stepping>();
 
         restPhase = 4; 
