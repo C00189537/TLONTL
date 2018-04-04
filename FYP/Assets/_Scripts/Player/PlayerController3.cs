@@ -36,15 +36,28 @@ public class PlayerController3 : MonoBehaviour {
     public float xpos;
     public float zpos;
 
-    public float rotation; 
-	// Use this for initialization
-	void Start () {
+    public float rotation;
+
+    float FallingCooldown = 1;
+    float TimeStampFallinig;
+    float JumpingCooldown = 2;
+    float TimeStampJumping; 
+    AudioSource audiosource;
+    public AudioClip falling;
+    public AudioClip Jumping;
+
+   
+    // Use this for initialization
+    void Start () {
        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         input = gameControllerObject.GetComponent<NetworkInput>();
        stepping = gameControllerObject.GetComponent<Stepping>();
        theWorld = gameControllerObject.GetComponent<WorldController>();
         rb = GetComponent<Rigidbody>();
-        rotation = 10; 
+        rotation = 10;
+        audiosource = GetComponent<AudioSource>();
+        TimeStampFallinig = Time.time + FallingCooldown;
+        TimeStampJumping = Time.time + JumpingCooldown;
     }
 
 
@@ -69,7 +82,19 @@ public class PlayerController3 : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-   
+        if (gameObject.transform.position.y < -0.2 && TimeStampFallinig <= Time.time)
+        {
+            audiosource.PlayOneShot(falling, 0.2f);
+            TimeStampFallinig = Time.time + FallingCooldown;
+        }
+
+        if (gameObject.transform.position.y > 1.1f && TimeStampJumping <= Time.time)
+        {
+            audiosource.PlayOneShot(Jumping, 0.5f);
+            TimeStampJumping = Time.time + JumpingCooldown;
+        }
+
+
         force = platform.cop.force;
         xpos = platform.cop.x;
         zpos = platform.cop.z;

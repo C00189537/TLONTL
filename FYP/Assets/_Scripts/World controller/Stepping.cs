@@ -28,11 +28,14 @@ public class Stepping : MonoBehaviour
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
     public Queue <GameObject>Steps = new Queue<GameObject>();
 
+    public AudioClip fbJingle;
+    AudioSource audiosource; 
+
     private void Start()
     {
         GameObject playerControllerObject = GameObject.FindWithTag("Player");
         playerController = playerControllerObject.GetComponent<PlayerController3>();
-        
+        audiosource = GetComponent<AudioSource>();
     }
 
    
@@ -104,16 +107,14 @@ public class Stepping : MonoBehaviour
               if (firstArrow.CompareTag("Right"))
               {
                  firstArrow.GetComponent<RawImage>().color = Color.green;
-                 // Wait(2);
+                audiosource.PlayOneShot(fbJingle, 0.5f);
                   Steps.Dequeue();
-                  //Destroy(firstArrow);
               }
             ResetXPosition();
         }
         
     }
     
-
     public void DestroyUp()
     {
         if (Steps.Count > 0)
@@ -123,9 +124,9 @@ public class Stepping : MonoBehaviour
             if (firstArrow.CompareTag("Up"))
             {
                 firstArrow.GetComponent<RawImage>().color = Color.green;
+                audiosource.PlayOneShot(fbJingle, 0.5f);
                 Steps.Dequeue();
-
-                //Destroy(firstArrow);
+                
             }
             ResetXPosition();
         }
@@ -141,21 +142,15 @@ public class Stepping : MonoBehaviour
             if (firstArrow.CompareTag("Left"))
             {
                 firstArrow.GetComponent<RawImage>().color = Color.green;
+                audiosource.PlayOneShot(fbJingle, 0.5f);
                 Steps.Dequeue();
-                //Destroy(firstArrow);
             }
             ResetXPosition();
         }
         
     }
 
-    IEnumerator Wait(float time)
-    {
-        yield return new WaitForSeconds(time);
-    }
-
-    
-
+ 
     public void ResetXPosition()
     {
         if (Steps.Count == 0)
