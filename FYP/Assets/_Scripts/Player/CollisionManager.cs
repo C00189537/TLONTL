@@ -76,9 +76,13 @@ public class CollisionManager : MonoBehaviour
             //gameController.UpdateSpeed(-0.025f);
             cam.GetComponent<CameraShake>().SetTimer(1.0f);
 
+            amount = -1;
+            FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
+
             if (platformScore > 0)
             {
-                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform);
+                amount = -1; 
+                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
                 platformScore--;
                 
             }
@@ -97,8 +101,8 @@ public class CollisionManager : MonoBehaviour
             if (platformScore > 0)
             {
                 platformScore--;
-
-                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform);
+                amount = -1; 
+                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
             }
             playerController.pit = true;
             playerController.basic = false;
@@ -107,6 +111,8 @@ public class CollisionManager : MonoBehaviour
         {
             audiosource.PlayOneShot(collectable, 0.1f);
             gameController.score += 20;
+            amount = 20; 
+            FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
             Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "Killer")

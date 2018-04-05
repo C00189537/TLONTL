@@ -6,17 +6,26 @@ using UnityEngine.UI;
 public class FloatingText : MonoBehaviour {
 
     public Animator animator;
-    private Text text; 
+    private Text scoreText; 
 
     public void OnEnable()
     {
         AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
         Destroy(gameObject, clipInfo[0].clip.length);
-        text = animator.GetComponent<Text>();
+        scoreText = animator.GetComponent<Text>();
     }
 
-    public void SetText (string passedtext)
+    public void SetText (string passedtext, int color)
     {
-        text.text = passedtext; 
+        scoreText.text = passedtext;
+
+        if (color == 0)
+        {
+            scoreText.color = Color.green;
+        }
+        if (color == 1)
+        {
+            scoreText.color = Color.red;
+        }
     }
 }
