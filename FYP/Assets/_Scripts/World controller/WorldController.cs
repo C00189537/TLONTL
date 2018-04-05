@@ -50,13 +50,12 @@ public class WorldController : MonoBehaviour {
     public int maxRand;
 
     public Text scoreText;
-    public Text timerText;
-    public Text gameOverText;
 
     //Obstacles
     public GameObject[] blockade = new GameObject[3];
 
     public double score = 0;
+    public int scoreInt = 0; 
 
     public double timeLeft = 30;
     public int difficulty;
@@ -103,9 +102,6 @@ public class WorldController : MonoBehaviour {
 
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
 
-        gameOver = false;
-        timerText.text = "Time: " + timeLeft;
-
         StartCoroutine(Earthquake());
       
     }
@@ -151,7 +147,6 @@ public class WorldController : MonoBehaviour {
         {
             UpdateDifficultyScore();
         }
-        timer();
       
         
     }
@@ -616,33 +611,15 @@ public class WorldController : MonoBehaviour {
 
     public void SetScoreText()
     {
-        scoreText.text = "Score: " + score.ToString("F");
+        
+        scoreInt =(int)score;
+        scoreText.text = "Score: " + scoreInt.ToString();
     }
-    private void SetTimerText()
-    {
-        timerText.text = "Time: " + timeLeft.ToString("F");
-    }
-
-    void timer()
-    {
-        timeLeft -= Time.deltaTime;
-        SetTimerText();
-        if (timeLeft < 0)
-        {
-            //Game over
-            gameOver = true;
-            timeLeft = 0.00;
-            gameOverText.text = "Time is up!";
-            SetTimerText();
-        }
-    }
+   
     void UpdateScore()
     {
-        if (!gameOver)
-        {
-            score += speed * Time.deltaTime;
+            score += speed * Time.deltaTime * 5;
             SetScoreText();
-        } 
     }
     void UpdateDifficultyScore()
     {

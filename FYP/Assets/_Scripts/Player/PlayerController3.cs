@@ -86,6 +86,11 @@ public class PlayerController3 : MonoBehaviour {
         {
             audiosource.PlayOneShot(falling, 0.2f);
             TimeStampFallinig = Time.time + FallingCooldown;
+
+            float amount = -5;
+            theWorld.score = +amount;
+            FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
+
         }
 
         if (gameObject.transform.position.y > 1.1f && TimeStampJumping <= Time.time)
