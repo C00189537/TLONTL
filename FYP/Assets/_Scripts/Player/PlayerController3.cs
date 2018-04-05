@@ -39,7 +39,7 @@ public class PlayerController3 : MonoBehaviour {
 
     public float rotation;
 
-    float FallingCooldown = 1;
+    float FallingCooldown = 2;
     float TimeStampFallinig;
     float JumpingCooldown = 2;
     float TimeStampJumping; 
