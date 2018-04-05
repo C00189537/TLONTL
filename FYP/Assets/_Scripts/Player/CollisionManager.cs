@@ -16,7 +16,8 @@ public class CollisionManager : MonoBehaviour
     public AudioClip obstacle; 
     private int platformScore;
 
-    int amount = -1;
+    int amount = 0;
+    int hitObstacles = 0; 
 
     void Start()
     {
@@ -70,21 +71,18 @@ public class CollisionManager : MonoBehaviour
            
             audiosource.PlayOneShot(obstacle, 0.4f);
             gameController.CamShake();
-            movement.Boardvibration();
             Debug.Log("explode?");
             Destroy(other.gameObject);
             //gameController.UpdateSpeed(-0.025f);
             cam.GetComponent<CameraShake>().SetTimer(1.0f);
-
-            amount = -1;
+            movement.Boardvibration(); 
+            amount = -5;
+            gameController.score += amount;
             FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
-
+            hitObstacles++; 
             if (platformScore > 0)
-            {
-                amount = -1; 
-                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
+            { 
                 platformScore--;
-                
             }
             //palpitation TBD
             
@@ -98,21 +96,23 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "Pit")
         {
             gameObject.GetComponent<PlayerController3>().ResetPlayer();
+
             if (platformScore > 0)
             {
                 platformScore--;
-                amount = -1; 
-                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
             }
             playerController.pit = true;
             playerController.basic = false;
+            
         }
         else if (other.gameObject.tag == "Coin")
         {
             audiosource.PlayOneShot(collectable, 0.1f);
+
             gameController.score += 20;
             amount = 20; 
             FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
+
             Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "Killer")
@@ -152,6 +152,7 @@ public class CollisionManager : MonoBehaviour
             playerController.basic = false;
             platformScore = 1;
             movement.BoardMovements();
+
         }
         else if (other.gameObject.tag == "Step")
         {
@@ -198,6 +199,7 @@ public class CollisionManager : MonoBehaviour
                 default:
                     break;
             }
+            
         }
         else if (other.gameObject.tag == "Jump2")
         {
@@ -312,6 +314,22 @@ public class CollisionManager : MonoBehaviour
             {
                 gameController.difficultyScore += platformScore;
             }
+            
+        }
+        else if (other.gameObject.tag == "End")
+        {
+            Debug.Log("touch end"); 
+            if (playerController.fallOff <= 0 && hitObstacles <= 0)
+            {
+                Debug.Log("if statement true");
+                amount = 25;
+                gameController.score += amount;
+                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
+                
+            }
+            playerController.fallOff = 0;
+            hitObstacles = 0; 
+
         }
         else if (other.gameObject.tag == "Step")
         {
@@ -375,6 +393,7 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "Jump2")
         {
+            
             playerController.jump2 = false;
             //Difficulty check
             if (platformScore == 0)

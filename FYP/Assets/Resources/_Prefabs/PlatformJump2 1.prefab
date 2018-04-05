@@ -206,6 +206,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1991406966467620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4667222217497516}
+  - component: {fileID: 65955195382370790}
+  m_Layer: 0
+  m_Name: end
+  m_TagString: End
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4133806585977536
 Transform:
   m_ObjectHideFlags: 1
@@ -304,6 +320,7 @@ Transform:
   - {fileID: 4237603602549390}
   - {fileID: 4690272328790472}
   - {fileID: 4641869433390406}
+  - {fileID: 4667222217497516}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -320,6 +337,19 @@ Transform:
   m_Father: {fileID: 4423534881203874}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!4 &4667222217497516
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991406966467620}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.8, z: -1}
+  m_LocalScale: {x: 10, y: 7.4961896, z: 32}
+  m_Children: []
+  m_Father: {fileID: 4423534881203874}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4690272328790472
 Transform:
   m_ObjectHideFlags: 1
@@ -893,5 +923,17 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.9596826}
+  m_Center: {x: 0, y: 0, z: -0.020158693}
+--- !u!65 &65955195382370790
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991406966467620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.030310392}
+  m_Center: {x: 0, y: 0, z: 0.4848448}

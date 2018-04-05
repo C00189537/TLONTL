@@ -9,6 +9,7 @@ public class PlayerController3 : MonoBehaviour {
     public WorldController theWorld; 
 
     public float xMax;
+    public int fallOff; 
 
     private bool leanLeft, LeanRight, jumping2, jumping2L, jumping2R;
     public float translateSpeed;
@@ -90,6 +91,7 @@ public class PlayerController3 : MonoBehaviour {
             float amount = -5;
             theWorld.score = +amount;
             FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
+            fallOff++; 
 
         }
 

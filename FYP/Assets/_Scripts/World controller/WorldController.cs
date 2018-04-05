@@ -595,11 +595,8 @@ public class WorldController : MonoBehaviour {
     }
 
     void SpeedUpdate()
-    {
-        if (input.NManual == 1)
-        {
-            speed = input.NSpeed;
-        }
+    { 
+        speed = input.NSpeed;
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
 
@@ -613,12 +610,16 @@ public class WorldController : MonoBehaviour {
     {
         
         scoreInt =(int)score;
-        scoreText.text = "Score: " + scoreInt.ToString();
+        scoreText.text =  scoreInt.ToString();
     }
    
     void UpdateScore()
     {
             score += speed * Time.deltaTime * 5;
+        if (score < 0)
+        {
+            score = 0; 
+        }
             SetScoreText();
     }
     void UpdateDifficultyScore()
@@ -637,31 +638,26 @@ public class WorldController : MonoBehaviour {
         {
             difficulty = 1;
             oneLegDif = 1;
-            speed = 0.15f;
         }
         else if (difficultyScore >= 5 && difficultyScore < 15)
         {
             difficulty = 2;
             oneLegDif = 2;
-            speed = 0.20f;
         }
         else if (difficultyScore >= 15 && difficultyScore < 30)
         {
             difficulty = 3;
             oneLegDif = 3;
-            speed = 0.25f;
         }
         else if (difficultyScore >= 30 && difficultyScore < 50)
         {
             difficulty = 4;
             oneLegDif = 4;
-            speed = 0.30f;
         }
         else if (difficultyScore >= 50 && difficultyScore < 70)
         {
             difficulty = 5;
             oneLegDif = 5;
-            speed = 0.35f;
         }
     }
     public void SteppingStones()

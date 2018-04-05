@@ -122,13 +122,8 @@ public class BoardMovement : MonoBehaviour {
     public void Boardvibration()
     {
         board.SetPos(0.001f, 0.001f);
-        board.SetPos(0, 0);
         board.SetPos(-0.001f, -0.001f);
         board.SetPos(0, 0);
-        board.SetPos(0.001f, -0.001f);
-        board.SetPos(0, 0);
-        board.SetPos(-0.001f, 0.001f);
-        board.SetPos(0, 0);;
     }
 
     public float GetRandomFloat (float min, float max) { 

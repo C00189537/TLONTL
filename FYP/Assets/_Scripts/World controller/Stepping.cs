@@ -18,8 +18,8 @@ public class Stepping : MonoBehaviour
     public int Zvalue = 0;
     public int ButtonSpacing = 65;
 
-    int previousArrow = 4; 
-
+    int previousArrow = 4;
+    float amount = 0;
     
     System.Random randy = new System.Random();
 
@@ -106,7 +106,10 @@ public class Stepping : MonoBehaviour
 
               if (firstArrow.CompareTag("Right"))
               {
-                 firstArrow.GetComponent<RawImage>().color = Color.green;
+                amount = 25;
+                playerController.theWorld.score += amount;
+                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
+                firstArrow.GetComponent<RawImage>().color = Color.green;
                 audiosource.PlayOneShot(fbJingle, 0.5f);
                   Steps.Dequeue();
               }
@@ -123,6 +126,9 @@ public class Stepping : MonoBehaviour
 
             if (firstArrow.CompareTag("Up"))
             {
+                amount = 25;
+                playerController.theWorld.score += amount;
+                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 audiosource.PlayOneShot(fbJingle, 0.5f);
                 Steps.Dequeue();
@@ -141,6 +147,9 @@ public class Stepping : MonoBehaviour
 
             if (firstArrow.CompareTag("Left"))
             {
+                amount = 25;
+                playerController.theWorld.score += amount;
+                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 audiosource.PlayOneShot(fbJingle, 0.5f);
                 Steps.Dequeue();

@@ -22,6 +22,7 @@ TagManager:
   - Down
   - Basic
   - Jump-pad
+  - End
   layers:
   - Default
   - TransparentFX
