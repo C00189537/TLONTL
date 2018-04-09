@@ -89,7 +89,7 @@ public class PlayerController3 : MonoBehaviour {
             TimeStampFallinig = Time.time + FallingCooldown;
 
             float amount = -5;
-            theWorld.score = +amount;
+            theWorld.score = theWorld.score + amount;
             FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
             fallOff++; 
 
