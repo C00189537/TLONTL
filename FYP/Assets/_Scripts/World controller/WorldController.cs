@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WorldController : MonoBehaviour {
 
@@ -52,9 +51,6 @@ public class WorldController : MonoBehaviour {
     //Obstacles
     public GameObject[] blockade = new GameObject[3];
     
-    public double timeLeft = 30;
-    public int difficulty;
-    public int difficultyScore = 0;
     
     Stepping stepping;
     Leaning leaning;
@@ -103,30 +99,7 @@ public class WorldController : MonoBehaviour {
       
     }
 
-    public void BeginDifficulty(int difficulty)
-    {
-        switch (difficulty)
-        {
-            case 1:
-                difficultyScore = 2;
-                break;
-            case 2:
-                difficultyScore = 7;
-                break;
-            case 3:
-                difficultyScore = 20;
-                break;
-            case 4:
-                difficultyScore = 35;
-                break;
-            case 5:
-                difficultyScore = 55;
-                break;
-            default:
-                break;
-        }
-    }
-
+    
     void Update()
     {
         for (int i = 0; i < TRACK_SIZE; i++)
@@ -140,7 +113,7 @@ public class WorldController : MonoBehaviour {
 
         if (input.NManual == 0)
         {
-            UpdateDifficultyScore();
+            Difficultycontroller.GetInstance().UpdateDifficultyScore();
         }
       
     }
@@ -298,11 +271,11 @@ public class WorldController : MonoBehaviour {
 
     void ObstacleSpawn(int val)
     {
-        int variable = difficulty; 
+        int variable = Difficultycontroller.GetInstance().difficulty; 
 
         if (input.NManual == 0.0f)
         {
-            variable = difficulty;
+            variable = Difficultycontroller.GetInstance().difficulty;
         } 
         if (input.NManual == 1)
         {
@@ -339,7 +312,7 @@ public class WorldController : MonoBehaviour {
     {
         if (input.NManual == 0)
         {
-            stepping.GenerateButtons(difficulty);
+            stepping.GenerateButtons(Difficultycontroller.GetInstance().difficulty);
         }
         if (input.NManual == 1)
         {
@@ -368,11 +341,11 @@ public class WorldController : MonoBehaviour {
     void JumpSpawn(int val)
     {
 
-        int variable = difficulty;
+        int variable = Difficultycontroller.GetInstance().difficulty;
 
         if (input.NManual == 0)
         {
-            variable = difficulty;
+            variable = Difficultycontroller.GetInstance().difficulty;
         }
         if (input.NManual == 1)
         {
@@ -403,11 +376,11 @@ public class WorldController : MonoBehaviour {
 
     void DifJumpSpawn(int val)
     {
-        int variable = difficulty;
+        int variable = Difficultycontroller.GetInstance().difficulty;
 
         if (input.NManual == 0)
         {
-            variable = difficulty;
+            variable = Difficultycontroller.GetInstance().difficulty;
         }
         if (input.NManual == 1)
         {
@@ -477,7 +450,6 @@ public class WorldController : MonoBehaviour {
                 trackPiece[val].transform.Find("Pad1").Translate(-2.5f, 0, 0);
             }
         }
-
     }
 
     void SpeedUpdate()
@@ -490,45 +462,6 @@ public class WorldController : MonoBehaviour {
     {
         g.transform.position -= scrollSpeed;
     }
-
-    void UpdateDifficultyScore()
-    {
-        //Contain within 0-50
-        if (difficultyScore  < 0)
-        {
-            difficultyScore = 0;
-        }
-        else if (difficultyScore >= 70)
-        {
-            difficultyScore = 70;
-        }
-        //Difficulty set based on performance
-        if (difficultyScore >= 0 && difficultyScore < 5)
-        {
-            difficulty = 1;
-            oneLegDif = 1;
-        }
-        else if (difficultyScore >= 5 && difficultyScore < 15)
-        {
-            difficulty = 2;
-            oneLegDif = 2;
-        }
-        else if (difficultyScore >= 15 && difficultyScore < 30)
-        {
-            difficulty = 3;
-            oneLegDif = 3;
-        }
-        else if (difficultyScore >= 30 && difficultyScore < 50)
-        {
-            difficulty = 4;
-            oneLegDif = 4;
-        }
-        else if (difficultyScore >= 50 && difficultyScore < 70)
-        {
-            difficulty = 5;
-            oneLegDif = 5;
-        }
-    }
     
     public void CamShake()
     {
@@ -540,11 +473,11 @@ public class WorldController : MonoBehaviour {
     {
         while(earthquake)
         {
-            int variable = difficulty;
+            int variable = Difficultycontroller.GetInstance().difficulty; ;
 
             if (input.NManual == 0)
             {
-                variable = difficulty;
+                variable = Difficultycontroller.GetInstance().difficulty; ;
             }
             if (input.NManual == 1)
             {

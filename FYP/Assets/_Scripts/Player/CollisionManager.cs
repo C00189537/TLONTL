@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
-
     WorldController gameController;
     Stepping stepController;
     PlayerController3 playerController;
     Camera cam;
     BoardMovement movement;
-    
-    private int platformScore;
 
-    int amount = 0;
-    int hitObstacles = 0; 
+    int hitObstacles = 0;
 
     void Start()
     {
-        
-        //access the world controller for updating speed + score
+
+        //access the world controller for updating speed
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+
         if (gameControllerObject != null)
         {
             gameController = gameControllerObject.GetComponent<WorldController>();
@@ -47,7 +44,7 @@ public class CollisionManager : MonoBehaviour
         {
             Debug.Log("cannot find 'PlayerController' script");
         }
-  
+
         GameObject camOb = GameObject.FindWithTag("MainCamera");
         if (camOb != null)
         {
@@ -63,44 +60,40 @@ public class CollisionManager : MonoBehaviour
         //Player vs Obstacle
         if (other.gameObject.tag == "Obstacle")
         {
-
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().HitObstacle, 0.5f);
-
             gameController.CamShake();
             Destroy(other.gameObject);
             ScoreController.GetInstance().SubtractScore(-5);
-            movement.Boardvibration(); 
-            hitObstacles++; 
-            if (platformScore > 0)
-            { 
-                platformScore--;
-            }
-            //palpitation TBD
-            
+            movement.Boardvibration();
+            hitObstacles++;
 
+            if (Difficultycontroller.GetInstance().platformScore > 0)
+            {
+                Difficultycontroller.GetInstance().platformScore--;
+            }
         }
         else if (other.gameObject.tag == "Basic")
         {
             playerController.basic = true;
             movement.ResetBoard();
+            playerController.fallOff = 0; 
         }
         else if (other.gameObject.tag == "Pit")
         {
             gameObject.GetComponent<PlayerController3>().ResetPlayer();
 
-            if (platformScore > 0)
+            if (Difficultycontroller.GetInstance().platformScore > 0)
             {
-                platformScore--;
+                Difficultycontroller.GetInstance().platformScore--;
             }
             playerController.pit = true;
             playerController.basic = false;
-            
+
         }
         else if (other.gameObject.tag == "Coin")
         {
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().Collectable, 0.5f);
             ScoreController.GetInstance().AddScore(10);
-
             Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "Killer")
@@ -110,36 +103,21 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "Lean")
         {
-            platformScore = 3;
             playerController.pit = false;
             playerController.basic = false;
-            switch (gameController.difficulty)
-            {
-                case 1:
-                    platformScore = 0;
-                    break;
-                case 2:
-                    platformScore = 1;
-                    break;
-                case 3:
-                    platformScore = 2;
-                    break;
-                case 4:
-                    platformScore = 3;
-                    Debug.Log("its me");
-                    break;
-                default:
-                    break;
-            }
+            Difficultycontroller.GetInstance().setPlatformScore();
             movement.BoardMovements();
         }
         else if (other.gameObject.tag == "OneLeg")
         {
-            //gameController.oneLegSpeed = true;
             playerController.pit = false;
             playerController.basic = false;
-            platformScore = 1;
             movement.BoardMovements();
+
+            if (playerController.fallOff == 0)
+            {
+                Difficultycontroller.GetInstance().platformScore = 1;
+            }
 
         }
         else if (other.gameObject.tag == "Step")
@@ -147,78 +125,32 @@ public class CollisionManager : MonoBehaviour
             playerController.pit = false;
             playerController.basic = false;
             gameController.SteppingStones();
-            switch (gameController.difficulty)
-            {
-                case 1:
-                    platformScore = 1;
-                    break;
-                case 2:
-                    platformScore = 2;
-                    break;
-                case 3:
-                    platformScore = 3;
-                    break;
-                case 4:
-                    platformScore = 4;
-                    break;
-                default:
-                    break;
-            }
+            Difficultycontroller.GetInstance().setPlatformScore();
 
         }
         else if (other.gameObject.tag == "Jump")
         {
             playerController.pit = false;
             playerController.basic = false;
-            switch (gameController.difficulty)
-            {
-                case 1:
-                    platformScore = 1;
-                    break;
-                case 2:
-                    platformScore = 1;
-                    break;
-                case 3:
-                    platformScore = 2;
-                    break;
-                case 4:
-                    platformScore = 2;
-                    break;
-                default:
-                    break;
-            }
-            
+            Difficultycontroller.GetInstance().setPlatformScore();
         }
         else if (other.gameObject.tag == "Jump2")
         {
             playerController.pit = false;
             playerController.basic = false;
-            switch (gameController.difficulty)
+
+            if (playerController.fallOff == 0)
             {
-                case 1:
-                    platformScore = 2;
-                    break;
-                case 2:
-                    platformScore = 2;
-                    break;
-                case 3:
-                    platformScore = 3;
-                    break;
-                case 4:
-                    platformScore = 3;
-                    break;
-                default:
-                    break;
+                Difficultycontroller.GetInstance().platformScore = 1;
             }
         }
     }
     void OnTriggerStay(Collider other)
     {
-
         if (other.gameObject.tag == "Lean")
         {
             playerController.lean = true;
-            playerController.basic = false; 
+            playerController.basic = false;
         }
         else if (other.gameObject.tag == "Basic")
         {
@@ -227,7 +159,7 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "Pit")
         {
-            playerController.pit = true; 
+            playerController.pit = true;
         }
         else if (other.gameObject.tag == "OneLeg")
         {
@@ -251,34 +183,12 @@ public class CollisionManager : MonoBehaviour
         }
 
     }
-    //Leaving each platform
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Lean")
         {
             playerController.lean = false;
-            //Difficulty check
-            if (platformScore == 0)
-            {
-                switch (gameController.difficulty)
-                {
-                    case 2:
-                        gameController.difficultyScore--;
-                        break;
-                    case 3:
-                        gameController.difficultyScore -= 2;
-                        break;
-                    case 4:
-                        gameController.difficultyScore -= 3;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                gameController.difficultyScore += platformScore;
-            }
+            Difficultycontroller.GetInstance().CalculateDifficultyScore();
         }
         else if (other.gameObject.tag == "Basic")
         {
@@ -291,119 +201,33 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "OneLeg")
         {
             playerController.oneLeg = false;
-            //Difficulty check
-            if (platformScore == 0)
-            {
-                gameController.difficultyScore--;
-            }
-            else
-            {
-                gameController.difficultyScore += platformScore;
-            }
             
         }
         else if (other.gameObject.tag == "End")
         {
-            Debug.Log("touch end"); 
             if (playerController.fallOff <= 0 && hitObstacles <= 0)
             {
-                Debug.Log("if statement true");
                 ScoreController.GetInstance().AddScore(25);
-
             }
+            Difficultycontroller.GetInstance().CalculateDifficultyScore();
             playerController.fallOff = 0;
-            hitObstacles = 0; 
-
+            hitObstacles = 0;
         }
         else if (other.gameObject.tag == "Step")
         {
-            playerController.step = false; 
-            //playerController.basic = true;
-            platformScore -= stepController.getSteps();
-            //Difficulty check
-            if (platformScore == 0)
-            {
-                switch (gameController.difficulty)
-                {
-                    case 1:
-                        gameController.difficultyScore--;
-                        break;
-                    case 2:
-                        gameController.difficultyScore -= 2;
-                        break;
-                    case 3:
-                        gameController.difficultyScore -= 3;
-                        break;
-                    case 4:
-                        gameController.difficultyScore -= 4;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                gameController.difficultyScore += platformScore;
-            }
+            playerController.step = false;
+            Difficultycontroller.GetInstance().platformScore -= stepController.getSteps();
+            Difficultycontroller.GetInstance().CalculateDifficultyScore();
         }
         else if (other.gameObject.tag == "Jump")
         {
             playerController.jump = false;
-            //Difficulty check
-            if (platformScore == 0)
-            {
-                switch (gameController.difficulty)
-                {
-                    case 1:
-                        gameController.difficultyScore--;
-                        break;
-                    case 2:
-                        gameController.difficultyScore -= 2;
-                        break;
-                    case 3:
-                        gameController.difficultyScore -= 3;
-                        break;
-                    case 4:
-                        gameController.difficultyScore -= 4;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                gameController.difficultyScore += platformScore;
-            }
+            Difficultycontroller.GetInstance().CalculateDifficultyScore();
         }
         else if (other.gameObject.tag == "Jump2")
         {
-            
             playerController.jump2 = false;
-            //Difficulty check
-            if (platformScore == 0)
-            {
-                switch (gameController.difficulty)
-                {
-                    case 1:
-                        gameController.difficultyScore -= 2;
-                        break;
-                    case 2:
-                        gameController.difficultyScore -= 2;
-                        break;
-                    case 3:
-                        gameController.difficultyScore -= 3;
-                        break;
-                    case 4:
-                        gameController.difficultyScore -= 3;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                gameController.difficultyScore += platformScore;
-            }
+            Difficultycontroller.GetInstance().CalculateDifficultyScore();
         }
     }
 

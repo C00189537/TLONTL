@@ -51,7 +51,7 @@ public class NetworkInput : MonoBehaviour {
         {
             nDifficulty = value;
             diffChange = nDifficulty;
-            theWorld.BeginDifficulty((int)NDifficulty);
+            Difficultycontroller.GetInstance().BeginDifficulty((int)NDifficulty);
         }
     }
 

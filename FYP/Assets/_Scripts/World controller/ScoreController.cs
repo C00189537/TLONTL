@@ -47,6 +47,7 @@ public class ScoreController : MonoBehaviour {
         FloatingTextController.CreateFLoatingText(value.ToString(), player.transform, 0);
     }
 
+    //Insert a negative value between the brackets
     public void SubtractScore(int value)
     {
         score = score + value;

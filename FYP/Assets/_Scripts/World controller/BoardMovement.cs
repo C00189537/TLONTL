@@ -28,11 +28,11 @@ public class BoardMovement : MonoBehaviour {
 
     public void BoardMovements()
     {
-        int variable = world.difficulty;    
+        int variable = Difficultycontroller.GetInstance().difficulty; ;    
 
         if (input.NManual == 0)
         {
-            variable = world.difficulty;
+            variable = Difficultycontroller.GetInstance().difficulty;
         }
         if (input.NManual == 1)
         {

@@ -1769,6 +1769,21 @@ MonoBehaviour:
   scoreText: {fileID: 1009907257}
   score: 0
   scoreInt: 0
+--- !u!114 &1963922966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1963922962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ddeced01cbae34dba414114fc82773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theWorld: {fileID: 0}
+  difficulty: 0
+  difficultyScore: 0
+  platformScore: 0
 --- !u!114 &1981407011 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114134431862739772, guid: 38d3f8b3f9d5ea04aac27d06255c046c,
