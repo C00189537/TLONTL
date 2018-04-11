@@ -28,14 +28,10 @@ public class Stepping : MonoBehaviour
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
     public Queue <GameObject>Steps = new Queue<GameObject>();
 
-    public AudioClip fbJingle;
-    AudioSource audiosource; 
-
     private void Start()
     {
         GameObject playerControllerObject = GameObject.FindWithTag("Player");
         playerController = playerControllerObject.GetComponent<PlayerController3>();
-        audiosource = GetComponent<AudioSource>();
     }
 
    
@@ -110,7 +106,7 @@ public class Stepping : MonoBehaviour
                 playerController.theWorld.score += amount;
                 FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
-                audiosource.PlayOneShot(fbJingle, 0.5f);
+                AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
                   Steps.Dequeue();
               }
             ResetXPosition();
@@ -130,7 +126,8 @@ public class Stepping : MonoBehaviour
                 playerController.theWorld.score += amount;
                 FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
-                audiosource.PlayOneShot(fbJingle, 0.5f);
+                AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
+
                 Steps.Dequeue();
                 
             }
@@ -151,7 +148,8 @@ public class Stepping : MonoBehaviour
                 playerController.theWorld.score += amount;
                 FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
-                audiosource.PlayOneShot(fbJingle, 0.5f);
+                AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
+
                 Steps.Dequeue();
             }
             ResetXPosition();

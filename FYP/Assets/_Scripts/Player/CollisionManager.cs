@@ -10,10 +10,7 @@ public class CollisionManager : MonoBehaviour
     PlayerController3 playerController;
     Camera cam;
     BoardMovement movement;
-
-    AudioSource audiosource; 
-    public AudioClip collectable;
-    public AudioClip obstacle; 
+    
     private int platformScore;
 
     int amount = 0;
@@ -60,16 +57,15 @@ public class CollisionManager : MonoBehaviour
         {
             Debug.Log("cannot find 'GameController' script");
         }
-
-        audiosource = GetComponent<AudioSource>();
     }
     void OnTriggerEnter(Collider other)
     {
         //Player vs Obstacle
         if (other.gameObject.tag == "Obstacle")
         {
-           
-            audiosource.PlayOneShot(obstacle, 0.4f);
+
+            AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().HitObstacle, 0.5f);
+
             gameController.CamShake();
             Debug.Log("explode?");
             Destroy(other.gameObject);
@@ -107,7 +103,7 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "Coin")
         {
-            audiosource.PlayOneShot(collectable, 0.1f);
+            AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().Collectable, 0.5f);
 
             gameController.score += 20;
             amount = 20; 

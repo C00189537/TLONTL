@@ -43,9 +43,6 @@ public class PlayerController3 : MonoBehaviour {
     float TimeStampFallinig;
     float JumpingCooldown = 2;
     float TimeStampJumping; 
-    AudioSource audiosource;
-    public AudioClip falling;
-    public AudioClip Jumping;
 
    
     // Use this for initialization
@@ -56,7 +53,6 @@ public class PlayerController3 : MonoBehaviour {
        theWorld = gameControllerObject.GetComponent<WorldController>();
         rb = GetComponent<Rigidbody>();
         rotation = 10;
-        audiosource = GetComponent<AudioSource>();
         TimeStampFallinig = Time.time + FallingCooldown;
         TimeStampJumping = Time.time + JumpingCooldown;
     }
@@ -85,7 +81,8 @@ public class PlayerController3 : MonoBehaviour {
 
         if (gameObject.transform.position.y < -0.2 && TimeStampFallinig <= Time.time)
         {
-            audiosource.PlayOneShot(falling, 0.2f);
+            AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().falling, 0.5f);
+
             TimeStampFallinig = Time.time + FallingCooldown;
 
             float amount = -5;
@@ -97,7 +94,7 @@ public class PlayerController3 : MonoBehaviour {
 
         if (gameObject.transform.position.y > 1.1f && TimeStampJumping <= Time.time)
         {
-            audiosource.PlayOneShot(Jumping, 0.5f);
+            AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().Jumping, 0.5f);
             TimeStampJumping = Time.time + JumpingCooldown;
         }
 
