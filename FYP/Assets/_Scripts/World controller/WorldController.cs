@@ -28,7 +28,7 @@ public class WorldController : MonoBehaviour {
 
     //Sections of track
     private int TRACK_SIZE = 3 ;
-    private GameObject[] trackPiece = new GameObject[3];
+    public GameObject[] trackPiece = new GameObject[3];
     private GameObject currentSection;
     private GameObject nextSection;
     private GameObject farSection;
@@ -64,12 +64,14 @@ public class WorldController : MonoBehaviour {
     public bool gameOver;
 
     Stepping stepping;
+    Leaning leaning; 
     public NetworkInput input;
 
     void Start()
     {
         FloatingTextController.Initialize();
         stepping = GetComponent<Stepping>();
+        leaning = GetComponent<Leaning>(); 
 
         restPhase = 4; 
 
@@ -318,20 +320,19 @@ public class WorldController : MonoBehaviour {
         switch (variable)
         {
             case 1:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(rand.Next(-4, 5), 2, 0);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(rand.Next(-4,5),2,0);
+                leaning.ObstalceOne(val);
                 break;
             case 2:
-                ObstacleTwo(val);
+                leaning.ObstacleTwo(val);
                 break;
             case 3:
-                ObstacleThree(val);
+                leaning.ObstacleThree(val);
                 break;
             case 4:
-                ObstacleFour(val);
+                leaning.ObstacleFour(val);
                 break;
             case 5:
-                ObstacleFive(val);
+                leaning.ObstacleFive(val);
                 break;
             default:
                 break;
@@ -342,114 +343,7 @@ public class WorldController : MonoBehaviour {
         trackPiece[val].transform.Find("ObstacleBack").localScale = trackPiece[val].transform.Find("ObstacleBack").localScale * 2;//difficulty* 0.75f;
     }
 
-    void ObstacleTwo(int val)
-    {
-        int set = rand.Next(1, 4);
-
-        switch (set)
-        {
-            case 1:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(1, 2, -1);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(rand.Next(-4, 5), 2, 0);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(rand.Next(-4, 5), 2, -7.5f);
-                break;
-            case 2:
-                trackPiece[val].transform.Find("ObstacleFront").Translate((rand.Next(-4, 5)), 2, -1);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(1, 2, 0);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(rand.Next(-4, 5), 2, -7.5f);
-                break;
-            case 3:
-                int side = rand.Next(-4, 5);
-                trackPiece[val].transform.Find("ObstacleFront").Translate(side, 2, -1);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(side, 2, 0);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(-side, 2, -7.5f);
-                break;
-        }
-    }
-
-    void ObstacleThree(int val)
-    {
-        int set = rand.Next(1, 4);
-
-        switch (1)
-        {
-            case 1:
-                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(-3, 2, -12);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(0, 2, 0);
-                break;
-            case 2:
-                trackPiece[val].transform.Find("ObstacleMid").Translate(2, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, -14);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(1, 2, -2);
-                break;
-            case 3:
-                trackPiece[val].transform.Find("ObstacleMid").Translate(3, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, -9);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(-1, 2, 0);
-                break;
-        }
-    }
-
-    void ObstacleFour(int val)
-    {
-        int set = rand.Next(1, 4);
-
-        switch (set)
-        {
-            case 1:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(0, 2, 0);
-                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, 0);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(2, 2, 2);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(2, 2, 0);
-                break;
-            case 2:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(-3, 2, 0);
-                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(3, 2, 0);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(2, 2, 2);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(-1, 2, 0);
-                break;
-            case 3:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(3, 2, 0);
-                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(-3.5f, 2, 0);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(-1, 2, 2);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(2, 2, 0);
-                break;
-        }
-    }
-
-    void ObstacleFive (int val)
-    {
-        int set = rand.Next(1, 4);
-
-        switch (set)
-        {
-            case 1:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(-2, 2, 9);
-                trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 9);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(2, 2, -9);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(0, 2, 2);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(2, 2, 8);
-                break;
-            case 2:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(3.5f, 2, 9);
-                trackPiece[val].transform.Find("ObstacleMid").Translate(1, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(-3.5f, 2, -9);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(-1, 2, 2);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(-1, 2, 0);
-                break;
-            case 3:
-                trackPiece[val].transform.Find("ObstacleFront").Translate(-3.5f, 2, 9);
-                trackPiece[val].transform.Find("ObstacleMid").Translate(-1, 2, 0);
-                trackPiece[val].transform.Find("ObstacleBack").Translate(3.5f, 2, -9);
-                trackPiece[val].transform.Find("ScoreOb1").Translate(0, 2, 2);
-                trackPiece[val].transform.Find("ScoreOb2").Translate(0, 2, 0);
-                break;
-        }
-    }
+  
     void OneLegSpawn(int val)
     {
 

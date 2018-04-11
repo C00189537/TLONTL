@@ -849,7 +849,8 @@ Prefab:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1009907257}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 82241835404681870, guid: bf69d8c034f4b48408c34b0ade75d994, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: bf69d8c034f4b48408c34b0ade75d994, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &977192796
@@ -1630,6 +1631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b368b3ed646464043a06a0ab7b22abed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audiosource: {fileID: 0}
   falling: {fileID: 8300000, guid: 502e377dd254a5f448ed6a8a668f21e7, type: 3}
   Jumping: {fileID: 8300000, guid: 79f086f89aca6494a89922cc1e4683d9, type: 3}
   Collectable: {fileID: 8300000, guid: a2dad163a87608b438439bf8c3e792ba, type: 3}
@@ -1722,6 +1724,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1935664336}
+--- !u!1 &1963922962 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1827215757070166, guid: bf69d8c034f4b48408c34b0ade75d994,
+    type: 2}
+  m_PrefabInternal: {fileID: 858357506}
+--- !u!114 &1963922963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1963922962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b11035e04910c4683e319ce6a0ef55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theWorld: {fileID: 0}
 --- !u!1 &2049742406
 GameObject:
   m_ObjectHideFlags: 0
