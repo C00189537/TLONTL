@@ -12,11 +12,6 @@ public class Leaning : MonoBehaviour {
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         theWorld = gameControllerObject.GetComponent<WorldController>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void ObstalceOne(int val)
     {

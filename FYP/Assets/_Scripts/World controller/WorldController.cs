@@ -64,14 +64,16 @@ public class WorldController : MonoBehaviour {
     public bool gameOver;
 
     Stepping stepping;
-    Leaning leaning; 
+    Leaning leaning;
+    Jumping jumping; 
     public NetworkInput input;
 
     void Start()
     {
         FloatingTextController.Initialize();
         stepping = GetComponent<Stepping>();
-        leaning = GetComponent<Leaning>(); 
+        leaning = GetComponent<Leaning>();
+        jumping = GetComponent<Jumping>();
 
         restPhase = 4; 
 
@@ -378,33 +380,21 @@ public class WorldController : MonoBehaviour {
         switch (variable)
             {
                 case 1:
-                    trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
-                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, (9 * speed) + 1);
-                break;
+                    jumping.JumpOne(val);
+                    break;
                 case 2:
-                    trackPiece[val].transform.Find("WallMid").Translate(0, 3.5f, 0);
-                    trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, (9 * speed) + 1);
-                break;
+                    jumping.JumpTwo(val); 
+                    break;
                 case 3:
-                    trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
-                    trackPiece[val].transform.Find("WallBack").Translate(0, 2.5f, 1);
-                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, (9 * speed) + 1);
-                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, (9 * speed) + 1);
-
-                break;
+                    jumping.JumpThree(val);
+                    break;
                 case 4:
-                    trackPiece[val].transform.Find("WallFront").Translate(0, 2.5f, -3);
-                    trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
-                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, (9 * speed) + 1);
-                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, (9 * speed) + 1);
-                break;
-                 case 5:
-                    trackPiece[val].transform.Find("WallFront").Translate(0, 3.5f, -3);
-                    trackPiece[val].transform.Find("WallBack").Translate(0, 3.5f, 1);
-                    trackPiece[val].transform.Find("JumpZoneF").Translate(0, 0.6f, (9 * speed) + 1);
-                    trackPiece[val].transform.Find("JumpZoneB").Translate(0, 0.6f, (9 * speed) + 1);
-                break;
-            default:
+                    jumping.JumpFour(val);
+                    break;
+                case 5:
+                    jumping.JumpFive(val);
+                    break;
+                default:
                     break;
             }
     }
