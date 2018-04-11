@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController3 : MonoBehaviour {
+public class PlayerController3 : MonoBehaviour
+{
 
-    public DynSTABLE platform; 
+    public DynSTABLE platform;
     public Stepping stepping;
-    public WorldController theWorld; 
+    public WorldController theWorld;
 
     public float xMax;
-    public int fallOff; 
+    public int fallOff;
 
     private bool leanLeft, LeanRight, jumping2, jumping2L, jumping2R;
     public float translateSpeed;
     public float LeanSpeed;
     public float jumpSpeed;
-    public float jumpFallSpeed; 
-    public float jump2Speed; 
+    public float jumpFallSpeed;
+    public float jump2Speed;
     public float switchJumpSpeed;
     public float OneLegValue;
     public float StepValue;
@@ -26,7 +27,7 @@ public class PlayerController3 : MonoBehaviour {
     public bool basic, lean, oneLeg, step, jump, jump2, pit;
     public bool touchGround = true, flying = false;
 
-	private const int MAXJUMP = 1;
+    private const int MAXJUMP = 1;
     public float pressure;
 
     public Rigidbody rb;
@@ -42,15 +43,16 @@ public class PlayerController3 : MonoBehaviour {
     float FallingCooldown = 2;
     float TimeStampFallinig;
     float JumpingCooldown = 2;
-    float TimeStampJumping; 
+    float TimeStampJumping;
 
-   
+
     // Use this for initialization
-    void Start () {
-       GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+    void Start()
+    {
+        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         input = gameControllerObject.GetComponent<NetworkInput>();
-       stepping = gameControllerObject.GetComponent<Stepping>();
-       theWorld = gameControllerObject.GetComponent<WorldController>();
+        stepping = gameControllerObject.GetComponent<Stepping>();
+        theWorld = gameControllerObject.GetComponent<WorldController>();
         rb = GetComponent<Rigidbody>();
         rotation = 10;
         TimeStampFallinig = Time.time + FallingCooldown;
@@ -62,8 +64,8 @@ public class PlayerController3 : MonoBehaviour {
     {
         if (platform.cop.force >= JumpValue && touchGround == false)
         {
-			rb.AddForce(Vector3.down * jumpFallSpeed, ForceMode.Impulse);
-		}
+            rb.AddForce(Vector3.down * jumpFallSpeed, ForceMode.Impulse);
+        }
 
         if (platform.cop.force >= 300)
         {
@@ -71,13 +73,14 @@ public class PlayerController3 : MonoBehaviour {
         }
 
         if (jump2)
-        { 
+        {
             Jump2();
-            
+
         }
     }
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
         if (gameObject.transform.position.y < -0.2 && TimeStampFallinig <= Time.time)
         {
@@ -85,7 +88,7 @@ public class PlayerController3 : MonoBehaviour {
 
             TimeStampFallinig = Time.time + FallingCooldown;
             ScoreController.GetInstance().SubtractScore(-5);
-            fallOff++; 
+            fallOff++;
 
         }
 
@@ -99,9 +102,9 @@ public class PlayerController3 : MonoBehaviour {
         force = platform.cop.force;
         xpos = platform.cop.x;
         zpos = platform.cop.z;
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0 );
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0);
         Tilted();
-      
+
         Inputs();
 
         if (basic)
@@ -120,7 +123,7 @@ public class PlayerController3 : MonoBehaviour {
         {
             Lean();
         }
-        else if(oneLeg)
+        else if (oneLeg)
         {
             OneLeg();
         }
@@ -128,12 +131,12 @@ public class PlayerController3 : MonoBehaviour {
         {
             Step();
         }
-		else if (jump)
-		{
-			Jump();
-		}
+        else if (jump)
+        {
+            Jump();
+        }
 
-	}
+    }
     void Lean()
     {
         gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
@@ -174,17 +177,17 @@ public class PlayerController3 : MonoBehaviour {
         {
             stepping.DestroyLeft();
         }
-        
+
     }
 
     void Jump()
     {
         if (platform.cop.force < JumpValue && touchGround == true)
         {
-			rb.velocity = rb.velocity + new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
-			touchGround = false;
+            rb.velocity = rb.velocity + new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+            touchGround = false;
         }
-        
+
 
     }
     void Jump2()
@@ -194,7 +197,7 @@ public class PlayerController3 : MonoBehaviour {
         if (touchGround)
         {
 
-            if ( input.nMomZ < -pressure) 
+            if (input.nMomZ < -pressure)
             {
 
                 flying = false;
@@ -206,13 +209,13 @@ public class PlayerController3 : MonoBehaviour {
                     jumping2R = true;
                     flying = true;
                 }
-               
+
 
             }
             if (input.nMomZ > -pressure && input.nMomZ < pressure)
             {
-     
-               
+
+
             }
             if (input.nMomZ > pressure)
             {
@@ -247,12 +250,12 @@ public class PlayerController3 : MonoBehaviour {
     void Inputs()
     {
 
-       if (platform.cop.x > OneLegValue)
+        if (platform.cop.x > OneLegValue)
         {
             LeanRight = true;
             leanLeft = false;
         }
-       if(platform.cop.x <= OneLegValue)
+        if (platform.cop.x <= OneLegValue)
         {
             LeanRight = false;
         }
@@ -272,18 +275,18 @@ public class PlayerController3 : MonoBehaviour {
         {
             jumping2 = false;
         }
-       
 
-       if (platform.cop.force < JumpValue)
+
+        if (platform.cop.force < JumpValue)
         {
-            jumping2 = true; 
+            jumping2 = true;
         }
 
     }
     public void ResetPlayer()
-	{
+    {
         gameObject.transform.position = new Vector3(0, 3, 0);
-		gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
     private void Tilted()
     {

@@ -23,8 +23,11 @@ GameObject:
   - component: {fileID: 114669572370761672}
   - component: {fileID: 114120550342037776}
   - component: {fileID: 114204391942548182}
-  - component: {fileID: 82241835404681870}
   - component: {fileID: 114543036212112440}
+  - component: {fileID: 114967685493788376}
+  - component: {fileID: 114452428243970932}
+  - component: {fileID: 114112703734035380}
+  - component: {fileID: 114083709524843988}
   m_Layer: 0
   m_Name: WorldController 1
   m_TagString: GameController
@@ -45,86 +48,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &82241835404681870
-AudioSource:
+--- !u!114 &114083709524843988
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1827215757070166}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ddeced01cbae34dba414114fc82773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theWorld: {fileID: 0}
+  difficulty: 0
+  difficultyScore: 0
+  platformScore: 0
+--- !u!114 &114112703734035380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8760304ccb7448e4195766a2bc1446dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theWorld: {fileID: 0}
+  player: {fileID: 0}
+  scoreText: {fileID: 0}
+  score: 0
+  scoreInt: 0
 --- !u!114 &114120550342037776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,6 +140,10 @@ MonoBehaviour:
   oneLegDif: 1
   restTracks: 1
   killPoint: -60
+  trackPiece:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   speed: 0.1
   minSpeed: 0.15
   maxSpeed: 0.35
@@ -193,18 +151,23 @@ MonoBehaviour:
   spawnPointFar: 120
   minRand: 1
   maxRand: 5
-  scoreText: {fileID: 0}
   blockade:
   - {fileID: 1128516937520142, guid: 66c7a66c0f78a15468e8da62404b390d, type: 2}
   - {fileID: 1128516937520142, guid: 66c7a66c0f78a15468e8da62404b390d, type: 2}
   - {fileID: 1128516937520142, guid: 66c7a66c0f78a15468e8da62404b390d, type: 2}
-  score: 0
-  scoreInt: 0
-  timeLeft: 120
-  difficulty: 3
-  difficultyScore: 0
-  gameOver: 0
   input: {fileID: 0}
+--- !u!114 &114452428243970932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f7ae1d5a0fd0c47b4d5549597bdc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theWorld: {fileID: 0}
 --- !u!114 &114543036212112440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,4 +209,15 @@ MonoBehaviour:
   Yvalue: -100
   Zvalue: 0
   ButtonSpacing: -65
-  fbJingle: {fileID: 8300000, guid: 26a304905fdf20c4b90ff191dedf4d4f, type: 3}
+--- !u!114 &114967685493788376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b11035e04910c4683e319ce6a0ef55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theWorld: {fileID: 0}

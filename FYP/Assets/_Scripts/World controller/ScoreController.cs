@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
-public class ScoreController : MonoBehaviour {
+public class ScoreController : MonoBehaviour
+{
 
     private static ScoreController instance;
     public WorldController theWorld;
-    public PlayerController3 player; 
+    public PlayerController3 player;
 
     public Text scoreText;
 
@@ -31,15 +32,17 @@ public class ScoreController : MonoBehaviour {
     {
         return instance;
     }
-    
-    void Start () {
+
+    void Start()
+    {
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         theWorld = gameControllerObject.GetComponent<WorldController>();
     }
-	
-	void Update () {
+
+    void Update()
+    {
         UpdateScore();
-	}
+    }
 
     public void AddScore(int value)
     {

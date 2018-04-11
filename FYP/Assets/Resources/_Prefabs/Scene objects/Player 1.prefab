@@ -471,8 +471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f4cb8cc0752e7419248847836b5e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectable: {fileID: 8300000, guid: 6ec5d670edaf0ac46b37c6a474c32071, type: 3}
-  obstacle: {fileID: 8300000, guid: eaa61c087753f5c4da1f056ef7f96c8a, type: 3}
 --- !u!114 &114134431862739772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -517,8 +515,6 @@ MonoBehaviour:
   xpos: 0
   zpos: 0
   rotation: 0
-  falling: {fileID: 8300000, guid: ebd2cd848f7f4494ca490fb3bb3173f5, type: 3}
-  Jumping: {fileID: 8300000, guid: 79f086f89aca6494a89922cc1e4683d9, type: 3}
 --- !u!114 &114580259191085680
 MonoBehaviour:
   m_ObjectHideFlags: 1

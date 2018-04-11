@@ -76,7 +76,7 @@ public class CollisionManager : MonoBehaviour
         {
             playerController.basic = true;
             movement.ResetBoard();
-            playerController.fallOff = 0; 
+            playerController.fallOff = 0;
         }
         else if (other.gameObject.tag == "Pit")
         {
@@ -201,7 +201,7 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "OneLeg")
         {
             playerController.oneLeg = false;
-            
+
         }
         else if (other.gameObject.tag == "End")
         {

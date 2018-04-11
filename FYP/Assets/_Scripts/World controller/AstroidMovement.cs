@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AstroidMovement : MonoBehaviour {
+public class AstroidMovement : MonoBehaviour
+{
 
     WorldController theWorld;
     public float posZ;
@@ -25,8 +26,8 @@ public class AstroidMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        posZ = gameObject.transform.localPosition.z - theWorld.speed/4;
-        gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y, posZ); 
+        posZ = gameObject.transform.localPosition.z - theWorld.speed / 4;
+        gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y, posZ);
 
         if (gameObject.transform.position.z < killpoint)
         {

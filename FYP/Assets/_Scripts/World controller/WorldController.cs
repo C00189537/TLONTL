@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldController : MonoBehaviour {
+public class WorldController : MonoBehaviour
+{
 
     public GameObject[] platformLayout = new GameObject[6];
     public int[] trackAvailable = new int[6];
@@ -26,7 +27,7 @@ public class WorldController : MonoBehaviour {
     public float killPoint;
 
     //Sections of track
-    private int TRACK_SIZE = 3 ;
+    private int TRACK_SIZE = 3;
     public GameObject[] trackPiece = new GameObject[3];
     private GameObject currentSection;
     private GameObject nextSection;
@@ -50,11 +51,11 @@ public class WorldController : MonoBehaviour {
 
     //Obstacles
     public GameObject[] blockade = new GameObject[3];
-    
-    
+
+
     Stepping stepping;
     Leaning leaning;
-    Jumping jumping; 
+    Jumping jumping;
     public NetworkInput input;
 
     void Start()
@@ -64,7 +65,7 @@ public class WorldController : MonoBehaviour {
         leaning = GetComponent<Leaning>();
         jumping = GetComponent<Jumping>();
 
-        restPhase = 4; 
+        restPhase = 4;
 
         //Initialise camera obj
         GameObject camOb = GameObject.FindWithTag("MainCamera");
@@ -96,18 +97,17 @@ public class WorldController : MonoBehaviour {
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
 
         StartCoroutine(Earthquake());
-      
+
     }
 
-    
     void Update()
     {
         for (int i = 0; i < TRACK_SIZE; i++)
         {
-            trackPiece[i].transform.position -= scrollSpeed;   
+            trackPiece[i].transform.position -= scrollSpeed;
         }
-        
-        UpdateAvailableTracks(); 
+
+        UpdateAvailableTracks();
         UpdateTrack();
         SpeedUpdate();
 
@@ -115,7 +115,7 @@ public class WorldController : MonoBehaviour {
         {
             Difficultycontroller.GetInstance().UpdateDifficultyScore();
         }
-      
+
     }
 
     void UpdateAvailableTracks()
@@ -139,20 +139,21 @@ public class WorldController : MonoBehaviour {
                 if (restPhase > restTracks)
                 {
                     temp = rand.Next(minRand, maxRand + 1);
-                    restPhase = 0; 
-                    int count = 0; 
+                    restPhase = 0;
+                    int count = 0;
                     while (trackAvailable[temp] != 1)
                     {
-                        
+
                         temp = rand.Next(minRand, maxRand + 1);
                         count++;
 
-                         if (count >= 20){
+                        if (count >= 20)
+                        {
                             temp = 0;
-                            restPhase = restTracks; 
+                            restPhase = restTracks;
                             break;
                         }
-                        
+
                     }
                     trackers[i] = temp;
                     //Longer one leg
@@ -217,7 +218,7 @@ public class WorldController : MonoBehaviour {
                     }
 
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-         
+
                     //Set up the track pieces
                     switch (trackers[i])
                     {
@@ -239,7 +240,7 @@ public class WorldController : MonoBehaviour {
                         default:
                             break;
                     }
-                    
+
                 }
                 else if (oneLegTracker > 0)
                 {
@@ -250,10 +251,10 @@ public class WorldController : MonoBehaviour {
                 //If the track piece is an exercise, the next one will be a base piece
                 else if (restPhase <= restTracks)  //(trackers[i] > 0)
                 {
-                    restPhase++; 
+                    restPhase++;
                     trackers[i] = 0;
                     trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-                    
+
                 }
                 //Alligns the track
                 if (TRACK_SIZE > i + 1)
@@ -264,19 +265,19 @@ public class WorldController : MonoBehaviour {
                 {
                     trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, spawnPoint);
                 }
-                
+
             }
         }
     }
 
     void ObstacleSpawn(int val)
     {
-        int variable = Difficultycontroller.GetInstance().difficulty; 
+        int variable = Difficultycontroller.GetInstance().difficulty;
 
         if (input.NManual == 0.0f)
         {
             variable = Difficultycontroller.GetInstance().difficulty;
-        } 
+        }
         if (input.NManual == 1)
         {
             variable = (int)input.nObstackles;
@@ -353,25 +354,25 @@ public class WorldController : MonoBehaviour {
         }
 
         switch (variable)
-            {
-                case 1:
-                    jumping.JumpOne(val);
-                    break;
-                case 2:
-                    jumping.JumpTwo(val); 
-                    break;
-                case 3:
-                    jumping.JumpThree(val);
-                    break;
-                case 4:
-                    jumping.JumpFour(val);
-                    break;
-                case 5:
-                    jumping.JumpFive(val);
-                    break;
-                default:
-                    break;
-            }
+        {
+            case 1:
+                jumping.JumpOne(val);
+                break;
+            case 2:
+                jumping.JumpTwo(val);
+                break;
+            case 3:
+                jumping.JumpThree(val);
+                break;
+            case 4:
+                jumping.JumpFour(val);
+                break;
+            case 5:
+                jumping.JumpFive(val);
+                break;
+            default:
+                break;
+        }
     }
 
     void DifJumpSpawn(int val)
@@ -389,7 +390,7 @@ public class WorldController : MonoBehaviour {
 
         if (variable == 1)
         {
-            int side = rand.Next(1,3);
+            int side = rand.Next(1, 3);
             //spawns the platforms on the same side
             if (side == 1)
             {
@@ -417,7 +418,7 @@ public class WorldController : MonoBehaviour {
             int front = 1;// rand.Next(1, 3);
             int back = 2;// rand.Next(1, 3);
             int endP = rand.Next(1, 3);
-            
+
             //Spawns random pads
             if (front == 1)
             {
@@ -453,7 +454,7 @@ public class WorldController : MonoBehaviour {
     }
 
     void SpeedUpdate()
-    { 
+    {
         speed = input.NSpeed;
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
@@ -462,7 +463,7 @@ public class WorldController : MonoBehaviour {
     {
         g.transform.position -= scrollSpeed;
     }
-    
+
     public void CamShake()
     {
         cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
@@ -471,7 +472,7 @@ public class WorldController : MonoBehaviour {
     //Flashes 
     public IEnumerator Earthquake()
     {
-        while(earthquake)
+        while (earthquake)
         {
             int variable = Difficultycontroller.GetInstance().difficulty; ;
 
@@ -505,9 +506,7 @@ public class WorldController : MonoBehaviour {
             }
 
             yield return new WaitForSeconds(rand.Next(5, 10));
-            Debug.Log("Shake");
-            //Earthquake
             cam.GetComponent<CameraShake>().SetTimer(1.0f);
-        }    
+        }
     }
 }
