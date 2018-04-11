@@ -18,11 +18,13 @@ public class Stepping : MonoBehaviour
     public int Zvalue = 0;
     public int ButtonSpacing = 65;
 
+    //To prevent two the same arrows being spawned in a row 
     int previousArrow = 4;
+
+    //Helps with score
     float amount = 0;
     
     System.Random randy = new System.Random();
-
     PlayerController3 playerController;
 
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
@@ -41,7 +43,6 @@ public class Stepping : MonoBehaviour
         //Should destroy all the objects in the queue when player leaves stepping track
         if (playerController.step == false)
         {
-            
             foreach ( GameObject step in Steps){
                Destroy(step);
             }
@@ -50,7 +51,7 @@ public class Stepping : MonoBehaviour
         }
     }
 
-    // parameter should eventually be received from world controller
+    // parameter is received from worldcontroller
     public void GenerateButtons(int numberOfButtons)
     {
         for (int i = 0; i < numberOfButtons; i++)
@@ -107,7 +108,7 @@ public class Stepping : MonoBehaviour
                 FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
-                  Steps.Dequeue();
+                Steps.Dequeue();
               }
             ResetXPosition();
         }
@@ -127,13 +128,11 @@ public class Stepping : MonoBehaviour
                 FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
-
                 Steps.Dequeue();
                 
             }
             ResetXPosition();
         }
-       
     }
 
     public void DestroyLeft()
@@ -149,14 +148,11 @@ public class Stepping : MonoBehaviour
                 FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
-
                 Steps.Dequeue();
             }
             ResetXPosition();
         }
-        
     }
-
  
     public void ResetXPosition()
     {
