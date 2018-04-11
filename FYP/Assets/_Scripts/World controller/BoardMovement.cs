@@ -23,13 +23,7 @@ public class BoardMovement : MonoBehaviour {
         input = GetComponent<NetworkInput>();
         board = GetComponent<NetworkOutput>();
         board.SetPos(0, 0);
-        //boardOffset = 0.015f;
         k = 0.0f;
-    }
-	
-	// Update is called once per frame
-	void Update () {
-            
     }
 
     public void BoardMovements()

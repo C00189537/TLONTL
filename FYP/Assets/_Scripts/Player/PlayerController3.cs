@@ -84,10 +84,7 @@ public class PlayerController3 : MonoBehaviour {
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().falling, 0.5f);
 
             TimeStampFallinig = Time.time + FallingCooldown;
-
-            float amount = -5;
-            theWorld.score = theWorld.score + amount;
-            FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
+            ScoreController.GetInstance().SubtractScore(-5);
             fallOff++; 
 
         }
@@ -163,17 +160,17 @@ public class PlayerController3 : MonoBehaviour {
     }
     void Step()
     {
-        if (platform.cop.x > StepValue)// && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
+        if (platform.cop.x > StepValue)
         {
             stepping.DestroyRight();
         }
 
-        if (platform.cop.z <= -StepValue)// && platform.cop.x < 0.1f && platform.cop.x > -0.1f)
+        if (platform.cop.z <= -StepValue)
         {
             stepping.DestroyUp();
         }
 
-        if (platform.cop.x < -StepValue)// && platform.cop.z < 0.1f && platform.cop.z > -0.1f)
+        if (platform.cop.x < -StepValue)
         {
             stepping.DestroyLeft();
         }
@@ -184,9 +181,7 @@ public class PlayerController3 : MonoBehaviour {
     {
         if (platform.cop.force < JumpValue && touchGround == true)
         {
-			//rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
 			rb.velocity = rb.velocity + new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
-			//transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime, Space.World);
 			touchGround = false;
         }
         
@@ -199,7 +194,7 @@ public class PlayerController3 : MonoBehaviour {
         if (touchGround)
         {
 
-            if ( input.nMomZ < -pressure) //platform.cop.x < -OneLegJumpValue &&
+            if ( input.nMomZ < -pressure) 
             {
 
                 flying = false;
@@ -214,12 +209,12 @@ public class PlayerController3 : MonoBehaviour {
                
 
             }
-            if (input.nMomZ > -pressure && input.nMomZ < pressure)//platform.cop.x > -OneLegJumpValue && platform.cop.x < OneLegJumpValue)
+            if (input.nMomZ > -pressure && input.nMomZ < pressure)
             {
      
                
             }
-            if (input.nMomZ > pressure) //platform.cop.x > OneLegJumpValue && 
+            if (input.nMomZ > pressure)
             {
 
                 flying = false;
@@ -245,7 +240,6 @@ public class PlayerController3 : MonoBehaviour {
             if (flying)
             {
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
-                //gameObject.transform.Translate(0, ((xMax + gameObject.transform.position.y) / translateSpeed), 0);
             }
 
         }
@@ -293,15 +287,12 @@ public class PlayerController3 : MonoBehaviour {
     }
     private void Tilted()
     {
-        //gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         if (input.nMomZ < -pressure)
         {
-            //gameObject.transform.Rotate(new Vector3 (0, 0, -tilt));
             gameObject.transform.rotation = new Quaternion(0, 0, tilt * Mathf.Deg2Rad, 1);
         }
         else if (input.nMomZ > pressure)
         {
-            //gameObject.transform.Rotate(new Vector3(0, 0, tilt));
             gameObject.transform.rotation = new Quaternion(0, 0, -tilt * Mathf.Deg2Rad, 1);
         }
         else

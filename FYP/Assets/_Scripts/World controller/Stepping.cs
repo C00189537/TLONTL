@@ -94,8 +94,7 @@ public class Stepping : MonoBehaviour
             Steps.Enqueue(arrow);
            ResetXPosition();
     }
-
-     
+ 
     public void DestroyRight()
     {
         if (Steps.Count > 0){
@@ -103,9 +102,7 @@ public class Stepping : MonoBehaviour
 
               if (firstArrow.CompareTag("Right"))
               {
-                amount = 25;
-                playerController.theWorld.score += amount;
-                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
+                ScoreController.GetInstance().AddScore(15);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
                 Steps.Dequeue();
@@ -123,9 +120,7 @@ public class Stepping : MonoBehaviour
 
             if (firstArrow.CompareTag("Up"))
             {
-                amount = 25;
-                playerController.theWorld.score += amount;
-                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
+                ScoreController.GetInstance().AddScore(15);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
                 Steps.Dequeue();
@@ -143,9 +138,7 @@ public class Stepping : MonoBehaviour
 
             if (firstArrow.CompareTag("Left"))
             {
-                amount = 25;
-                playerController.theWorld.score += amount;
-                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
+                ScoreController.GetInstance().AddScore(15);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
                 Steps.Dequeue();

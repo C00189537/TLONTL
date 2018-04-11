@@ -49,20 +49,13 @@ public class WorldController : MonoBehaviour {
     public int minRand;
     public int maxRand;
 
-    public Text scoreText;
-
     //Obstacles
     public GameObject[] blockade = new GameObject[3];
-
-    public double score = 0;
-    public int scoreInt = 0; 
-
+    
     public double timeLeft = 30;
     public int difficulty;
     public int difficultyScore = 0;
-
-    public bool gameOver;
-
+    
     Stepping stepping;
     Leaning leaning;
     Jumping jumping; 
@@ -140,11 +133,9 @@ public class WorldController : MonoBehaviour {
         {
             trackPiece[i].transform.position -= scrollSpeed;   
         }
-
         
         UpdateAvailableTracks(); 
         UpdateTrack();
-        UpdateScore();
         SpeedUpdate();
 
         if (input.NManual == 0)
@@ -152,7 +143,6 @@ public class WorldController : MonoBehaviour {
             UpdateDifficultyScore();
         }
       
-        
     }
 
     void UpdateAvailableTracks()
@@ -345,7 +335,18 @@ public class WorldController : MonoBehaviour {
         trackPiece[val].transform.Find("ObstacleBack").localScale = trackPiece[val].transform.Find("ObstacleBack").localScale * 2;//difficulty* 0.75f;
     }
 
-  
+    public void SteppingStones()
+    {
+        if (input.NManual == 0)
+        {
+            stepping.GenerateButtons(difficulty);
+        }
+        if (input.NManual == 1)
+        {
+            stepping.GenerateButtons((int)input.nNumberofSteps);
+        }
+    }
+
     void OneLegSpawn(int val)
     {
 
@@ -363,6 +364,7 @@ public class WorldController : MonoBehaviour {
         }
 
     }
+
     void JumpSpawn(int val)
     {
 
@@ -484,28 +486,11 @@ public class WorldController : MonoBehaviour {
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
 
-
     void ScrollingWorld(GameObject g)
     {
         g.transform.position -= scrollSpeed;
     }
 
-    public void SetScoreText()
-    {
-        
-        scoreInt =(int)score;
-        scoreText.text =  scoreInt.ToString();
-    }
-   
-    void UpdateScore()
-    {
-            score += speed * Time.deltaTime * 5;
-        if (score < 0)
-        {
-            score = 0; 
-        }
-            SetScoreText();
-    }
     void UpdateDifficultyScore()
     {
         //Contain within 0-50
@@ -544,18 +529,7 @@ public class WorldController : MonoBehaviour {
             oneLegDif = 5;
         }
     }
-    public void SteppingStones()
-    {
-        if (input.NManual == 0)
-        {
-            stepping.GenerateButtons(difficulty);
-        }
-        if (input.NManual == 1)
-        {
-            stepping.GenerateButtons((int)input.nNumberofSteps);
-        }
-    }
-
+    
     public void CamShake()
     {
         cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);

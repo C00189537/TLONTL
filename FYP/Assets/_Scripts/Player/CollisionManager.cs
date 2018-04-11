@@ -67,14 +67,9 @@ public class CollisionManager : MonoBehaviour
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().HitObstacle, 0.5f);
 
             gameController.CamShake();
-            Debug.Log("explode?");
             Destroy(other.gameObject);
-            //gameController.UpdateSpeed(-0.025f);
-            cam.GetComponent<CameraShake>().SetTimer(1.0f);
+            ScoreController.GetInstance().SubtractScore(-5);
             movement.Boardvibration(); 
-            amount = -5;
-            gameController.score += amount;
-            FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 1);
             hitObstacles++; 
             if (platformScore > 0)
             { 
@@ -104,10 +99,7 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "Coin")
         {
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().Collectable, 0.5f);
-
-            gameController.score += 20;
-            amount = 20; 
-            FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
+            ScoreController.GetInstance().AddScore(10);
 
             Destroy(other.gameObject);
         }
@@ -265,7 +257,6 @@ public class CollisionManager : MonoBehaviour
         if (other.gameObject.tag == "Lean")
         {
             playerController.lean = false;
-           // playerController.basic = true;
             //Difficulty check
             if (platformScore == 0)
             {
@@ -300,7 +291,6 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "OneLeg")
         {
             playerController.oneLeg = false;
-           // playerController.basic = true;
             //Difficulty check
             if (platformScore == 0)
             {
@@ -318,10 +308,8 @@ public class CollisionManager : MonoBehaviour
             if (playerController.fallOff <= 0 && hitObstacles <= 0)
             {
                 Debug.Log("if statement true");
-                amount = 25;
-                gameController.score += amount;
-                FloatingTextController.CreateFLoatingText(amount.ToString(), gameObject.transform, 0);
-                
+                ScoreController.GetInstance().AddScore(25);
+
             }
             playerController.fallOff = 0;
             hitObstacles = 0; 
