@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardMovement : MonoBehaviour {
+public class BoardMovement : MonoBehaviour
+{
 
 
     public NetworkOutput board;
@@ -10,35 +11,30 @@ public class BoardMovement : MonoBehaviour {
     public WorldController world;
     public NetworkInput input;
     public float moveTime;
-    public float increment, l, m; 
+    public float increment, l, m;
     System.Random rand = new System.Random();
 
     public float boardOffset;
-    public bool done = false; 
+    public bool done = false;
 
     float k;
 
-    void Start () {
+    void Start()
+    {
         world = GetComponent<WorldController>();
         input = GetComponent<NetworkInput>();
         board = GetComponent<NetworkOutput>();
         board.SetPos(0, 0);
-        //boardOffset = 0.015f;
         k = 0.0f;
-    }
-	
-	// Update is called once per frame
-	void Update () {
-            
     }
 
     public void BoardMovements()
     {
-        int variable = world.difficulty;    
+        int variable = Difficultycontroller.GetInstance().difficulty; ;
 
         if (input.NManual == 0)
         {
-            variable = world.difficulty;
+            variable = Difficultycontroller.GetInstance().difficulty;
         }
         if (input.NManual == 1)
         {
@@ -52,7 +48,7 @@ public class BoardMovement : MonoBehaviour {
             case 2:
                 increment = 0.002f;
                 moveTime = 0.3f;
-                boardOffset = 0.007f; 
+                boardOffset = 0.007f;
                 break;
             case 3:
                 increment = 0.002f;
@@ -67,7 +63,7 @@ public class BoardMovement : MonoBehaviour {
             case 5:
                 increment = 0.004f;
                 moveTime = 0.1f;
-                boardOffset = 0.015f; 
+                boardOffset = 0.015f;
                 break;
             default:
                 break;
@@ -80,13 +76,13 @@ public class BoardMovement : MonoBehaviour {
 
     IEnumerator Movement(float offset, float inc, float time)
     {
-       
+
 
         while (k < offset && done == false)
         {
             k += inc;
             yield return new WaitForSeconds(time);
-            board.SetPos(l * k , m * k );
+            board.SetPos(l * k, m * k);
 
             if (k > offset)
             {
@@ -95,7 +91,7 @@ public class BoardMovement : MonoBehaviour {
             }
         }
 
-        while (done == true )
+        while (done == true)
         {
             k -= 0.03f;
             board.SetPos(k, k);
@@ -110,12 +106,12 @@ public class BoardMovement : MonoBehaviour {
             }
         }
 
-        
+
     }
 
     public void ResetBoard()
     {
-        board.SetPos(0, 0); 
+        board.SetPos(0, 0);
 
     }
 
@@ -126,15 +122,18 @@ public class BoardMovement : MonoBehaviour {
         board.SetPos(0, 0);
     }
 
-    public float GetRandomFloat (float min, float max) { 
-         int i = rand.Next(0, 2);
-       
-            if (i == 0)
-            {
-                i = -1; 
-            } else {
-                i = 1;
-             }
+    public float GetRandomFloat(float min, float max)
+    {
+        int i = rand.Next(0, 2);
+
+        if (i == 0)
+        {
+            i = -1;
+        }
+        else
+        {
+            i = 1;
+        }
 
         return (Random.Range(min, max) * i);
     }
@@ -145,7 +144,7 @@ public class BoardMovement : MonoBehaviour {
 
         if (j == 0)
         {
-            return val; 
+            return val;
         }
         else
         {

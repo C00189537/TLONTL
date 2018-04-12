@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NetworkInput : MonoBehaviour {
+public class NetworkInput : MonoBehaviour
+{
 
     public DFlowNetwork network;
     public WorldController theWorld;
@@ -21,10 +22,10 @@ public class NetworkInput : MonoBehaviour {
     public float nNumberofSteps = 0;
     public float nOneLegDifficulty = 1;
     public float nEarthquakeShake = 0;
-    public float nMomZ = 0; 
+    public float nMomZ = 0;
 
     public float diffChange;
-    public float speedChange; 
+    public float speedChange;
 
     public float NManual
     {
@@ -36,7 +37,7 @@ public class NetworkInput : MonoBehaviour {
         set
         {
             nManual = value;
-            
+
         }
     }
 
@@ -51,7 +52,7 @@ public class NetworkInput : MonoBehaviour {
         {
             nDifficulty = value;
             diffChange = nDifficulty;
-            theWorld.BeginDifficulty((int)NDifficulty);
+            Difficultycontroller.GetInstance().BeginDifficulty((int)NDifficulty);
         }
     }
 
@@ -77,7 +78,7 @@ public class NetworkInput : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        
+
         NManual = network.getOutput(3);
         nLeaning = network.getOutput(4);
         nOneLeg = network.getOutput(5);
