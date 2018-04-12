@@ -19,6 +19,15 @@ public class ScoreController : MonoBehaviour
     float time;
     Color currentColor;
 
+    //Score values
+    public int Collectable = 10;
+    public int Obstacle = -10;
+    public int FallingOff = -10;
+    public int NotFallingOff = 25;
+    public int Step = 10;
+    public int StepsLeft = -10;
+    public int PerfectJump = 15; 
+    
     void Awake()
     {
         if (instance != null && instance != this)

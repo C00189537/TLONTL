@@ -104,7 +104,7 @@ public class Stepping : MonoBehaviour
 
             if (firstArrow.CompareTag("Right"))
             {
-                ScoreController.GetInstance().AddScore(15);
+                ScoreController.GetInstance().AddScore(ScoreController.GetInstance().Step);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
                 Steps.Dequeue();
@@ -122,7 +122,7 @@ public class Stepping : MonoBehaviour
 
             if (firstArrow.CompareTag("Up"))
             {
-                ScoreController.GetInstance().AddScore(15);
+                ScoreController.GetInstance().AddScore(ScoreController.GetInstance().Step);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
                 Steps.Dequeue();
@@ -140,7 +140,7 @@ public class Stepping : MonoBehaviour
 
             if (firstArrow.CompareTag("Left"))
             {
-                ScoreController.GetInstance().AddScore(15);
+                ScoreController.GetInstance().AddScore(ScoreController.GetInstance().Step);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
                 Steps.Dequeue();

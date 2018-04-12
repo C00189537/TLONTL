@@ -63,7 +63,7 @@ public class CollisionManager : MonoBehaviour
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().HitObstacle, 0.5f);
             gameController.CamShake();
             Destroy(other.gameObject);
-            ScoreController.GetInstance().SubtractScore(-5);
+            ScoreController.GetInstance().SubtractScore(ScoreController.GetInstance().Obstacle);
             movement.Boardvibration();
             hitObstacles++;
 
@@ -77,6 +77,7 @@ public class CollisionManager : MonoBehaviour
             playerController.basic = true;
             movement.ResetBoard();
             playerController.fallOff = 0;
+            hitObstacles = 0;
         }
         else if (other.gameObject.tag == "Pit")
         {
@@ -93,7 +94,7 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "Coin")
         {
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().Collectable, 0.5f);
-            ScoreController.GetInstance().AddScore(10);
+            ScoreController.GetInstance().AddScore(ScoreController.GetInstance().Collectable);
             Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "Killer")
@@ -207,11 +208,10 @@ public class CollisionManager : MonoBehaviour
         {
             if (playerController.fallOff <= 0 && hitObstacles <= 0)
             {
-                ScoreController.GetInstance().AddScore(25);
+                ScoreController.GetInstance().AddScore(ScoreController.GetInstance().NotFallingOff);
             }
             Difficultycontroller.GetInstance().CalculateDifficultyScore();
-            playerController.fallOff = 0;
-            hitObstacles = 0;
+            
         }
         else if (other.gameObject.tag == "Step")
         {
