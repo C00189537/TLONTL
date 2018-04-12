@@ -15,6 +15,10 @@ public class ScoreController : MonoBehaviour
     public double score = 0;
     public int scoreInt = 0;
 
+    public float duration = 2f;
+    float time;
+    Color currentColor;
+
     void Awake()
     {
         if (instance != null && instance != this)
@@ -37,16 +41,32 @@ public class ScoreController : MonoBehaviour
     {
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         theWorld = gameControllerObject.GetComponent<WorldController>();
+        currentColor = Color.white;
     }
 
     void Update()
     {
+        if (currentColor == Color.green || currentColor == Color.red)
+        {
+            Color color = Color.Lerp(currentColor, Color.white, time);
+            time += Time.deltaTime / duration;
+            scoreText.color = color;
+        }
+
+        if (currentColor.r == 0 && currentColor.g == 0 && currentColor.b == 0)
+        {
+            currentColor = Color.white;
+        }
+
         UpdateScore();
     }
 
     public void AddScore(int value)
     {
         score = score + value;
+        scoreText.color = Color.green;
+        currentColor = Color.green;
+        time = 0;
         FloatingTextController.CreateFLoatingText(value.ToString(), player.transform, 0);
     }
 
@@ -54,6 +74,9 @@ public class ScoreController : MonoBehaviour
     public void SubtractScore(int value)
     {
         score = score + value;
+        scoreText.color = Color.red;
+        currentColor = Color.red;
+        time = 0;
         FloatingTextController.CreateFLoatingText(value.ToString(), player.transform, 1);
     }
 
@@ -66,10 +89,13 @@ public class ScoreController : MonoBehaviour
     void UpdateScore()
     {
         score += theWorld.speed * Time.deltaTime * 5;
+
         if (score < 0)
         {
             score = 0;
         }
         setScoreText();
+
+
     }
 }

@@ -298,6 +298,61 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114212720156675956, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114212720156675956, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114212720156675956, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114212720156675956, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114804405966628404, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114804405966628404, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114804405966628404, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114550012438669700, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114550012438669700, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114550012438669700, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114550012438669700, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f14bb30f588d22a4fb22cebb125f5189, type: 2}
   m_IsPrefabParent: 0
