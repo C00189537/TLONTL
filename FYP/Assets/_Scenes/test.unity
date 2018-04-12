@@ -576,6 +576,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1212019961206434, guid: 09cbca2bd89f7a64fac49d70c1e79efc, type: 2}
+      propertyPath: m_Name
+      value: BlackholeContainer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09cbca2bd89f7a64fac49d70c1e79efc, type: 2}
   m_IsPrefabParent: 0

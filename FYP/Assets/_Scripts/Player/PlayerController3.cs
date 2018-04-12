@@ -87,7 +87,6 @@ public class PlayerController3 : MonoBehaviour
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().falling, 0.5f);
 
             TimeStampFallinig = Time.time + FallingCooldown;
-            ScoreController.GetInstance().SubtractScore(ScoreController.GetInstance().FallingOff);
             fallOff++;
 
         }

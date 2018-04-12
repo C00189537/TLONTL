@@ -63,7 +63,6 @@ public class CollisionManager : MonoBehaviour
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().HitObstacle, 0.5f);
             gameController.CamShake();
             Destroy(other.gameObject);
-            ScoreController.GetInstance().SubtractScore(ScoreController.GetInstance().Obstacle);
             movement.Boardvibration();
             hitObstacles++;
 
@@ -78,6 +77,13 @@ public class CollisionManager : MonoBehaviour
             movement.ResetBoard();
             playerController.fallOff = 0;
             hitObstacles = 0;
+        }
+        else if (other.gameObject.tag == "End")
+        {
+            if (playerController.fallOff <= 0 && hitObstacles <= 0)
+            {
+                ScoreController.GetInstance().AddScore(ScoreController.GetInstance().NotFallingOff);
+            }
         }
         else if (other.gameObject.tag == "Pit")
         {
@@ -206,16 +212,13 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "End")
         {
-            if (playerController.fallOff <= 0 && hitObstacles <= 0)
-            {
-                ScoreController.GetInstance().AddScore(ScoreController.GetInstance().NotFallingOff);
-            }
             Difficultycontroller.GetInstance().CalculateDifficultyScore();
-            
+
         }
         else if (other.gameObject.tag == "Step")
         {
             playerController.step = false;
+            
             Difficultycontroller.GetInstance().platformScore -= stepController.getSteps();
             Difficultycontroller.GetInstance().CalculateDifficultyScore();
         }
