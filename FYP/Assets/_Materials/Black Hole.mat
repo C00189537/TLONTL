@@ -26,8 +26,8 @@ Material:
     - _ComplicatedAmount1: 0.85
     - _ComplicatedRadiusInner1: 0.2
     - _ComplicatedRadiusOuter1: 0.27
-    - _DarkRange: 0.033
-    - _Distortion: -1.73
+    - _DarkRange: 0.2
+    - _Distortion: -2.5
     - _Form: 0.171
     - _Radius: 1
     - _SimpleAmount1: 0.5
