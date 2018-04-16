@@ -21,11 +21,11 @@ public class FloatingText : MonoBehaviour {
 
         if (color == 0)
         {
-            scoreText.color = new Color(0, 66f / 255f, 7f / 255f); //green;
+            scoreText.color = Color.green;
         }
         if (color == 1)
         {
-            scoreText.color = new Color(117f / 255f, 0, 39f / 255f);//red;
+            scoreText.color = Color.red; 
         }
     }
 }

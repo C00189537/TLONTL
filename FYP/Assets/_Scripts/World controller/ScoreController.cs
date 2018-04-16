@@ -19,6 +19,10 @@ public class ScoreController : MonoBehaviour
     float time;
     Color currentColor;
 
+    public int currentSize = 45;
+    public int newSize = 70;
+    public int standardSize = 45;
+
     //Score values
     public int Collectable = 10;
     public int Obstacle = -10;
@@ -26,8 +30,8 @@ public class ScoreController : MonoBehaviour
     public int NotFallingOff = 25;
     public int Step = 10;
     public int StepsLeft = -10;
-    public int PerfectJump = 15; 
-    
+    public int PerfectJump = 15;
+
     void Awake()
     {
         if (instance != null && instance != this)
@@ -51,15 +55,14 @@ public class ScoreController : MonoBehaviour
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         theWorld = gameControllerObject.GetComponent<WorldController>();
         currentColor = Color.white;
+        scoreText.fontSize = standardSize; 
     }
 
     void Update()
     {
         if (currentColor == Color.green || currentColor == Color.red)
         {
-            Color color = Color.Lerp(currentColor, Color.white, time);
-            time += Time.deltaTime / duration;
-            scoreText.color = color;
+            LerpColor();
         }
 
         if (currentColor.r == 0 && currentColor.g == 0 && currentColor.b == 0)
@@ -68,13 +71,35 @@ public class ScoreController : MonoBehaviour
         }
 
         UpdateScore();
+
+        if (currentSize > standardSize)
+        {
+            LerpSize();
+        }
+    }
+
+    public void LerpColor()
+    {
+        Color color = Color.Lerp(currentColor, Color.white, time);
+        time += Time.deltaTime / duration;
+        scoreText.color = color;
+    }
+
+    public void LerpSize()
+    {
+        currentSize--;
+        scoreText.fontSize = currentSize;
     }
 
     public void AddScore(int value)
     {
         score = score + value;
+
         scoreText.color = Color.green;
         currentColor = Color.green;
+
+        currentSize = newSize;
+
         time = 0;
         FloatingTextController.CreateFLoatingText(value.ToString(), player.transform, 0);
     }
@@ -83,8 +108,12 @@ public class ScoreController : MonoBehaviour
     public void SubtractScore(int value)
     {
         score = score + value;
+
         scoreText.color = Color.red;
         currentColor = Color.red;
+
+        currentSize = newSize;
+
         time = 0;
         FloatingTextController.CreateFLoatingText(value.ToString(), player.transform, 1);
     }

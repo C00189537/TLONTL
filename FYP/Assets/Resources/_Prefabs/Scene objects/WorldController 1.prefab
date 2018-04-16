@@ -79,6 +79,17 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   score: 0
   scoreInt: 0
+  duration: 2
+  currentSize: 45
+  newSize: 70
+  standardSize: 45
+  Collectable: 10
+  Obstacle: -10
+  FallingOff: -10
+  NotFallingOff: 25
+  Step: 10
+  StepsLeft: -10
+  PerfectJump: 15
 --- !u!114 &114120550342037776
 MonoBehaviour:
   m_ObjectHideFlags: 1
