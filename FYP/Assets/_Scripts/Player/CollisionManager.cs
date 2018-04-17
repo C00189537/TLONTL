@@ -8,7 +8,7 @@ public class CollisionManager : MonoBehaviour
     Stepping stepController;
     PlayerController3 playerController;
     Camera cam;
-    BoardMovement movement;
+    BoardMovement movement; 
 
     int hitObstacles = 0;
 
@@ -27,7 +27,7 @@ public class CollisionManager : MonoBehaviour
             Debug.Log("cannot find 'GameController' script");
         }
 
-        movement = gameControllerObject.GetComponent<BoardMovement>();
+        movement = gameControllerObject.GetComponent<BoardMovement>(); 
 
         //Get player script
         GameObject playerControllerObject = GameObject.FindWithTag("Player");
@@ -74,7 +74,6 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "Basic")
         {
             playerController.basic = true;
-            movement.ResetBoard();
             playerController.fallOff = 0;
             hitObstacles = 0;
         }
@@ -162,7 +161,6 @@ public class CollisionManager : MonoBehaviour
         else if (other.gameObject.tag == "Basic")
         {
             playerController.basic = true;
-            movement.ResetBoard();
         }
         else if (other.gameObject.tag == "Pit")
         {

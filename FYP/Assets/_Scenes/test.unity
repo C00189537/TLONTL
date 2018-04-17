@@ -294,6 +294,31 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38d3f8b3f9d5ea04aac27d06255c046c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &431361343 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1827215757070166, guid: bf69d8c034f4b48408c34b0ade75d994,
+    type: 2}
+  m_PrefabInternal: {fileID: 858357506}
+--- !u!114 &431361353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431361343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1a40b4e4570dc4dba5000f2dd5e80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 0}
+  world: {fileID: 0}
+  input: {fileID: 0}
+  moveTime: 0
+  increment: 0
+  l: 0
+  m: 0
+  boardOffset: 0
+  done: 0
 --- !u!1001 &440113548
 Prefab:
   m_ObjectHideFlags: 0
@@ -425,7 +450,8 @@ Prefab:
       propertyPath: standardSize
       value: 45
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114543036212112440, guid: bf69d8c034f4b48408c34b0ade75d994, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: bf69d8c034f4b48408c34b0ade75d994, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1009907257 stripped

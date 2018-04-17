@@ -117,8 +117,7 @@ public class BoardMovement : MonoBehaviour
 
     public void Boardvibration()
     {
-        board.SetPos(0.001f, 0.001f);
-        board.SetPos(-0.001f, -0.001f);
+        board.SetPos(0.01f, 0.01f);
         board.SetPos(0, 0);
     }
 

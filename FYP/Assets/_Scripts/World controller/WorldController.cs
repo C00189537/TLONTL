@@ -469,44 +469,46 @@ public class WorldController : MonoBehaviour
         cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
     }
 
+    
+
     //Flashes 
-    public IEnumerator Earthquake()
-    {
-        while (earthquake)
-        {
-            int variable = Difficultycontroller.GetInstance().difficulty; ;
+    //public IEnumerator Earthquake()
+    //{
+    //    while (earthquake)
+    //    {
+    //        int variable = Difficultycontroller.GetInstance().difficulty; ;
 
-            if (input.NManual == 0)
-            {
-                variable = Difficultycontroller.GetInstance().difficulty; ;
-            }
-            if (input.NManual == 1)
-            {
-                variable = (int)input.nEarthquakeShake;
-            }
-            switch (variable)
-            {
-                case 1:
-                    cam.GetComponent<CameraShake>().SetShakeAmount(0.05f);
-                    break;
-                case 2:
-                    cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
-                    break;
-                case 3:
-                    cam.GetComponent<CameraShake>().SetShakeAmount(0.2f);
-                    break;
-                case 4:
-                    cam.GetComponent<CameraShake>().SetShakeAmount(0.3f);
-                    break;
-                case 5:
-                    cam.GetComponent<CameraShake>().SetShakeAmount(0.35f);
-                    break;
-                default:
-                    break;
-            }
+    //        if (input.NManual == 0)
+    //        {
+    //            variable = Difficultycontroller.GetInstance().difficulty; ;
+    //        }
+    //        if (input.NManual == 1)
+    //        {
+    //            variable = (int)input.nEarthquakeShake;
+    //        }
+    //        switch (variable)
+    //        {
+    //            case 1:
+    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.05f);
+    //                break;
+    //            case 2:
+    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
+    //                break;
+    //            case 3:
+    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.2f);
+    //                break;
+    //            case 4:
+    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.3f);
+    //                break;
+    //            case 5:
+    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.35f);
+    //                break;
+    //            default:
+    //                break;
+    //        }
 
-            yield return new WaitForSeconds(rand.Next(5, 10));
-            cam.GetComponent<CameraShake>().SetTimer(1.0f);
-        }
-    }
+    //        yield return new WaitForSeconds(rand.Next(5, 10));
+    //        cam.GetComponent<CameraShake>().SetTimer(1.0f);
+    //    }
+    //}
 }

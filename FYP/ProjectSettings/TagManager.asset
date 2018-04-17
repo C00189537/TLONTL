@@ -23,6 +23,7 @@ TagManager:
   - Basic
   - Jump-pad
   - End
+  - Meteor
   layers:
   - Default
   - TransparentFX
