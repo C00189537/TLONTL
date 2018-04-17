@@ -34,7 +34,7 @@ public class Meteor : MonoBehaviour
         {
             board.BoardMovements();
             cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
-            cam.GetComponent<CameraShake>().SetTimer(0.5f);
+            cam.GetComponent<CameraShake>().SetTimer(1.0f);
         }
 
         if (timeStamp < Time.time)
@@ -42,7 +42,7 @@ public class Meteor : MonoBehaviour
             gameObject.transform.position += Vector3.down * 0.5f;
         }
 
-        if (gameObject.transform.position.y <= -50)
+        if (gameObject.transform.position.y <= -5)
         {
             gameObject.transform.position = new Vector3(0, 22, 24);
             setTimer();

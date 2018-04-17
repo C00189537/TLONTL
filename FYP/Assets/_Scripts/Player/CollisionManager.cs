@@ -63,7 +63,7 @@ public class CollisionManager : MonoBehaviour
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().HitObstacle, 0.5f);
             gameController.CamShake();
             Destroy(other.gameObject);
-            movement.Boardvibration();
+            StartCoroutine(movement.ObstacleHit());
             hitObstacles++;
 
             if (Difficultycontroller.GetInstance().platformScore > 0)
@@ -112,13 +112,11 @@ public class CollisionManager : MonoBehaviour
             playerController.pit = false;
             playerController.basic = false;
             Difficultycontroller.GetInstance().setPlatformScore();
-            movement.BoardMovements();
         }
         else if (other.gameObject.tag == "OneLeg")
         {
             playerController.pit = false;
             playerController.basic = false;
-            movement.BoardMovements();
 
             if (playerController.fallOff == 0)
             {

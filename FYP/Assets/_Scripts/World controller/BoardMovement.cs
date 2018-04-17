@@ -115,6 +115,13 @@ public class BoardMovement : MonoBehaviour
 
     }
 
+    public IEnumerator ObstacleHit()
+    {
+        board.SetPos(0.03f, 0.01f);
+        yield return new WaitForSeconds(1);
+        board.SetPos(0, 0);
+    }
+
     public void Boardvibration()
     {
         board.SetPos(0.01f, 0.01f);
