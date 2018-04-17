@@ -717,6 +717,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114335864957488778, guid: 39a62cfb5857cf346a72cc6a9113164c,
+        type: 2}
+      propertyPath: samplePeriod
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39a62cfb5857cf346a72cc6a9113164c, type: 2}
   m_IsPrefabParent: 0
@@ -830,7 +835,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114015556743878142, guid: dc7c6ecc4c3d05e47aa2f7be6897a495, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dc7c6ecc4c3d05e47aa2f7be6897a495, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1981407011 stripped

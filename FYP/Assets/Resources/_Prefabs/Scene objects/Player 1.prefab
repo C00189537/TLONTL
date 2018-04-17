@@ -489,10 +489,10 @@ MonoBehaviour:
   fallOff: 0
   translateSpeed: 10
   LeanSpeed: 0.8
-  jumpSpeed: 10
-  jumpFallSpeed: 50
+  jumpSpeed: 12
+  jumpFallSpeed: 75
   jump2Speed: 150
-  switchJumpSpeed: 70
+  switchJumpSpeed: 85
   OneLegValue: 0.09
   StepValue: 0.12
   OneLegJumpValue: 0.15

@@ -62,12 +62,12 @@ public class PlayerController3 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (platform.cop.force >= JumpValue && touchGround == false)
+        if (gameObject.transform.position.y > 1.3f && touchGround == true)
         {
-            rb.AddForce(Vector3.down * jumpFallSpeed, ForceMode.Impulse);
+            rb.AddForce(Vector3.down * jumpFallSpeed, ForceMode.Acceleration);
         }
 
-        if (platform.cop.force >= 300)
+        if (platform.cop.force >= JumpValue)
         {
             touchGround = true;
         }
@@ -183,7 +183,7 @@ public class PlayerController3 : MonoBehaviour
     {
         if (platform.cop.force < JumpValue && touchGround == true)
         {
-            rb.velocity = rb.velocity + new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+            rb.velocity = rb.velocity + new Vector3(0, jumpSpeed, rb.velocity.z);
             touchGround = false;
         }
 
