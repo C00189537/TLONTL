@@ -96,7 +96,7 @@ public class WorldController : MonoBehaviour
 
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
 
-        StartCoroutine(Earthquake());
+       
 
     }
 
