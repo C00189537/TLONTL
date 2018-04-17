@@ -26,6 +26,11 @@ public class Indicator : MonoBehaviour {
 
         color.a = alpha;
         image.color = color;
+
+        if (distance < 60)
+        {
+            image.enabled = false; 
+        }
     }
 
 

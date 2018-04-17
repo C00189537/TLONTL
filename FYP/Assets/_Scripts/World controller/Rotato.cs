@@ -8,12 +8,12 @@ public class Rotato : MonoBehaviour
     public Vector3 rotationVector;
 
     float originalY;
-    float FloatStrength = 0.3f;
+    float FloatStrength = 0.4f;
 
     // Use this for initialization
     void Start()
     {
-        Vector3 initialY = new Vector3(0, 90, 0);
+        Vector3 initialY = new Vector3(0, 90f, 0);
         transform.Rotate(initialY);
 
         this.originalY = this.transform.position.y;
@@ -24,6 +24,6 @@ public class Rotato : MonoBehaviour
     {
         transform.Rotate(rotationVector * Time.deltaTime);
 
-        transform.position = new Vector3(transform.position.x, originalY + 0.5f + ((float)Mathf.Sin(Time.time) * FloatStrength), transform.position.z);
+        transform.position = new Vector3(transform.position.x, originalY +  0.3f+ ((float)Mathf.Sin(Time.time * 3) * FloatStrength), transform.position.z);
     }
 }
