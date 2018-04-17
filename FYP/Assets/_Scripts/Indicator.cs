@@ -22,7 +22,7 @@ public class Indicator : MonoBehaviour {
     private void Update()
     {
         distance = Vector3.Distance(player.transform.position, transform.position);
-        alpha = distance / 200.0f;
+        alpha = distance / 100.0f;
 
         color.a = alpha;
         image.color = color;
