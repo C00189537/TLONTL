@@ -104,7 +104,7 @@ public class Leaning : MonoBehaviour {
     {
         int set = rand.Next(1, 4);
 
-        switch (set)
+        switch (3)
         {
             case 1:
                 theWorld.trackPiece[val].transform.Find("ObstacleFront").Translate(-2, 2, 9);
@@ -115,15 +115,15 @@ public class Leaning : MonoBehaviour {
                 break;
             case 2:
                 theWorld.trackPiece[val].transform.Find("ObstacleFront").Translate(3.5f, 2, 9);
-                theWorld.trackPiece[val].transform.Find("ObstacleMid").Translate(1, 2, 0);
+                theWorld.trackPiece[val].transform.Find("ObstacleMid").Translate(1, 2, 9);
                 theWorld.trackPiece[val].transform.Find("ObstacleBack").Translate(-3.5f, 2, -9);
                 theWorld.trackPiece[val].transform.Find("ScoreOb1").Translate(-1, 2, 2);
                 theWorld.trackPiece[val].transform.Find("ScoreOb2").Translate(-1, 2, 0);
                 break;
             case 3:
-                theWorld.trackPiece[val].transform.Find("ObstacleFront").Translate(-3.5f, 2, 9);
-                theWorld.trackPiece[val].transform.Find("ObstacleMid").Translate(-1, 2, 0);
-                theWorld.trackPiece[val].transform.Find("ObstacleBack").Translate(3.5f, 2, -9);
+                theWorld.trackPiece[val].transform.Find("ObstacleFront").Translate(-1, 2, 21);
+                theWorld.trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 9);
+                theWorld.trackPiece[val].transform.Find("ObstacleBack").Translate(3, 2, -9);
                 theWorld.trackPiece[val].transform.Find("ScoreOb1").Translate(0, 2, 2);
                 theWorld.trackPiece[val].transform.Find("ScoreOb2").Translate(0, 2, 0);
                 break;
