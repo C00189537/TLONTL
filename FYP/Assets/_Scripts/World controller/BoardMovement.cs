@@ -72,6 +72,7 @@ public class BoardMovement : MonoBehaviour
         l = PosNegValue(1);
         m = PosNegValue(1);
         StartCoroutine(Movement(boardOffset, increment, moveTime));
+        //StartCoroutine(Movements(moveTime));
     }
 
     IEnumerator Movement(float offset, float inc, float time)
@@ -115,9 +116,30 @@ public class BoardMovement : MonoBehaviour
 
     }
 
+    public IEnumerator Movements(float time)
+    //start posotion 0.0  end position 0.04
+    {
+        Vector3 startPosition = new Vector3(0, 0, 0);
+        Vector3 endPosition = new Vector3(0.03f, 0.03f, 0.03f);
+        Vector3 direction = endPosition - startPosition;
+        float distance = direction.magnitude;
+
+        board.SetPos((direction * (Time.deltaTime * (distance / time))).x * l, (direction * (Time.deltaTime * (distance / time))).y * m);
+        Debug.Log((direction * (Time.deltaTime * (distance / time))).x);
+        yield return new WaitForSeconds(1);
+
+        Vector3 startPositionB = new Vector3(0.03f, 0.03f, 0.03f);
+        Vector3 endPositionB = new Vector3(0, 0, 0);
+        Vector3 directionB = endPosition - startPosition;
+        float distanceB = direction.magnitude;
+
+        board.SetPos((direction * (Time.deltaTime * (distance / time))).x * l, (direction * (Time.deltaTime * (distance / time))).y * m);
+
+    }
+
     public IEnumerator ObstacleHit()
     {
-        board.SetPos(0.03f, 0.01f);
+        board.SetPos(0, -0.007f);
         yield return new WaitForSeconds(1);
         board.SetPos(0, 0);
     }
