@@ -11,6 +11,10 @@ public class Meteor : MonoBehaviour
 
     public float timeStamp;
     public float waitTime;
+
+    public float shakeTimeStamp;
+    public float shakeWaitTime = 4; 
+
     public BoardMovement board;
 
 
@@ -30,11 +34,12 @@ public class Meteor : MonoBehaviour
     void Update()
     {
 
-        if (gameObject.transform.position.y <= 1.0f)
+        if (gameObject.transform.position.y <= 1.0f  && shakeTimeStamp < Time.time)
         {
             board.BoardMovements();
             cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
             cam.GetComponent<CameraShake>().SetTimer(1.0f);
+            shakeTimeStamp = Time.time + shakeWaitTime; 
         }
 
         if (timeStamp < Time.time)
@@ -42,7 +47,7 @@ public class Meteor : MonoBehaviour
             gameObject.transform.position += Vector3.down * 0.5f;
         }
 
-        if (gameObject.transform.position.y <= -5)
+        if (gameObject.transform.position.y <= -3)
         {
             gameObject.transform.position = new Vector3(0, 22, 24);
             setTimer();

@@ -51,4 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c611bc65332b44db6d81416e2fca33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  samplePeriod: 60
+  samplePeriod: 10

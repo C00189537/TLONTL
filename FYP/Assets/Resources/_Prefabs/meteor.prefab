@@ -96,3 +96,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeStamp: 0
   waitTime: 0
+  board: {fileID: 0}

@@ -23,11 +23,11 @@ GameObject:
   - component: {fileID: 114669572370761672}
   - component: {fileID: 114120550342037776}
   - component: {fileID: 114204391942548182}
-  - component: {fileID: 114543036212112440}
   - component: {fileID: 114967685493788376}
   - component: {fileID: 114452428243970932}
   - component: {fileID: 114112703734035380}
   - component: {fileID: 114083709524843988}
+  - component: {fileID: 114555769293974668}
   m_Layer: 0
   m_Name: WorldController 1
   m_TagString: GameController
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theWorld: {fileID: 0}
---- !u!114 &114543036212112440
+--- !u!114 &114555769293974668
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -190,9 +190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1a40b4e4570dc4dba5000f2dd5e80d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 114204391942548182}
-  world: {fileID: 114421315659252798}
-  input: {fileID: 114120550342037776}
+  board: {fileID: 0}
+  world: {fileID: 0}
+  input: {fileID: 0}
   moveTime: 0
   increment: 0
   l: 0
