@@ -47,23 +47,23 @@ public class BoardMovement : MonoBehaviour
                 break;
             case 2:
                 increment = 0.002f;
-                moveTime = 0.3f;
+                moveTime = 0.5f;
                 boardOffset = 0.007f;
                 break;
             case 3:
                 increment = 0.002f;
-                moveTime = 0.3f;
-                boardOffset = 0.009f;
+                moveTime = 0.4f;
+                boardOffset = 0.01f;
                 break;
             case 4:
                 increment = 0.003f;
                 moveTime = 0.2f;
-                boardOffset = 0.011f;
+                boardOffset = 0.012f;
                 break;
             case 5:
                 increment = 0.004f;
                 moveTime = 0.1f;
-                boardOffset = 0.015f;
+                boardOffset = 0.016f;
                 break;
             default:
                 break;
@@ -77,15 +77,13 @@ public class BoardMovement : MonoBehaviour
 
     IEnumerator Movement(float offset, float inc, float time)
     {
-
-
         while (k < offset && done == false)
         {
             k += inc;
             yield return new WaitForSeconds(time);
             board.SetPos(l * k, m * k);
 
-            if (k > offset)
+            if (k >= offset)
             {
                 done = true;
                 break;
@@ -94,7 +92,8 @@ public class BoardMovement : MonoBehaviour
 
         while (done == true)
         {
-            k -= 0.03f;
+            k -= inc;
+            yield return new WaitForSeconds(time);
             board.SetPos(k, k);
 
             if (k <= 0)
@@ -102,11 +101,9 @@ public class BoardMovement : MonoBehaviour
                 done = false;
                 board.SetPos(0, 0);
                 k = 0;
-                yield return new WaitForSeconds(5);
                 break;
             }
         }
-
 
     }
 
@@ -139,7 +136,7 @@ public class BoardMovement : MonoBehaviour
 
     public IEnumerator ObstacleHit()
     {
-        board.SetPos(0, -0.007f);
+        board.SetPos(0, 0.007f);
         yield return new WaitForSeconds(1);
         board.SetPos(0, 0);
     }
