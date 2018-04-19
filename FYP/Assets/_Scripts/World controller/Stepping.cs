@@ -51,7 +51,7 @@ public class Stepping : MonoBehaviour
             greenLeft = GameObject.FindGameObjectsWithTag("Left");
             greenRight = GameObject.FindGameObjectsWithTag("Right");
 
-            foreach(GameObject up in greenUp)
+            foreach (GameObject up in greenUp)
             {
                 Destroy(up);
             }
@@ -65,7 +65,7 @@ public class Stepping : MonoBehaviour
             {
                 Destroy(right);
             }
-            
+
             foreach (GameObject step in Steps)
             {
                 Destroy(step);
@@ -74,11 +74,15 @@ public class Stepping : MonoBehaviour
             ResetXPosition();
         }
 
-        if (Steps.Count > 0 && mySelector == null)
+        if (Steps.Count > 0)
         {
             var firstArrow = Steps.Peek();
-            firstArrow.GetComponent<RawImage>().color = Color.white; 
-            mySelector = Instantiate(Selector);
+            firstArrow.GetComponent<RawImage>().color = Color.white;
+
+            if (mySelector == null)
+            {
+                mySelector = Instantiate(Selector);
+            }
         }
         if (!(mySelector == null))
         {
@@ -203,7 +207,7 @@ public class Stepping : MonoBehaviour
         {
             GameObject firstArrow = Steps.Peek();
             mySelector.transform.SetParent(Canvas.transform, false);
-            mySelector.transform.position = firstArrow.transform.position + new Vector3 (0, 5f, 0);
+            mySelector.transform.position = firstArrow.transform.position + new Vector3(0, 5f, 0);
         }
         else
         {
