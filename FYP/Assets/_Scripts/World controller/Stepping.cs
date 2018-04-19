@@ -9,6 +9,11 @@ public class Stepping : MonoBehaviour
     public GameObject LeftButton;
     public GameObject UpButton;
     public GameObject RightButton;
+    public GameObject Selector;
+    GameObject[] greenUp;
+    GameObject[] greenLeft;
+    GameObject[] greenRight;
+    GameObject mySelector = null;
     public Canvas Canvas;
 
     //For positioning
@@ -39,10 +44,28 @@ public class Stepping : MonoBehaviour
 
     void Update()
     {
-
         //Should destroy all the objects in the queue when player leaves stepping track
         if (playerController.step == false)
         {
+            greenUp = GameObject.FindGameObjectsWithTag("Up");
+            greenLeft = GameObject.FindGameObjectsWithTag("Left");
+            greenRight = GameObject.FindGameObjectsWithTag("Right");
+
+            foreach(GameObject up in greenUp)
+            {
+                Destroy(up);
+            }
+
+            foreach (GameObject left in greenLeft)
+            {
+                Destroy(left);
+            }
+
+            foreach (GameObject right in greenRight)
+            {
+                Destroy(right);
+            }
+            
             foreach (GameObject step in Steps)
             {
                 Destroy(step);
@@ -50,6 +73,18 @@ public class Stepping : MonoBehaviour
             Steps.Clear();
             ResetXPosition();
         }
+
+        if (Steps.Count > 0 && mySelector == null)
+        {
+            var firstArrow = Steps.Peek();
+            firstArrow.GetComponent<RawImage>().color = Color.white; 
+            mySelector = Instantiate(Selector);
+        }
+        if (!(mySelector == null))
+        {
+            SelectArrow();
+        }
+
     }
 
     // parameter is received from worldcontroller
@@ -160,5 +195,22 @@ public class Stepping : MonoBehaviour
     public int getSteps()
     {
         return Steps.Count;
+    }
+
+    public void SelectArrow()
+    {
+        if (Steps.Count > 0)
+        {
+            GameObject firstArrow = Steps.Peek();
+            mySelector.transform.SetParent(Canvas.transform, false);
+            mySelector.transform.position = firstArrow.transform.position + new Vector3 (0, 5f, 0);
+        }
+        else
+        {
+            Destroy(mySelector);
+        }
+
+
+
     }
 }
