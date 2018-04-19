@@ -56,6 +56,7 @@ public class WorldController : MonoBehaviour
     Stepping stepping;
     Leaning leaning;
     Jumping jumping;
+    JumpingOneLeg jumpOneLeg; 
     public NetworkInput input;
 
     void Start()
@@ -64,6 +65,7 @@ public class WorldController : MonoBehaviour
         stepping = GetComponent<Stepping>();
         leaning = GetComponent<Leaning>();
         jumping = GetComponent<Jumping>();
+        jumpOneLeg = GetComponent<JumpingOneLeg>();
 
         restPhase = 4;
 
@@ -86,18 +88,12 @@ public class WorldController : MonoBehaviour
         trackPiece[1] = nextSection;
         trackPiece[2] = farSection;
 
-        //Initialises the first set of obstacles
-        //ObstacleSpawn(nextTracker);
-
         //Set up the trackers array
         trackers[0] = currentTracker;
         trackers[1] = nextTracker;
         trackers[2] = farTracker;
 
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
-
-       
-
     }
 
     void Update()
@@ -385,71 +381,28 @@ public class WorldController : MonoBehaviour
         }
         if (input.NManual == 1)
         {
-            variable = (int)input.nJumpDifficulty;
+            variable = (int)input.nOneLegJump;
         }
 
-        if (variable == 1)
+        switch (variable)
         {
-            int side = rand.Next(1, 3);
-            //spawns the platforms on the same side
-            if (side == 1)
-            {
-                trackPiece[val].transform.Find("Pad2").Translate(0, 1.0f, 0);
-                trackPiece[val].transform.Find("Pad4").Translate(0, 1.0f, 0);
-                trackPiece[val].transform.Find("Pad3").gameObject.SetActive(false);
-                trackPiece[val].transform.Find("Pad5").gameObject.SetActive(false);
-
-                trackPiece[val].transform.Find("Pad6").Translate(-2.5f, 0.0f, 0);
-                trackPiece[val].transform.Find("Pad1").Translate(2.5f, 0, 0);
-            }
-            else
-            {
-                trackPiece[val].transform.Find("Pad3").Translate(0, 1.0f, 0);
-                trackPiece[val].transform.Find("Pad5").Translate(0, 1.0f, 0);
-                trackPiece[val].transform.Find("Pad2").gameObject.SetActive(false);
-                trackPiece[val].transform.Find("Pad4").gameObject.SetActive(false);
-
-                trackPiece[val].transform.Find("Pad6").Translate(2.5f, 0.0f, 0);
-                trackPiece[val].transform.Find("Pad1").Translate(-2.5f, 0, 0);
-            }
-        }
-        else
-        {
-            int front = 1;// rand.Next(1, 3);
-            int back = 2;// rand.Next(1, 3);
-            int endP = rand.Next(1, 3);
-
-            //Spawns random pads
-            if (front == 1)
-            {
-                trackPiece[val].transform.Find("Pad2").Translate(0, 1.0f, 0);
-                trackPiece[val].transform.Find("Pad3").gameObject.SetActive(false);
-            }
-            else
-            {
-                trackPiece[val].transform.Find("Pad3").Translate(0, 1.0f, 0);
-                trackPiece[val].transform.Find("Pad2").gameObject.SetActive(false);
-            }
-            if (back == 1)
-            {
-                trackPiece[val].transform.Find("Pad4").Translate(0, 1.0f, 0);
-                trackPiece[val].transform.Find("Pad5").gameObject.SetActive(false);
-            }
-            else
-            {
-                trackPiece[val].transform.Find("Pad5").Translate(0, 1.0f, 0);
-                trackPiece[val].transform.Find("Pad4").gameObject.SetActive(false);
-            }
-            if (endP == 1)
-            {
-                trackPiece[val].transform.Find("Pad6").Translate(-2.5f, 0.0f, 0);
-                trackPiece[val].transform.Find("Pad1").Translate(2.5f, 0, 0);
-            }
-            else
-            {
-                trackPiece[val].transform.Find("Pad6").Translate(2.5f, 0.0f, 0);
-                trackPiece[val].transform.Find("Pad1").Translate(-2.5f, 0, 0);
-            }
+            case 1:
+                jumpOneLeg.FormationOne(val);
+                break;
+            case 2:
+                jumpOneLeg.FormationTwo(val);
+                break;
+            case 3:
+                jumpOneLeg.FormationThree(val);
+                break;
+            case 4:
+                jumpOneLeg.FormationFour(val);
+                break;
+            case 5:
+                jumpOneLeg.FormationFive(val);
+                break;
+            default:
+                break;
         }
     }
 
@@ -468,47 +421,4 @@ public class WorldController : MonoBehaviour
     {
         cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
     }
-
-    
-
-    //Flashes 
-    //public IEnumerator Earthquake()
-    //{
-    //    while (earthquake)
-    //    {
-    //        int variable = Difficultycontroller.GetInstance().difficulty; ;
-
-    //        if (input.NManual == 0)
-    //        {
-    //            variable = Difficultycontroller.GetInstance().difficulty; ;
-    //        }
-    //        if (input.NManual == 1)
-    //        {
-    //            variable = (int)input.nEarthquakeShake;
-    //        }
-    //        switch (variable)
-    //        {
-    //            case 1:
-    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.05f);
-    //                break;
-    //            case 2:
-    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
-    //                break;
-    //            case 3:
-    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.2f);
-    //                break;
-    //            case 4:
-    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.3f);
-    //                break;
-    //            case 5:
-    //                cam.GetComponent<CameraShake>().SetShakeAmount(0.35f);
-    //                break;
-    //            default:
-    //                break;
-    //        }
-
-    //        yield return new WaitForSeconds(rand.Next(5, 10));
-    //        cam.GetComponent<CameraShake>().SetTimer(1.0f);
-    //    }
-    //}
 }
