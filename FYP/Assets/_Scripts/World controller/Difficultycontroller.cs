@@ -142,6 +142,9 @@ public class Difficultycontroller : MonoBehaviour
                 case 4:
                     difficultyScore -= 4;
                     break;
+                case 5:
+                    difficultyScore -= 5;
+                    break; 
                 default:
                     break;
             }
