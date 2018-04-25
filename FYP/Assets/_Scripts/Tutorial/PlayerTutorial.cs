@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerTutorial : MonoBehaviour {
 
     public DynSTABLE platform;
-
+    public float OneLegValue; 
     public float xVal;
     private bool leanLeft, LeanRight;
     public float translateSpeed;
@@ -19,6 +19,8 @@ public class PlayerTutorial : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        Inputs(); 
 		if (lean)
         {
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
@@ -27,7 +29,6 @@ public class PlayerTutorial : MonoBehaviour {
             if (LeanRight)
             {
                 gameObject.transform.Translate((xVal - gameObject.transform.position.x) / translateSpeed, 0, 0);
-
             }
             else if (leanLeft)
             {
@@ -49,6 +50,31 @@ public class PlayerTutorial : MonoBehaviour {
 
         }
 	}
+
+    public void Inputs()
+    {
+
+        if (platform.cop.x > OneLegValue)
+        {
+            LeanRight = true;
+            leanLeft = false;
+        }
+        if (platform.cop.x <= OneLegValue)
+        {
+            LeanRight = false;
+        }
+
+        if (platform.cop.x < -OneLegValue)
+        {
+            LeanRight = false;
+            leanLeft = true;
+        }
+
+        if (platform.cop.x >= -OneLegValue)
+        {
+            leanLeft = false;
+        }
+    }
 
     void OnTriggerStay(Collider other)
     {
