@@ -358,7 +358,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 233613850}
+  stepping: {fileID: 0}
   OneLegValue: 0.09
+  StepValue: 0
   xVal: 1
   translateSpeed: 10
   LeanSpeed: 1
@@ -378,16 +380,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618a77db217d83644b01ea335dfe3612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftButton: {fileID: 1947113244769786, guid: 385fa7185cfda484e9c9c9a40f7ad9b0, type: 2}
-  UpButton: {fileID: 1097476532420890, guid: 3588856849147924faabd665d18e04cd, type: 2}
-  RightButton: {fileID: 1849859357751624, guid: 2df67f3573acec444912aa01756b1cc6,
+  LeftButton: {fileID: 1584990590800218, guid: fb05c8ec3887946429f28cdfd80ee9a0, type: 2}
+  UpButton: {fileID: 1335567790518504, guid: 6ea692aa481bc2046a45e46806ebd3a3, type: 2}
+  RightButton: {fileID: 1310167457212646, guid: d7dce2ee5248ba44fb20a702009097f7,
     type: 2}
+  Selector: {fileID: 1216683093079492, guid: 568c874b1469b384c80f3461d5939ea5, type: 2}
   Canvas: {fileID: 1384552214}
   resetYValue: -100
   Xvalue: 0
-  Yvalue: -65
+  Yvalue: 65
   Zvalue: 0
-  ButtonSpacing: 70
+  ButtonSpacing: -70
 --- !u!1 &702572723
 GameObject:
   m_ObjectHideFlags: 0

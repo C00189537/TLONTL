@@ -2,29 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTutorial : MonoBehaviour {
+public class PlayerTutorial : MonoBehaviour
+{
 
     public DynSTABLE platform;
-    public float OneLegValue; 
+    public StepTutorial stepping; 
+    public float OneLegValue;
+    public float StepValue; 
     public float xVal;
     private bool leanLeft, LeanRight;
     public float translateSpeed;
     public float LeanSpeed;
 
-    public bool lean, oneLeg, step, jump, jump2; 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    public bool lean, oneLeg, step, jump, jump2;
+    // Use this for initialization
+    void Start()
+    {
+        stepping = GetComponent<StepTutorial>(); 
+    }
 
-        Inputs(); 
-		if (lean)
+    // Update is called once per frame
+    void Update()
+    {
+
+        Inputs();
+        if (lean)
         {
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
-        } else if (oneLeg)
+        }
+        else if (oneLeg)
         {
             if (LeanRight)
             {
@@ -42,14 +48,39 @@ public class PlayerTutorial : MonoBehaviour {
             {
                 gameObject.transform.Translate(-((0 + gameObject.transform.position.x) / translateSpeed), 0, 0);
             }
-        } else if (jump)
+        }
+        else if (step)
         {
-
-        } else if (jump2)
+            Step();
+        }
+        else if (jump)
         {
 
         }
-	}
+        else if (jump2)
+        {
+
+        }
+    }
+
+    void Step()
+    {
+        if (platform.cop.x > StepValue && platform.cop.z >= -0.15f && platform.cop.z <= 0.15f)
+        {
+            stepping.DestroyRight();
+        }
+
+        if (platform.cop.z <= -StepValue && platform.cop.x >= -0.15f && platform.cop.x <= 0.15f)
+        {
+            stepping.DestroyUp();
+        }
+
+        if (platform.cop.x < -StepValue && platform.cop.z >= -0.15f && platform.cop.z <= 0.15f)
+        {
+            stepping.DestroyLeft();
+        }
+
+    }
 
     public void Inputs()
     {
@@ -85,7 +116,7 @@ public class PlayerTutorial : MonoBehaviour {
             oneLeg = false;
             step = false;
             jump = false;
-            jump2 = false; 
+            jump2 = false;
         }
         else if (other.gameObject.tag == "OneLeg")
         {
@@ -102,6 +133,11 @@ public class PlayerTutorial : MonoBehaviour {
             step = true;
             jump = false;
             jump2 = false;
+            if (stepping.getSteps() <= 0)
+            {
+                stepping.GenerateButtons(3);
+            }
+            
         }
         else if (other.gameObject.tag == "Jump")
         {
