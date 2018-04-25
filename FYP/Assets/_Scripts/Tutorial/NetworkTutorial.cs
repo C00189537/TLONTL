@@ -71,7 +71,7 @@ public class NetworkTutorial : MonoBehaviour {
         {
             leaning.transform.position = new Vector3(-120, 0, 0);
             oneLeg.transform.position = new Vector3(-80, 0, 0);
-            stepping.transform.position = new Vector3(40, 0, 0);
+            stepping.transform.position = new Vector3(-40, 0, 0);
             jumping.transform.position = new Vector3(0, 0, 0);
             jumpingTwo.transform.position = new Vector3(40, 0, 0);
             //this.transform.position = new Vector3(120, 1, 0);
