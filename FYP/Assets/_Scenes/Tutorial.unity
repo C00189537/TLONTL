@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 637390469}
   - component: {fileID: 637390474}
   - component: {fileID: 637390475}
+  - component: {fileID: 637390476}
   m_Layer: 0
   m_Name: TutPlayer
   m_TagString: PlayerTut
@@ -359,16 +360,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platform: {fileID: 233613850}
   stepping: {fileID: 0}
+  input: {fileID: 0}
   OneLegValue: 0.09
   StepValue: 0
   xVal: 1
   translateSpeed: 10
   LeanSpeed: 1
+  rb: {fileID: 0}
+  touchGround: 1
+  flying: 0
   lean: 0
   oneLeg: 0
   step: 0
   jump: 0
   jump2: 0
+  jumpFallSpeed: 75
+  JumpValue: 300
+  jumpSpeed: 12
+  xMax: 3
+  switchJumpSpeed: 85
+  pressure: 100
 --- !u!114 &637390475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +402,24 @@ MonoBehaviour:
   Yvalue: 65
   Zvalue: 0
   ButtonSpacing: -70
+--- !u!114 &637390476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 637390468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f9573c99bde3d49ac18f95a8fa6c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  network: {fileID: 1528284187}
+  nLeaning: 0
+  nOneLeg: 0
+  nStepping: 0
+  nJumping: 0
+  nJumpingOneleg: 0
+  nMomZ: 0
 --- !u!1 &702572723
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,12 +605,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   network: {fileID: 1528284187}
-  step: {fileID: 637390475}
   nLeaning: 0
   nOneLeg: 0
   nStepping: 0
   nJumping: 0
   nJumpingOneleg: 0
+  nMomZ: 0
 --- !u!65 &708934314
 BoxCollider:
   m_ObjectHideFlags: 0

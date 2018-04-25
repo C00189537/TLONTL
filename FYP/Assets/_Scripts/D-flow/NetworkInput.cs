@@ -6,7 +6,7 @@ public class NetworkInput : MonoBehaviour
 {
 
     public DFlowNetwork network;
-    public WorldController theWorld;
+   // public WorldController theWorld;
 
     private float nDifficulty = 0;
     private float nManual = 0;
@@ -51,7 +51,7 @@ public class NetworkInput : MonoBehaviour
         set
         {
             nDifficulty = value;
-            diffChange = nDifficulty;
+            diffChange = nDifficulty;   
             Difficultycontroller.GetInstance().BeginDifficulty((int)NDifficulty);
         }
     }
@@ -72,7 +72,7 @@ public class NetworkInput : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        theWorld = gameObject.GetComponent<WorldController>();
+       // theWorld = gameObject.GetComponent<WorldController>();
     }
 
     // Update is called once per frame
