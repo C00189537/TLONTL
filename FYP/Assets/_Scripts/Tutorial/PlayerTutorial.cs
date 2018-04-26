@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class PlayerTutorial : MonoBehaviour
 {
@@ -22,6 +23,15 @@ public class PlayerTutorial : MonoBehaviour
     public float jumpSpeed;
     public float xMax;
 
+    //UI elements
+    public Text Scoretext;
+    public Image greenLeft;
+    public Image redLeft;
+    public Image redRight;
+    public Image greenRight;
+    int i = 1;
+    int j = 1; 
+
     public float switchJumpSpeed;
 
     private const int MAXJUMP = 1;
@@ -36,7 +46,8 @@ public class PlayerTutorial : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         input = GetComponent<NetworkTutorial>();
 
-        score = 0; 
+        score = 0;
+        
     }
 
     private void FixedUpdate()
@@ -73,10 +84,15 @@ public class PlayerTutorial : MonoBehaviour
             if (LeanRight)
             {
                 gameObject.transform.Translate((xVal - gameObject.transform.position.x) / translateSpeed, 0, 0);
+                i++;
+                greenRight.rectTransform.sizeDelta = new Vector2(100, i);
             }
             else if (leanLeft)
             {
                 gameObject.transform.Translate(-((xVal + gameObject.transform.position.x) / translateSpeed), 0, 0);
+                j++;
+                greenLeft.rectTransform.sizeDelta = new Vector2(100, j);
+
             }
             else if (!LeanRight)
             {
@@ -96,10 +112,6 @@ public class PlayerTutorial : MonoBehaviour
         {
             Jump();
         }
-        else if (jump2)
-        {
-
-        }
     }
 
     void Jump()
@@ -110,8 +122,8 @@ public class PlayerTutorial : MonoBehaviour
             touchGround = false;
         }
 
-
     }
+
     void Jump2()
     {
         float step = switchJumpSpeed * Time.deltaTime;
@@ -230,7 +242,8 @@ public class PlayerTutorial : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             score++; 
-            Destroy(other.gameObject); 
+            Destroy(other.gameObject);
+            Scoretext.text = "Score: " +score.ToString();
         }
     }
 
@@ -239,6 +252,11 @@ public class PlayerTutorial : MonoBehaviour
 
         if (other.gameObject.tag == "Lean")
         {
+            Scoretext.enabled = true;
+            redLeft.enabled = false;
+            redRight.enabled = false;
+            greenLeft.enabled = false;
+            greenRight.enabled = false; 
             lean = true;
             oneLeg = false;
             step = false;
@@ -247,6 +265,11 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "OneLeg")
         {
+            Scoretext.enabled = false;
+            redLeft.enabled = true;
+            redRight.enabled = true;
+            greenLeft.enabled = true;
+            greenRight.enabled = true;
             lean = false;
             oneLeg = true;
             step = false;
@@ -255,6 +278,11 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "Step")
         {
+            Scoretext.enabled = false;
+            redLeft.enabled = false;
+            redRight.enabled = false;
+            greenLeft.enabled = false;
+            greenRight.enabled = false;
             lean = false;
             oneLeg = false;
             step = true;
@@ -269,6 +297,11 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "Jump")
         {
+            Scoretext.enabled = false;
+            redLeft.enabled = false;
+            redRight.enabled = false;
+            greenLeft.enabled = false;
+            greenRight.enabled = false;
             lean = false;
             oneLeg = false;
             step = false;
@@ -277,6 +310,11 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "Jump2")
         {
+            Scoretext.enabled = false;
+            redLeft.enabled = false;
+            redRight.enabled = false;
+            greenLeft.enabled = false;
+            greenRight.enabled = false;
             lean = false;
             oneLeg = false;
             step = false;
