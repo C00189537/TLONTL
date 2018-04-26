@@ -30,7 +30,6 @@ public class StepTutorial : MonoBehaviour
 
     int previousArrow = 4;
 
-
     System.Random randy = new System.Random();
 
     PlayerTutorial playerController;
@@ -47,7 +46,7 @@ public class StepTutorial : MonoBehaviour
 
     void Update()
     {
-
+        
         //Should destroy all the objects in the queue when player leaves stepping track
         if (Steps.Count <= 0)
         {
@@ -151,6 +150,7 @@ public class StepTutorial : MonoBehaviour
 
             if (firstArrow.CompareTag("Right"))
             {
+                playerController.steppingScore++;
                 Steps.Dequeue();
                 firstArrow.GetComponent<RawImage>().color = Color.green;
             }
@@ -168,6 +168,7 @@ public class StepTutorial : MonoBehaviour
 
             if (firstArrow.CompareTag("Up"))
             {
+                playerController.steppingScore++;
                 Steps.Dequeue();
                 firstArrow.GetComponent<RawImage>().color = Color.green;
             }
@@ -184,6 +185,7 @@ public class StepTutorial : MonoBehaviour
 
             if (firstArrow.CompareTag("Left"))
             {
+                playerController.steppingScore++;
                 Steps.Dequeue();
                 firstArrow.GetComponent<RawImage>().color = Color.green;
             }
@@ -191,9 +193,6 @@ public class StepTutorial : MonoBehaviour
         }
 
     }
-
-
-
 
     public void ResetXPosition()
     {

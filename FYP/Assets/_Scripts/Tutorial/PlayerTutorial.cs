@@ -25,7 +25,7 @@ public class PlayerTutorial : MonoBehaviour
     bool leftDone = false, rightDOne = false;
 
     //UI elements
-    public Text Scoretext;
+    public Text Scoretext;//leaning
     public Image greenLeft;
     public Image redLeft;
     public Image redRight;
@@ -33,12 +33,19 @@ public class PlayerTutorial : MonoBehaviour
     float i = 0;
     float j = 0;
 
+    public Text steppingText;
+    public Text jumpingText;
+    public Text jumpingTwoText; 
+
     public float switchJumpSpeed;
 
     private const int MAXJUMP = 1;
     public float pressure;
 
-    public int score;
+    public int Leanscore; //for leaning
+    public int steppingScore;
+    public int JumpScore;
+    public int JumpTwoScore;
 
     // Use this for initialization
     void Start()
@@ -47,7 +54,7 @@ public class PlayerTutorial : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         input = GetComponent<NetworkTutorial>();
 
-        score = 0;
+        Leanscore = 0;
 
     }
 
@@ -195,19 +202,23 @@ public class PlayerTutorial : MonoBehaviour
 
     void Step()
     {
+        
         if (platform.cop.x > StepValue && platform.cop.z >= -0.15f && platform.cop.z <= 0.15f)
         {
             stepping.DestroyRight();
+           
         }
 
         if (platform.cop.z <= -StepValue && platform.cop.x >= -0.15f && platform.cop.x <= 0.15f)
         {
             stepping.DestroyUp();
+           
         }
 
         if (platform.cop.x < -StepValue && platform.cop.z >= -0.15f && platform.cop.z <= 0.15f)
         {
             stepping.DestroyLeft();
+            
         }
 
     }
@@ -252,9 +263,9 @@ public class PlayerTutorial : MonoBehaviour
     {
         if (other.gameObject.tag == "Coin")
         {
-            score++;
+            Leanscore++;
             Destroy(other.gameObject);
-            Scoretext.text = "Score: " + score.ToString();
+            Scoretext.text = "Score: " + Leanscore.ToString();
         }
     }
 
@@ -268,6 +279,9 @@ public class PlayerTutorial : MonoBehaviour
             redRight.enabled = false;
             greenLeft.enabled = false;
             greenRight.enabled = false;
+            steppingText.enabled = false;
+            jumpingText.enabled = false;
+            jumpingTwoText.enabled = false; 
             lean = true;
             oneLeg = false;
             step = false;
@@ -281,6 +295,9 @@ public class PlayerTutorial : MonoBehaviour
             redRight.enabled = true;
             greenLeft.enabled = true;
             greenRight.enabled = true;
+            steppingText.enabled = false;
+            jumpingText.enabled = false;
+            jumpingTwoText.enabled = false;
             lean = false;
             oneLeg = true;
             step = false;
@@ -294,6 +311,9 @@ public class PlayerTutorial : MonoBehaviour
             redRight.enabled = false;
             greenLeft.enabled = false;
             greenRight.enabled = false;
+            steppingText.enabled = true;
+            jumpingText.enabled = false;
+            jumpingTwoText.enabled = false;
             lean = false;
             oneLeg = false;
             step = true;
@@ -304,7 +324,7 @@ public class PlayerTutorial : MonoBehaviour
             {
                 stepping.GenerateButtons(3);
             }
-
+            steppingText.text = steppingScore.ToString() + "/10"; 
         }
         else if (other.gameObject.tag == "Jump")
         {
@@ -313,11 +333,16 @@ public class PlayerTutorial : MonoBehaviour
             redRight.enabled = false;
             greenLeft.enabled = false;
             greenRight.enabled = false;
+            steppingText.enabled = false;
+            jumpingText.enabled = true;
+            jumpingTwoText.enabled = false;
             lean = false;
             oneLeg = false;
             step = false;
             jump = true;
             jump2 = false;
+            jumpingText.text = JumpScore.ToString() + "/10"; 
+
         }
         else if (other.gameObject.tag == "Jump2")
         {
@@ -326,11 +351,15 @@ public class PlayerTutorial : MonoBehaviour
             redRight.enabled = false;
             greenLeft.enabled = false;
             greenRight.enabled = false;
+            steppingText.enabled = false;
+            jumpingText.enabled = false;
+            jumpingTwoText.enabled = true;
             lean = false;
             oneLeg = false;
             step = false;
             jump = false;
             jump2 = true;
+            jumpingTwoText.text = JumpTwoScore.ToString() + "/10";
         }
 
     }
