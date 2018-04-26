@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class PlayerTutorial : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class PlayerTutorial : MonoBehaviour
     public StepTutorial stepping;
     public NetworkTutorial input;
     public float OneLegValue;
-    public float StepValue; 
+    public float StepValue;
     public float xVal;
     private bool leanLeft, LeanRight, jumping2, jumping2L, jumping2R;
     public float translateSpeed;
@@ -22,6 +22,7 @@ public class PlayerTutorial : MonoBehaviour
     public float JumpValue;
     public float jumpSpeed;
     public float xMax;
+    bool leftDone = false, rightDOne = false;
 
     //UI elements
     public Text Scoretext;
@@ -29,15 +30,15 @@ public class PlayerTutorial : MonoBehaviour
     public Image redLeft;
     public Image redRight;
     public Image greenRight;
-    int i = 1;
-    int j = 1; 
+    float i = 0;
+    float j = 0;
 
     public float switchJumpSpeed;
 
     private const int MAXJUMP = 1;
     public float pressure;
 
-    public int score; 
+    public int score;
 
     // Use this for initialization
     void Start()
@@ -47,7 +48,7 @@ public class PlayerTutorial : MonoBehaviour
         input = GetComponent<NetworkTutorial>();
 
         score = 0;
-        
+
     }
 
     private void FixedUpdate()
@@ -68,8 +69,8 @@ public class PlayerTutorial : MonoBehaviour
 
         }
     }
-        // Update is called once per frame
-        void Update()
+    // Update is called once per frame
+    void Update()
     {
         Inputs();
 
@@ -84,23 +85,33 @@ public class PlayerTutorial : MonoBehaviour
             if (LeanRight)
             {
                 gameObject.transform.Translate((xVal - gameObject.transform.position.x) / translateSpeed, 0, 0);
-                i++;
-                greenRight.rectTransform.sizeDelta = new Vector2(100, i);
+                if (i < 186)
+                {
+                    i += 0.2f;
+                    greenRight.rectTransform.sizeDelta = new Vector2(100, i);
+                }
+
             }
             else if (leanLeft)
             {
                 gameObject.transform.Translate(-((xVal + gameObject.transform.position.x) / translateSpeed), 0, 0);
-                j++;
-                greenLeft.rectTransform.sizeDelta = new Vector2(100, j);
+                if (j < 186)
+                {
+                    j += 0.2f;
+                    greenLeft.rectTransform.sizeDelta = new Vector2(100, j);
+                }
+
 
             }
             else if (!LeanRight)
             {
                 gameObject.transform.Translate(-((0 + gameObject.transform.position.x) / translateSpeed), 0, 0);
+
             }
             else if (!leanLeft)
             {
                 gameObject.transform.Translate(-((0 + gameObject.transform.position.x) / translateSpeed), 0, 0);
+
             }
         }
 
@@ -241,9 +252,9 @@ public class PlayerTutorial : MonoBehaviour
     {
         if (other.gameObject.tag == "Coin")
         {
-            score++; 
+            score++;
             Destroy(other.gameObject);
-            Scoretext.text = "Score: " +score.ToString();
+            Scoretext.text = "Score: " + score.ToString();
         }
     }
 
@@ -256,7 +267,7 @@ public class PlayerTutorial : MonoBehaviour
             redLeft.enabled = false;
             redRight.enabled = false;
             greenLeft.enabled = false;
-            greenRight.enabled = false; 
+            greenRight.enabled = false;
             lean = true;
             oneLeg = false;
             step = false;
@@ -293,7 +304,7 @@ public class PlayerTutorial : MonoBehaviour
             {
                 stepping.GenerateButtons(3);
             }
-            
+
         }
         else if (other.gameObject.tag == "Jump")
         {
