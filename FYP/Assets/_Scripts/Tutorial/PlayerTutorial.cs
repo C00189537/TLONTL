@@ -27,12 +27,16 @@ public class PlayerTutorial : MonoBehaviour
     private const int MAXJUMP = 1;
     public float pressure;
 
+    public int score; 
+
     // Use this for initialization
     void Start()
     {
         stepping = GetComponent<StepTutorial>();
         rb = GetComponent<Rigidbody>();
-        input = GetComponent<NetworkTutorial>(); 
+        input = GetComponent<NetworkTutorial>();
+
+        score = 0; 
     }
 
     private void FixedUpdate()
@@ -56,12 +60,14 @@ public class PlayerTutorial : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-
         Inputs();
+
         if (lean)
         {
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, 1, -8);
         }
+
         else if (oneLeg)
         {
             if (LeanRight)
@@ -81,6 +87,7 @@ public class PlayerTutorial : MonoBehaviour
                 gameObject.transform.Translate(-((0 + gameObject.transform.position.x) / translateSpeed), 0, 0);
             }
         }
+
         else if (step)
         {
             Step();
@@ -218,6 +225,15 @@ public class PlayerTutorial : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Coin")
+        {
+            score++; 
+            Destroy(other.gameObject); 
+        }
+    }
+
     void OnTriggerStay(Collider other)
     {
 
@@ -244,6 +260,7 @@ public class PlayerTutorial : MonoBehaviour
             step = true;
             jump = false;
             jump2 = false;
+
             if (stepping.getSteps() <= 0)
             {
                 stepping.GenerateButtons(3);

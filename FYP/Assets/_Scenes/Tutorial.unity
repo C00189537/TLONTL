@@ -263,7 +263,7 @@ MonoBehaviour:
   input: {fileID: 0}
   OneLegValue: 0.09
   StepValue: 0
-  xVal: 1
+  xVal: 10
   translateSpeed: 10
   LeanSpeed: 1
   rb: {fileID: 0}
@@ -280,6 +280,7 @@ MonoBehaviour:
   xMax: 3
   switchJumpSpeed: 85
   pressure: 100
+  score: 0
 --- !u!114 &637390475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,7 +545,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1072651988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.89, y: 1.66, z: 6.35}
+  m_LocalPosition: {x: -9.89, y: 1.4, z: -8}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 311348067}
@@ -694,7 +695,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1220518611}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.93, y: 1.66, z: -8.8}
+  m_LocalPosition: {x: -4, y: 1.4, z: -8}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 311348067}
@@ -1059,7 +1060,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4166584791542002, guid: df1e81b21ed29344fa46535998a15755, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.57
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166584791542002, guid: df1e81b21ed29344fa46535998a15755, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df1e81b21ed29344fa46535998a15755, type: 2}
