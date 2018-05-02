@@ -28,6 +28,9 @@ TagManager:
   - LeanTut
   - TutorialWorld
   - OneLegTut
+  - StepTut
+  - JumpTut
+  - JumpTwoTut
   layers:
   - Default
   - TransparentFX

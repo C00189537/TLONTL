@@ -9,7 +9,10 @@ public class LeanTutorial : MonoBehaviour
     public PlayerTutorial player;
     public TutorialWorld tutWorld; 
     public Image instructions;
-    public Image OtherInstructionsOne; 
+    public Image OtherInstructionsOne;
+    public Image OtherInstructionsTwo;
+    public Image OtherInstructionsThree;
+    public Image OtherInstructionsFour;
 
 
     public GameObject collectPrefab;
@@ -35,8 +38,12 @@ public class LeanTutorial : MonoBehaviour
         tutWorld = GameObject.FindGameObjectWithTag("TutorialWorld").GetComponent<TutorialWorld>();
 
         StartCoroutine(CountDown());
+
         instructions.enabled = true;
-        OtherInstructionsOne.enabled = false; 
+        OtherInstructionsOne.enabled = false;
+        OtherInstructionsTwo.enabled = false;
+        OtherInstructionsThree.enabled = false;
+        OtherInstructionsFour.enabled = false; 
 
         checkMark.enabled = false; 
     }
@@ -56,14 +63,14 @@ public class LeanTutorial : MonoBehaviour
             timeText.text = ""; 
         }
 
-        if (gameStart && nrOfCollect <= 3 && !gameEnd)
+        if (gameStart && nrOfCollect < 1 && !gameEnd)//change later
         {
             nrOfCollect++;
             int xPos = rand.Next(-13, 13);
             Instantiate(collectPrefab, new Vector3(xPos, 1, -8), Quaternion.identity);
         }           
 
-        if (player.Leanscore >= 25)
+        if (player.Leanscore >= 26 && gameStart)
         {
             gameEnd = true;
             gameStart = false;
@@ -71,6 +78,7 @@ public class LeanTutorial : MonoBehaviour
 
         if (gameEnd)
         {
+            player.transform.position = new Vector3(0, 1, -8);
             GameObject[] objects = GameObject.FindGameObjectsWithTag("Coin");
             foreach( GameObject coin in objects){
                 Destroy(coin);
@@ -107,6 +115,9 @@ public class LeanTutorial : MonoBehaviour
         checkMark.enabled = true; 
         yield return new WaitForSeconds(4);
         TutorialWorld.LeanPlatform = false;
-        TutorialWorld.OneLegPlatform = true; 
+        TutorialWorld.OneLegPlatform = true;
+        TutorialWorld.StepPlatform = false;
+        TutorialWorld.JumpPlatform = false;
+        TutorialWorld.JumpTwoPlatform = false; 
     }
 }

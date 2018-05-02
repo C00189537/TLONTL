@@ -8,7 +8,10 @@ public class TutorialWorld : MonoBehaviour
     public static bool LeanPlatform, OneLegPlatform, StepPlatform, JumpPlatform, JumpTwoPlatform;
 
     public LeanTutorial leanTut;
-    public OneLegTutorial oneLegTut; 
+    public OneLegTutorial oneLegTut;
+    public SteppingTutorial stepTut;
+    public JumpTutorial jumpTut;
+    public JumpTwoTutorial jumpTwoTut; 
 
     public GameObject leaning;
     public GameObject oneLeg;
@@ -27,7 +30,11 @@ public class TutorialWorld : MonoBehaviour
         // leanTut = GameObject.FindWithTag("LeanTut").GetComponent<LeanTutorial>();
         //oneLegTut = GameObject.FindWithTag("OneLegTut").GetComponent<OneLegTutorial>(); 
         leanTut = leaning.GetComponent<LeanTutorial>();
-        oneLegTut = oneLeg.GetComponent<OneLegTutorial>(); 
+        oneLegTut = oneLeg.GetComponent<OneLegTutorial>();
+        stepTut = stepping.GetComponent<SteppingTutorial>();
+        jumpTut = jumping.GetComponent<JumpTutorial>();
+        jumpTwoTut = jumpingTwo.GetComponent<JumpTwoTutorial>(); 
+        
     }
 
     public void Update()
@@ -36,6 +43,9 @@ public class TutorialWorld : MonoBehaviour
         {
             leanTut.enabled = true;
             oneLegTut.enabled = false;
+            stepTut.enabled = false;
+            jumpTut.enabled = false;
+            jumpTwoTut.enabled = false; 
 
             leaning.transform.position = new Vector3(0, 0, 0);
             oneLeg.transform.position = new Vector3(40, 0, 0);
@@ -46,7 +56,10 @@ public class TutorialWorld : MonoBehaviour
         else if (OneLegPlatform)
         {
             leanTut.enabled = false;
-            oneLegTut.enabled = true; 
+            oneLegTut.enabled = true;
+            stepTut.enabled = false;
+            jumpTut.enabled = false;
+            jumpTwoTut.enabled = false;
 
             leaning.transform.position = new Vector3(-40, 0, 0);
             oneLeg.transform.position = new Vector3(0, 0, 0);
@@ -57,7 +70,10 @@ public class TutorialWorld : MonoBehaviour
         else if (StepPlatform)
         {
             leanTut.enabled = false;
-            oneLegTut.enabled = false; 
+            oneLegTut.enabled = false;
+            stepTut.enabled = true;
+            jumpTut.enabled = false;
+            jumpTwoTut.enabled = false;
 
             leaning.transform.position = new Vector3(-80, 0, 0);
             oneLeg.transform.position = new Vector3(-40, 0, 0);
@@ -68,7 +84,10 @@ public class TutorialWorld : MonoBehaviour
         else if (JumpPlatform)
         {
             leanTut.enabled = false;
-            oneLegTut.enabled = false; 
+            oneLegTut.enabled = false;
+            stepTut.enabled = false;
+            jumpTut.enabled = true;
+            jumpTwoTut.enabled = false;
 
             leaning.transform.position = new Vector3(-120, 0, 0);
             oneLeg.transform.position = new Vector3(-80, 0, 0);
@@ -79,7 +98,10 @@ public class TutorialWorld : MonoBehaviour
         else if (JumpTwoPlatform)
         {
             leanTut.enabled = false;
-            oneLegTut.enabled = false; 
+            oneLegTut.enabled = false;
+            stepTut.enabled = false;
+            jumpTut.enabled = false;
+            jumpTwoTut.enabled = true;
 
             leaning.transform.position = new Vector3(-160, 0, 0);
             oneLeg.transform.position = new Vector3(-120, 0, 0);

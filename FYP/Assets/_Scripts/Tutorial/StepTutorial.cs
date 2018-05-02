@@ -34,6 +34,8 @@ public class StepTutorial : MonoBehaviour
 
     PlayerTutorial playerController;
 
+    public int DestroyedSteps; 
+
     //Creating a queue to load the buttons in. This will help with destroying them in the order they are displayed
     public Queue<GameObject> Steps = new Queue<GameObject>();
 
@@ -41,6 +43,7 @@ public class StepTutorial : MonoBehaviour
     {
         GameObject playerControllerObject = GameObject.FindWithTag("PlayerTut");
         playerController = playerControllerObject.GetComponent<PlayerTutorial>();
+        DestroyedSteps = 0; 
     }
 
 
@@ -153,6 +156,7 @@ public class StepTutorial : MonoBehaviour
                 playerController.steppingScore++;
                 Steps.Dequeue();
                 firstArrow.GetComponent<RawImage>().color = Color.green;
+                DestroyedSteps++; 
             }
             ResetXPosition();
         }
@@ -171,6 +175,7 @@ public class StepTutorial : MonoBehaviour
                 playerController.steppingScore++;
                 Steps.Dequeue();
                 firstArrow.GetComponent<RawImage>().color = Color.green;
+                DestroyedSteps++;
             }
             ResetXPosition();
         }
@@ -188,6 +193,7 @@ public class StepTutorial : MonoBehaviour
                 playerController.steppingScore++;
                 Steps.Dequeue();
                 firstArrow.GetComponent<RawImage>().color = Color.green;
+                DestroyedSteps++;
             }
             ResetXPosition();
         }

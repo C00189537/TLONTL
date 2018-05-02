@@ -5,7 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerTutorial : MonoBehaviour
 {
-    public LeanTutorial leanTut; 
+    public LeanTutorial leanTut;
+    public OneLegTutorial OneLegTut;
+    public SteppingTutorial stepTut;
+    public JumpTutorial jumpTut;
+    public JumpTwoTutorial jumpTwoTut;
+
     public DynSTABLE platform;
     public StepTutorial stepping;
     public NetworkTutorial input;
@@ -32,8 +37,8 @@ public class PlayerTutorial : MonoBehaviour
     public Image redLeft;
     public Image redRight;
     public Image greenRight;
-    float i = 0;
-    float j = 0;
+    public float i = 0;
+    public float j = 0;
 
     public Text steppingText;
     public Text jumpingText;
@@ -54,6 +59,11 @@ public class PlayerTutorial : MonoBehaviour
     {
         tutWorld = GameObject.FindGameObjectWithTag("TutorialWorld").GetComponent<TutorialWorld>();
         leanTut = GameObject.FindGameObjectWithTag("LeanTut").GetComponent<LeanTutorial>();
+        OneLegTut = GameObject.FindGameObjectWithTag("OneLegTut").GetComponent<OneLegTutorial>();
+        stepTut = GameObject.FindGameObjectWithTag("StepTut").GetComponent<SteppingTutorial>(); 
+        jumpTut = GameObject.FindGameObjectWithTag("JumpTut").GetComponent<JumpTutorial>();
+        jumpTwoTut = GameObject.FindGameObjectWithTag("JumpTwoTut").GetComponent<JumpTwoTutorial>(); 
+        
         stepping = GetComponent<StepTutorial>();
         rb = GetComponent<Rigidbody>();
         input = GetComponent<NetworkTutorial>();
@@ -74,7 +84,7 @@ public class PlayerTutorial : MonoBehaviour
             touchGround = true;
         }
 
-        if (jump2)
+        if (jump2 && jumpTwoTut.gameStart)
         {
             Jump2();
 
@@ -83,16 +93,18 @@ public class PlayerTutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+
         Inputs();
 
         if (lean && leanTut.gameStart)
         {
-            
+            LeanScore.text = Leanscore.ToString() + "/25";
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, 1, -8);
         }
 
-        else if (oneLeg)
+        else if (oneLeg && OneLegTut.gameStart)
         {
             if (LeanRight)
             {
@@ -125,16 +137,19 @@ public class PlayerTutorial : MonoBehaviour
                 gameObject.transform.Translate(-((0 + gameObject.transform.position.x) / translateSpeed), 0, 0);
 
             }
+
         }
 
-        else if (step)
+        else if (step && stepTut.gameStart)
         {
+            steppingText.text = stepping.DestroyedSteps + "/27";
             Step();
         }
-        else if (jump)
+        else if (jump && jumpTut.gameStart)
         {
             Jump();
         }
+
     }
 
     void Jump()
@@ -271,7 +286,7 @@ public class PlayerTutorial : MonoBehaviour
             Leanscore++;
             Destroy(other.gameObject);
             leanTut.nrOfCollect--;
-            LeanScore.text =Leanscore.ToString() + "/25";
+          
         }
     }
 
@@ -326,11 +341,10 @@ public class PlayerTutorial : MonoBehaviour
             jump = false;
             jump2 = false;
 
-            if (stepping.getSteps() <= 0)
+            if (stepping.getSteps() <= 0 && stepTut.gameStart)
             {
                 stepping.GenerateButtons(3);
-            }
-            steppingText.text = steppingScore.ToString() + "/10"; 
+            } 
         }
         else if (other.gameObject.tag == "Jump")
         {
@@ -347,7 +361,7 @@ public class PlayerTutorial : MonoBehaviour
             step = false;
             jump = true;
             jump2 = false;
-            jumpingText.text = JumpScore.ToString() + "/10"; 
+            //jumpingText.text = JumpScore.ToString() + "/10"; 
 
         }
         else if (other.gameObject.tag == "Jump2")
@@ -365,7 +379,7 @@ public class PlayerTutorial : MonoBehaviour
             step = false;
             jump = false;
             jump2 = true;
-            jumpingTwoText.text = JumpTwoScore.ToString() + "/10";
+            //jumpingTwoText.text = JumpTwoScore.ToString() + "/10";
         }
 
     }
