@@ -5,134 +5,89 @@ using UnityEngine.UI;
 
 public class TutorialWorld : MonoBehaviour
 {
+    public static bool LeanPlatform, OneLegPlatform, StepPlatform, JumpPlatform, JumpTwoPlatform;
 
-    public PlayerTutorial player;
+    public LeanTutorial leanTut;
+    public OneLegTutorial oneLegTut; 
 
-    public int waitTimer = 3;
-    public int instructionsTimer = 10;
-    public Image theInstructions; 
-    public Image Lean;
-    public Image OneLeg;
-    public Image Step;
-    public Image Jump;
-    public Image Jump2;
+    public GameObject leaning;
+    public GameObject oneLeg;
+    public GameObject stepping;
+    public GameObject jumping;
+    public GameObject jumpingTwo;
 
-    bool showInst = false;
-
-    // Use this for initialization
-    void Start()
+    public void Start()
     {
+        LeanPlatform = true;
+        OneLegPlatform = false;
+        StepPlatform = false;
+        JumpPlatform = false;
+        JumpTwoPlatform = false;
 
-        player = GameObject.FindGameObjectWithTag("PlayerTut").GetComponent<PlayerTutorial>();
-        Lean.enabled = false;
-        OneLeg.enabled = false;
-        Step.enabled = false;
-        Jump.enabled = false;
-        Jump2.enabled = false;
+        // leanTut = GameObject.FindWithTag("LeanTut").GetComponent<LeanTutorial>();
+        //oneLegTut = GameObject.FindWithTag("OneLegTut").GetComponent<OneLegTutorial>(); 
+        leanTut = leaning.GetComponent<LeanTutorial>();
+        oneLegTut = oneLeg.GetComponent<OneLegTutorial>(); 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        if (instructionsTimer <= 0)
+        if (LeanPlatform)
         {
-            showInst = false;
-            StopCoroutine(CountDown());
-         
-            Lean.enabled = false;
-            OneLeg.enabled = false;
-            Step.enabled = false;
-            Jump.enabled = false;
-            Jump2.enabled = false;
+            leanTut.enabled = true;
+            oneLegTut.enabled = false;
+
+            leaning.transform.position = new Vector3(0, 0, 0);
+            oneLeg.transform.position = new Vector3(40, 0, 0);
+            stepping.transform.position = new Vector3(80, 0, 0);
+            jumping.transform.position = new Vector3(120, 0, 0);
+            jumpingTwo.transform.position = new Vector3(160, 0, 0);
         }
-
-        if (player.lean)
+        else if (OneLegPlatform)
         {
-           
-            while (instructionsTimer >= 0)
-            {
-                StartCoroutine(CountDown());
-              
+            leanTut.enabled = false;
+            oneLegTut.enabled = true; 
 
-            }
-
+            leaning.transform.position = new Vector3(-40, 0, 0);
+            oneLeg.transform.position = new Vector3(0, 0, 0);
+            stepping.transform.position = new Vector3(40, 0, 0);
+            jumping.transform.position = new Vector3(80, 0, 0);
+            jumpingTwo.transform.position = new Vector3(120, 0, 0);
         }
-        if (player.oneLeg)
+        else if (StepPlatform)
         {
-            instructionsTimer = 3;
-            // StartCoroutine(CountDown());
-            while (instructionsTimer > 0)
-            {
-                Lean.enabled = false;
-                OneLeg.enabled = true;
-                Step.enabled = false;
-                Jump.enabled = false;
-                Jump2.enabled = false;
-            }
+            leanTut.enabled = false;
+            oneLegTut.enabled = false; 
 
+            leaning.transform.position = new Vector3(-80, 0, 0);
+            oneLeg.transform.position = new Vector3(-40, 0, 0);
+            stepping.transform.position = new Vector3(0, 0, 0);
+            jumping.transform.position = new Vector3(40, 0, 0);
+            jumpingTwo.transform.position = new Vector3(80, 0, 0);
         }
-        if (player.step)
+        else if (JumpPlatform)
         {
-            instructionsTimer = 3;
-            /// StartCoroutine(CountDown());
-            while (instructionsTimer > 0)
-            {
-                Lean.enabled = false;
-                OneLeg.enabled = false;
-                Step.enabled = true;
-                Jump.enabled = false;
-                Jump2.enabled = false;
-            }
+            leanTut.enabled = false;
+            oneLegTut.enabled = false; 
 
+            leaning.transform.position = new Vector3(-120, 0, 0);
+            oneLeg.transform.position = new Vector3(-80, 0, 0);
+            stepping.transform.position = new Vector3(-40, 0, 0);
+            jumping.transform.position = new Vector3(0, 0, 0);
+            jumpingTwo.transform.position = new Vector3(40, 0, 0);
         }
-        if (player.jump)
+        else if (JumpTwoPlatform)
         {
-            instructionsTimer = 3;
-            //  StartCoroutine(CountDown());
-            while (instructionsTimer > 0)
-            {
-                Lean.enabled = false;
-                OneLeg.enabled = false;
-                Step.enabled = false;
-                Jump.enabled = true;
-                Jump2.enabled = false;
-            }
+            leanTut.enabled = false;
+            oneLegTut.enabled = false; 
 
-        }
-        if (player.jump2)
-        {
-            instructionsTimer = 3;
-            //  StartCoroutine(CountDown());
-            while (instructionsTimer > 0)
-            {
-                Lean.enabled = false;
-                OneLeg.enabled = false;
-                Step.enabled = false;
-                Jump.enabled = false;
-                Jump2.enabled = true;
-            }
-
+            leaning.transform.position = new Vector3(-160, 0, 0);
+            oneLeg.transform.position = new Vector3(-120, 0, 0);
+            stepping.transform.position = new Vector3(-80, 0, 0);
+            jumping.transform.position = new Vector3(-40, 0, 0);
+            jumpingTwo.transform.position = new Vector3(0, 0, 0);
         }
     }
 
-    public IEnumerator CountDown()
-    {
-        // while (instructionsTimer > 0)
-        // {
-        Debug.Log("it workssss");
-        instructionsTimer--;
-        showInst = true; 
-        yield return new WaitForSeconds(1);
-        //}
-
-
-    }
-
-    public IEnumerator Wait()
-    {
-        waitTimer--;
-        yield return new WaitForSeconds(1);
-
-
-    }
+  
 }

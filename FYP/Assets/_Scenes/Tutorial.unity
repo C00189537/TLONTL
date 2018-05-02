@@ -113,11 +113,97 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &8453706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 8453707}
+  - component: {fileID: 8453709}
+  - component: {fileID: 8453708}
+  m_Layer: 5
+  m_Name: CheckMark
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8453707
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 8453706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1384552215}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8453708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 8453706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.7794118, b: 0.23113589, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: c21228c459f94364b98b1b28c3305caf, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &8453709
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 8453706}
 --- !u!1 &187161097 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1027057485637570, guid: 34836040b8ee61646a74fccb8a915910,
     type: 2}
   m_PrefabInternal: {fileID: 1073423473}
+--- !u!114 &187161099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 187161097}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc088c6118f3c6478dba056168fd77f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instructions: {fileID: 334682829}
+  timeText: {fileID: 1672454195}
+  instructionsTimer: 10
+  waitTimer: 5
+  timer: 0
+  gameStart: 0
+  gameEnd: 0
 --- !u!114 &233613850 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114335864957488778, guid: 39a62cfb5857cf346a72cc6a9113164c,
@@ -140,15 +226,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c3d7f4fc5dce340b3fd2a086cf79e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  tutWorld: {fileID: 0}
   instructions: {fileID: 1578159366}
-  timeText: {fileID: 1672454195}
+  OtherInstructionsOne: {fileID: 334682829}
   collectPrefab: {fileID: 1918555031667778, guid: a9cd64fc94bffa74bb6fdcef9c0bd949,
     type: 2}
+  nrOfCollect: 0
+  timeText: {fileID: 1672454195}
   instructionsTimer: 10
   waitTimer: 3
-  nrOfCollect: 0
   timer: 0
   gameStart: 0
+  gameEnd: 0
+  checkMark: {fileID: 8453708}
 --- !u!1 &334682827
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &334682828
 RectTransform:
   m_ObjectHideFlags: 0
@@ -487,6 +578,7 @@ MonoBehaviour:
   platform: {fileID: 233613850}
   stepping: {fileID: 0}
   input: {fileID: 0}
+  tutWorld: {fileID: 0}
   OneLegValue: 0.09
   StepValue: 0
   xVal: 10
@@ -546,18 +638,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 637390468}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86f9573c99bde3d49ac18f95a8fa6c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   network: {fileID: 1528284187}
-  cam: {fileID: 0}
-  leaning: {fileID: 311348066}
-  oneLeg: {fileID: 187161097}
-  stepping: {fileID: 430246295}
-  jumping: {fileID: 1307718407}
-  jumpingTwo: {fileID: 400113473}
   nLeaning: 0
   nOneLeg: 0
   nStepping: 0
@@ -580,7 +666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &656984688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -915,7 +1001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &811880442
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1012,6 +1098,14 @@ Prefab:
       propertyPath: network
       value: 
       objectReference: {fileID: 1528284187}
+    - target: {fileID: 1027057485637570, guid: 34836040b8ee61646a74fccb8a915910, type: 2}
+      propertyPath: m_TagString
+      value: OneLegTut
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027057485637570, guid: 34836040b8ee61646a74fccb8a915910, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34836040b8ee61646a74fccb8a915910, type: 2}
   m_IsPrefabParent: 0
@@ -1157,6 +1251,7 @@ RectTransform:
   - {fileID: 1672454197}
   - {fileID: 1578159365}
   - {fileID: 334682828}
+  - {fileID: 8453707}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1250,11 +1345,11 @@ GameObject:
   - component: {fileID: 1488271323}
   m_Layer: 5
   m_Name: Manager
-  m_TagString: Untagged
+  m_TagString: TutorialWorld
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1488271322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1284,15 +1379,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1db957f4f9a7e42b9a381ac22b9ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  waitTimer: 3
-  instructionsTimer: 10
-  theInstructions: {fileID: 0}
-  Lean: {fileID: 1578159366}
-  OneLeg: {fileID: 334682829}
-  Step: {fileID: 1578159366}
-  Jump: {fileID: 334682829}
-  Jump2: {fileID: 1578159366}
+  leanTut: {fileID: 0}
+  oneLegTut: {fileID: 0}
+  leaning: {fileID: 311348066}
+  oneLeg: {fileID: 187161097}
+  stepping: {fileID: 430246295}
+  jumping: {fileID: 1307718407}
+  jumpingTwo: {fileID: 400113473}
 --- !u!1001 &1496699474
 Prefab:
   m_ObjectHideFlags: 0

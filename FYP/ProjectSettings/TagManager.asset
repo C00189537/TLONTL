@@ -26,6 +26,8 @@ TagManager:
   - Meteor
   - PlayerTut
   - LeanTut
+  - TutorialWorld
+  - OneLegTut
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,8 @@ public class PlayerTutorial : MonoBehaviour
     public DynSTABLE platform;
     public StepTutorial stepping;
     public NetworkTutorial input;
+    public TutorialWorld tutWorld; 
+
     public float OneLegValue;
     public float StepValue;
     public float xVal;
@@ -50,10 +52,12 @@ public class PlayerTutorial : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        tutWorld = GameObject.FindGameObjectWithTag("TutorialWorld").GetComponent<TutorialWorld>();
         leanTut = GameObject.FindGameObjectWithTag("LeanTut").GetComponent<LeanTutorial>();
         stepping = GetComponent<StepTutorial>();
         rb = GetComponent<Rigidbody>();
         input = GetComponent<NetworkTutorial>();
+       
         Leanscore = 0;
 
     }

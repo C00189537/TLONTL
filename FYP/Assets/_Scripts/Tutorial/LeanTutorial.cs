@@ -6,17 +6,25 @@ using UnityEngine.UI;
 public class LeanTutorial : MonoBehaviour
 {
 
-    PlayerTutorial player;
+    public PlayerTutorial player;
+    public TutorialWorld tutWorld; 
     public Image instructions;
-    public Text timeText;
-    public GameObject collectPrefab; 
+    public Image OtherInstructionsOne; 
 
+
+    public GameObject collectPrefab;
+    public int nrOfCollect = 0;
+
+    public Text timeText;
     public int instructionsTimer = 10;
     public int waitTimer = 5;
-    public int nrOfCollect = 0; 
+   
 
     public bool timer = false;
     public bool gameStart = false;
+    public bool gameEnd = false;
+
+    public Image checkMark;
 
     System.Random rand = new System.Random();
 
@@ -24,8 +32,13 @@ public class LeanTutorial : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("PlayerTut").GetComponent<PlayerTutorial>();
+        tutWorld = GameObject.FindGameObjectWithTag("TutorialWorld").GetComponent<TutorialWorld>();
+
         StartCoroutine(CountDown());
-        instructions.enabled = true; 
+        instructions.enabled = true;
+        OtherInstructionsOne.enabled = false; 
+
+        checkMark.enabled = false; 
     }
     // Update is called once per frame
     void Update()
@@ -43,12 +56,28 @@ public class LeanTutorial : MonoBehaviour
             timeText.text = ""; 
         }
 
-        if (gameStart && nrOfCollect <= 3)
+        if (gameStart && nrOfCollect <= 3 && !gameEnd)
         {
             nrOfCollect++;
             int xPos = rand.Next(-13, 13);
             Instantiate(collectPrefab, new Vector3(xPos, 1, -8), Quaternion.identity);
         }           
+
+        if (player.Leanscore >= 25)
+        {
+            gameEnd = true;
+            gameStart = false;
+        }
+
+        if (gameEnd)
+        {
+            GameObject[] objects = GameObject.FindGameObjectsWithTag("Coin");
+            foreach( GameObject coin in objects){
+                Destroy(coin);
+            }
+
+            StartCoroutine(End());
+        }
 
     }
 
@@ -71,7 +100,13 @@ public class LeanTutorial : MonoBehaviour
             timer = true;
             yield return new WaitForSeconds(1);
         }
-       
+    }
 
+    public IEnumerator End()
+    {
+        checkMark.enabled = true; 
+        yield return new WaitForSeconds(4);
+        TutorialWorld.LeanPlatform = false;
+        TutorialWorld.OneLegPlatform = true; 
     }
 }
