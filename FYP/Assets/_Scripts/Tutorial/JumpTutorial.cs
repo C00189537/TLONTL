@@ -60,7 +60,17 @@ public class JumpTutorial : MonoBehaviour {
             gameStart = true;
             timeText.text = "";
         }
+        
+        if (gameStart)
+        {
+            player.transform.position += new Vector3(0, 0, 0.1f);
 
+            if (player.transform.position.z > 28)
+            {
+                player.transform.position = new Vector3(0, 1, -8);
+
+            }
+        }
 
         if (gameEnd)
         {

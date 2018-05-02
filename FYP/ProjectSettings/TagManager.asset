@@ -31,6 +31,7 @@ TagManager:
   - StepTut
   - JumpTut
   - JumpTwoTut
+  - backSpawn
   layers:
   - Default
   - TransparentFX

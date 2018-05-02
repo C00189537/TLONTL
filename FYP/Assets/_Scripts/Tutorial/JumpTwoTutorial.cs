@@ -61,10 +61,9 @@ public class JumpTwoTutorial : MonoBehaviour {
             timeText.text = "";
         }
 
-
         if (gameEnd)
         {
-            player.transform.position = new Vector3(0, 1, -8);
+            player.transform.position = new Vector3(0, 1, -8);  
             StartCoroutine(End());
         }
     }
@@ -94,10 +93,10 @@ public class JumpTwoTutorial : MonoBehaviour {
     {
         checkMark.enabled = true;
         yield return new WaitForSeconds(4);
-        TutorialWorld.LeanPlatform = false;
+        TutorialWorld.LeanPlatform = true;
         TutorialWorld.OneLegPlatform = false;
         TutorialWorld.StepPlatform = false;
         TutorialWorld.JumpPlatform = false;
-        TutorialWorld.JumpTwoPlatform = true;
+        TutorialWorld.JumpTwoPlatform = false;
     }
 }

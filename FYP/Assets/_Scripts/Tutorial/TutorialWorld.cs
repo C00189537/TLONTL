@@ -21,14 +21,12 @@ public class TutorialWorld : MonoBehaviour
 
     public void Start()
     {
-        LeanPlatform = true;
+        LeanPlatform = false;
         OneLegPlatform = false;
         StepPlatform = false;
-        JumpPlatform = false;
+        JumpPlatform = true;
         JumpTwoPlatform = false;
-
-        // leanTut = GameObject.FindWithTag("LeanTut").GetComponent<LeanTutorial>();
-        //oneLegTut = GameObject.FindWithTag("OneLegTut").GetComponent<OneLegTutorial>(); 
+         
         leanTut = leaning.GetComponent<LeanTutorial>();
         oneLegTut = oneLeg.GetComponent<OneLegTutorial>();
         stepTut = stepping.GetComponent<SteppingTutorial>();

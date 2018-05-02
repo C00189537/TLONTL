@@ -186,29 +186,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1027057485637570, guid: 34836040b8ee61646a74fccb8a915910,
     type: 2}
   m_PrefabInternal: {fileID: 1073423473}
---- !u!114 &187161099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 187161097}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cc088c6118f3c6478dba056168fd77f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instructions: {fileID: 334682829}
-  OtherInstructionsOne: {fileID: 1578159366}
-  OtherInstructionsTwo: {fileID: 696057632}
-  OtherInstructionsThree: {fileID: 680337654}
-  OtherInstructionsFour: {fileID: 765608545}
-  timeText: {fileID: 1672454195}
-  checkMark: {fileID: 8453708}
-  instructionsTimer: 10
-  waitTimer: 3
-  timer: 0
-  gameStart: 0
-  gameEnd: 0
 --- !u!114 &233613850 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114335864957488778, guid: 39a62cfb5857cf346a72cc6a9113164c,
@@ -220,34 +197,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1999316450441324, guid: df1e81b21ed29344fa46535998a15755,
     type: 2}
   m_PrefabInternal: {fileID: 1964145416}
---- !u!114 &311348068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 311348066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28c3d7f4fc5dce340b3fd2a086cf79e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  tutWorld: {fileID: 0}
-  instructions: {fileID: 1578159366}
-  OtherInstructionsOne: {fileID: 334682829}
-  OtherInstructionsTwo: {fileID: 696057632}
-  OtherInstructionsThree: {fileID: 680337654}
-  OtherInstructionsFour: {fileID: 765608545}
-  collectPrefab: {fileID: 1918555031667778, guid: a9cd64fc94bffa74bb6fdcef9c0bd949,
-    type: 2}
-  nrOfCollect: 0
-  timeText: {fileID: 1672454195}
-  instructionsTimer: 10
-  waitTimer: 3
-  timer: 0
-  gameStart: 0
-  gameEnd: 0
-  checkMark: {fileID: 8453708}
 --- !u!1 &334682827
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,62 +344,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1383433585108680, guid: fa8f99926898cda4faf5d5dcc4be54ab,
     type: 2}
   m_PrefabInternal: {fileID: 784110589}
---- !u!114 &400113474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 400113473}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47038ca0599959840ba9b196ddf26b3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  tutWorld: {fileID: 0}
-  instructions: {fileID: 765608545}
-  OtherInstructionsOne: {fileID: 1578159366}
-  OtherInstructionsTwo: {fileID: 334682829}
-  OtherInstructionsThree: {fileID: 696057632}
-  OtherInstructionsFour: {fileID: 680337654}
-  timeText: {fileID: 1672454195}
-  instructionsTimer: 10
-  waitTimer: 3
-  timer: 0
-  gameStart: 0
-  gameEnd: 0
-  checkMark: {fileID: 8453708}
 --- !u!1 &430246295 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1295876436029104, guid: b9bddc47acbf3324bbefb0968d879bd6,
     type: 2}
   m_PrefabInternal: {fileID: 1496699474}
---- !u!114 &430246296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 430246295}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 143ec956b9003984aae34db557c47f2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  tutWorld: {fileID: 0}
-  stepManager: {fileID: 0}
-  instructions: {fileID: 696057632}
-  OtherInstructionsOne: {fileID: 1578159366}
-  OtherInstructionsTwo: {fileID: 334682829}
-  OtherInstructionsThree: {fileID: 680337654}
-  OtherInstructionsFour: {fileID: 765608545}
-  timeText: {fileID: 1672454195}
-  instructionsTimer: 10
-  waitTimer: 3
-  timer: 0
-  gameStart: 0
-  gameEnd: 0
-  checkMark: {fileID: 8453708}
 --- !u!1 &611662057
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +573,7 @@ MonoBehaviour:
   steppingScore: 0
   JumpScore: 0
   JumpTwoScore: 0
+  hitObstacle: 0
 --- !u!114 &637390475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +603,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 637390468}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86f9573c99bde3d49ac18f95a8fa6c0b, type: 3}
   m_Name: 
@@ -1252,10 +1151,41 @@ Prefab:
       propertyPath: network
       value: 
       objectReference: {fileID: 1528284187}
-    - target: {fileID: 1383433585108680, guid: fa8f99926898cda4faf5d5dcc4be54ab, type: 2}
-      propertyPath: m_TagString
-      value: JumpTwoTut
-      objectReference: {fileID: 0}
+    - target: {fileID: 114745976367289184, guid: fa8f99926898cda4faf5d5dcc4be54ab,
+        type: 2}
+      propertyPath: instructions
+      value: 
+      objectReference: {fileID: 765608545}
+    - target: {fileID: 114745976367289184, guid: fa8f99926898cda4faf5d5dcc4be54ab,
+        type: 2}
+      propertyPath: OtherInstructionsOne
+      value: 
+      objectReference: {fileID: 1578159366}
+    - target: {fileID: 114745976367289184, guid: fa8f99926898cda4faf5d5dcc4be54ab,
+        type: 2}
+      propertyPath: OtherInstructionsTwo
+      value: 
+      objectReference: {fileID: 334682829}
+    - target: {fileID: 114745976367289184, guid: fa8f99926898cda4faf5d5dcc4be54ab,
+        type: 2}
+      propertyPath: OtherInstructionsThree
+      value: 
+      objectReference: {fileID: 696057632}
+    - target: {fileID: 114745976367289184, guid: fa8f99926898cda4faf5d5dcc4be54ab,
+        type: 2}
+      propertyPath: OtherInstructionsFour
+      value: 
+      objectReference: {fileID: 680337654}
+    - target: {fileID: 114745976367289184, guid: fa8f99926898cda4faf5d5dcc4be54ab,
+        type: 2}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 1672454195}
+    - target: {fileID: 114745976367289184, guid: fa8f99926898cda4faf5d5dcc4be54ab,
+        type: 2}
+      propertyPath: checkMark
+      value: 
+      objectReference: {fileID: 8453708}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa8f99926898cda4faf5d5dcc4be54ab, type: 2}
   m_IsPrefabParent: 0
@@ -1372,14 +1302,41 @@ Prefab:
       propertyPath: network
       value: 
       objectReference: {fileID: 1528284187}
-    - target: {fileID: 1027057485637570, guid: 34836040b8ee61646a74fccb8a915910, type: 2}
-      propertyPath: m_TagString
-      value: OneLegTut
-      objectReference: {fileID: 0}
-    - target: {fileID: 1027057485637570, guid: 34836040b8ee61646a74fccb8a915910, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 114482287295845638, guid: 34836040b8ee61646a74fccb8a915910,
+        type: 2}
+      propertyPath: instructions
+      value: 
+      objectReference: {fileID: 334682829}
+    - target: {fileID: 114482287295845638, guid: 34836040b8ee61646a74fccb8a915910,
+        type: 2}
+      propertyPath: OtherInstructionsOne
+      value: 
+      objectReference: {fileID: 1578159366}
+    - target: {fileID: 114482287295845638, guid: 34836040b8ee61646a74fccb8a915910,
+        type: 2}
+      propertyPath: OtherInstructionsTwo
+      value: 
+      objectReference: {fileID: 696057632}
+    - target: {fileID: 114482287295845638, guid: 34836040b8ee61646a74fccb8a915910,
+        type: 2}
+      propertyPath: OtherInstructionsThree
+      value: 
+      objectReference: {fileID: 680337654}
+    - target: {fileID: 114482287295845638, guid: 34836040b8ee61646a74fccb8a915910,
+        type: 2}
+      propertyPath: OtherInstructionsFour
+      value: 
+      objectReference: {fileID: 765608545}
+    - target: {fileID: 114482287295845638, guid: 34836040b8ee61646a74fccb8a915910,
+        type: 2}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 1672454195}
+    - target: {fileID: 114482287295845638, guid: 34836040b8ee61646a74fccb8a915910,
+        type: 2}
+      propertyPath: checkMark
+      value: 
+      objectReference: {fileID: 8453708}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34836040b8ee61646a74fccb8a915910, type: 2}
   m_IsPrefabParent: 0
@@ -1430,31 +1387,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1639818046444718, guid: f24efaf4d856fb640958c8c9d996bef6,
     type: 2}
   m_PrefabInternal: {fileID: 1957242670}
---- !u!114 &1307718408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1307718407}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f73a7381b8a08f4db979a37366b3774, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  tutWorld: {fileID: 0}
-  instructions: {fileID: 680337654}
-  OtherInstructionsOne: {fileID: 1578159366}
-  OtherInstructionsTwo: {fileID: 334682829}
-  OtherInstructionsThree: {fileID: 696057632}
-  OtherInstructionsFour: {fileID: 765608545}
-  timeText: {fileID: 1672454195}
-  instructionsTimer: 10
-  waitTimer: 3
-  timer: 0
-  gameStart: 0
-  gameEnd: 0
-  checkMark: {fileID: 8453708}
+--- !u!4 &1307718409 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4570820782692356, guid: f24efaf4d856fb640958c8c9d996bef6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1957242670}
 --- !u!1 &1384552211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,6 +1573,92 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1384586363}
+--- !u!1 &1408006783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1408006787}
+  - component: {fileID: 1408006786}
+  - component: {fileID: 1408006785}
+  - component: {fileID: 1408006784}
+  m_Layer: 0
+  m_Name: Plane
+  m_TagString: backSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1408006784
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1408006783}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 673e32d17a2f7ff4a953d65bc035db40, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!64 &1408006785
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1408006783}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &1408006786
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1408006783}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1408006787
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1408006783}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: 0.7, z: 25.11}
+  m_LocalScale: {x: 1, y: 1, z: 2}
+  m_Children: []
+  m_Father: {fileID: 1307718409}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1488271320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,10 +1758,41 @@ Prefab:
       propertyPath: network
       value: 
       objectReference: {fileID: 1528284187}
-    - target: {fileID: 1295876436029104, guid: b9bddc47acbf3324bbefb0968d879bd6, type: 2}
-      propertyPath: m_TagString
-      value: StepTut
-      objectReference: {fileID: 0}
+    - target: {fileID: 114617255797580110, guid: b9bddc47acbf3324bbefb0968d879bd6,
+        type: 2}
+      propertyPath: instructions
+      value: 
+      objectReference: {fileID: 696057632}
+    - target: {fileID: 114617255797580110, guid: b9bddc47acbf3324bbefb0968d879bd6,
+        type: 2}
+      propertyPath: OtherInstructionsOne
+      value: 
+      objectReference: {fileID: 1578159366}
+    - target: {fileID: 114617255797580110, guid: b9bddc47acbf3324bbefb0968d879bd6,
+        type: 2}
+      propertyPath: OtherInstructionsTwo
+      value: 
+      objectReference: {fileID: 334682829}
+    - target: {fileID: 114617255797580110, guid: b9bddc47acbf3324bbefb0968d879bd6,
+        type: 2}
+      propertyPath: OtherInstructionsThree
+      value: 
+      objectReference: {fileID: 680337654}
+    - target: {fileID: 114617255797580110, guid: b9bddc47acbf3324bbefb0968d879bd6,
+        type: 2}
+      propertyPath: OtherInstructionsFour
+      value: 
+      objectReference: {fileID: 765608545}
+    - target: {fileID: 114617255797580110, guid: b9bddc47acbf3324bbefb0968d879bd6,
+        type: 2}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 1672454195}
+    - target: {fileID: 114617255797580110, guid: b9bddc47acbf3324bbefb0968d879bd6,
+        type: 2}
+      propertyPath: checkMark
+      value: 
+      objectReference: {fileID: 8453708}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9bddc47acbf3324bbefb0968d879bd6, type: 2}
   m_IsPrefabParent: 0
@@ -2082,10 +2136,41 @@ Prefab:
       propertyPath: network
       value: 
       objectReference: {fileID: 1528284187}
-    - target: {fileID: 1639818046444718, guid: f24efaf4d856fb640958c8c9d996bef6, type: 2}
-      propertyPath: m_TagString
-      value: JumpTut
-      objectReference: {fileID: 0}
+    - target: {fileID: 114340688928740416, guid: f24efaf4d856fb640958c8c9d996bef6,
+        type: 2}
+      propertyPath: instructions
+      value: 
+      objectReference: {fileID: 680337654}
+    - target: {fileID: 114340688928740416, guid: f24efaf4d856fb640958c8c9d996bef6,
+        type: 2}
+      propertyPath: OtherInstructionsOne
+      value: 
+      objectReference: {fileID: 1578159366}
+    - target: {fileID: 114340688928740416, guid: f24efaf4d856fb640958c8c9d996bef6,
+        type: 2}
+      propertyPath: OtherInstructionsTwo
+      value: 
+      objectReference: {fileID: 334682829}
+    - target: {fileID: 114340688928740416, guid: f24efaf4d856fb640958c8c9d996bef6,
+        type: 2}
+      propertyPath: OtherInstructionsThree
+      value: 
+      objectReference: {fileID: 696057632}
+    - target: {fileID: 114340688928740416, guid: f24efaf4d856fb640958c8c9d996bef6,
+        type: 2}
+      propertyPath: OtherInstructionsFour
+      value: 
+      objectReference: {fileID: 765608545}
+    - target: {fileID: 114340688928740416, guid: f24efaf4d856fb640958c8c9d996bef6,
+        type: 2}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 1672454195}
+    - target: {fileID: 114340688928740416, guid: f24efaf4d856fb640958c8c9d996bef6,
+        type: 2}
+      propertyPath: checkMark
+      value: 
+      objectReference: {fileID: 8453708}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f24efaf4d856fb640958c8c9d996bef6, type: 2}
   m_IsPrefabParent: 0
@@ -2133,30 +2218,41 @@ Prefab:
       propertyPath: network
       value: 
       objectReference: {fileID: 1528284187}
-    - target: {fileID: 4166584791542002, guid: df1e81b21ed29344fa46535998a15755, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 8.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166584791542002, guid: df1e81b21ed29344fa46535998a15755, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166584791542002, guid: df1e81b21ed29344fa46535998a15755, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1793783436205940, guid: df1e81b21ed29344fa46535998a15755, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1367258830321508, guid: df1e81b21ed29344fa46535998a15755, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1999316450441324, guid: df1e81b21ed29344fa46535998a15755, type: 2}
-      propertyPath: m_TagString
-      value: LeanTut
-      objectReference: {fileID: 0}
+    - target: {fileID: 114223357526934500, guid: df1e81b21ed29344fa46535998a15755,
+        type: 2}
+      propertyPath: instructions
+      value: 
+      objectReference: {fileID: 1578159366}
+    - target: {fileID: 114223357526934500, guid: df1e81b21ed29344fa46535998a15755,
+        type: 2}
+      propertyPath: OtherInstructionsOne
+      value: 
+      objectReference: {fileID: 334682829}
+    - target: {fileID: 114223357526934500, guid: df1e81b21ed29344fa46535998a15755,
+        type: 2}
+      propertyPath: OtherInstructionsTwo
+      value: 
+      objectReference: {fileID: 696057632}
+    - target: {fileID: 114223357526934500, guid: df1e81b21ed29344fa46535998a15755,
+        type: 2}
+      propertyPath: OtherInstructionsThree
+      value: 
+      objectReference: {fileID: 680337654}
+    - target: {fileID: 114223357526934500, guid: df1e81b21ed29344fa46535998a15755,
+        type: 2}
+      propertyPath: OtherInstructionsFour
+      value: 
+      objectReference: {fileID: 765608545}
+    - target: {fileID: 114223357526934500, guid: df1e81b21ed29344fa46535998a15755,
+        type: 2}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 1672454195}
+    - target: {fileID: 114223357526934500, guid: df1e81b21ed29344fa46535998a15755,
+        type: 2}
+      propertyPath: checkMark
+      value: 
+      objectReference: {fileID: 8453708}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df1e81b21ed29344fa46535998a15755, type: 2}
   m_IsPrefabParent: 0

@@ -54,6 +54,8 @@ public class PlayerTutorial : MonoBehaviour
     public int JumpScore;
     public int JumpTwoScore;
 
+    public bool hitObstacle = false; 
+
     // Use this for initialization
     void Start()
     {
@@ -154,24 +156,35 @@ public class PlayerTutorial : MonoBehaviour
 
     void Jump()
     {
+        jumpingText.text = JumpScore.ToString() + "/10";
+
         if (platform.cop.force < JumpValue && touchGround == true)
         {
             rb.velocity = rb.velocity + new Vector3(0, jumpSpeed, rb.velocity.z);
             touchGround = false;
         }
 
+        if (gameObject.transform.position.z < -7)
+        {
+            hitObstacle = false; 
+        }
+
+       if (gameObject.transform.position.z > 27.9 && !hitObstacle)
+        {
+            JumpScore++; 
+        }
     }
 
     void Jump2()
     {
         float step = switchJumpSpeed * Time.deltaTime;
-
+       
         if (touchGround)
         {
 
             if (input.nMomZ < -pressure)
             {
-
+                Debug.Log("input < -press");
                 flying = false;
                 jumping2L = true;
                 jumping2R = false;
@@ -191,7 +204,7 @@ public class PlayerTutorial : MonoBehaviour
             }
             if (input.nMomZ > pressure)
             {
-
+                Debug.Log("input > press");
                 flying = false;
                 jumping2L = false;
                 jumping2R = true;
@@ -214,8 +227,10 @@ public class PlayerTutorial : MonoBehaviour
             }
             if (flying)
             {
+                Debug.Log("Fly " + flying);
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
             }
+          //  Debug.Log("Fly " + flying);
 
         }
     }
@@ -288,6 +303,19 @@ public class PlayerTutorial : MonoBehaviour
             leanTut.nrOfCollect--;
           
         }
+
+        if (other.gameObject.tag == "Obstacle")
+        {
+            hitObstacle = true; 
+        }
+
+        //if (other.gameObject.tag == "backSpawn")
+        //{
+        //    if (!hitObstacle)
+        //    {
+        //        JumpScore++; 
+        //    }
+        //}
     }
 
     void OnTriggerStay(Collider other)
@@ -361,7 +389,7 @@ public class PlayerTutorial : MonoBehaviour
             step = false;
             jump = true;
             jump2 = false;
-            //jumpingText.text = JumpScore.ToString() + "/10"; 
+            
 
         }
         else if (other.gameObject.tag == "Jump2")
