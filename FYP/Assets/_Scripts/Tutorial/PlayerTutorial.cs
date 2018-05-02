@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerTutorial : MonoBehaviour
 {
-
+    public LeanTutorial leanTut; 
     public DynSTABLE platform;
     public StepTutorial stepping;
     public NetworkTutorial input;
@@ -25,7 +25,7 @@ public class PlayerTutorial : MonoBehaviour
     bool leftDone = false, rightDOne = false;
 
     //UI elements
-    public Text Scoretext;//leaning
+    public Text LeanScore;//leaning
     public Image greenLeft;
     public Image redLeft;
     public Image redRight;
@@ -42,7 +42,7 @@ public class PlayerTutorial : MonoBehaviour
     private const int MAXJUMP = 1;
     public float pressure;
 
-    public int Leanscore; //for leaning
+    public int Leanscore = 0; //for leaning
     public int steppingScore;
     public int JumpScore;
     public int JumpTwoScore;
@@ -50,10 +50,10 @@ public class PlayerTutorial : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        leanTut = GameObject.FindGameObjectWithTag("LeanTut").GetComponent<LeanTutorial>();
         stepping = GetComponent<StepTutorial>();
         rb = GetComponent<Rigidbody>();
         input = GetComponent<NetworkTutorial>();
-
         Leanscore = 0;
 
     }
@@ -81,8 +81,9 @@ public class PlayerTutorial : MonoBehaviour
     {
         Inputs();
 
-        if (lean)
+        if (lean && leanTut.gameStart)
         {
+            
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, 1, -8);
         }
@@ -265,7 +266,8 @@ public class PlayerTutorial : MonoBehaviour
         {
             Leanscore++;
             Destroy(other.gameObject);
-            Scoretext.text = "Score: " + Leanscore.ToString();
+            leanTut.nrOfCollect--;
+            LeanScore.text =Leanscore.ToString() + "/25";
         }
     }
 
@@ -274,7 +276,7 @@ public class PlayerTutorial : MonoBehaviour
 
         if (other.gameObject.tag == "Lean")
         {
-            Scoretext.enabled = true;
+            LeanScore.enabled = true;
             redLeft.enabled = false;
             redRight.enabled = false;
             greenLeft.enabled = false;
@@ -290,7 +292,7 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "OneLeg")
         {
-            Scoretext.enabled = false;
+            LeanScore.enabled = false;
             redLeft.enabled = true;
             redRight.enabled = true;
             greenLeft.enabled = true;
@@ -306,7 +308,7 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "Step")
         {
-            Scoretext.enabled = false;
+            LeanScore.enabled = false;
             redLeft.enabled = false;
             redRight.enabled = false;
             greenLeft.enabled = false;
@@ -328,7 +330,7 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "Jump")
         {
-            Scoretext.enabled = false;
+            LeanScore.enabled = false;
             redLeft.enabled = false;
             redRight.enabled = false;
             greenLeft.enabled = false;
@@ -346,7 +348,7 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "Jump2")
         {
-            Scoretext.enabled = false;
+            LeanScore.enabled = false;
             redLeft.enabled = false;
             redRight.enabled = false;
             greenLeft.enabled = false;

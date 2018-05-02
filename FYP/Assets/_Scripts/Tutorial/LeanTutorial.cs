@@ -45,9 +45,9 @@ public class LeanTutorial : MonoBehaviour
 
         if (gameStart && nrOfCollect <= 3)
         {
+            nrOfCollect++;
             int xPos = rand.Next(-13, 13);
             Instantiate(collectPrefab, new Vector3(xPos, 1, -8), Quaternion.identity);
-            nrOfCollect++; 
         }           
 
     }
