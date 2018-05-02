@@ -55,9 +55,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4161356686144884}
+  - component: {fileID: 114617255797580110}
   m_Layer: 0
   m_Name: Stepping
-  m_TagString: Basic
+  m_TagString: StepTut
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -519,15 +520,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   network: {fileID: 0}
-  cam: {fileID: 0}
-  leaning: {fileID: 0}
-  oneLeg: {fileID: 0}
-  stepping: {fileID: 0}
-  jumping: {fileID: 0}
-  jumpingTwo: {fileID: 0}
   nLeaning: 0
   nOneLeg: 0
   nStepping: 0
   nJumping: 0
   nJumpingOneleg: 0
   nMomZ: 0
+--- !u!114 &114617255797580110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1295876436029104}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143ec956b9003984aae34db557c47f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  tutWorld: {fileID: 0}
+  stepManager: {fileID: 0}
+  instructions: {fileID: 0}
+  OtherInstructionsOne: {fileID: 0}
+  OtherInstructionsTwo: {fileID: 0}
+  OtherInstructionsThree: {fileID: 0}
+  OtherInstructionsFour: {fileID: 0}
+  timeText: {fileID: 0}
+  instructionsTimer: 10
+  waitTimer: 3
+  timer: 0
+  gameStart: 0
+  gameEnd: 0
+  checkMark: {fileID: 0}

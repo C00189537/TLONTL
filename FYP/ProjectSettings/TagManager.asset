@@ -24,6 +24,14 @@ TagManager:
   - Jump-pad
   - End
   - Meteor
+  - PlayerTut
+  - LeanTut
+  - TutorialWorld
+  - OneLegTut
+  - StepTut
+  - JumpTut
+  - JumpTwoTut
+  - backSpawn
   layers:
   - Default
   - TransparentFX

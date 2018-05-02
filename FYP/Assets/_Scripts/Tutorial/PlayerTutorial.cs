@@ -5,10 +5,17 @@ using UnityEngine.UI;
 
 public class PlayerTutorial : MonoBehaviour
 {
+    public LeanTutorial leanTut;
+    public OneLegTutorial OneLegTut;
+    public SteppingTutorial stepTut;
+    public JumpTutorial jumpTut;
+    public JumpTwoTutorial jumpTwoTut;
 
     public DynSTABLE platform;
     public StepTutorial stepping;
     public NetworkTutorial input;
+    public TutorialWorld tutWorld; 
+
     public float OneLegValue;
     public float StepValue;
     public float xVal;
@@ -25,13 +32,13 @@ public class PlayerTutorial : MonoBehaviour
     bool leftDone = false, rightDOne = false;
 
     //UI elements
-    public Text Scoretext;//leaning
+    public Text LeanScore;//leaning
     public Image greenLeft;
     public Image redLeft;
     public Image redRight;
     public Image greenRight;
-    float i = 0;
-    float j = 0;
+    public float i = 0;
+    public float j = 0;
 
     public Text steppingText;
     public Text jumpingText;
@@ -42,18 +49,27 @@ public class PlayerTutorial : MonoBehaviour
     private const int MAXJUMP = 1;
     public float pressure;
 
-    public int Leanscore; //for leaning
+    public int Leanscore = 0; //for leaning
     public int steppingScore;
     public int JumpScore;
     public int JumpTwoScore;
 
+    public bool hitObstacle = false; 
+
     // Use this for initialization
     void Start()
     {
+        tutWorld = GameObject.FindGameObjectWithTag("TutorialWorld").GetComponent<TutorialWorld>();
+        leanTut = GameObject.FindGameObjectWithTag("LeanTut").GetComponent<LeanTutorial>();
+        OneLegTut = GameObject.FindGameObjectWithTag("OneLegTut").GetComponent<OneLegTutorial>();
+        stepTut = GameObject.FindGameObjectWithTag("StepTut").GetComponent<SteppingTutorial>(); 
+        jumpTut = GameObject.FindGameObjectWithTag("JumpTut").GetComponent<JumpTutorial>();
+        jumpTwoTut = GameObject.FindGameObjectWithTag("JumpTwoTut").GetComponent<JumpTwoTutorial>(); 
+        
         stepping = GetComponent<StepTutorial>();
         rb = GetComponent<Rigidbody>();
         input = GetComponent<NetworkTutorial>();
-
+       
         Leanscore = 0;
 
     }
@@ -70,7 +86,7 @@ public class PlayerTutorial : MonoBehaviour
             touchGround = true;
         }
 
-        if (jump2)
+        if (jump2 && jumpTwoTut.gameStart)
         {
             Jump2();
 
@@ -79,15 +95,18 @@ public class PlayerTutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+
         Inputs();
 
-        if (lean)
+        if (lean && leanTut.gameStart)
         {
+            LeanScore.text = Leanscore.ToString() + "/25";
             gameObject.transform.Translate(platform.cop.x * LeanSpeed, 0, 0);
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, 1, -8);
         }
 
-        else if (oneLeg)
+        else if (oneLeg && OneLegTut.gameStart)
         {
             if (LeanRight)
             {
@@ -120,38 +139,52 @@ public class PlayerTutorial : MonoBehaviour
                 gameObject.transform.Translate(-((0 + gameObject.transform.position.x) / translateSpeed), 0, 0);
 
             }
+
         }
 
-        else if (step)
+        else if (step && stepTut.gameStart)
         {
+            steppingText.text = stepping.DestroyedSteps + "/27";
             Step();
         }
-        else if (jump)
+        else if (jump && jumpTut.gameStart)
         {
             Jump();
         }
+
     }
 
     void Jump()
     {
+        jumpingText.text = JumpScore.ToString() + "/10";
+
         if (platform.cop.force < JumpValue && touchGround == true)
         {
             rb.velocity = rb.velocity + new Vector3(0, jumpSpeed, rb.velocity.z);
             touchGround = false;
         }
 
+        if (gameObject.transform.position.z < -7)
+        {
+            hitObstacle = false; 
+        }
+
+       if (gameObject.transform.position.z > 27.9 && !hitObstacle)
+        {
+            JumpScore++; 
+        }
     }
 
     void Jump2()
     {
         float step = switchJumpSpeed * Time.deltaTime;
-
+       
         if (touchGround)
         {
 
             if (input.nMomZ < -pressure)
             {
-
+                Debug.Log("input < -press");
                 flying = false;
                 jumping2L = true;
                 jumping2R = false;
@@ -171,7 +204,7 @@ public class PlayerTutorial : MonoBehaviour
             }
             if (input.nMomZ > pressure)
             {
-
+                Debug.Log("input > press");
                 flying = false;
                 jumping2L = false;
                 jumping2R = true;
@@ -194,8 +227,10 @@ public class PlayerTutorial : MonoBehaviour
             }
             if (flying)
             {
+                Debug.Log("Fly " + flying);
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
             }
+          //  Debug.Log("Fly " + flying);
 
         }
     }
@@ -265,8 +300,22 @@ public class PlayerTutorial : MonoBehaviour
         {
             Leanscore++;
             Destroy(other.gameObject);
-            Scoretext.text = "Score: " + Leanscore.ToString();
+            leanTut.nrOfCollect--;
+          
         }
+
+        if (other.gameObject.tag == "Obstacle")
+        {
+            hitObstacle = true; 
+        }
+
+        //if (other.gameObject.tag == "backSpawn")
+        //{
+        //    if (!hitObstacle)
+        //    {
+        //        JumpScore++; 
+        //    }
+        //}
     }
 
     void OnTriggerStay(Collider other)
@@ -274,7 +323,7 @@ public class PlayerTutorial : MonoBehaviour
 
         if (other.gameObject.tag == "Lean")
         {
-            Scoretext.enabled = true;
+            LeanScore.enabled = true;
             redLeft.enabled = false;
             redRight.enabled = false;
             greenLeft.enabled = false;
@@ -290,7 +339,7 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "OneLeg")
         {
-            Scoretext.enabled = false;
+            LeanScore.enabled = false;
             redLeft.enabled = true;
             redRight.enabled = true;
             greenLeft.enabled = true;
@@ -306,7 +355,7 @@ public class PlayerTutorial : MonoBehaviour
         }
         else if (other.gameObject.tag == "Step")
         {
-            Scoretext.enabled = false;
+            LeanScore.enabled = false;
             redLeft.enabled = false;
             redRight.enabled = false;
             greenLeft.enabled = false;
@@ -320,15 +369,14 @@ public class PlayerTutorial : MonoBehaviour
             jump = false;
             jump2 = false;
 
-            if (stepping.getSteps() <= 0)
+            if (stepping.getSteps() <= 0 && stepTut.gameStart)
             {
                 stepping.GenerateButtons(3);
-            }
-            steppingText.text = steppingScore.ToString() + "/10"; 
+            } 
         }
         else if (other.gameObject.tag == "Jump")
         {
-            Scoretext.enabled = false;
+            LeanScore.enabled = false;
             redLeft.enabled = false;
             redRight.enabled = false;
             greenLeft.enabled = false;
@@ -341,12 +389,12 @@ public class PlayerTutorial : MonoBehaviour
             step = false;
             jump = true;
             jump2 = false;
-            jumpingText.text = JumpScore.ToString() + "/10"; 
+            
 
         }
         else if (other.gameObject.tag == "Jump2")
         {
-            Scoretext.enabled = false;
+            LeanScore.enabled = false;
             redLeft.enabled = false;
             redRight.enabled = false;
             greenLeft.enabled = false;
@@ -359,7 +407,7 @@ public class PlayerTutorial : MonoBehaviour
             step = false;
             jump = false;
             jump2 = true;
-            jumpingTwoText.text = JumpTwoScore.ToString() + "/10";
+            //jumpingTwoText.text = JumpTwoScore.ToString() + "/10";
         }
 
     }
