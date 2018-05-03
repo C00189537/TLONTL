@@ -1438,6 +1438,15 @@ Prefab:
       propertyPath: coroutineDone
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1184961109888294, guid: fa8f99926898cda4faf5d5dcc4be54ab, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114745976367289184, guid: fa8f99926898cda4faf5d5dcc4be54ab,
+        type: 2}
+      propertyPath: receiveScore
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa8f99926898cda4faf5d5dcc4be54ab, type: 2}
   m_IsPrefabParent: 0

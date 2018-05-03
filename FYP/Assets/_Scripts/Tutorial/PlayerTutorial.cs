@@ -179,14 +179,14 @@ public class PlayerTutorial : MonoBehaviour
 
     void Jump2()
     {
+        jumpingTwoText.text = JumpTwoScore.ToString() + "/20";
+
         float step = switchJumpSpeed * Time.deltaTime;
        
         if (touchGround)
         {
-
             if (input.nMomZ < -pressure)
             {
-                Debug.Log("input < -press");
                 flying = false;
                 jumping2L = true;
                 jumping2R = false;
@@ -196,17 +196,12 @@ public class PlayerTutorial : MonoBehaviour
                     jumping2R = true;
                     flying = true;
                 }
-
-
             }
             if (input.nMomZ > -pressure && input.nMomZ < pressure)
             {
-
-
             }
             if (input.nMomZ > pressure)
             {
-                Debug.Log("input > press");
                 flying = false;
                 jumping2L = false;
                 jumping2R = true;
@@ -217,22 +212,22 @@ public class PlayerTutorial : MonoBehaviour
                     flying = true;
                 }
             }
-
             //Movement from left to right
             if (jumping2L)
             {
                 gameObject.transform.Translate(-((xMax + gameObject.transform.position.x) / translateSpeed), 0, 0);
+                
+                
             }
             else if (jumping2R)
             {
                 gameObject.transform.Translate((xMax - gameObject.transform.position.x) / translateSpeed, 0, 0);
+
             }
             if (flying)
             {
-                Debug.Log("Fly " + flying);
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
             }
-          //  Debug.Log("Fly " + flying);
 
         }
     }
@@ -310,14 +305,28 @@ public class PlayerTutorial : MonoBehaviour
         {
             hitObstacle = true; 
         }
+        
+    }
 
-        //if (other.gameObject.tag == "backSpawn")
-        //{
-        //    if (!hitObstacle)
-        //    {
-        //        JumpScore++; 
-        //    }
-        //}
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Stepleft" || collision.gameObject.tag == "Stepright")
+        {
+            jumpTwoTut.receiveScore = true;
+        }
+
+        if (collision.gameObject.tag == "Stepleft")
+        {
+            jumpTwoTut.Stepleft = true;
+            jumpTwoTut.Stepright = false; 
+        }
+
+        if (collision.gameObject.tag == "Stepright")
+        {
+            jumpTwoTut.Stepright = true;
+            jumpTwoTut.Stepleft = false; 
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -413,7 +422,6 @@ public class PlayerTutorial : MonoBehaviour
             step = false;
             jump = false;
             jump2 = true;
-            //jumpingTwoText.text = JumpTwoScore.ToString() + "/10";
         }
 
     }
@@ -422,5 +430,6 @@ public class PlayerTutorial : MonoBehaviour
     {
         gameObject.transform.position = new Vector3(0, 5, -8);
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        jumpTwoTut.receiveScore = false; 
     }
 }

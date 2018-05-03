@@ -33,6 +33,9 @@ public class JumpTwoTutorial : MonoBehaviour {
     public bool odd = true; 
     public bool firstPanel = true; 
 
+    public bool receiveScore;
+    public bool Stepleft = false;
+    public bool Stepright = false; 
 
     public Image checkMark;
 
@@ -119,7 +122,7 @@ public class JumpTwoTutorial : MonoBehaviour {
 
     public IEnumerator Interval()
     {
-        Debug.Log("Interval is running");
+       
 
         if (side == 1)
         {

@@ -22,10 +22,10 @@ public class TutorialWorld : MonoBehaviour
     public void Start()
     {
         LeanPlatform = false;
-        OneLegPlatform = false;
+        OneLegPlatform = true;
         StepPlatform = false;
         JumpPlatform = false;
-        JumpTwoPlatform = true;
+        JumpTwoPlatform = false;
          
         leanTut = leaning.GetComponent<LeanTutorial>();
         oneLegTut = oneLeg.GetComponent<OneLegTutorial>();
