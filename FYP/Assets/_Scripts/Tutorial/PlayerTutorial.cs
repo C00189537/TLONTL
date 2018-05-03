@@ -172,6 +172,7 @@ public class PlayerTutorial : MonoBehaviour
        if (gameObject.transform.position.z > 27.9 && !hitObstacle)
         {
             JumpScore++; 
+            jumpingText.text = JumpScore.ToString() + "/10";
         }
     }
 
