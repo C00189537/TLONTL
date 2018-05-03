@@ -95,13 +95,10 @@ public class JumpTutorial : MonoBehaviour
                 coroutineStart = true;
                 StartCoroutine(Pause());
             }
-
         }
-        
 
         if (gameEnd)
         {
-            Debug.Log("game end");
             StopCoroutine(Pause());
             player.transform.position = new Vector3(0, 1, -8);
             StartCoroutine(End());
@@ -144,7 +141,6 @@ public class JumpTutorial : MonoBehaviour
 
     public IEnumerator Pause()
     {
-        Debug.Log("FIRE PAUSE");
         Go.enabled = true;
         yield return new WaitForSeconds(0.3f);
         Go.enabled = false;

@@ -37,6 +37,7 @@ public class PlayerTutorial : MonoBehaviour
     public Image redLeft;
     public Image redRight;
     public Image greenRight;
+    public Image Go; 
     public float i = 0;
     public float j = 0;
 
@@ -331,7 +332,8 @@ public class PlayerTutorial : MonoBehaviour
             greenRight.enabled = false;
             steppingText.enabled = false;
             jumpingText.enabled = false;
-            jumpingTwoText.enabled = false; 
+            jumpingTwoText.enabled = false;
+            Go.enabled = false; 
             lean = true;
             oneLeg = false;
             step = false;
@@ -348,6 +350,7 @@ public class PlayerTutorial : MonoBehaviour
             steppingText.enabled = false;
             jumpingText.enabled = false;
             jumpingTwoText.enabled = false;
+            Go.enabled = false;
             lean = false;
             oneLeg = true;
             step = false;
@@ -364,6 +367,7 @@ public class PlayerTutorial : MonoBehaviour
             steppingText.enabled = true;
             jumpingText.enabled = false;
             jumpingTwoText.enabled = false;
+            Go.enabled = false;
             lean = false;
             oneLeg = false;
             step = true;
@@ -403,6 +407,7 @@ public class PlayerTutorial : MonoBehaviour
             steppingText.enabled = false;
             jumpingText.enabled = false;
             jumpingTwoText.enabled = true;
+            Go.enabled = false;
             lean = false;
             oneLeg = false;
             step = false;
@@ -415,7 +420,7 @@ public class PlayerTutorial : MonoBehaviour
 
     public void ResetPlayer()
     {
-        gameObject.transform.position = new Vector3(0, 3, 0);
+        gameObject.transform.position = new Vector3(0, 5, -8);
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }

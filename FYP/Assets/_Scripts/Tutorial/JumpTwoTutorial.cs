@@ -13,17 +13,31 @@ public class JumpTwoTutorial : MonoBehaviour {
     public Image OtherInstructionsThree;
     public Image OtherInstructionsFour;
 
+    public GameObject LeftPanel;
+    public GameObject RightPanel; 
 
     public Text timeText;
     public int instructionsTimer = 10;
     public int waitTimer = 5;
 
+    public int side = 0; 
 
     public bool timer = false;
     public bool gameStart = false;
     public bool gameEnd = false;
 
+    public bool LeftOn = true;
+    public bool RightOn = true;
+
+    public bool coroutineDone = true;
+    public bool odd = true; 
+    public bool firstPanel = true; 
+
+
     public Image checkMark;
+
+    System.Random rand = new System.Random();
+
 
     // Use this for initialization
     void Start()
@@ -42,11 +56,15 @@ public class JumpTwoTutorial : MonoBehaviour {
 
         checkMark.enabled = false;
 
+        LeftPanel = gameObject.transform.Find("LeftPanel").gameObject;
+        RightPanel = gameObject.transform.Find("RightPanel").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
+        LeftPanel.SetActive(LeftOn);
+        RightPanel.SetActive(RightOn);
 
         if (instructionsTimer <= 0 && !timer)
         {
@@ -61,11 +79,103 @@ public class JumpTwoTutorial : MonoBehaviour {
             timeText.text = "";
         }
 
+        if (gameStart)
+        {
+            if (player.transform.position.y < 1.5)
+            {
+                player.ResetPlayer(); 
+            }
+           
+            if (firstPanel)
+            {
+                side = rand.Next(1, 3);
+                if (side == 1)
+                {
+                    RightOn = false;
+                    LeftOn = true; 
+                } else
+                {
+                    RightOn = true; 
+                    LeftOn = false; 
+                }
+
+                firstPanel = false; 
+            }
+
+            if (coroutineDone)
+            {
+                coroutineDone = false; 
+                StartCoroutine(Interval());
+                
+            }
+        }
+
         if (gameEnd)
         {
             player.transform.position = new Vector3(0, 1, -8);  
             StartCoroutine(End());
         }
+    }
+
+    public IEnumerator Interval()
+    {
+        Debug.Log("Interval is running");
+
+        if (side == 1)
+        {
+            if (odd)
+            {
+                yield return new WaitForSeconds(1);
+                RightOn = !RightOn;
+                yield return new WaitForSeconds(1);
+                LeftOn = !LeftOn;
+                coroutineDone = true;
+                odd = false; 
+                yield break;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1);
+                LeftOn = !LeftOn;
+                yield return new WaitForSeconds(1);
+                RightOn = !RightOn;
+                coroutineDone = true;
+                odd = true; 
+                yield break;
+            }
+            
+        }
+        else
+        {
+            if (odd)
+            {
+                yield return new WaitForSeconds(1);
+                LeftOn = !LeftOn;
+                yield return new WaitForSeconds(1);
+                RightOn = !RightOn;
+                coroutineDone = true;
+                odd = false; 
+                yield break;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1);
+                RightOn = !RightOn;
+                yield return new WaitForSeconds(1);
+                LeftOn = !LeftOn;
+                coroutineDone = true;
+                odd = true;
+                yield break;
+            }
+        }
+
+
+        //int waitInterval = rand.Next(1, 3);
+        
+        //RightOn = !RightOn;
+        //LeftOn = !LeftOn;
+        //yield return new WaitForSeconds(waitInterval);
+        
     }
 
     public IEnumerator CountDown()
@@ -75,6 +185,7 @@ public class JumpTwoTutorial : MonoBehaviour {
             instructionsTimer--;
             instructions.enabled = true;
             yield return new WaitForSeconds(1);
+           
         }
     }
 

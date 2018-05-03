@@ -24,8 +24,8 @@ public class TutorialWorld : MonoBehaviour
         LeanPlatform = false;
         OneLegPlatform = false;
         StepPlatform = false;
-        JumpPlatform = true;
-        JumpTwoPlatform = false;
+        JumpPlatform = false;
+        JumpTwoPlatform = true;
          
         leanTut = leaning.GetComponent<LeanTutorial>();
         oneLegTut = oneLeg.GetComponent<OneLegTutorial>();
