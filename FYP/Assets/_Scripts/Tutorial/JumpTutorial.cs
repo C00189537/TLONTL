@@ -13,6 +13,9 @@ public class JumpTutorial : MonoBehaviour {
     public Image OtherInstructionsThree;
     public Image OtherInstructionsFour;
 
+    public Image Go;
+    public bool restPause = true;
+    public bool coroutineStart = false; 
 
     public Text timeText;
     public int instructionsTimer = 10;
@@ -41,6 +44,7 @@ public class JumpTutorial : MonoBehaviour {
         OtherInstructionsFour.enabled = false;
 
         checkMark.enabled = false;
+        Go.enabled = false; 
 
     }
 
@@ -63,13 +67,35 @@ public class JumpTutorial : MonoBehaviour {
         
         if (gameStart)
         {
-            player.transform.position += new Vector3(0, 0, 0.1f);
+            if (!restPause)
+            {
+                player.transform.position += new Vector3(0, 0, 0.1f);
+                StopCoroutine(Pause());
+                coroutineStart = false; 
+            }
+           
 
             if (player.transform.position.z > 28)
             {
+                restPause = true;
                 player.transform.position = new Vector3(0, 1, -8);
-
+                
             }
+
+            if (player.transform.position.z < -7 && restPause && !coroutineStart)
+            {
+                coroutineStart = true; 
+                StartCoroutine(Pause());
+
+                //restPause = false; 
+            }
+
+        }
+
+        if (player.JumpScore >= 11 && gameStart)
+        {
+            gameStart = false;
+            gameEnd = true;
         }
 
         if (gameEnd)
@@ -109,5 +135,18 @@ public class JumpTutorial : MonoBehaviour {
         TutorialWorld.StepPlatform = false;
         TutorialWorld.JumpPlatform = false;
         TutorialWorld.JumpTwoPlatform = true;
+    }
+
+    public IEnumerator Pause()
+    {
+      
+        Go.enabled = true; 
+        yield return new WaitForSeconds(0.3f);
+        Go.enabled = false;
+        yield return new WaitForSeconds(0.3f);
+        Go.enabled = true;
+        yield return new WaitForSeconds(0.3f);
+        Go.enabled = false;
+        restPause = false; 
     }
 }

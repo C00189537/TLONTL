@@ -147,7 +147,7 @@ public class PlayerTutorial : MonoBehaviour
             steppingText.text = stepping.DestroyedSteps + "/27";
             Step();
         }
-        else if (jump && jumpTut.gameStart)
+        else if (jump && jumpTut.gameStart && !jumpTut.restPause)
         {
             Jump();
         }
