@@ -23,6 +23,7 @@ public class NetworkInput : MonoBehaviour
     public float nOneLegDifficulty = 1;
     public float nOneLegJump = 0;
     public float nMomZ = 0;
+    public float nTutorial = 0; 
 
     public float diffChange;
     public float speedChange;
@@ -99,6 +100,7 @@ public class NetworkInput : MonoBehaviour
         }
 
         nMomZ = network.getOutput(17);
+        nTutorial = network.getOutput(18);
     }
 
 

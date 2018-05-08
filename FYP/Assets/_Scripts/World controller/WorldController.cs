@@ -11,6 +11,7 @@ public class WorldController : MonoBehaviour
     private int temp;
     Camera cam;
 
+    public int previousTrack = 0; 
     private int[] trackers = new int[3];
     private int currentTracker = 0;
     private int nextTracker = 0;
@@ -29,6 +30,9 @@ public class WorldController : MonoBehaviour
     //Sections of track
     private int TRACK_SIZE = 3;
     public GameObject[] trackPiece = new GameObject[3];
+    public List<GameObject> enemies = new List<GameObject>();
+
+
     private GameObject currentSection;
     private GameObject nextSection;
     private GameObject farSection;
@@ -58,6 +62,8 @@ public class WorldController : MonoBehaviour
     Jumping jumping;
     JumpingOneLeg jumpOneLeg; 
     public NetworkInput input;
+
+    public bool tutorial = false;
 
     void Start()
     {
@@ -94,6 +100,8 @@ public class WorldController : MonoBehaviour
         trackers[2] = farTracker;
 
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
+
+        
     }
 
     void Update()
@@ -107,20 +115,37 @@ public class WorldController : MonoBehaviour
         UpdateTrack();
         SpeedUpdate();
 
-        if (input.NManual == 0)
-        {
-            Difficultycontroller.GetInstance().UpdateDifficultyScore();
-        }
-
+      
     }
 
     void UpdateAvailableTracks()
     {
-        trackAvailable[1] = (int)input.nLeaning;
-        trackAvailable[2] = (int)input.nOneLeg;
-        trackAvailable[3] = (int)input.nJumping;
-        trackAvailable[4] = (int)input.nStepping;
-        trackAvailable[5] = (int)input.nJumpingOneleg;
+        if (input.nTutorial == 1)
+        {
+            tutorial = true;
+        } 
+        if (input.nTutorial == 0)
+        {
+            tutorial = false;
+        }
+
+        if (!tutorial)
+        {
+            trackAvailable[1] = (int)input.nLeaning;
+            trackAvailable[2] = (int)input.nOneLeg;
+            trackAvailable[3] = (int)input.nJumping;
+            trackAvailable[4] = (int)input.nStepping;
+            trackAvailable[5] = (int)input.nJumpingOneleg;
+        } 
+        if (tutorial)
+        {
+            trackAvailable[1] = 1;
+            trackAvailable[2] = 1;
+            trackAvailable[3] = 1;
+            trackAvailable[4] = 1;
+            trackAvailable[5] = 1;
+        }
+      
     }
 
     void UpdateTrack()
@@ -128,11 +153,61 @@ public class WorldController : MonoBehaviour
         //Creates a looping track
         for (int i = 0; i < TRACK_SIZE; i++)
         {
+
             if (trackPiece[i].transform.position.z <= killPoint)
             {
                 Destroy(trackPiece[i]);
+                enemies.Remove(trackPiece[i]);
                 //If the track piece is a base piece the next one will be a random exercise
-                if (restPhase > restTracks)
+
+                if (tutorial)
+                {
+                    if (previousTrack == 0)
+                    {
+                        temp = rand.Next(minRand, maxRand + 1);
+                       
+                        
+                        Debug.Log("Tutorial");
+
+                        if (temp == 2)
+                        {
+                            oneLegTracker = 1;
+                        }
+                        trackers[i] = temp;
+                        trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+                        enemies.Add(platformLayout[trackers[i]]);   
+
+                        switch (trackers[i])
+                        {
+                            case 1:
+                                //CoinSpawn(i);
+                                ObstacleSpawn(i);
+                                break;
+                            case 2:
+                                OneLegSpawn(i);
+                                break;
+                            case 3:
+                                JumpSpawn(i);
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                DifJumpSpawn(i);
+                                break;
+                            default:
+                                break;
+                        }
+                        previousTrack = 1;
+                    }
+                    if (previousTrack == 1)
+                    {
+                        trackPiece[i] = Instantiate(platformLayout[trackers[0]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+                        Debug.Log("Tutorial rest");
+                        previousTrack = 0;
+                    }
+                }
+
+                if (restPhase > restTracks && !tutorial)
                 {
                     temp = rand.Next(minRand, maxRand + 1);
                     restPhase = 0;
@@ -245,7 +320,7 @@ public class WorldController : MonoBehaviour
                     OneLegSpawn(i);
                 }
                 //If the track piece is an exercise, the next one will be a base piece
-                else if (restPhase <= restTracks)  //(trackers[i] > 0)
+                else if (restPhase <= restTracks && !tutorial)  //(trackers[i] > 0)
                 {
                     restPhase++;
                     trackers[i] = 0;
