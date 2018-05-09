@@ -199,7 +199,7 @@ public class WorldController : MonoBehaviour
                             default:
                                 break;
                         }
-                        StartCoroutine(tutorialScript.CountDown());
+                        StartCoroutine(tutorialScript.WaitforInstructions());
                     }
                     if (rest)
                     {

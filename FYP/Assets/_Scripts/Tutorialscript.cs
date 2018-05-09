@@ -61,6 +61,12 @@ public class Tutorialscript : MonoBehaviour {
                 break; 
         }
     }
+    public IEnumerator WaitforInstructions()
+    {
+        yield return new WaitForSeconds(10);
+        StartCoroutine(CountDown());
+        yield break; 
+    }
 
     public IEnumerator CountDown()
     {
