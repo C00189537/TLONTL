@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class WorldController : MonoBehaviour
 {
@@ -64,6 +65,8 @@ public class WorldController : MonoBehaviour
 
     public bool tutorial = false;
 
+    public Tutorialscript tutorialScript;  
+
     void Start()
     {
         FloatingTextController.Initialize();
@@ -100,7 +103,7 @@ public class WorldController : MonoBehaviour
 
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
 
-        
+        tutorialScript = GetComponent<Tutorialscript>(); 
     }
 
     void Update()
@@ -171,6 +174,7 @@ public class WorldController : MonoBehaviour
                         {
                             oneLegTracker = 0;
                         }
+                        tutorialScript.SetInstructions(temp);
                         trackers[i] = temp;
                         trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
                     
@@ -195,7 +199,7 @@ public class WorldController : MonoBehaviour
                             default:
                                 break;
                         }
-                       
+                        StartCoroutine(tutorialScript.CountDown());
                     }
                     if (rest)
                     {
@@ -526,7 +530,15 @@ public class WorldController : MonoBehaviour
         }
         else if (tutorial)
         {
-            speed = 0.1f;
+            if (!tutorialScript.timer)
+            {
+                speed = 0.1f;
+            } 
+            if (tutorialScript.timer)
+            {
+                speed = 0.0f; 
+            }
+           
         }
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
@@ -540,4 +552,6 @@ public class WorldController : MonoBehaviour
     {
         cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
     }
+
+   
 }
