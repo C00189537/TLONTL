@@ -8,10 +8,10 @@ public class WorldController : MonoBehaviour
 
     public GameObject[] platformLayout = new GameObject[6];
     public int[] trackAvailable = new int[6];
-    private int temp;
+    public int temp;
     Camera cam;
 
-    public int previousTrack = 0; 
+    public bool rest = false; 
     private int[] trackers = new int[3];
     private int currentTracker = 0;
     private int nextTracker = 0;
@@ -30,7 +30,6 @@ public class WorldController : MonoBehaviour
     //Sections of track
     private int TRACK_SIZE = 3;
     public GameObject[] trackPiece = new GameObject[3];
-    public List<GameObject> enemies = new List<GameObject>();
 
 
     private GameObject currentSection;
@@ -157,25 +156,24 @@ public class WorldController : MonoBehaviour
             if (trackPiece[i].transform.position.z <= killPoint)
             {
                 Destroy(trackPiece[i]);
-                enemies.Remove(trackPiece[i]);
                 //If the track piece is a base piece the next one will be a random exercise
-
+               
                 if (tutorial)
                 {
-                    if (previousTrack == 0)
+                    rest = !rest;
+                    if (!rest)
                     {
                         temp = rand.Next(minRand, maxRand + 1);
-                       
-                        
+
                         Debug.Log("Tutorial");
 
                         if (temp == 2)
                         {
-                            oneLegTracker = 1;
+                            oneLegTracker = 0;
                         }
                         trackers[i] = temp;
                         trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-                        enemies.Add(platformLayout[trackers[i]]);   
+                    
 
                         switch (trackers[i])
                         {
@@ -197,15 +195,17 @@ public class WorldController : MonoBehaviour
                             default:
                                 break;
                         }
-                        previousTrack = 1;
+                       
                     }
-                    if (previousTrack == 1)
+                    if (rest)
                     {
-                        trackPiece[i] = Instantiate(platformLayout[trackers[0]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+                        temp = 0;
+                        trackers[i] = temp;
+                        trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
                         Debug.Log("Tutorial rest");
-                        previousTrack = 0;
                     }
                 }
+              
 
                 if (restPhase > restTracks && !tutorial)
                 {
