@@ -345,14 +345,23 @@ public class WorldController : MonoBehaviour
     {
         int variable = Difficultycontroller.GetInstance().difficulty;
 
-        if (input.NManual == 0.0f)
+        if (tutorial)
         {
-            variable = Difficultycontroller.GetInstance().difficulty;
+            variable = 1; 
         }
-        if (input.NManual == 1)
+        
+        if (!tutorial)
         {
-            variable = (int)input.nObstackles;
+            if (input.NManual == 0.0f)
+            {
+                variable = Difficultycontroller.GetInstance().difficulty;
+            }
+            if (input.NManual == 1)
+            {
+                variable = (int)input.nObstackles;
+            }
         }
+        
 
         switch (variable)
         {
@@ -382,14 +391,24 @@ public class WorldController : MonoBehaviour
 
     public void SteppingStones()
     {
-        if (input.NManual == 0)
+        if (!tutorial)
         {
-            stepping.GenerateButtons(Difficultycontroller.GetInstance().difficulty);
+            if (input.NManual == 0)
+            {
+                stepping.GenerateButtons(Difficultycontroller.GetInstance().difficulty);
+            }
+            if (input.NManual == 1)
+            {
+                stepping.GenerateButtons((int)input.nNumberofSteps);
+            }
+
         }
-        if (input.NManual == 1)
+
+        if (tutorial)
         {
-            stepping.GenerateButtons((int)input.nNumberofSteps);
+            stepping.GenerateButtons(3);
         }
+
     }
 
     void OneLegSpawn(int val)
@@ -415,14 +434,23 @@ public class WorldController : MonoBehaviour
 
         int variable = Difficultycontroller.GetInstance().difficulty;
 
-        if (input.NManual == 0)
+        if (tutorial)
         {
-            variable = Difficultycontroller.GetInstance().difficulty;
+            variable = 1;
         }
-        if (input.NManual == 1)
+
+        if (!tutorial)
         {
-            variable = (int)input.nJumpDifficulty;
+            if (input.NManual == 0)
+            {
+                variable = Difficultycontroller.GetInstance().difficulty;
+            }
+            if (input.NManual == 1)
+            {
+                variable = (int)input.nJumpDifficulty;
+            }
         }
+       
 
         switch (variable)
         {
@@ -450,14 +478,23 @@ public class WorldController : MonoBehaviour
     {
         int variable = Difficultycontroller.GetInstance().difficulty;
 
-        if (input.NManual == 0)
+        if (tutorial)
         {
-            variable = Difficultycontroller.GetInstance().difficulty;
+            variable = 1;
         }
-        if (input.NManual == 1)
+
+        if (!tutorial)
         {
-            variable = (int)input.nOneLegJump;
+            if (input.NManual == 0)
+            {
+                variable = Difficultycontroller.GetInstance().difficulty;
+            }
+            if (input.NManual == 1)
+            {
+                variable = (int)input.nOneLegJump;
+            }
         }
+        
 
         switch (variable)
         {
@@ -483,7 +520,14 @@ public class WorldController : MonoBehaviour
 
     void SpeedUpdate()
     {
-        speed = input.NSpeed;
+        if (!tutorial)
+        {
+            speed = input.NSpeed;
+        }
+        else if (tutorial)
+        {
+            speed = 0.1f;
+        }
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
 

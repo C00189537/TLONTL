@@ -63,7 +63,9 @@ public class Difficultycontroller : MonoBehaviour
 
     public void UpdateDifficultyScore()
     {
+
         //Contain within 0-70
+
         if (difficultyScore < 0)
         {
             difficultyScore = 0;
@@ -98,6 +100,8 @@ public class Difficultycontroller : MonoBehaviour
             difficulty = 5;
             theWorld.oneLegDif = 5;
         }
+
+
     }
 
     public void setPlatformScore()
@@ -144,7 +148,7 @@ public class Difficultycontroller : MonoBehaviour
                     break;
                 case 5:
                     difficultyScore -= 5;
-                    break; 
+                    break;
                 default:
                     break;
             }
