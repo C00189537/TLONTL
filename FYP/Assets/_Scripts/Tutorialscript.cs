@@ -7,6 +7,7 @@ public class Tutorialscript : MonoBehaviour {
     
     public WorldController theWorld;
     public PlayerController3 player;
+    public GameObject playerObject;
 
     public int instructionsTimer = 10;
     public int waitTimer = 3;
@@ -25,7 +26,7 @@ public class Tutorialscript : MonoBehaviour {
     void Start () {
         theWorld = GetComponent<WorldController>(); 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController3>();
-
+        playerObject = GameObject.FindGameObjectWithTag("Player");
         leanIns.enabled = false;
         oneLegIns.enabled = false;
         stepIns.enabled = false;
@@ -71,19 +72,23 @@ public class Tutorialscript : MonoBehaviour {
     public IEnumerator CountDown()
     {
         
-        while (instructionsTimer > 0)
+        while (instructionsTimer > 0 && theWorld.tutorial)
         {
+            player.enabled = false;  
             timer = true; 
             theWorld.speed = 0;
             instructionsTimer--;
             instructions.enabled = true;
+            
             yield return new WaitForSeconds(1);
         }
 
-        if (instructionsTimer <= 0)
+        if (instructionsTimer <= 0 || !theWorld.tutorial)
         {
             timer = false; 
-            instructions.enabled = false; 
+            instructions.enabled = false;
+
+            player.enabled = true;
             StartCoroutine(Wait());
             yield break; 
         }
@@ -91,22 +96,22 @@ public class Tutorialscript : MonoBehaviour {
     
     public IEnumerator Wait()
     {
-       
-        while (waitTimer > 0)
+        while (waitTimer > 0 && theWorld.tutorial)
         {
             timer = true; 
             theWorld.speed = 0;
             timeText.text = waitTimer.ToString();
             waitTimer--;
+            
             yield return new WaitForSeconds(1);
         }
 
-        if (waitTimer <= 0)
+        if (waitTimer <= 0 || !theWorld.tutorial)
         {
             timer = false; 
             timeText.text = "";
             theWorld.speed = 0.1f;
-            SetValues(); 
+            SetValues();
             yield break; 
         }
     }

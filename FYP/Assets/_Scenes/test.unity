@@ -807,6 +807,16 @@ Prefab:
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114159274094138904, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114159274094138904, guid: f14bb30f588d22a4fb22cebb125f5189,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f14bb30f588d22a4fb22cebb125f5189, type: 2}
   m_IsPrefabParent: 0
