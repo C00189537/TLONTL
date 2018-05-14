@@ -77,8 +77,6 @@ public class Leaning : MonoBehaviour {
             case 1:
                 theWorld.trackPiece[val].transform.Find("ObstacleFront").Translate(0, 2, 0);
                 theWorld.trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
-                theWorld.trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
-                theWorld.trackPiece[val].transform.Find("ObstacleMid").Translate(0, 2, 0);
                 theWorld.trackPiece[val].transform.Find("ObstacleBack").Translate(0, 2, 0);
                 theWorld.trackPiece[val].transform.Find("ScoreOb1").Translate(2, 2, 2);
                 theWorld.trackPiece[val].transform.Find("ScoreOb2").Translate(2, 2, 0);
@@ -103,7 +101,7 @@ public class Leaning : MonoBehaviour {
     public void ObstacleFive(int val)
     {
         int set = rand.Next(1, 4);
-
+        Debug.Log("Inside leaning script");
         switch (set)
         {
             case 1:

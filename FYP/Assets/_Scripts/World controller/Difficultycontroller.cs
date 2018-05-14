@@ -37,6 +37,10 @@ public class Difficultycontroller : MonoBehaviour
         theWorld = gameControllerObject.GetComponent<WorldController>();
     }
 
+    public void Update()
+    {
+        UpdateDifficultyScore(); 
+    }
     public void BeginDifficulty(int difficulty)
     {
         switch (difficulty)
@@ -59,6 +63,8 @@ public class Difficultycontroller : MonoBehaviour
             default:
                 break;
         }
+
+        
     }
 
     public void UpdateDifficultyScore()

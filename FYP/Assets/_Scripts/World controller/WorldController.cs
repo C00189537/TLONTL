@@ -210,136 +210,141 @@ public class WorldController : MonoBehaviour
                     }
                 }
               
-
-                if (restPhase > restTracks && !tutorial)
+                else if (!tutorial)
                 {
-                    temp = rand.Next(minRand, maxRand + 1);
-                    restPhase = 0;
-                    int count = 0;
-                    while (trackAvailable[temp] != 1)
+                    Debug.Log("Inside first loop");
+                    if (restPhase > restTracks)
                     {
-
                         temp = rand.Next(minRand, maxRand + 1);
-                        count++;
-
-                        if (count >= 20)
+                        restPhase = 0;
+                        int count = 0;
+                        while (trackAvailable[temp] != 1)
                         {
-                            temp = 0;
-                            restPhase = restTracks;
-                            break;
-                        }
 
-                    }
-                    trackers[i] = temp;
-                    //Longer one leg
-                    if (temp == 2)
-                    {
-                        if (input.NManual == 1)
-                        {
-                            switch ((int)input.nOneLegDifficulty)
+                            temp = rand.Next(minRand, maxRand + 1);
+                            count++;
+
+                            if (count >= 20)
                             {
-                                case 1:
-                                    //1 length
-                                    oneLegTracker = 0;
-                                    break;
-                                case 2:
-                                    //2 length
-                                    oneLegTracker = 1;
-                                    break;
-                                case 3:
-                                    //3 length
-                                    oneLegTracker = 2;
-                                    break;
-                                case 4:
-                                    //4 length
-                                    oneLegTracker = 3;
-                                    break;
-                                case 5:
-                                    //5 length
-                                    oneLegTracker = 4;
-                                    break;
-                                default:
-                                    break;
+                                temp = 0;
+                                restPhase = restTracks;
+                                break;
+                            }
+
+                        }
+                        trackers[i] = temp;
+                        //Longer one leg
+                        if (temp == 2)
+                        {
+                            if (input.NManual == 1)
+                            {
+                                switch ((int)input.nOneLegDifficulty)
+                                {
+                                    case 1:
+                                        //1 length
+                                        oneLegTracker = 0;
+                                        break;
+                                    case 2:
+                                        //2 length
+                                        oneLegTracker = 1;
+                                        break;
+                                    case 3:
+                                        //3 length
+                                        oneLegTracker = 2;
+                                        break;
+                                    case 4:
+                                        //4 length
+                                        oneLegTracker = 3;
+                                        break;
+                                    case 5:
+                                        //5 length
+                                        oneLegTracker = 4;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                switch (oneLegDif)
+                                {
+                                    case 1:
+                                        //1 length
+                                        oneLegTracker = 0;
+                                        break;
+                                    case 2:
+                                        //2 length
+                                        oneLegTracker = 1;
+                                        break;
+                                    case 3:
+                                        //3 length
+                                        oneLegTracker = 2;
+                                        break;
+                                    case 4:
+                                        //4 length
+                                        oneLegTracker = 3;
+                                        break;
+                                    case 5:
+                                        //5 length
+                                        oneLegTracker = 4;
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                         }
-                        else
+
+                        trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+
+                        //Set up the track pieces
+                        switch (trackers[i])
                         {
-                            switch (oneLegDif)
-                            {
-                                case 1:
-                                    //1 length
-                                    oneLegTracker = 0;
-                                    break;
-                                case 2:
-                                    //2 length
-                                    oneLegTracker = 1;
-                                    break;
-                                case 3:
-                                    //3 length
-                                    oneLegTracker = 2;
-                                    break;
-                                case 4:
-                                    //4 length
-                                    oneLegTracker = 3;
-                                    break;
-                                case 5:
-                                    //5 length
-                                    oneLegTracker = 4;
-                                    break;
-                                default:
-                                    break;
-                            }
+                            case 1:
+                                //CoinSpawn(i);
+                                ObstacleSpawn(i);
+                                break;
+                            case 2:
+                                OneLegSpawn(i);
+                                break;
+                            case 3:
+                                JumpSpawn(i);
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                DifJumpSpawn(i);
+                                break;
+                            default:
+                                break;
                         }
+
                     }
-
-                    trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-
-                    //Set up the track pieces
-                    switch (trackers[i])
+                    else if (oneLegTracker > 0)
                     {
-                        case 1:
-                            //CoinSpawn(i);
-                            ObstacleSpawn(i);
-                            break;
-                        case 2:
-                            OneLegSpawn(i);
-                            break;
-                        case 3:
-                            JumpSpawn(i);
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            DifJumpSpawn(i);
-                            break;
-                        default:
-                            break;
+                        oneLegTracker--;
+                        trackPiece[i] = Instantiate(platformLayout[2], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+                        OneLegSpawn(i);
                     }
+                    //If the track piece is an exercise, the next one will be a base piece
+                    else if (restPhase <= restTracks && !tutorial)  //(trackers[i] > 0)
+                    {
+                        restPhase++;
+                        trackers[i] = 0;
+                        trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
 
+                    }
+                    //Alligns the track
+                    if (TRACK_SIZE > i + 1)
+                    {
+                        trackPiece[i + 1].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+                    }
+                    if (TRACK_SIZE > i + 2)
+                    {
+                        trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, spawnPoint);
+                    }
                 }
-                else if (oneLegTracker > 0)
-                {
-                    oneLegTracker--;
-                    trackPiece[i] = Instantiate(platformLayout[2], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-                    OneLegSpawn(i);
-                }
-                //If the track piece is an exercise, the next one will be a base piece
-                else if (restPhase <= restTracks && !tutorial)  //(trackers[i] > 0)
-                {
-                    restPhase++;
-                    trackers[i] = 0;
-                    trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-
-                }
-                //Alligns the track
-                if (TRACK_SIZE > i + 1)
-                {
-                    trackPiece[i + 1].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-                }
-                if (TRACK_SIZE > i + 2)
-                {
-                    trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, spawnPoint);
-                }
+                    
+                  
 
             }
         }
@@ -359,13 +364,15 @@ public class WorldController : MonoBehaviour
             if (input.NManual == 0.0f)
             {
                 variable = Difficultycontroller.GetInstance().difficulty;
+                Debug.Log("lean man off + var  " + variable);
             }
             if (input.NManual == 1)
             {
                 variable = (int)input.nObstackles;
+                Debug.Log("lean man on+ var  " + variable);
             }
         }
-        
+        Debug.Log("Now inside obstaclespawn");
 
         switch (variable)
         {
