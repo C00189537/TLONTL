@@ -146,6 +146,7 @@ public class Stepping : MonoBehaviour
                 ScoreController.GetInstance().AddScore(ScoreController.GetInstance().Step);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
+                Difficultycontroller.GetInstance().difficultyScore += 1;
                 Steps.Dequeue();
             }
             ResetXPosition();
@@ -164,6 +165,7 @@ public class Stepping : MonoBehaviour
                 ScoreController.GetInstance().AddScore(ScoreController.GetInstance().Step);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
+                Difficultycontroller.GetInstance().difficultyScore += 1;
                 Steps.Dequeue();
 
             }
@@ -182,6 +184,7 @@ public class Stepping : MonoBehaviour
                 ScoreController.GetInstance().AddScore(ScoreController.GetInstance().Step);
                 firstArrow.GetComponent<RawImage>().color = Color.green;
                 AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().CorrectStep, 0.5f);
+                Difficultycontroller.GetInstance().difficultyScore += 1;
                 Steps.Dequeue();
             }
             ResetXPosition();

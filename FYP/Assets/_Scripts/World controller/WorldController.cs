@@ -226,13 +226,11 @@ public class WorldController : MonoBehaviour
                         temp = 0;
                         trackers[i] = temp;
                         trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-                        Debug.Log("Tutorial rest");
                     }
                 }
               
                 else if (!tutorial)
                 {
-                    Debug.Log("Inside first loop");
                     if (restPhase > restTracks)
                     {
                         temp = rand.Next(minRand, maxRand + 1);

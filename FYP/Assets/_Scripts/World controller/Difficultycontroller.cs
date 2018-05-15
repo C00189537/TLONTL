@@ -76,9 +76,9 @@ public class Difficultycontroller : MonoBehaviour
         {
             difficultyScore = 0;
         }
-        else if (difficultyScore >= 70)
+        else if (difficultyScore >= 75)
         {
-            difficultyScore = 70;
+            difficultyScore = 75;
         }
         //Difficulty set based on performance
         if (difficultyScore >= 0 && difficultyScore < 5)
@@ -101,7 +101,7 @@ public class Difficultycontroller : MonoBehaviour
             difficulty = 4;
             theWorld.oneLegDif = 4;
         }
-        else if (difficultyScore >= 50 && difficultyScore < 70)
+        else if (difficultyScore >= 50 && difficultyScore < 75)
         {
             difficulty = 5;
             theWorld.oneLegDif = 5;
