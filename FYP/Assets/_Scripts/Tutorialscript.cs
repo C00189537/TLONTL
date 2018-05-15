@@ -73,8 +73,7 @@ public class Tutorialscript : MonoBehaviour {
     {
         
         while (instructionsTimer > 0 && theWorld.tutorial)
-        {
-            player.enabled = false;  
+        { 
             timer = true; 
             theWorld.speed = 0;
             instructionsTimer--;
@@ -87,8 +86,6 @@ public class Tutorialscript : MonoBehaviour {
         {
             timer = false; 
             instructions.enabled = false;
-
-            player.enabled = true;
             StartCoroutine(Wait());
             yield break; 
         }

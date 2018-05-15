@@ -103,7 +103,9 @@ public class WorldController : MonoBehaviour
 
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
 
-        tutorialScript = GetComponent<Tutorialscript>(); 
+        tutorialScript = GetComponent<Tutorialscript>();
+
+        //Debug.Log("TRACKLENGT: " + trackAvailable[trackAvailable.Length]);
     }
 
     void Update()
@@ -131,22 +133,22 @@ public class WorldController : MonoBehaviour
             tutorial = false;
         }
 
-        if (!tutorial)
-        {
+        //if (!tutorial)
+        //{
             trackAvailable[1] = (int)input.nLeaning;
             trackAvailable[2] = (int)input.nOneLeg;
             trackAvailable[3] = (int)input.nJumping;
             trackAvailable[4] = (int)input.nStepping;
             trackAvailable[5] = (int)input.nJumpingOneleg;
-        } 
-        if (tutorial)
-        {
-            trackAvailable[1] = 1;
-            trackAvailable[2] = 1;
-            trackAvailable[3] = 1;
-            trackAvailable[4] = 1;
-            trackAvailable[5] = 1;
-        }
+        //} 
+        //if (tutorial)
+        //{
+        //    trackAvailable[1] = 1;
+        //    trackAvailable[2] = 1;
+        //    trackAvailable[3] = 1;
+        //    trackAvailable[4] = 1;
+        //    trackAvailable[5] = 1;
+        //}
       
     }
 
@@ -166,41 +168,59 @@ public class WorldController : MonoBehaviour
                     rest = !rest;
                     if (!rest)
                     {
-                        temp = rand.Next(minRand, maxRand + 1);
+                        //temp = rand.Next(minRand, maxRand + 1);
 
-                        Debug.Log("Tutorial");
-
-                        if (temp == 2)
+                        //Debug.Log("Tutorial");
+                        for (int q = 1; q < 6; q++)
                         {
-                            oneLegTracker = 0;
-                        }
-                        tutorialScript.SetInstructions(temp);
-                        trackers[i] = temp;
-                        trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-                    
+                            if (trackAvailable[q] == 1)
+                            {
+                                temp = q;
+                                break;
+                            } 
 
-                        switch (trackers[i])
-                        {
-                            case 1:
-                                //CoinSpawn(i);
-                                ObstacleSpawn(i);
-                                break;
-                            case 2:
-                                OneLegSpawn(i);
-                                break;
-                            case 3:
-                                JumpSpawn(i);
-                                break;
-                            case 4:
-                                break;
-                            case 5:
-                                DifJumpSpawn(i);
-                                break;
-                            default:
-                                break;
+                            if (q == 5 && trackAvailable[q] != 1)
+                            {
+                                temp = 0; 
+                                rest = true; 
+                            }
                         }
-                        StartCoroutine(tutorialScript.WaitforInstructions());
+
+                        if (temp > 0)
+                        {
+                            if (temp == 2)
+                            {
+                                oneLegTracker = 0;
+                            }
+                            tutorialScript.SetInstructions(temp);
+                            trackers[i] = temp;
+                            trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+
+
+                            switch (trackers[i])
+                            {
+                                case 1:
+                                    //CoinSpawn(i);
+                                    ObstacleSpawn(i);
+                                    break;
+                                case 2:
+                                    OneLegSpawn(i);
+                                    break;
+                                case 3:
+                                    JumpSpawn(i);
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    DifJumpSpawn(i);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            StartCoroutine(tutorialScript.WaitforInstructions());
+                        }
                     }
+                        
                     if (rest)
                     {
                         temp = 0;
