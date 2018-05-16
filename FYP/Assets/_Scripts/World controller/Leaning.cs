@@ -15,8 +15,14 @@ public class Leaning : MonoBehaviour {
 
     public void ObstalceOne(int val)
     {
-        theWorld.trackPiece[val].transform.Find("ObstacleFront").Translate(rand.Next(-4, 5), 2, 0);
-        theWorld. trackPiece[val].transform.Find("ScoreOb2").Translate(rand.Next(-4, 5), 2, 0);
+        theWorld.trackPiece[val].transform.Find("ObstacleFront").Translate(rand.Next(-3, 4), 2, 0);
+        theWorld. trackPiece[val].transform.Find("ScoreOb2").Translate(rand.Next(-3, 4), 2, 0);
+
+        if (theWorld.tutorial)
+        {
+            theWorld.trackPiece[val].transform.Find("RightWall").Translate(5, 0, 0);
+            theWorld.trackPiece[val].transform.Find("LeftWall").Translate(5, 0, 0);
+        }
     }
 
     public void ObstacleTwo(int val)

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class WorldController : MonoBehaviour
 {
-
     public GameObject[] platformLayout = new GameObject[6];
     public int[] trackAvailable = new int[6];
     public int temp;
@@ -361,9 +360,6 @@ public class WorldController : MonoBehaviour
                         trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, spawnPoint);
                     }
                 }
-                    
-                  
-
             }
         }
     }
@@ -382,15 +378,12 @@ public class WorldController : MonoBehaviour
             if (input.NManual == 0.0f)
             {
                 variable = Difficultycontroller.GetInstance().difficulty;
-                Debug.Log("lean man off + var  " + variable);
             }
             if (input.NManual == 1)
             {
                 variable = (int)input.nObstackles;
-                Debug.Log("lean man on+ var  " + variable);
             }
         }
-        Debug.Log("Now inside obstaclespawn");
 
         switch (variable)
         {
