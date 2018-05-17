@@ -16,12 +16,12 @@ public class WorldController : MonoBehaviour
     private int currentTracker = 0;
     private int nextTracker = 0;
     private int farTracker = 0;
-    private int oneLegTracker = 0;
+    public int oneLegTracker = 0;
     public int oneLegDif = 1;
 
     private int restPhase;
     public int restTracks;
-
+    public int side = 1; 
     bool earthquake = true;
 
     //Destroys track off screen
@@ -63,11 +63,13 @@ public class WorldController : MonoBehaviour
     public NetworkInput input;
 
     public bool tutorial = false;
+    public bool setLeanSide; 
 
     public Tutorialscript tutorialScript;  
 
     void Start()
     {
+        setLeanSide = false; 
         FloatingTextController.Initialize();
         stepping = GetComponent<Stepping>();
         leaning = GetComponent<Leaning>();
@@ -118,7 +120,8 @@ public class WorldController : MonoBehaviour
         UpdateTrack();
         SpeedUpdate();
 
-      
+       
+
     }
 
     void UpdateAvailableTracks()
@@ -232,6 +235,7 @@ public class WorldController : MonoBehaviour
                 {
                     if (restPhase > restTracks)
                     {
+                        int side = rand.Next(1, 3);
                         temp = rand.Next(minRand, maxRand + 1);
                         restPhase = 0;
                         int count = 0;
@@ -253,6 +257,7 @@ public class WorldController : MonoBehaviour
                         //Longer one leg
                         if (temp == 2)
                         {
+                           
                             if (input.NManual == 1)
                             {
                                 switch ((int)input.nOneLegDifficulty)
@@ -264,6 +269,7 @@ public class WorldController : MonoBehaviour
                                     case 2:
                                         //2 length
                                         oneLegTracker = 1;
+
                                         break;
                                     case 3:
                                         //3 length
@@ -312,7 +318,7 @@ public class WorldController : MonoBehaviour
                         }
 
                         trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-
+                        
                         //Set up the track pieces
                         switch (trackers[i])
                         {
@@ -336,12 +342,15 @@ public class WorldController : MonoBehaviour
                         }
 
                     }
+                    
                     else if (oneLegTracker > 0)
                     {
+                        setLeanSide = false; 
                         oneLegTracker--;
                         trackPiece[i] = Instantiate(platformLayout[2], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
                         OneLegSpawn(i);
                     }
+                  
                     //If the track piece is an exercise, the next one will be a base piece
                     else if (restPhase <= restTracks && !tutorial)  //(trackers[i] > 0)
                     {
@@ -349,6 +358,12 @@ public class WorldController : MonoBehaviour
                         trackers[i] = 0;
                         trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
 
+                    }
+
+                    if (oneLegTracker <= 0)
+                    {
+
+                        setLeanSide = true; 
                     }
                     //Alligns the track
                     if (TRACK_SIZE > i + 1)
@@ -437,7 +452,11 @@ public class WorldController : MonoBehaviour
     {
 
         //Randomly pick a side
-        int side = rand.Next(1, 3);
+        if (setLeanSide)
+        {
+            side = rand.Next(1, 3);
+        }
+
         if (side == 1)
         {
             //Right
