@@ -2,25 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class WorldController : MonoBehaviour
 {
-
     public GameObject[] platformLayout = new GameObject[6];
     public int[] trackAvailable = new int[6];
-    private int temp;
+    public int temp;
     Camera cam;
 
+    public bool rest = false; 
     private int[] trackers = new int[3];
     private int currentTracker = 0;
     private int nextTracker = 0;
     private int farTracker = 0;
-    private int oneLegTracker = 0;
+    public int oneLegTracker = 0;
     public int oneLegDif = 1;
 
     private int restPhase;
     public int restTracks;
-
+    public int side = 1; 
     bool earthquake = true;
 
     //Destroys track off screen
@@ -29,6 +30,8 @@ public class WorldController : MonoBehaviour
     //Sections of track
     private int TRACK_SIZE = 3;
     public GameObject[] trackPiece = new GameObject[3];
+
+
     private GameObject currentSection;
     private GameObject nextSection;
     private GameObject farSection;
@@ -59,8 +62,14 @@ public class WorldController : MonoBehaviour
     JumpingOneLeg jumpOneLeg; 
     public NetworkInput input;
 
+    public bool tutorial = false;
+    public bool setLeanSide; 
+
+    public Tutorialscript tutorialScript;  
+
     void Start()
     {
+        setLeanSide = false; 
         FloatingTextController.Initialize();
         stepping = GetComponent<Stepping>();
         leaning = GetComponent<Leaning>();
@@ -94,6 +103,10 @@ public class WorldController : MonoBehaviour
         trackers[2] = farTracker;
 
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
+
+        tutorialScript = GetComponent<Tutorialscript>();
+
+        //Debug.Log("TRACKLENGT: " + trackAvailable[trackAvailable.Length]);
     }
 
     void Update()
@@ -107,20 +120,38 @@ public class WorldController : MonoBehaviour
         UpdateTrack();
         SpeedUpdate();
 
-        if (input.NManual == 0)
-        {
-            Difficultycontroller.GetInstance().UpdateDifficultyScore();
-        }
+       
 
     }
 
     void UpdateAvailableTracks()
     {
-        trackAvailable[1] = (int)input.nLeaning;
-        trackAvailable[2] = (int)input.nOneLeg;
-        trackAvailable[3] = (int)input.nJumping;
-        trackAvailable[4] = (int)input.nStepping;
-        trackAvailable[5] = (int)input.nJumpingOneleg;
+        if (input.nTutorial == 1)
+        {
+            tutorial = true;
+        } 
+        if (input.nTutorial == 0)
+        {
+            tutorial = false;
+        }
+
+        //if (!tutorial)
+        //{
+            trackAvailable[1] = (int)input.nLeaning;
+            trackAvailable[2] = (int)input.nOneLeg;
+            trackAvailable[3] = (int)input.nJumping;
+            trackAvailable[4] = (int)input.nStepping;
+            trackAvailable[5] = (int)input.nJumpingOneleg;
+        //} 
+        //if (tutorial)
+        //{
+        //    trackAvailable[1] = 1;
+        //    trackAvailable[2] = 1;
+        //    trackAvailable[3] = 1;
+        //    trackAvailable[4] = 1;
+        //    trackAvailable[5] = 1;
+        //}
+      
     }
 
     void UpdateTrack()
@@ -128,140 +159,222 @@ public class WorldController : MonoBehaviour
         //Creates a looping track
         for (int i = 0; i < TRACK_SIZE; i++)
         {
+
             if (trackPiece[i].transform.position.z <= killPoint)
             {
                 Destroy(trackPiece[i]);
                 //If the track piece is a base piece the next one will be a random exercise
-                if (restPhase > restTracks)
+               
+                if (tutorial)
                 {
-                    temp = rand.Next(minRand, maxRand + 1);
-                    restPhase = 0;
-                    int count = 0;
-                    while (trackAvailable[temp] != 1)
+                    rest = !rest;
+                    if (!rest)
                     {
+                        //temp = rand.Next(minRand, maxRand + 1);
 
+                        //Debug.Log("Tutorial");
+                        for (int q = 1; q < 6; q++)
+                        {
+                            if (trackAvailable[q] == 1)
+                            {
+                                temp = q;
+                                break;
+                            } 
+
+                            if (q == 5 && trackAvailable[q] != 1)
+                            {
+                                temp = 0; 
+                                rest = true; 
+                            }
+                        }
+
+                        if (temp > 0)
+                        {
+                            if (temp == 2)
+                            {
+                                oneLegTracker = 0;
+                            }
+                            tutorialScript.SetInstructions(temp);
+                            trackers[i] = temp;
+                            trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+
+
+                            switch (trackers[i])
+                            {
+                                case 1:
+                                    //CoinSpawn(i);
+                                    ObstacleSpawn(i);
+                                    break;
+                                case 2:
+                                    OneLegSpawn(i);
+                                    break;
+                                case 3:
+                                    JumpSpawn(i);
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    DifJumpSpawn(i);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            StartCoroutine(tutorialScript.WaitforInstructions());
+                        }
+                    }
+                        
+                    if (rest)
+                    {
+                        temp = 0;
+                        trackers[i] = temp;
+                        trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+                    }
+                }
+              
+                else if (!tutorial)
+                {
+                    if (restPhase > restTracks)
+                    {
+                        int side = rand.Next(1, 3);
                         temp = rand.Next(minRand, maxRand + 1);
-                        count++;
-
-                        if (count >= 20)
+                        restPhase = 0;
+                        int count = 0;
+                        while (trackAvailable[temp] != 1)
                         {
-                            temp = 0;
-                            restPhase = restTracks;
-                            break;
-                        }
 
-                    }
-                    trackers[i] = temp;
-                    //Longer one leg
-                    if (temp == 2)
-                    {
-                        if (input.NManual == 1)
-                        {
-                            switch ((int)input.nOneLegDifficulty)
+                            temp = rand.Next(minRand, maxRand + 1);
+                            count++;
+
+                            if (count >= 20)
                             {
-                                case 1:
-                                    //1 length
-                                    oneLegTracker = 0;
-                                    break;
-                                case 2:
-                                    //2 length
-                                    oneLegTracker = 1;
-                                    break;
-                                case 3:
-                                    //3 length
-                                    oneLegTracker = 2;
-                                    break;
-                                case 4:
-                                    //4 length
-                                    oneLegTracker = 3;
-                                    break;
-                                case 5:
-                                    //5 length
-                                    oneLegTracker = 4;
-                                    break;
-                                default:
-                                    break;
+                                temp = 0;
+                                restPhase = restTracks;
+                                break;
+                            }
+
+                        }
+                        trackers[i] = temp;
+                        //Longer one leg
+                        if (temp == 2)
+                        {
+                           
+                            if (input.NManual == 1)
+                            {
+                                switch ((int)input.nOneLegDifficulty)
+                                {
+                                    case 1:
+                                        //1 length
+                                        oneLegTracker = 0;
+                                        break;
+                                    case 2:
+                                        //2 length
+                                        oneLegTracker = 1;
+
+                                        break;
+                                    case 3:
+                                        //3 length
+                                        oneLegTracker = 2;
+                                        break;
+                                    case 4:
+                                        //4 length
+                                        oneLegTracker = 3;
+                                        break;
+                                    case 5:
+                                        //5 length
+                                        oneLegTracker = 4;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                switch (oneLegDif)
+                                {
+                                    case 1:
+                                        //1 length
+                                        oneLegTracker = 0;
+                                        break;
+                                    case 2:
+                                        //2 length
+                                        oneLegTracker = 1;
+                                        break;
+                                    case 3:
+                                        //3 length
+                                        oneLegTracker = 2;
+                                        break;
+                                    case 4:
+                                        //4 length
+                                        oneLegTracker = 3;
+                                        break;
+                                    case 5:
+                                        //5 length
+                                        oneLegTracker = 4;
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                         }
-                        else
+
+                        trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+                        
+                        //Set up the track pieces
+                        switch (trackers[i])
                         {
-                            switch (oneLegDif)
-                            {
-                                case 1:
-                                    //1 length
-                                    oneLegTracker = 0;
-                                    break;
-                                case 2:
-                                    //2 length
-                                    oneLegTracker = 1;
-                                    break;
-                                case 3:
-                                    //3 length
-                                    oneLegTracker = 2;
-                                    break;
-                                case 4:
-                                    //4 length
-                                    oneLegTracker = 3;
-                                    break;
-                                case 5:
-                                    //5 length
-                                    oneLegTracker = 4;
-                                    break;
-                                default:
-                                    break;
-                            }
+                            case 1:
+                                //CoinSpawn(i);
+                                ObstacleSpawn(i);
+                                break;
+                            case 2:
+                                OneLegSpawn(i);
+                                break;
+                            case 3:
+                                JumpSpawn(i);
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                DifJumpSpawn(i);
+                                break;
+                            default:
+                                break;
                         }
+
                     }
-
-                    trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-
-                    //Set up the track pieces
-                    switch (trackers[i])
+                    
+                    else if (oneLegTracker > 0)
                     {
-                        case 1:
-                            //CoinSpawn(i);
-                            ObstacleSpawn(i);
-                            break;
-                        case 2:
-                            OneLegSpawn(i);
-                            break;
-                        case 3:
-                            JumpSpawn(i);
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            DifJumpSpawn(i);
-                            break;
-                        default:
-                            break;
+                        setLeanSide = false; 
+                        oneLegTracker--;
+                        trackPiece[i] = Instantiate(platformLayout[2], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+                        OneLegSpawn(i);
+                    }
+                  
+                    //If the track piece is an exercise, the next one will be a base piece
+                    else if (restPhase <= restTracks && !tutorial)  //(trackers[i] > 0)
+                    {
+                        restPhase++;
+                        trackers[i] = 0;
+                        trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+
                     }
 
-                }
-                else if (oneLegTracker > 0)
-                {
-                    oneLegTracker--;
-                    trackPiece[i] = Instantiate(platformLayout[2], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
-                    OneLegSpawn(i);
-                }
-                //If the track piece is an exercise, the next one will be a base piece
-                else if (restPhase <= restTracks)  //(trackers[i] > 0)
-                {
-                    restPhase++;
-                    trackers[i] = 0;
-                    trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
+                    if (oneLegTracker <= 0)
+                    {
 
+                        setLeanSide = true; 
+                    }
+                    //Alligns the track
+                    if (TRACK_SIZE > i + 1)
+                    {
+                        trackPiece[i + 1].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+                    }
+                    if (TRACK_SIZE > i + 2)
+                    {
+                        trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, spawnPoint);
+                    }
                 }
-                //Alligns the track
-                if (TRACK_SIZE > i + 1)
-                {
-                    trackPiece[i + 1].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-                }
-                if (TRACK_SIZE > i + 2)
-                {
-                    trackPiece[i + 2].transform.position = new Vector3(0.0f, 0.0f, spawnPoint);
-                }
-
             }
         }
     }
@@ -270,13 +383,21 @@ public class WorldController : MonoBehaviour
     {
         int variable = Difficultycontroller.GetInstance().difficulty;
 
-        if (input.NManual == 0.0f)
+        if (tutorial)
         {
-            variable = Difficultycontroller.GetInstance().difficulty;
+            variable = 1; 
         }
-        if (input.NManual == 1)
+        
+        if (!tutorial)
         {
-            variable = (int)input.nObstackles;
+            if (input.NManual == 0.0f)
+            {
+                variable = Difficultycontroller.GetInstance().difficulty;
+            }
+            if (input.NManual == 1)
+            {
+                variable = (int)input.nObstackles;
+            }
         }
 
         switch (variable)
@@ -307,21 +428,35 @@ public class WorldController : MonoBehaviour
 
     public void SteppingStones()
     {
-        if (input.NManual == 0)
+        if (!tutorial)
         {
-            stepping.GenerateButtons(Difficultycontroller.GetInstance().difficulty);
+            if (input.NManual == 0)
+            {
+                stepping.GenerateButtons(Difficultycontroller.GetInstance().difficulty);
+            }
+            if (input.NManual == 1)
+            {
+                stepping.GenerateButtons((int)input.nNumberofSteps);
+            }
+
         }
-        if (input.NManual == 1)
+
+        if (tutorial)
         {
-            stepping.GenerateButtons((int)input.nNumberofSteps);
+            stepping.GenerateButtons(3);
         }
+
     }
 
     void OneLegSpawn(int val)
     {
 
         //Randomly pick a side
-        int side = rand.Next(1, 3);
+        if (setLeanSide)
+        {
+            side = rand.Next(1, 3);
+        }
+
         if (side == 1)
         {
             //Right
@@ -340,14 +475,23 @@ public class WorldController : MonoBehaviour
 
         int variable = Difficultycontroller.GetInstance().difficulty;
 
-        if (input.NManual == 0)
+        if (tutorial)
         {
-            variable = Difficultycontroller.GetInstance().difficulty;
+            variable = 1;
         }
-        if (input.NManual == 1)
+
+        if (!tutorial)
         {
-            variable = (int)input.nJumpDifficulty;
+            if (input.NManual == 0)
+            {
+                variable = Difficultycontroller.GetInstance().difficulty;
+            }
+            if (input.NManual == 1)
+            {
+                variable = (int)input.nJumpDifficulty;
+            }
         }
+       
 
         switch (variable)
         {
@@ -375,14 +519,23 @@ public class WorldController : MonoBehaviour
     {
         int variable = Difficultycontroller.GetInstance().difficulty;
 
-        if (input.NManual == 0)
+        if (tutorial)
         {
-            variable = Difficultycontroller.GetInstance().difficulty;
+            variable = 1;
         }
-        if (input.NManual == 1)
+
+        if (!tutorial)
         {
-            variable = (int)input.nOneLegJump;
+            if (input.NManual == 0)
+            {
+                variable = Difficultycontroller.GetInstance().difficulty;
+            }
+            if (input.NManual == 1)
+            {
+                variable = (int)input.nOneLegJump;
+            }
         }
+        
 
         switch (variable)
         {
@@ -408,7 +561,22 @@ public class WorldController : MonoBehaviour
 
     void SpeedUpdate()
     {
-        speed = input.NSpeed;
+        if (!tutorial)
+        {
+            speed = input.NSpeed;
+        }
+        else if (tutorial)
+        {
+            if (!tutorialScript.timer)
+            {
+                speed = 0.1f;
+            } 
+            if (tutorialScript.timer)
+            {
+                speed = 0.0f; 
+            }
+           
+        }
         scrollSpeed = new Vector3(0.0f, 0.0f, speed);
     }
 
@@ -421,4 +589,6 @@ public class WorldController : MonoBehaviour
     {
         cam.GetComponent<CameraShake>().SetShakeAmount(0.1f);
     }
+
+   
 }

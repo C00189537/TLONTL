@@ -22,9 +22,9 @@ public class TutorialWorld : MonoBehaviour
     public void Start()
     {
         LeanPlatform = false;
-        OneLegPlatform = false;
+        OneLegPlatform = true;
         StepPlatform = false;
-        JumpPlatform = true;
+        JumpPlatform = false;
         JumpTwoPlatform = false;
          
         leanTut = leaning.GetComponent<LeanTutorial>();

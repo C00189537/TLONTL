@@ -28,6 +28,8 @@ GameObject:
   - component: {fileID: 114112703734035380}
   - component: {fileID: 114083709524843988}
   - component: {fileID: 114555769293974668}
+  - component: {fileID: 114475746772177378}
+  - component: {fileID: 114161096130186174}
   m_Layer: 0
   m_Name: WorldController 1
   m_TagString: GameController
@@ -102,7 +104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   network: {fileID: 0}
-  theWorld: {fileID: 0}
   nLeaning: 0
   nOneLeg: 0
   nStepping: 0
@@ -113,10 +114,34 @@ MonoBehaviour:
   nJumpDifficulty: 0
   nNumberofSteps: 0
   nOneLegDifficulty: 1
-  nEarthquakeShake: 0
+  nOneLegJump: 0
   nMomZ: 0
+  nTutorial: 0
   diffChange: 0
   speedChange: 0
+--- !u!114 &114161096130186174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e72fd0b529322649b5b18d44b817a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theWorld: {fileID: 0}
+  player: {fileID: 0}
+  instructionsTimer: 10
+  waitTimer: 3
+  instructions: {fileID: 0}
+  timeText: {fileID: 0}
+  timer: 0
+  leanIns: {fileID: 0}
+  oneLegIns: {fileID: 0}
+  stepIns: {fileID: 0}
+  jumpIns: {fileID: 0}
+  jumpTwoIns: {fileID: 0}
 --- !u!114 &114204391942548182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,6 +173,8 @@ MonoBehaviour:
   - {fileID: 1868207315502254, guid: e769c5a21252f7b40a33a241bc5f9c88, type: 2}
   - {fileID: 1290377093584360, guid: f37155dd7134bb847b23fd5cf7f87a28, type: 2}
   trackAvailable: 010000000100000001000000010000000100000001000000
+  temp: 0
+  rest: 0
   oneLegDif: 1
   restTracks: 1
   killPoint: -60
@@ -167,6 +194,8 @@ MonoBehaviour:
   - {fileID: 1128516937520142, guid: 66c7a66c0f78a15468e8da62404b390d, type: 2}
   - {fileID: 1128516937520142, guid: 66c7a66c0f78a15468e8da62404b390d, type: 2}
   input: {fileID: 0}
+  tutorial: 0
+  tutorialScript: {fileID: 0}
 --- !u!114 &114452428243970932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,6 +205,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73f7ae1d5a0fd0c47b4d5549597bdc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theWorld: {fileID: 0}
+--- !u!114 &114475746772177378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827215757070166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ebba269eb732f47a36d7b8d596d7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   theWorld: {fileID: 0}
@@ -214,6 +255,7 @@ MonoBehaviour:
   UpButton: {fileID: 1097476532420890, guid: 58996e55e45736c4eb632a874da662cc, type: 2}
   RightButton: {fileID: 1849859357751624, guid: 2caa35187d818014abba60456990cd0a,
     type: 2}
+  Selector: {fileID: 1754366028556048, guid: ff6a2c58279b5834ebdf8bc8736aad84, type: 2}
   Canvas: {fileID: 0}
   resetYValue: -100
   Xvalue: 0

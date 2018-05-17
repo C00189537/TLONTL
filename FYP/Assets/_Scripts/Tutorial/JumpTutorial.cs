@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
-public class JumpTutorial : MonoBehaviour {
+public class JumpTutorial : MonoBehaviour
+{
 
     public PlayerTutorial player;
     public TutorialWorld tutWorld;
@@ -13,6 +14,9 @@ public class JumpTutorial : MonoBehaviour {
     public Image OtherInstructionsThree;
     public Image OtherInstructionsFour;
 
+    public Image Go;
+    public bool restPause = true;
+    public bool coroutineStart = false;
 
     public Text timeText;
     public int instructionsTimer = 10;
@@ -41,6 +45,7 @@ public class JumpTutorial : MonoBehaviour {
         OtherInstructionsFour.enabled = false;
 
         checkMark.enabled = false;
+        Go.enabled = false;
 
     }
 
@@ -60,20 +65,41 @@ public class JumpTutorial : MonoBehaviour {
             gameStart = true;
             timeText.text = "";
         }
-        
+
         if (gameStart)
         {
-            player.transform.position += new Vector3(0, 0, 0.1f);
+
+            if (player.JumpScore >= 10 && gameStart)
+            {
+                gameStart = false;
+                gameEnd = true;
+            }
+
+            if (!restPause)
+            {
+                player.transform.position += new Vector3(0, 0, 0.1f);
+                StopCoroutine(Pause());
+                coroutineStart = false;
+            }
+
 
             if (player.transform.position.z > 28)
             {
+                restPause = true;
                 player.transform.position = new Vector3(0, 1, -8);
 
+            }
+
+            if (player.transform.position.z < -7 && restPause && !coroutineStart && !gameEnd)
+            {
+                coroutineStart = true;
+                StartCoroutine(Pause());
             }
         }
 
         if (gameEnd)
         {
+            StopCoroutine(Pause());
             player.transform.position = new Vector3(0, 1, -8);
             StartCoroutine(End());
         }
@@ -102,6 +128,8 @@ public class JumpTutorial : MonoBehaviour {
 
     public IEnumerator End()
     {
+        StopCoroutine(Pause());
+        Go.enabled = false; 
         checkMark.enabled = true;
         yield return new WaitForSeconds(4);
         TutorialWorld.LeanPlatform = false;
@@ -109,5 +137,17 @@ public class JumpTutorial : MonoBehaviour {
         TutorialWorld.StepPlatform = false;
         TutorialWorld.JumpPlatform = false;
         TutorialWorld.JumpTwoPlatform = true;
+    }
+
+    public IEnumerator Pause()
+    {
+        Go.enabled = true;
+        yield return new WaitForSeconds(0.3f);
+        Go.enabled = false;
+        yield return new WaitForSeconds(0.3f);
+        Go.enabled = true;
+        yield return new WaitForSeconds(0.3f);
+        Go.enabled = false;
+        restPause = false;
     }
 }

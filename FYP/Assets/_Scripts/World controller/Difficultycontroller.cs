@@ -37,6 +37,10 @@ public class Difficultycontroller : MonoBehaviour
         theWorld = gameControllerObject.GetComponent<WorldController>();
     }
 
+    public void Update()
+    {
+        UpdateDifficultyScore(); 
+    }
     public void BeginDifficulty(int difficulty)
     {
         switch (difficulty)
@@ -59,18 +63,22 @@ public class Difficultycontroller : MonoBehaviour
             default:
                 break;
         }
+
+        
     }
 
     public void UpdateDifficultyScore()
     {
+
         //Contain within 0-70
+
         if (difficultyScore < 0)
         {
             difficultyScore = 0;
         }
-        else if (difficultyScore >= 70)
+        else if (difficultyScore >= 75)
         {
-            difficultyScore = 70;
+            difficultyScore = 75;
         }
         //Difficulty set based on performance
         if (difficultyScore >= 0 && difficultyScore < 5)
@@ -93,11 +101,13 @@ public class Difficultycontroller : MonoBehaviour
             difficulty = 4;
             theWorld.oneLegDif = 4;
         }
-        else if (difficultyScore >= 50 && difficultyScore < 70)
+        else if (difficultyScore >= 50 && difficultyScore < 75)
         {
             difficulty = 5;
             theWorld.oneLegDif = 5;
         }
+
+
     }
 
     public void setPlatformScore()
@@ -144,7 +154,7 @@ public class Difficultycontroller : MonoBehaviour
                     break;
                 case 5:
                     difficultyScore -= 5;
-                    break; 
+                    break;
                 default:
                     break;
             }

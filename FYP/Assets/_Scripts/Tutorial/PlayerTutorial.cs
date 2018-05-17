@@ -37,6 +37,7 @@ public class PlayerTutorial : MonoBehaviour
     public Image redLeft;
     public Image redRight;
     public Image greenRight;
+    public Image Go; 
     public float i = 0;
     public float j = 0;
 
@@ -147,7 +148,7 @@ public class PlayerTutorial : MonoBehaviour
             steppingText.text = stepping.DestroyedSteps + "/27";
             Step();
         }
-        else if (jump && jumpTut.gameStart)
+        else if (jump && jumpTut.gameStart && !jumpTut.restPause)
         {
             Jump();
         }
@@ -172,19 +173,20 @@ public class PlayerTutorial : MonoBehaviour
        if (gameObject.transform.position.z > 27.9 && !hitObstacle)
         {
             JumpScore++; 
+            jumpingText.text = JumpScore.ToString() + "/10";
         }
     }
 
     void Jump2()
     {
+        jumpingTwoText.text = JumpTwoScore.ToString() + "/20";
+
         float step = switchJumpSpeed * Time.deltaTime;
        
         if (touchGround)
         {
-
             if (input.nMomZ < -pressure)
             {
-                Debug.Log("input < -press");
                 flying = false;
                 jumping2L = true;
                 jumping2R = false;
@@ -194,17 +196,12 @@ public class PlayerTutorial : MonoBehaviour
                     jumping2R = true;
                     flying = true;
                 }
-
-
             }
             if (input.nMomZ > -pressure && input.nMomZ < pressure)
             {
-
-
             }
             if (input.nMomZ > pressure)
             {
-                Debug.Log("input > press");
                 flying = false;
                 jumping2L = false;
                 jumping2R = true;
@@ -215,22 +212,22 @@ public class PlayerTutorial : MonoBehaviour
                     flying = true;
                 }
             }
-
             //Movement from left to right
             if (jumping2L)
             {
                 gameObject.transform.Translate(-((xMax + gameObject.transform.position.x) / translateSpeed), 0, 0);
+                
+                
             }
             else if (jumping2R)
             {
                 gameObject.transform.Translate((xMax - gameObject.transform.position.x) / translateSpeed, 0, 0);
+
             }
             if (flying)
             {
-                Debug.Log("Fly " + flying);
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, 3, gameObject.transform.position.z);
             }
-          //  Debug.Log("Fly " + flying);
 
         }
     }
@@ -308,14 +305,28 @@ public class PlayerTutorial : MonoBehaviour
         {
             hitObstacle = true; 
         }
+        
+    }
 
-        //if (other.gameObject.tag == "backSpawn")
-        //{
-        //    if (!hitObstacle)
-        //    {
-        //        JumpScore++; 
-        //    }
-        //}
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Stepleft" || collision.gameObject.tag == "Stepright")
+        {
+            jumpTwoTut.receiveScore = true;
+        }
+
+        if (collision.gameObject.tag == "Stepleft")
+        {
+            jumpTwoTut.Stepleft = true;
+            jumpTwoTut.Stepright = false; 
+        }
+
+        if (collision.gameObject.tag == "Stepright")
+        {
+            jumpTwoTut.Stepright = true;
+            jumpTwoTut.Stepleft = false; 
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -330,7 +341,8 @@ public class PlayerTutorial : MonoBehaviour
             greenRight.enabled = false;
             steppingText.enabled = false;
             jumpingText.enabled = false;
-            jumpingTwoText.enabled = false; 
+            jumpingTwoText.enabled = false;
+            Go.enabled = false; 
             lean = true;
             oneLeg = false;
             step = false;
@@ -347,6 +359,7 @@ public class PlayerTutorial : MonoBehaviour
             steppingText.enabled = false;
             jumpingText.enabled = false;
             jumpingTwoText.enabled = false;
+            Go.enabled = false;
             lean = false;
             oneLeg = true;
             step = false;
@@ -363,6 +376,7 @@ public class PlayerTutorial : MonoBehaviour
             steppingText.enabled = true;
             jumpingText.enabled = false;
             jumpingTwoText.enabled = false;
+            Go.enabled = false;
             lean = false;
             oneLeg = false;
             step = true;
@@ -402,19 +416,20 @@ public class PlayerTutorial : MonoBehaviour
             steppingText.enabled = false;
             jumpingText.enabled = false;
             jumpingTwoText.enabled = true;
+            Go.enabled = false;
             lean = false;
             oneLeg = false;
             step = false;
             jump = false;
             jump2 = true;
-            //jumpingTwoText.text = JumpTwoScore.ToString() + "/10";
         }
 
     }
 
     public void ResetPlayer()
     {
-        gameObject.transform.position = new Vector3(0, 3, 0);
+        gameObject.transform.position = new Vector3(0, 5, -8);
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        jumpTwoTut.receiveScore = false; 
     }
 }

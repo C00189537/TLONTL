@@ -68,7 +68,7 @@ public class CollisionManager : MonoBehaviour
 
             if (Difficultycontroller.GetInstance().platformScore > 0)
             {
-                Difficultycontroller.GetInstance().platformScore--;
+                Difficultycontroller.GetInstance().difficultyScore -= Difficultycontroller.GetInstance().platformScore;
             }
         }
         else if (other.gameObject.tag == "Basic")
@@ -82,6 +82,7 @@ public class CollisionManager : MonoBehaviour
             if (playerController.fallOff <= 0 && hitObstacles <= 0)
             {
                 ScoreController.GetInstance().AddScore(ScoreController.GetInstance().NotFallingOff);
+                Difficultycontroller.GetInstance().difficultyScore += Difficultycontroller.GetInstance().platformScore;
             }
         }
         else if (other.gameObject.tag == "Pit")
@@ -90,7 +91,7 @@ public class CollisionManager : MonoBehaviour
 
             if (Difficultycontroller.GetInstance().platformScore > 0)
             {
-                Difficultycontroller.GetInstance().platformScore--;
+                Difficultycontroller.GetInstance().difficultyScore -= Difficultycontroller.GetInstance().platformScore;
             }
             playerController.pit = true;
             playerController.basic = false;
@@ -100,6 +101,10 @@ public class CollisionManager : MonoBehaviour
         {
             AudioManager.GetInstance().audiosource.PlayOneShot(AudioManager.GetInstance().Collectable, 0.5f);
             ScoreController.GetInstance().AddScore(ScoreController.GetInstance().Collectable);
+            if (Difficultycontroller.GetInstance().platformScore > 0)
+            {
+                Difficultycontroller.GetInstance().difficultyScore += Difficultycontroller.GetInstance().platformScore;
+            }
             Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "Killer")
@@ -145,7 +150,7 @@ public class CollisionManager : MonoBehaviour
 
             if (playerController.fallOff == 0)
             {
-                Difficultycontroller.GetInstance().platformScore = 1;
+                Difficultycontroller.GetInstance().setPlatformScore();
             }
         }
     }
@@ -191,7 +196,7 @@ public class CollisionManager : MonoBehaviour
         if (other.gameObject.tag == "Lean")
         {
             playerController.lean = false;
-            Difficultycontroller.GetInstance().CalculateDifficultyScore();
+            //Difficultycontroller.GetInstance().CalculateDifficultyScore();
         }
         else if (other.gameObject.tag == "Basic")
         {
@@ -208,25 +213,24 @@ public class CollisionManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "End")
         {
-            Difficultycontroller.GetInstance().CalculateDifficultyScore();
+           // Difficultycontroller.GetInstance().CalculateDifficultyScore();
 
         }
         else if (other.gameObject.tag == "Step")
         {
             playerController.step = false;
-            
-            Difficultycontroller.GetInstance().platformScore -= stepController.getSteps();
-            Difficultycontroller.GetInstance().CalculateDifficultyScore();
+            Difficultycontroller.GetInstance().difficultyScore -= stepController.getSteps();
+            //Difficultycontroller.GetInstance().CalculateDifficultyScore();
         }
         else if (other.gameObject.tag == "Jump")
         {
             playerController.jump = false;
-            Difficultycontroller.GetInstance().CalculateDifficultyScore();
+            //Difficultycontroller.GetInstance().CalculateDifficultyScore();
         }
         else if (other.gameObject.tag == "Jump2")
         {
             playerController.jump2 = false;
-            Difficultycontroller.GetInstance().CalculateDifficultyScore();
+           // Difficultycontroller.GetInstance().CalculateDifficultyScore();
         }
     }
 
