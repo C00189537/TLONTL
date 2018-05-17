@@ -13,6 +13,7 @@ public class Tutorialscript : MonoBehaviour {
     public int waitTimer = 3;
     public Image instructions= null;
     public Text timeText;
+    public Text instructionText; 
 
     public bool timer = false;
 
@@ -76,6 +77,7 @@ public class Tutorialscript : MonoBehaviour {
         { 
             timer = true; 
             theWorld.speed = 0;
+            instructionText.text = instructionsTimer.ToString();
             instructionsTimer--;
             instructions.enabled = true;
             
@@ -86,6 +88,7 @@ public class Tutorialscript : MonoBehaviour {
         {
             timer = false; 
             instructions.enabled = false;
+            instructionText.text = ""; 
             StartCoroutine(Wait());
             yield break; 
         }
