@@ -93,7 +93,16 @@ public class ScoreController : MonoBehaviour
 
     public void AddScore(int value)
     {
-        score = score + value;
+        int variable = 1;
+        if (theWorld.input.NManual == 0)
+        {
+            variable = Difficultycontroller.GetInstance().difficulty;
+        }
+        if (theWorld.input.NManual == 1)
+        {
+            variable = (int)theWorld.input.nJumpDifficulty;
+        }
+        score = score + (value*variable);
 
         scoreText.color = Color.green;
         currentColor = Color.green;

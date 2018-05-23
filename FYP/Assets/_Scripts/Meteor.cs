@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class Meteor : MonoBehaviour
 {
@@ -16,12 +17,17 @@ public class Meteor : MonoBehaviour
     public float shakeWaitTime = 4; 
 
     public BoardMovement board;
-    public WorldController theWorld; 
+    public WorldController theWorld;
+
+    public Image warningImage;
+    public bool coroutineWarning = false; 
+    public bool warning = false; 
 
 
     // Use this for initialization
     void Start()
     {
+        warningImage.enabled = false; 
         setTimer();
         GameObject camOb = GameObject.FindWithTag("MainCamera");
         if (camOb != null)
@@ -46,15 +52,22 @@ public class Meteor : MonoBehaviour
                 shakeTimeStamp = Time.time + shakeWaitTime;
             }
 
-            if (timeStamp < Time.time)
+            if (timeStamp < Time.time && !coroutineWarning)
+            {
+                coroutineWarning = true;
+                StartCoroutine(warningsign());
+            }
+
+            if (timeStamp < Time.time && warning)
             {
                 gameObject.transform.position += Vector3.down * 0.5f;
             }
-
-            if (gameObject.transform.position.y <= -3)
+            
+            if (gameObject.transform.position.y <= -3f)
             {
-                gameObject.transform.position = new Vector3(0, 22, 24);
                 setTimer();
+                gameObject.transform.position = new Vector3(0, 22, 24);
+                
             }
         }
 
@@ -63,8 +76,24 @@ public class Meteor : MonoBehaviour
 
     public void setTimer()
     {
-        waitTime = randy.Next(15, 25);
+        coroutineWarning = false; 
+        warning = false;
+        waitTime = randy.Next(10, 20);
         timeStamp = waitTime + Time.time;
+    }
+
+    public IEnumerator warningsign()
+    {
+        
+        warningImage.enabled = true;
+        yield return new WaitForSeconds(0.7f);
+        warningImage.enabled = false;
+        yield return new WaitForSeconds(0.7f);
+        warningImage.enabled = true;
+        yield return new WaitForSeconds(0.7f);
+        warningImage.enabled = false;
+        warning = true; 
+        yield break; 
     }
 
 }
