@@ -18,8 +18,17 @@ public class Jumping : MonoBehaviour
 
     public void JumpOne(int val)
     {
-        theWorld.trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
-        theWorld.trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, (9 * theWorld.speed) + 1);
+        if (theWorld.tutorial)
+        {
+            theWorld.trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
+            theWorld.trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, (9 * theWorld.speed) -2);
+        } 
+        else if (!theWorld.tutorial)
+        {
+            theWorld.trackPiece[val].transform.Find("WallMid").Translate(0, 2.5f, 0);
+            theWorld.trackPiece[val].transform.Find("JumpZoneM").Translate(0, 0.6f, (9 * theWorld.speed) + 1);
+        }
+       
     }
 
     public void JumpTwo(int val)
