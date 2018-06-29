@@ -287,6 +287,8 @@ public class PlayerController3 : MonoBehaviour
         gameObject.transform.position = new Vector3(0, 3, 0);
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
+
+    //tilts the ship
     private void Tilted()
     {
         if (input.nMomZ < -pressure)

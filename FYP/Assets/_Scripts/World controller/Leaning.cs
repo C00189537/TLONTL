@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Leaning : MonoBehaviour {
 
+    //Set the leaning track based on the difficulty. Is called by the WorldController
+
     System.Random rand = new System.Random();
 
     public WorldController theWorld;

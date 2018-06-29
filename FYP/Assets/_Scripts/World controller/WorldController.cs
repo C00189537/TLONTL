@@ -124,6 +124,7 @@ public class WorldController : MonoBehaviour
 
     }
 
+    //checks which exercises are selected in Dflow
     void UpdateAvailableTracks()
     {
         if (input.nTutorial == 1)
@@ -134,23 +135,13 @@ public class WorldController : MonoBehaviour
         {
             tutorial = false;
         }
-
-        //if (!tutorial)
-        //{
+        
             trackAvailable[1] = (int)input.nLeaning;
             trackAvailable[2] = (int)input.nOneLeg;
             trackAvailable[3] = (int)input.nJumping;
             trackAvailable[4] = (int)input.nStepping;
             trackAvailable[5] = (int)input.nJumpingOneleg;
-        //} 
-        //if (tutorial)
-        //{
-        //    trackAvailable[1] = 1;
-        //    trackAvailable[2] = 1;
-        //    trackAvailable[3] = 1;
-        //    trackAvailable[4] = 1;
-        //    trackAvailable[5] = 1;
-        //}
+        
       
     }
 
@@ -163,16 +154,14 @@ public class WorldController : MonoBehaviour
             if (trackPiece[i].transform.position.z <= killPoint)
             {
                 Destroy(trackPiece[i]);
-                //If the track piece is a base piece the next one will be a random exercise
                
+                //tutorial mode
                 if (tutorial)
                 {
+                    //if an exercise track is spawned, the next one will be a rest track
                     rest = !rest;
                     if (!rest)
                     {
-                        //temp = rand.Next(minRand, maxRand + 1);
-
-                        //Debug.Log("Tutorial");
                         for (int q = 1; q < 6; q++)
                         {
                             if (trackAvailable[q] == 1)
@@ -180,7 +169,7 @@ public class WorldController : MonoBehaviour
                                 temp = q;
                                 break;
                             } 
-
+                            //if no exercises are selected, a rest track will be spawned
                             if (q == 5 && trackAvailable[q] != 1)
                             {
                                 temp = 0; 
@@ -194,6 +183,7 @@ public class WorldController : MonoBehaviour
                             {
                                 oneLegTracker = 0;
                             }
+                            //sets the exercises for the tutorial which is spawned
                             tutorialScript.SetInstructions(temp);
                             trackers[i] = temp;
                             trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
@@ -202,7 +192,6 @@ public class WorldController : MonoBehaviour
                             switch (trackers[i])
                             {
                                 case 1:
-                                    //CoinSpawn(i);
                                     ObstacleSpawn(i);
                                     break;
                                 case 2:
@@ -230,9 +219,10 @@ public class WorldController : MonoBehaviour
                         trackPiece[i] = Instantiate(platformLayout[trackers[i]], new Vector3(0, 0, spawnPointFar), transform.rotation) as GameObject;
                     }
                 }
-              
+              //non tutorial mode (normal game)
                 else if (!tutorial)
                 {
+                    //not a rest track
                     if (restPhase > restTracks)
                     {
                         int side = rand.Next(1, 3);
@@ -247,6 +237,7 @@ public class WorldController : MonoBehaviour
 
                             if (count >= 20)
                             {
+                                //if no exercises are selected, a rest track will be spawned
                                 temp = 0;
                                 restPhase = restTracks;
                                 break;
@@ -254,7 +245,7 @@ public class WorldController : MonoBehaviour
 
                         }
                         trackers[i] = temp;
-                        //Longer one leg
+                        //Longer one leg (based on the difficulty)
                         if (temp == 2)
                         {
                            
@@ -343,6 +334,7 @@ public class WorldController : MonoBehaviour
 
                     }
                     
+                    //spawns the one leg track on one side
                     else if (oneLegTracker > 0)
                     {
                         setLeanSide = false; 
@@ -351,8 +343,7 @@ public class WorldController : MonoBehaviour
                         OneLegSpawn(i);
                     }
                   
-                    //If the track piece is an exercise, the next one will be a base piece
-                    else if (restPhase <= restTracks && !tutorial)  //(trackers[i] > 0)
+                    else if (restPhase <= restTracks && !tutorial)  
                     {
                         restPhase++;
                         trackers[i] = 0;

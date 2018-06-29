@@ -47,6 +47,7 @@ public class Stepping : MonoBehaviour
         //Should destroy all the objects in the queue when player leaves stepping track
         if (playerController.step == false)
         {
+            //Green arrows are put into an array to be destroyed
             greenUp = GameObject.FindGameObjectsWithTag("Up");
             greenLeft = GameObject.FindGameObjectsWithTag("Left");
             greenRight = GameObject.FindGameObjectsWithTag("Right");

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Indicator : MonoBehaviour {
 
+    //This class handles the icons in front of each exercise track
     public SpriteRenderer image;
     public GameObject player; 
     float alpha;

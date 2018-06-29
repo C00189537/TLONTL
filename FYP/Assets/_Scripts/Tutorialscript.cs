@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Tutorialscript : MonoBehaviour {
     
+    //Sets the tutorial during tutorial mode
+
     public WorldController theWorld;
     public PlayerController3 player;
     public GameObject playerObject;

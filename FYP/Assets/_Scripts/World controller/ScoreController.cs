@@ -78,12 +78,14 @@ public class ScoreController : MonoBehaviour
         }
     }
 
+    //Fades colour to white
     public void LerpColor()
     {
         Color color = Color.Lerp(currentColor, Color.white, time);
         time += Time.deltaTime / duration;
         scoreText.color = color;
     }
+
 
     public void LerpSize()
     {
